@@ -15,6 +15,8 @@ import { svgPack8LoadersA } from './svg-pack-8-a.js';
 import { svgPack8LoadersB } from './svg-pack-8-b.js';
 import { svgPack9LoadersA } from './svg-pack-9-a.js';
 import { svgPack9LoadersB } from './svg-pack-9-b.js';
+import { svgPack10LoadersA } from './svg-pack-10-a.js';
+import { svgPack10LoadersB } from './svg-pack-10-b.js';
 
 export const svgPackLoaders = [
   ...svgLoaders,
@@ -33,5 +35,7 @@ export const svgPackLoaders = [
   ...svgPack8LoadersA,
   ...svgPack8LoadersB,
   ...svgPack9LoadersA,
-  ...svgPack9LoadersB
+  ...svgPack9LoadersB,
+  ...svgPack10LoadersA,
+  ...svgPack10LoadersB
 ];

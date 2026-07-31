@@ -780,3 +780,22 @@ Sources:
 - loaders/svg-pack-9-a.js
 - loaders/svg-pack-9-b.js
 - https://yapweijun1996.github.io/Vanilla-HTML-Loader/
+
+## SVG Loader Pack 10
+
+Recorded: 2026-07-31
+Tags: loader-studio, svg, svg-loaders, ci-gated, release, qa
+
+Added 10 modular inline SVG loaders through svg-pack-10-a.js and svg-pack-10-b.js, registered in svg-index.js: SVG Ferris Wheel, SVG Water Wheel, SVG Vinyl Spin, SVG Balance Scale, SVG Combination Lock, SVG Semaphore Flags, SVG Bellows Breath, SVG Snowflake Grow, SVG Paper Plane, and SVG Thermometer Rise. SVG increased from 85 to 95 loaders and the full collection from 575 to 585.
+
+Gates: registry lint reported 585 loaders, 0 duplicate ids and 806 keyframe names with no conflicting definitions; the headless-Chrome snippet smoke run passed 585/585. Both also run in CI and block the deploy.
+
+Browser checks on a fresh origin with the registry total asserted first: all 10 render at 86x66, declare their animations, are decorative with no shared defs ids, and sit centred in the card stage without overflow.
+
+Ferris Wheel is worth noting as a technique: the cabins counter-rotate at the same duration as the wheel, using a per-cabin `--vl-fw-x/--vl-fw-y` transform-origin, so they stay upright through the full turn.
+
+Sources:
+- loaders/svg-index.js
+- loaders/svg-pack-10-a.js
+- loaders/svg-pack-10-b.js
+- https://yapweijun1996.github.io/Vanilla-HTML-Loader/

@@ -39,6 +39,7 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 | C14 | T-205: snippet smoke test enforced in CI over CDP with zero dependencies — both checks now gate the deploy (D-20) |
 | C15 | Dots Pack 4: 10 new CSS-only Dots loaders (Dots 30 → 40, collection 555 → **565**) |
 | C16 | SVG Pack 9: 10 new inline SVG loaders (SVG 75 → 85, collection 565 → **575**) |
+| C17 | SVG Pack 10: 10 new inline SVG loaders (SVG 85 → 95, collection 575 → **585**) |
 
 ### Live
 

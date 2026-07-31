@@ -11,7 +11,7 @@ Last verified against code: 2026-07-31. Task-level detail lives in [TASK.md](TAS
 | E5 | Quality gates & review governance | ✅ Done — automated checks landed 2026-07-31 |
 | E6 | Documentation & repo hygiene | ✅ Done |
 | E7 | Sharing & distribution | ✅ Done — deep links shipped; PWA closed won't-do |
-| E8 | CI enforcement | ⬜ Not started |
+| E8 | CI enforcement & deployment | 🟡 Lint gates deploy; smoke test still manual |
 
 ## E1 — Studio shell & modular architecture ✅
 
@@ -61,6 +61,10 @@ Closed as won't-do: PWA manifest, service worker and offline support. Product de
 
 Known trade-off carried forward: deep-linking to a late loader renders the whole preceding window (T-208).
 
-## E8 — CI enforcement ⬜
+## E8 — CI enforcement & deployment 🟡
 
-Not started. Scope: run `qa/registry-lint.mjs` on every change and drive the snippet smoke page headlessly, so the E5 gate cannot be skipped. Blocked on nothing except a decision about which runner is acceptable given D-01 — the checks themselves are already dependency-free, but a browser driver for the smoke page would be the project's first dev dependency. (T-205)
+Delivered 2026-07-31: `.github/workflows/deploy.yml` publishes the site to GitHub Pages on every push to `main`, gated on `qa/registry-lint.mjs` exiting 0. A registry violation now blocks the deploy rather than shipping. Only runtime files are published (`index.html`, `css/`, `js/`, `loaders/`, `qa/`) — 175 files instead of the repo's 341.
+
+Node is pinned to 24 because the registry is ESM in `.js` files with no `package.json`; module detection is on by default from 22.7 and the lint dies on Node 20. Verified by running the lint locally with `--no-experimental-detect-module`, which reproduces the failure.
+
+Still open: the snippet smoke page runs in a browser and is therefore still manual. Driving it in CI needs a headless browser, which would be the project's first dev dependency — a decision against D-01 that has not been taken. (T-205)

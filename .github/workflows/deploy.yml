@@ -1,0 +1,63 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let an in-flight deploy finish rather than cancelling it — a half-applied
+# Pages deployment is worse than a slightly stale one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Registry lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # The loader registry is ESM written in .js files with no package.json,
+      # so Node must detect module syntax. That is on by default from 22.7;
+      # on Node 20 the lint dies with "is a CommonJS module".
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check loader registry invariants
+        run: node qa/registry-lint.mjs
+
+  deploy:
+    name: Deploy
+    needs: verify
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/configure-pages@v5
+
+      # Publish only what the site actually loads. The QA harness ships too:
+      # it imports ../loaders and ../js, so it works from the same layout and
+      # lets the smoke test be run against the deployed copy.
+      - name: Stage site
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          cp -r css js loaders qa _site/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

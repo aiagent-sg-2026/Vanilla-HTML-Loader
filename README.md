@@ -65,6 +65,14 @@ Verifies unique loader ids, `@keyframes` names that are not redefined with a dif
 
 For snippet integrity, open `qa/snippet-paste-smoke.html` and run it. It pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and actually animates. Append `?autorun=1` to start immediately, `&limit=25` for a quick pass.
 
+## Deployment
+
+Pushing to `main` publishes the site to GitHub Pages via `.github/workflows/deploy.yml`. The workflow runs the registry lint first and **only deploys if it passes**, then publishes the runtime files (`index.html`, `css/`, `js/`, `loaders/`, `qa/`) — not the review, audit or research records.
+
+One-time setup in the repository: **Settings → Pages → Build and deployment → Source: GitHub Actions**. Without that, the workflow runs but has nothing to deploy to.
+
+The workflow pins Node 24 deliberately. The loader registry is ESM written in `.js` files with no `package.json`, so Node has to detect module syntax — that is on by default from 22.7, and on Node 20 the lint fails with "is a CommonJS module".
+
 ## License
 
 MIT — see [LICENSE](LICENSE). Copy the snippets into anything, including commercial work.

@@ -30,21 +30,24 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 | C5 | `?loader=` deep links with `replaceState` (FR-14, D-16) |
 | C6 | Snippet paste smoke test generalised from 1 loader to all 545 |
 | C7 | README + MIT LICENSE + doc sync (T-206) |
+| C8 | GitHub Pages auto-deploy on push to `main`, gated on the registry lint (E8) |
 
 ## Now
 
-1. **T-207** Backfill `knowledge-base/project-memory.md` for SVG packs 6–7 so the narrative record matches the code — or explicitly declare `review/` + code as the only records going forward.
+1. **T-212** Enable **Settings → Pages → Source: GitHub Actions**, then confirm the first deployment served. The workflow is committed but has never run, and without that setting the deploy job fails.
+2. **T-207** Backfill `knowledge-base/project-memory.md` for SVG packs 6–7 so the narrative record matches the code — or explicitly declare `review/` + code as the only records going forward.
 
 ## Next
 
-2. **T-208** Reduce deep-link window cost for late loaders (currently 504 cards / 59k px / 354ms for collection position 500, against a 24-card baseline of 3.3k px / 135ms). Needs a design that keeps Load-more contiguity intact.
-3. **T-205** CI enforcement of both checks (E8). Requires deciding whether a headless browser driver is an acceptable first dev dependency given D-01.
+3. **T-208** Reduce deep-link window cost for late loaders (currently 504 cards / 59k px / 354ms for collection position 500, against a 24-card baseline of 3.3k px / 135ms). Needs a design that keeps Load-more contiguity intact.
+4. **T-205** CI enforcement of the snippet smoke test (E8). The registry lint already gates deploys; the smoke page needs a headless browser, which would be the first dev dependency — decide against D-01.
 
 ## Later
 
-4. **T-209** Per-category lazy loading of the registry (~1.3MB of modules and 571KB of loader CSS load eagerly). Measure first; treat as an experiment against D-02.
-5. **T-210** Cache parsed card fragments by loader id and clone them instead of re-parsing markup on every render.
-6. Further loader packs (E3 is open-ended) — pattern is established: 10 loaders, A/B modules, barrel registration, lint + smoke + full QA gate, review record.
+5. **T-209** Per-category lazy loading of the registry (~1.3MB of modules and 571KB of loader CSS load eagerly). Measure first; treat as an experiment against D-02.
+6. **T-210** Cache parsed card fragments by loader id and clone them instead of re-parsing markup on every render.
+7. **T-211** Smoke harness slows as its results table grows (~1s → ~5s per loader).
+8. Further loader packs (E3 is open-ended) — pattern is established: 10 loaders, A/B modules, barrel registration, lint + smoke + full QA gate, review record.
 
 ## Closed — won't do
 

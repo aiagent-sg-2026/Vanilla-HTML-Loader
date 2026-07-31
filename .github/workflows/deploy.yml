@@ -23,22 +23,39 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # The loader registry is ESM written in .js files with no package.json,
-      # so Node must detect module syntax. That is on by default from 22.7;
-      # on Node 20 the lint dies with "is a CommonJS module". Node 22+ also
-      # gives the smoke runner a global WebSocket to speak CDP over.
+      # Node 22+ is the real floor: the QA runners drive Chrome over CDP using
+      # the global WebSocket, which landed in 22. (The old reason — ESM syntax
+      # detection for the .js registry — went away when package.json declared
+      # "type": "module".)
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+          cache: npm
+
+      - run: npm ci
 
       - name: Check loader registry invariants
-        run: node qa/registry-lint.mjs
+        run: npm run lint:registry
 
-      # Drives the paste smoke test in the Chrome the runner image already
-      # ships, over CDP, with no npm install — so the repository still has no
-      # dependencies and no node_modules. Takes a few seconds for all loaders.
+      - name: Build
+        run: npm run build
+
+      # Against the built artifact, not the source, so what ships is what is
+      # tested. Uses the Chrome the runner image already provides.
       - name: Check every snippet still pastes and animates
-        run: node qa/run-smoke-ci.mjs
+        run: node qa/run-smoke-ci.mjs --root dist
+
+      # The product is the snippet text, so bundling must not alter a single
+      # byte of it. Compares every loader's snippet from source against the
+      # same snippet produced by the minified bundle.
+      - name: Check the build did not change any snippet
+        run: node qa/verify-snippet-parity.mjs
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist
+          retention-days: 1
 
   deploy:
     name: Deploy
@@ -48,22 +65,16 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-
       - uses: actions/configure-pages@v5
 
-      # Publish only what the site actually loads. The QA harness ships too:
-      # it imports ../loaders and ../js, so it works from the same layout and
-      # lets the smoke test be run against the deployed copy.
-      - name: Stage site
-        run: |
-          mkdir -p _site
-          cp index.html _site/
-          cp -r css js loaders qa _site/
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: dist
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: dist
 
       - name: Deploy to GitHub Pages
         id: deployment

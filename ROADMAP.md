@@ -43,6 +43,7 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 | C18 | SVG Pack 11: 10 new inline SVG loaders (SVG 95 → 105, collection 585 → **595**) |
 | C19 | New **Charts** category with 10 data-visualisation loaders (16 categories, collection 595 → **605**) |
 | C20 | New **Maps** category with 10 location loaders (17 categories, collection 605 → **615**) |
+| C21 | **Vite build tooling** — `npm run dev` / `npm run build`; supersedes D-01; 146 requests → 3, 277 KB → ~178 KB gzipped (D-21, D-22) |
 
 ### Live
 

@@ -89,7 +89,8 @@ Status legend: ✅ Implemented · 🟡 Partial · ⬜ Not implemented · ❌ Won
 
 ## FR-13 Runtime constraints — ✅
 
-- No frameworks, no CDN, no build step, ES modules only (`<script type="module">`), works as static files.
+- No runtime framework, no CDN. Development and build run on Vite (`npm run dev` / `npm run build`); the output is a static `dist/` (D-21).
+- **The copied snippet remains dependency-free** — plain HTML, CSS and JS that runs anywhere with no toolchain. This is the constraint that matters to users, and it is verified per release rather than assumed (FR-16).
 - Fail-fast startup on missing DOM refs.
 
 ## FR-14 Shareable deep links — ✅
@@ -105,7 +106,14 @@ Status legend: ✅ Implemented · 🟡 Partial · ⬜ Not implemented · ❌ Won
 - `node qa/registry-lint.mjs`: unique ids, `@keyframes` redefinition conflicts, unscoped generic selectors, required fields; non-zero exit on violation; prints the canonical category count table.
 - `qa/snippet-paste-smoke.html`: pastes every loader's combined snippet into a blank page and asserts the overlay mounts and animates; supports `?autorun=1`, `&limit=`, `&category=`, and exposes `window.__smokeResult`. A full 615-loader run takes about 6 seconds.
 - `node qa/run-smoke-ci.mjs`: runs the smoke page in headless Chrome over CDP and exits non-zero on failure. Both checks gate the GitHub Pages deploy.
-- None of these introduces a dependency, preserving D-01 (D-20).
+- Vite is the only dependency; the QA runners still use nothing but Node built-ins and a CI-provided Chrome (D-20).
+
+## FR-16 Snippet parity across the build — ✅
+
+- `node qa/verify-snippet-parity.mjs` generates every loader's combined snippet twice — from the source modules in Node, and from the minified bundle running in headless Chrome — and compares them byte for byte. Non-zero exit on any difference, missing loader or unexpected extra.
+- Latest run: 615/615 identical, 0 differing.
+- Self-tested: renaming one identifier inside a built chunk makes it exit 1 and name the loader and character offset.
+- Runs in CI after the build, so a bundler or minifier setting can never silently change the deliverable (D-22).
 
 ## NFR / not implemented
 

@@ -2,17 +2,23 @@
 
 A zero-dependency gallery of **615 loading animations** across 17 categories. Browse them live, tune size, speed, accent colour and per-loader application state, then copy production-ready HTML, CSS and JavaScript you can paste straight into any page.
 
-No framework. No bundler. No CDN. No build step. Open the folder and it runs.
+No runtime framework. No CDN. The snippets you copy are plain HTML, CSS and JavaScript that run anywhere with no toolchain — and every release proves the build does not alter a single byte of them.
 
 ## Run it
 
-It is a static site, so any static server works:
-
 ```bash
-python -m http.server 8765
+npm install
+npm run dev
 ```
 
-Then open <http://localhost:8765>. ES modules require `http://`, so opening `index.html` from the filesystem will not work.
+Then open <http://localhost:8765>. Editing a loader hot-reloads.
+
+To produce the static site:
+
+```bash
+npm run build     # -> dist/
+npm run preview   # serve dist/ locally
+```
 
 Deep link straight to a loader by appending its id:
 
@@ -35,12 +41,12 @@ The pasted snippet ends with a demo call so the animation is visible immediately
 
 | Path | Contents |
 | --- | --- |
-| `index.html` | Application shell — static structure only |
+| `index.html` | Application shell and Vite entry point — static structure only |
 | `css/` | Design tokens, layout, components, responsive rules, sticky shell |
 | `js/` | State, storage, snippet generation, per-loader control schemas |
 | `js/ui/` | One controller per concern: collection, inspector, preview, shell, accent, motion, visibility, infinite scroll |
 | `loaders/` | The registry: `index.js` composes per-category barrels, which compose 10-loader pack modules |
-| `qa/` | `registry-lint.mjs` and the snippet paste smoke test |
+| `qa/` | `registry-lint.mjs`, the snippet paste smoke test, the snippet parity check, and the shared headless-Chrome plumbing |
 | `review/`, `audit-log/`, `research/`, `knowledge-base/` | Per-release QA records, decisions and research notes |
 
 Architecture and the durable decisions behind it: [DESIGN.md](DESIGN.md). Feature status: [SPEC.md](SPEC.md). Work in flight: [ROADMAP.md](ROADMAP.md), [TASK.md](TASK.md), [EPIC.md](EPIC.md).
@@ -60,7 +66,7 @@ One gotcha when verifying a new pack in a browser: the page keeps the ES module 
 ## Checks
 
 ```bash
-node qa/registry-lint.mjs
+npm run lint:registry
 ```
 
 Verifies unique loader ids, `@keyframes` names that are not redefined with a different body, generic class names never used as unscoped top-level selectors, and required fields. It exits non-zero on violation and prints the category count table that the docs must quote — never hand-count.
@@ -68,20 +74,29 @@ Verifies unique loader ids, `@keyframes` names that are not redefined with a dif
 In CI, or locally against headless Chrome:
 
 ```bash
-node qa/run-smoke-ci.mjs
+npm run test:snippets              # against the source tree
+npm run test:dist                  # against a built dist/
 ```
 
-This serves the repository, drives the smoke page over the Chrome DevTools Protocol and exits non-zero on any failure — no npm install, because it uses Node's built-in server and global `WebSocket` plus the Chrome that CI images already ship. Add `--category SVG` or `--limit 25` to narrow it.
+This serves the site, drives the smoke page over the Chrome DevTools Protocol and exits non-zero on any failure. It uses Node's built-in server and global `WebSocket` plus the Chrome that CI images already ship, so Vite stays the only dependency. Add `--category SVG` or `--limit 25` to narrow it.
+
+Because the copied snippet *is* the product, one more check proves bundling never changes it:
+
+```bash
+npm run build && node qa/verify-snippet-parity.mjs
+```
+
+It generates every loader's snippet from the source modules and from the minified bundle and compares them byte for byte.
 
 To watch it instead, open `qa/snippet-paste-smoke.html` and run it. It pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and actually animates. A full run over all 615 loaders takes about 6 seconds. Append `?autorun=1` to start immediately, `&category=SVG` to narrow it, `&limit=25` for a quick pass.
 
 ## Deployment
 
-Pushing to `main` publishes the site to GitHub Pages via `.github/workflows/deploy.yml`. The workflow runs the registry lint and the snippet smoke test first and **only deploys if both pass**, then publishes the runtime files (`index.html`, `css/`, `js/`, `loaders/`, `qa/`) — not the review, audit or research records.
+Pushing to `main` publishes the site to GitHub Pages via `.github/workflows/deploy.yml`. The workflow installs, lints the registry, builds, runs the smoke test **against the built artifact**, and checks snippet parity — it **only deploys if all four pass**, and publishes `dist/`.
 
 One-time setup in the repository: **Settings → Pages → Build and deployment → Source: GitHub Actions**. Without that, the workflow runs but has nothing to deploy to.
 
-The workflow pins Node 24 deliberately. The loader registry is ESM written in `.js` files with no `package.json`, so Node has to detect module syntax — that is on by default from 22.7, and on Node 20 the lint fails with "is a CommonJS module".
+The workflow pins Node 24 because the QA runners drive Chrome over CDP using the global `WebSocket`, which landed in Node 22.
 
 ## License
 
@@ -91,14 +106,14 @@ MIT — see [LICENSE](LICENSE). Copy the snippets into anything, including comme
 
 ## 简介（中文摘要）
 
-Loader Studio 是一个**零依赖**的加载动画画廊，收录 **615 个动画**，分 17 个分类。浏览、调整（尺寸/速度/主色/应用状态）后可直接复制可用于生产的 HTML、CSS 和 JavaScript。
+Loader Studio 是一个加载动画画廊，**复制出去的代码零依赖**（工作室本身用 Vite 构建），收录 **615 个动画**，分 17 个分类。浏览、调整（尺寸/速度/主色/应用状态）后可直接复制可用于生产的 HTML、CSS 和 JavaScript。
 
-没有框架、没有打包工具、没有构建步骤。用任意静态服务器打开即可（ES 模块不支持 `file://` 直接打开）：
+没有运行时框架、没有 CDN。开发与构建：
 
 ```bash
-python -m http.server 8765
+npm install && npm run dev
 ```
 
-复制出来的代码片段自带 `AppLoader.show('Saving…')` / `AppLoader.hide()`，末尾的演示调用在上线前删掉即可。
+`npm run build` 产出静态 `dist/`。复制出来的代码片段自带 `AppLoader.show('Saving…')` / `AppLoader.hide()`，末尾的演示调用在上线前删掉即可。
 
-新增 loader 包时请遵循 `loaders/` 的分层注册模式，并运行 `node qa/registry-lint.mjs`；文档中的数量一律以该脚本输出为准，**不要手动计算**。授权协议为 MIT，可自由用于商业项目。
+新增 loader 包时请遵循 `loaders/` 的分层注册模式，并运行 `npm run check`；文档中的数量一律以脚本输出为准，**不要手动计算**。授权协议为 MIT，可自由用于商业项目。

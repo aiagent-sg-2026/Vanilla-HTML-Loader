@@ -7,7 +7,7 @@ Related docs: [README.md](README.md) · [SPEC.md](SPEC.md) · [EPIC.md](EPIC.md)
 
 ## 1. What this is
 
-Loader Studio is a zero-dependency, no-build, vanilla HTML/CSS/ES-module web app that showcases **615 loading animations across 17 categories**. Users browse, search, filter, preview, customise (size, speed, accent, label, per-loader application state) and copy production-ready HTML/CSS/JS snippets. It ships as static files — open `index.html` or serve the folder; there is no package.json, bundler, framework, or CDN asset.
+Loader Studio is a zero-dependency, no-build, vanilla HTML/CSS/ES-module web app that showcases **615 loading animations across 17 categories**. Users browse, search, filter, preview, customise (size, speed, accent, label, per-loader application state) and copy production-ready HTML/CSS/JS snippets. Development runs on Vite (`npm run dev`), and `npm run build` emits a static `dist/` with no runtime framework or CDN asset. The snippets it hands to users stay plain HTML, CSS and JavaScript — that constraint is the product, and it is verified per release (D-22).
 
 ## 2. Architecture overview
 
@@ -76,7 +76,7 @@ Every loader is a plain object: `{ id, name, category, description, markup, css 
 
 | # | Decision | Rationale |
 | --- | --- | --- |
-| D-01 | Zero dependencies, no build step | Deliverable is copy-paste vanilla snippets; the studio itself must prove the same constraint. |
+| D-01 | ~~Zero dependencies, no build step~~ **Superseded by D-21 on 2026-07-31.** The *snippets* stay dependency-free; the *studio* is now built with Vite. | The original reasoning — that the studio should prove the same constraint it sells — held until the studio outgrew it. See D-21. |
 | D-02 | Barrel-module SSOT registry (`loaders/index.js` → category `*-index.js` → pack files) | Packs of 10 stay reviewable; category order is stable; no file grows unbounded. |
 | D-03 | DOM APIs + trusted `DOMParser` instead of `innerHTML` assignment | Security-review outcome (2026-07-20); loader markup is first-party but the renderer avoids the innerHTML pattern anyway. |
 | D-04 | Progressive rendering: 24-card initial window, +24 per batch | Full 615-card render was the mobile bottleneck (26,907px → 6,106px initial document height at 115 loaders). |
@@ -96,6 +96,8 @@ Every loader is a plain object: `{ id, name, category, description, markup, css 
 | D-18 | Eager-load the whole registry; no per-category lazy loading | Measured 2026-07-31 (research/lazy-loading-experiment-2026-07-31.md): eager loading costs ~10 ms of CPU total, and deferring the 584 KB of loader CSS saves ~0.6 ms. The 84% payload ceiling is only reachable by splitting every loader into metadata and payload, which breaks D-02. |
 | D-19 | Card preview fragments are parsed once per loader and cloned; growing the pagination window appends the new tail instead of rebuilding the grid | Measured 2026-07-31: parsing the whole registry's markup fell from 24.4ms to 4.1ms, and Load more went from 7.6→14.2ms growing with the total rendered to a flat ~4.5ms. Appending also leaves existing cards in place, so their animations no longer restart. Guarded: it only applies when the rendered cards are exactly the unchanged prefix. |
 | D-20 | CI drives headless Chrome over CDP with Node built-ins rather than adopting Playwright or Puppeteer | Enforcing the smoke test was worth doing, but a browser driver would have been this repository's first dev dependency and its first `node_modules`, contradicting D-01. Node has had a global `WebSocket` since 22 and CI images ship Chrome, so ~180 lines of `qa/run-smoke-ci.mjs` buy the same coverage with nothing installed. |
+| D-21 | The studio is built with Vite (`npm run dev` / `npm run build`); the snippets it produces remain plain HTML, CSS and JS with no dependencies | Supersedes D-01. At 615 loaders across 150 modules a visitor was fetching 277 KB over 146 render-blocking requests; bundling takes that to 3 requests and ~178 KB gzipped, and gives editing a loader hot reload instead of a manual refresh. The constraint that actually matters to users — that a copied snippet needs no toolchain — is unaffected, and is now enforced rather than assumed (D-22). |
+| D-22 | Every release proves the build did not alter a single byte of any snippet (`qa/verify-snippet-parity.mjs`) | The product *is* the snippet text. A bundler is allowed to rewrite the application around the registry, but a loader's markup and CSS are template-literal data that must reach the clipboard untouched. The check generates all 615 snippets from source and from the minified bundle and compares them byte for byte; it is self-tested by tampering with a built chunk and confirming it exits 1. |
 
 ## 4. Cross-cutting behaviours
 

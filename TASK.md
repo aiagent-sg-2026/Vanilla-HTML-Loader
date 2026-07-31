@@ -7,7 +7,7 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 1. **Code is the source of truth.** Every doc states the date it was last verified against the code.
 2. **Docs ship with the change.** Any pack or feature updates its affected docs in the same round — never "later".
 3. **Never hand-count.** Every loader/category number quoted in a doc is copied from `node qa/registry-lint.mjs` output.
-4. **Both checks before a release.** `node qa/registry-lint.mjs` must exit 0, and `qa/snippet-paste-smoke.html` must show no unexplained failures.
+4. **All checks before a release.** `npm run lint:registry` and `npm run test:snippets` must exit 0, and after any change to build config or the snippet service, `npm run build && node qa/verify-snippet-parity.mjs` must report 0 differing. CI runs all of them.
 
 ## Open
 
@@ -34,6 +34,7 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 | C6 | Snippet paste smoke test generalised from one hardcoded loader to the whole registry, with a generic animation probe, per-loader timeout, category filter and `?autorun=1`. Fixed a harness defect where `requestAnimationFrame` never fired in a hidden tab and reported healthy loaders as timeouts. |
 | T-206 / C7 | README (English + Chinese summary) and MIT LICENSE; all five root docs synced. |
 | C8 | GitHub Pages auto-deploy on push to `main`, gated on the registry lint. Staging verified locally: 175 files / 1.5MB, every asset `index.html` references present, the staged copy boots with 545 loaders and a working deep link, no console errors. |
+| C21 | Converted the studio to Vite (`npm run dev`, `npm run build`), superseding D-01. Built artifact loads in 3 requests / ~178 KB gzipped / 129ms against 146 requests / 277 KB / 1252ms before. Added `qa/verify-snippet-parity.mjs` (D-22) proving all 615 snippets are byte-identical between source and the minified bundle, self-tested by tampering with a built chunk. CI now installs, lints, builds, smoke-tests the artifact and checks parity before deploying `dist/`. Extracted the shared Chrome/CDP plumbing into `qa/headless-chrome.mjs`. |
 | C20 | New **Maps** category — 10 location loaders (Pin Drop, Route Trace, Tile Load, Geo Locate, Cluster Split, Street Grid Draw, Waypoint Hop, Region Fill, Elevation Profile, Layer Stack). Registered in its own barrel, `loaders/index.js` and `getCardSize`; renders 6 lg + 4 xl. 17 categories, collection 605 to 615. |
 | C19 | New **Charts** category — 10 data-visualisation loaders (Bar Chart Build, Line Chart Draw, Donut Fill, Area Chart Rise, Scatter Plot Populate, Candlestick Stream, Gauge Needle, Sparkline Pulse, Heatmap Cells, Stacked Bars). First new category since the audit; needed its own barrel, an entry in `loaders/index.js`, and registration in `getCardSize` so chart cards render large enough for their axes. 16 categories, collection 595 to 605. |
 | C18 | SVG Pack 11 — 10 inline SVG loaders (Escalator Steps, Windmill Sails, Film Reel, Telescope Focus, Pulley Hoist, Traffic Signal, Bubble Level, Ink Diffuse, Rocket Ascent, Page Flip). SVG 95 to 105, collection 585 to 595. |

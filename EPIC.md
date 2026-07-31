@@ -11,7 +11,8 @@ Last verified against code: 2026-07-31. Task-level detail lives in [TASK.md](TAS
 | E5 | Quality gates & review governance | ✅ Done — automated checks landed 2026-07-31 |
 | E6 | Documentation & repo hygiene | ✅ Done |
 | E7 | Sharing & distribution | ✅ Done — deep links shipped; PWA closed won't-do |
-| E8 | CI enforcement & deployment | ✅ Done — both checks gate the deploy |
+| E8 | CI enforcement & deployment | ✅ Done — four checks gate the deploy |
+| E9 | Build tooling (Vite) | ✅ Done — supersedes the no-build constraint |
 
 ## E1 — Studio shell & modular architecture ✅
 
@@ -68,3 +69,13 @@ Delivered 2026-07-31: `.github/workflows/deploy.yml` publishes the site to GitHu
 Node is pinned to 24 because the registry is ESM in `.js` files with no `package.json`; module detection is on by default from 22.7 and the lint dies on Node 20. Verified by running the lint locally with `--no-experimental-detect-module`, which reproduces the failure.
 
 The snippet smoke test is enforced too (T-205). The obstacle was that driving a browser normally means Playwright or Puppeteer — this repository's first dev dependency. `qa/run-smoke-ci.mjs` avoids that: Node's built-in HTTP server, the global `WebSocket` Node has had since 22, and the Chrome CI images already ship are enough to drive the page over CDP. All 615 loaders are checked in about 6 seconds, and D-01 survives intact (D-20).
+
+## E9 — Build tooling ✅
+
+Delivered 2026-07-31: the studio is developed and built with Vite. `npm run dev` gives hot reload while editing a loader; `npm run build` emits a static `dist/`.
+
+This supersedes D-01, the founding constraint that the project have no build step. The reasoning that retired it: at 615 loaders across 150 modules a first visit fetched 277 KB over 146 render-blocking requests, and the only dependency-free fix — splitting every loader into metadata and payload — was rejected under T-209 because it breaks the registry. Bundling delivers the same win without touching the registry: 3 requests, ~178 KB gzipped, 129ms load in local preview against 1252ms before.
+
+What did **not** change is the constraint users actually depend on: a copied snippet is still plain HTML, CSS and JavaScript needing no toolchain. That is no longer an assumption — `qa/verify-snippet-parity.mjs` proves per release that the minified bundle produces byte-identical snippets to the source (D-22), and it is self-tested against a tampered chunk.
+
+Side effect worth noting: declaring `"type": "module"` removed the project's dependence on Node's ESM syntax detection, so `qa/registry-lint.mjs` no longer needs Node 22.7+ for that reason. Node 22+ is still required, but now only because the QA runners use the global `WebSocket`.

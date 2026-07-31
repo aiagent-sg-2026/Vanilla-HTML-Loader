@@ -3,9 +3,15 @@
   "configurations": [
     {
       "name": "loader-studio",
-      "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "8765"],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "8765", "--strictPort"],
       "port": 8765
+    },
+    {
+      "name": "loader-studio-preview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "preview", "--", "--port", "8766", "--strictPort"],
+      "port": 8766
     }
   ]
 }

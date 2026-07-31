@@ -12,3 +12,8 @@ desktop.ini
 # Logs and local scratch
 *.log
 .tmp/
+
+# Build tooling
+node_modules/
+dist/
+.vite/

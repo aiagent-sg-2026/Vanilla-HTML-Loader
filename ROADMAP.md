@@ -42,6 +42,7 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 | C17 | SVG Pack 10: 10 new inline SVG loaders (SVG 85 → 95, collection 575 → **585**) |
 | C18 | SVG Pack 11: 10 new inline SVG loaders (SVG 95 → 105, collection 585 → **595**) |
 | C19 | New **Charts** category with 10 data-visualisation loaders (16 categories, collection 595 → **605**) |
+| C20 | New **Maps** category with 10 location loaders (17 categories, collection 605 → **615**) |
 
 ### Live
 

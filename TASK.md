@@ -34,6 +34,7 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 | C6 | Snippet paste smoke test generalised from one hardcoded loader to the whole registry, with a generic animation probe, per-loader timeout, category filter and `?autorun=1`. Fixed a harness defect where `requestAnimationFrame` never fired in a hidden tab and reported healthy loaders as timeouts. |
 | T-206 / C7 | README (English + Chinese summary) and MIT LICENSE; all five root docs synced. |
 | C8 | GitHub Pages auto-deploy on push to `main`, gated on the registry lint. Staging verified locally: 175 files / 1.5MB, every asset `index.html` references present, the staged copy boots with 545 loaders and a working deep link, no console errors. |
+| C20 | New **Maps** category — 10 location loaders (Pin Drop, Route Trace, Tile Load, Geo Locate, Cluster Split, Street Grid Draw, Waypoint Hop, Region Fill, Elevation Profile, Layer Stack). Registered in its own barrel, `loaders/index.js` and `getCardSize`; renders 6 lg + 4 xl. 17 categories, collection 605 to 615. |
 | C19 | New **Charts** category — 10 data-visualisation loaders (Bar Chart Build, Line Chart Draw, Donut Fill, Area Chart Rise, Scatter Plot Populate, Candlestick Stream, Gauge Needle, Sparkline Pulse, Heatmap Cells, Stacked Bars). First new category since the audit; needed its own barrel, an entry in `loaders/index.js`, and registration in `getCardSize` so chart cards render large enough for their axes. 16 categories, collection 595 to 605. |
 | C18 | SVG Pack 11 — 10 inline SVG loaders (Escalator Steps, Windmill Sails, Film Reel, Telescope Focus, Pulley Hoist, Traffic Signal, Bubble Level, Ink Diffuse, Rocket Ascent, Page Flip). SVG 95 to 105, collection 585 to 595. |
 | C17 | SVG Pack 10 — 10 inline SVG loaders (Ferris Wheel, Water Wheel, Vinyl Spin, Balance Scale, Combination Lock, Semaphore Flags, Bellows Breath, Snowflake Grow, Paper Plane, Thermometer Rise). SVG 85 to 95, collection 575 to 585. |
@@ -62,7 +63,7 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 | 07-28 | task_040–051 | Shapes packs 1–4 (345→375); Buttons packs 1–3 (385→405); Text packs 1–5 (415→455) |
 | 07-28/29 | task_052–058 | CSS 3D packs 3–8 (465→515); SVG packs 5–7 (525→545) |
 
-Intermediate totals are as narrated in `knowledge-base/project-memory.md`; the authoritative current total (605) comes from `qa/registry-lint.mjs`.
+Intermediate totals are as narrated in `knowledge-base/project-memory.md`; the authoritative current total (615) comes from `qa/registry-lint.mjs`.
 
 ## Watch
 

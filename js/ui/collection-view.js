@@ -155,9 +155,10 @@ function getCardSize(loader) {
   if (['Common UI', 'Application', 'Operations'].includes(loader.category)) {
     return variant % 2 === 0 ? 'lg' : 'md';
   }
-  // Charts belong here rather than in the default branch: a plot needs room for
-  // its axes to read as a chart at all, and the fallback sizes it sm/md.
-  if (['Progress', 'Charts', 'Matrix', 'Holographic', 'CSS 3D'].includes(loader.category)) {
+  // Charts and Maps belong here rather than in the default branch: a plot needs
+  // room for its axes, and a map for its route, to read as one at all. The
+  // fallback would size them sm/md.
+  if (['Progress', 'Charts', 'Maps', 'Matrix', 'Holographic', 'CSS 3D'].includes(loader.category)) {
     return variant % 3 === 0 ? 'xl' : 'lg';
   }
   if (['SVG', 'Shapes', 'Text', 'Buttons'].includes(loader.category)) {

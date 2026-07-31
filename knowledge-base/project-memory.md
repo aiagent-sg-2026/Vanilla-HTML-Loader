@@ -839,3 +839,21 @@ Sources:
 - loaders/charts-pack-1-b.js
 - loaders/index.js
 - js/ui/collection-view.js
+
+## Maps Category — Pack 1
+
+Recorded: 2026-07-31
+Tags: loader-studio, maps, new-category, css-loaders, svg-loaders, ci-gated, release, qa
+
+Added a new **Maps** category with 10 location loaders through maps-pack-1-a.js and maps-pack-1-b.js behind maps-index.js: Pin Drop, Route Trace, Tile Load, Geo Locate, Cluster Split, Street Grid Draw, Waypoint Hop, Region Fill, Elevation Profile, and Layer Stack. The collection went from 605 to 615 loaders and from 16 to 17 categories. The gap it fills: nothing in the library covered map, routing or geolocation waits.
+
+Followed the three-point category checklist established with Charts: own barrel, entry in loaders/index.js, and registration in getCardSize (js/ui/collection-view.js) so cards render lg/xl rather than falling to the sm/md default — verified as 6 lg + 4 xl.
+
+Gates: registry lint 615 loaders / 17 categories / 0 duplicate ids / no keyframe conflicts; snippet smoke 615/615. Browser verification on a fresh origin confirmed the Maps filter button, deep-link scoping to Maps, and no card overflow.
+
+Sources:
+- loaders/maps-index.js
+- loaders/maps-pack-1-a.js
+- loaders/maps-pack-1-b.js
+- loaders/index.js
+- js/ui/collection-view.js

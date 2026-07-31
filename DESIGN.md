@@ -1,0 +1,109 @@
+# DESIGN.md — Loader Studio (Vanilla-HTML-Loader)
+
+Last verified against code: 2026-07-31.
+**Source of truth is the code** (`index.html`, `css/`, `js/`, `loaders/`). This document is a projection; when it disagrees with the code, the code wins.
+
+Related docs: [SPEC.md](SPEC.md) · [EPIC.md](EPIC.md) · [ROADMAP.md](ROADMAP.md) · [TASK.md](TASK.md) · [docs/modular-refactor.md](docs/modular-refactor.md) · history in [knowledge-base/project-memory.md](knowledge-base/project-memory.md)
+
+## 1. What this is
+
+Loader Studio is a zero-dependency, no-build, vanilla HTML/CSS/ES-module web app that showcases **545 loading animations across 15 categories**. Users browse, search, filter, preview, customise (size, speed, accent, label, per-loader application state) and copy production-ready HTML/CSS/JS snippets. It ships as static files — open `index.html` or serve the folder; there is no package.json, bundler, framework, or CDN asset.
+
+## 2. Architecture overview
+
+```
+index.html                     static shell (sidebar, topbar, toolbar, grid, inspector, full preview, toast)
+├─ css/                        one concern per file, loaded in cascade order
+│   tokens.css                 design tokens (colours, spacing, typography)
+│   layout.css                 app shell layout
+│   components.css             cards, inspector, controls (largest file)
+│   collection-pagination.css  Load-more / progress UI
+│   icons.css                  UI icon styles
+│   responsive.css             breakpoint rules
+│   collection-layout.css      masonry (CSS columns) + grid layouts
+│   sticky-shell.css           sticky topbar/toolbar stack (loaded last, isolated)
+├─ js/app.js                   entry point: resolves ~70 required DOM refs (fail-fast),
+│                              mounts icons, installs loader styles, starts event controller
+├─ js/                         services
+│   state.js                   single mutable state object (selection, filters, view,
+│                              pagination window, shell prefs, per-loader control values)
+│   storage.js                 localStorage persistence behind STORAGE_KEYS
+│   snippet-service.js         HTML / CSS / JS / combined snippet generation
+│   loader-style-service.js    injects loader CSS into the page for live previews
+│   loader-controls.js         renders declarative per-loader control schemas (range/select)
+├─ js/ui/                      controllers (each owns one concern)
+│   event-controller.js        central orchestrator: binds all events, composes controllers
+│   collection-view.js         filtering, card rendering (DOM APIs + trusted DOMParser),
+│                              pagination summary/progressbar
+│   inspector-view.js          selected-loader panel
+│   preview-view.js            preview settings, full-preview dialog, clipboard
+│   shell-controller.js        sidebar / inspector open-collapse-pin state
+│   accent-controller.js       global accent palette (presets + custom colour)
+│   motion-controller.js       global pause/resume (default: running)
+│   visibility-controller.js   IntersectionObserver: only visible cards animate;
+│                              everything pauses when the tab is hidden
+│   infinite-scroll-controller.js  sentinel-based auto-load after genuine user scroll
+│   icon-library.js            inline SVG UI icons
+└─ loaders/                    loader registry — data, not UI
+    index.js                   top-level SSOT: composes 16 imports into `loaders` + `categories`
+    *-index.js                 per-category barrel modules (spinners, dots, bars, shapes,
+                               buttons, common, text, css-3d, svg)
+    *-pack-N-{a,b}.js          10-loader expansion packs, split A/B (~5 each)
+    shared.js                  COMMON_OVERLAY_CSS + LOADER_RUNTIME_JS (AppLoader API)
+```
+
+### Loader definition contract
+
+Every loader is a plain object: `{ id, name, category, description, markup, css }`, optionally `tech`, `js` (copyable runtime API, 76 loaders), `controls` (declarative Inspector schema, 71 loaders) and `applyControls(container, values)`. IDs are unique across the whole registry (verified 2026-07-31: 545 loaders, 0 duplicates).
+
+### Category counts (from `loaders/index.js`, 2026-07-31)
+
+| Category | Count | | Category | Count |
+| --- | --- | --- | --- | --- |
+| CSS 3D | 76 | | Bars | 38 |
+| Spinners | 66 | | Buttons | 36 |
+| SVG | 65 | | Dots | 30 |
+| Text | 57 | | Progress | 19 |
+| Common UI | 53 | | Application | 5 |
+| Skeletons | 53 | | Matrix | 3 |
+| Shapes | 41 | | Holographic | 2 |
+| | | | Operations | 1 |
+
+**Total: 545 loaders, 15 categories** (plus the synthetic "All" filter).
+
+## 3. Durable design decisions
+
+| # | Decision | Rationale |
+| --- | --- | --- |
+| D-01 | Zero dependencies, no build step | Deliverable is copy-paste vanilla snippets; the studio itself must prove the same constraint. |
+| D-02 | Barrel-module SSOT registry (`loaders/index.js` → category `*-index.js` → pack files) | Packs of 10 stay reviewable; category order is stable; no file grows unbounded. |
+| D-03 | DOM APIs + trusted `DOMParser` instead of `innerHTML` assignment | Security-review outcome (2026-07-20); loader markup is first-party but the renderer avoids the innerHTML pattern anyway. |
+| D-04 | Progressive rendering: 24-card initial window, +24 per batch | Full 545-card render was the mobile bottleneck (26,907px → 6,106px initial document height at 115 loaders). |
+| D-05 | Infinite scroll via bottom-sentinel IntersectionObserver, armed only after genuine user scroll/keyboard input; Load More button kept as accessible fallback | Research-backed (research/loading-pattern-research-2026-07-22.md); prevents instant page-load expansion and keyboard exclusion. |
+| D-06 | Visible-only animation: per-card IntersectionObserver + pause-all when tab hidden | Keeps 545 simultaneous CSS animations cheap; summary pill reports "N animations · M visible active". |
+| D-07 | Motion defaults to running (`state.paused = false`) even under OS reduced-motion; Pause/Resume controls always available | Product decision 2026-07-16: a loader gallery whose loaders don't move fails its purpose; user keeps explicit control. |
+| D-08 | Masonry default layout via responsive CSS columns, persisted Masonry/Grid toggle, stable per-loader card sizes (hash of id + category) | Pinterest-style browsing without JS layout thrash; deterministic heights avoid reflow. |
+| D-09 | Sticky topbar/toolbar stack isolated in `sticky-shell.css` with `--main-topbar-height` variable | Fixed overlap bugs once; per-breakpoint heights 80/76/72px. |
+| D-10 | Snippet contract: overlay markup `#appLoader` + `COMMON_OVERLAY_CSS` + `LOADER_RUNTIME_JS` exposing `AppLoader.show()/hide()`; combined snippet auto-runs a demo after paste | "Paste and see it immediately" is the core UX promise; production users delete the demo call. |
+| D-11 | localStorage keys frozen in `storage.js` (`loaderStudioFavorites/Recent/Theme/Accent/Shell/CollectionLayout`) | Backwards compatibility with every earlier release. |
+| D-12 | All loader motion elements are decorative: `aria-hidden`, `focusable=false`; buttons use real `disabled` + `aria-busy`; ≥44×44px interaction targets | Accessibility bar established 2026-07-16 and enforced in every pack QA (axe: zero violations). |
+| D-13 | Per-loader "Application state" controls are a declarative schema (`controls[]` + `applyControls`) rendered with DOM APIs | Trusted-internal-only control rendering; values persist per loader and sync selected + full previews. |
+
+## 4. Cross-cutting behaviours
+
+- **State flow**: single `state` object; `event-controller.js` mutates it and re-renders affected views. No framework, no pub/sub — controller composition through explicit callbacks.
+- **Fail-fast boot**: `app.js` throws on any missing required element, so an incomplete `index.html` fails loudly at startup.
+- **Views**: Library / Favorites / Recently-viewed (max 8) share the same collection pipeline: view filter → category filter → text search → pagination window.
+- **Theming**: light/dark body theme, global accent (8 presets + custom, propagated into copied CSS via `--loader-accent` rewrite), per-preview background (light/dark/brand).
+
+## 5. Quality gates (as practised per pack release)
+
+Each 10-loader pack ships with: static validation over all project files → desktop + mobile interaction QA (Inspector, Full Preview, progressive loading to the final card) → responsive/network inspection → axe accessibility audit (zero-violation bar) → Chromium/Firefox/WebKit cross-browser QA → focused code review recorded in `review/` (JSON + MD pair). `qa/snippet-paste-smoke.html` is a manual smoke harness verifying the exact combined snippet animates inside a sandboxed iframe.
+
+## 6. Known gaps / accepted debt
+
+- Static fallback text in `index.html` is stale before JS runs: hero pill "30 animations running", pagination "Showing 24 of 115", `aria-valuemax="125"`. Runtime JS overwrites all of them; cosmetic only. (TASK T-202)
+- No PWA manifest or service worker — repeatedly flagged by PWA audits, deliberately out of scope so far. (TASK T-204)
+- No automated test runner/CI; quality relies on the manual per-pack gate above. (TASK T-205)
+- The whole implementation is uncommitted on top of the initial commit; git history does not yet reflect the release history. (TASK T-201)
+- `knowledge-base/project-memory.md` narrates history only through SVG Pack 5 (525 loaders); SVG Packs 6–7 landed afterwards. Code and `review/` are authoritative. (TASK T-207)

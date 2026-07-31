@@ -1,0 +1,50 @@
+.ui-icon-slot {
+  width: 20px;
+  height: 20px;
+  display: inline-grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.ui-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  transition: transform .18s ease;
+  transform-origin: center;
+}
+
+.inspector-controls .icon-button {
+  color: var(--muted);
+}
+
+.inspector-controls .icon-button:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+
+.inspector-pin[aria-pressed="true"] {
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--line));
+  background: var(--primary-soft);
+  color: var(--primary-strong);
+}
+
+.inspector-pin[aria-pressed="false"] .ui-icon-pin {
+  transform: rotate(45deg);
+}
+
+.inspector-collapse[aria-expanded="false"] .ui-icon-collapse {
+  transform: rotate(180deg);
+}
+
+.inspector-close:hover {
+  border-color: color-mix(in srgb, var(--danger) 42%, var(--line));
+  background: color-mix(in srgb, var(--danger) 9%, var(--surface));
+  color: var(--danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-icon {
+    transition: none;
+  }
+}

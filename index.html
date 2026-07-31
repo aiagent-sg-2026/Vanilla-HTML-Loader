@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <title>Loader Studio — Vanilla Loader Collection</title>
+
+  <link rel="stylesheet" href="./css/tokens.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/collection-pagination.css">
+  <link rel="stylesheet" href="./css/icons.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="stylesheet" href="./css/collection-layout.css">
+  <link rel="stylesheet" href="./css/sticky-shell.css">
+</head>
+<body>
+  <div class="app-shell" id="appShell">
+    <aside class="sidebar" id="sidebar" aria-label="Primary navigation">
+      <button class="brand brand-toggle" id="sidebarToggle" type="button" aria-label="Collapse sidebar" aria-controls="sidebar" aria-expanded="true" title="Collapse sidebar">
+        <span class="brand-identity">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">Loader Studio</span>
+        </span>
+      </button>
+
+      <div class="nav-label">Workspace</div>
+      <nav class="nav-list">
+        <button class="nav-item is-active" type="button" data-nav="library" title="Loader library">
+          <span class="nav-icon" aria-hidden="true">▦</span><span class="nav-text">Loader library</span>
+        </button>
+        <button class="nav-item" type="button" data-nav="favorites" title="Favorites">
+          <span class="nav-icon" aria-hidden="true">☆</span><span class="nav-text">Favorites</span>
+        </button>
+        <button class="nav-item" type="button" data-nav="recent" title="Recently viewed">
+          <span class="nav-icon" aria-hidden="true">↻</span><span class="nav-text">Recently viewed</span>
+        </button>
+      </nav>
+
+      <div class="side-note">
+        <strong>Zero dependencies</strong>
+        <p>Every component is plain HTML, CSS and optional JavaScript.</p>
+      </div>
+    </aside>
+
+    <main class="main" id="mainContent">
+      <header class="topbar">
+        <div class="topbar-leading">
+          <button class="mobile-brand-button" id="mobileBrandButton" type="button" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false" title="Open navigation">
+            <span class="brand-mark" aria-hidden="true"></span>
+          </button>
+          <div class="breadcrumbs">Components / <strong>Loaders</strong></div>
+        </div>
+        <div class="top-actions">
+          <button class="button ghost" id="motionToggle" type="button" aria-pressed="false">Ⅱ Pause motion</button>
+          <div class="palette-control" id="paletteControl">
+            <button class="icon-button palette-toggle" id="paletteToggle" type="button" aria-label="Choose interface and loader colour" aria-controls="accentPalette" aria-expanded="false" title="Choose colour palette">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 3a9 9 0 1 0 0 18h1.2a1.8 1.8 0 0 0 1.24-3.1l-.24-.23a1.55 1.55 0 0 1 1.08-2.67H17a4 4 0 0 0 4-4c0-4.42-4.03-8-9-8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                <circle cx="7.7" cy="10" r="1.25" fill="currentColor"/>
+                <circle cx="10" cy="6.8" r="1.25" fill="currentColor"/>
+                <circle cx="14" cy="6.9" r="1.25" fill="currentColor"/>
+                <circle cx="16.6" cy="10" r="1.25" fill="currentColor"/>
+              </svg>
+              <span class="palette-current-dot" aria-hidden="true"></span>
+            </button>
+            <div class="accent-palette" id="accentPalette" hidden>
+              <div class="accent-palette-header">
+                <div>
+                  <strong>Colour palette</strong>
+                  <span>Interface and loader previews</span>
+                </div>
+                <button class="palette-reset" id="accentReset" type="button">Reset</button>
+              </div>
+              <div class="accent-swatches" id="accentSwatches" role="group" aria-label="Accent colour presets">
+                <button class="accent-swatch" type="button" data-accent="#3B63F3" aria-label="Blue" title="Blue" style="--swatch:#3B63F3"></button>
+                <button class="accent-swatch" type="button" data-accent="#7C3AED" aria-label="Violet" title="Violet" style="--swatch:#7C3AED"></button>
+                <button class="accent-swatch" type="button" data-accent="#C026D3" aria-label="Magenta" title="Magenta" style="--swatch:#C026D3"></button>
+                <button class="accent-swatch" type="button" data-accent="#E11D48" aria-label="Rose" title="Rose" style="--swatch:#E11D48"></button>
+                <button class="accent-swatch" type="button" data-accent="#EA580C" aria-label="Orange" title="Orange" style="--swatch:#EA580C"></button>
+                <button class="accent-swatch" type="button" data-accent="#059669" aria-label="Emerald" title="Emerald" style="--swatch:#059669"></button>
+                <button class="accent-swatch" type="button" data-accent="#0F766E" aria-label="Teal" title="Teal" style="--swatch:#0F766E"></button>
+                <button class="accent-swatch" type="button" data-accent="#475569" aria-label="Slate" title="Slate" style="--swatch:#475569"></button>
+              </div>
+              <label class="custom-accent" for="globalAccentControl">
+                <span>Custom colour</span>
+                <span class="custom-accent-control">
+                  <input id="globalAccentControl" type="color" value="#3b63f3" aria-label="Custom interface and loader colour">
+                  <output id="accentValue" for="globalAccentControl">#3B63F3</output>
+                </span>
+              </label>
+            </div>
+          </div>
+          <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div>
+          <h1>Vanilla loader collection</h1>
+          <p>Preview every animation live, select a loader, tune its appearance, and copy production-ready HTML, CSS and JavaScript snippets.</p>
+        </div>
+        <div class="summary-pill"><span class="live-dot" aria-hidden="true"></span><span id="liveSummary">30 animations running</span></div>
+      </section>
+
+      <section class="collection-toolbar" aria-label="Browse loader collection">
+        <div class="collection-toolbar-primary">
+          <div class="collection-header">
+            <h2 id="collectionTitle">All loaders</h2>
+            <span class="collection-count" id="collectionCount"></span>
+          </div>
+          <div class="toolbar">
+            <label class="search-box">
+              <span aria-hidden="true">⌕</span>
+              <input id="searchInput" type="search" placeholder="Search loaders by name or category" autocomplete="off">
+            </label>
+            <button class="filter-toggle" id="filterToggle" type="button" aria-expanded="false" aria-controls="filterRow">
+              <svg class="filter-toggle-leading-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 5h12M4 10h12M4 15h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="7" cy="5" r="1.25" fill="currentColor"/><circle cx="13" cy="10" r="1.25" fill="currentColor"/><circle cx="9" cy="15" r="1.25" fill="currentColor"/></svg>
+              <span class="filter-toggle-label">Filters</span>
+              <svg class="filter-toggle-chevron" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="m5.5 7.5 4.5 4.5 4.5-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="layout-switcher" id="layoutSwitcher" role="group" aria-label="Card layout">
+              <button class="layout-option is-active" type="button" data-layout-mode="masonry" aria-label="Use Pinterest masonry layout" aria-pressed="true" title="Masonry layout">
+                <span class="layout-option-icon" aria-hidden="true">▥</span>
+                <span class="layout-option-label">Masonry</span>
+              </button>
+              <button class="layout-option" type="button" data-layout-mode="grid" aria-label="Use aligned grid layout" aria-pressed="false" title="Grid layout">
+                <span class="layout-option-icon" aria-hidden="true">▦</span>
+                <span class="layout-option-label">Grid</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="filter-row" id="filterRow" aria-label="Loader categories"></div>
+      </section>
+
+      <section class="loader-grid" id="loaderGrid" data-layout="masonry" role="feed" aria-live="polite" aria-busy="false"></section>
+
+      <section class="collection-pagination" id="collectionPagination" aria-label="Load more loaders" hidden>
+        <div class="collection-pagination-copy">
+          <strong id="collectionPaginationSummary" aria-live="polite">Showing 24 of 115 loaders</strong>
+          <div class="collection-progress" id="collectionProgress" role="progressbar" aria-label="Loaded loaders" aria-valuemin="0" aria-valuemax="125" aria-valuenow="24">
+            <span id="collectionProgressFill"></span>
+          </div>
+          <span class="collection-auto-status" id="collectionAutoStatus" aria-live="polite">Scroll down to load more automatically.</span>
+        </div>
+        <button class="button collection-load-more" id="loadMoreButton" type="button">Load more</button>
+      </section>
+      <div class="collection-sentinel" id="collectionSentinel" aria-hidden="true" hidden></div>
+    </main>
+
+    <aside class="inspector" id="inspector" aria-label="Selected loader details" aria-hidden="false">
+      <header class="inspector-header">
+        <div class="inspector-heading">
+          <h2>Loader inspector</h2>
+          <span class="inspector-state" id="inspectorState">Pinned</span>
+        </div>
+        <div class="inspector-controls">
+          <button class="icon-button inspector-pin" id="inspectorPin" type="button" aria-label="Unpin inspector" aria-pressed="true" title="Unpin inspector">
+            <span class="ui-icon-slot" data-ui-icon="pin"></span>
+          </button>
+          <button class="icon-button inspector-collapse" id="inspectorCollapse" type="button" aria-label="Collapse inspector" aria-expanded="true" title="Collapse inspector">
+            <span class="ui-icon-slot" data-ui-icon="collapse"></span>
+          </button>
+          <button class="icon-button inspector-close" id="inspectorClose" type="button" aria-label="Close inspector" title="Close inspector">
+            <span class="ui-icon-slot" data-ui-icon="close"></span>
+          </button>
+        </div>
+      </header>
+
+      <div class="inspector-content">
+        <div class="selected-meta">
+          <h3 id="selectedName">Orbit Spinner</h3>
+          <span class="tag" id="selectedCategory">Spinners</span>
+        </div>
+        <p class="selected-description" id="selectedDescription"></p>
+
+        <div class="large-preview" id="largePreview" data-preview-theme="light">
+          <div class="large-preview-inner" id="largePreviewInner">
+            <div id="selectedPreview"></div>
+            <p class="preview-label" id="previewLabel">Loading data…</p>
+          </div>
+        </div>
+
+        <div class="theme-switcher" id="previewThemeSwitcher" aria-label="Preview background">
+          <button class="theme-option is-active" type="button" data-theme-value="light">Light</button>
+          <button class="theme-option" type="button" data-theme-value="dark">Dark</button>
+          <button class="theme-option" type="button" data-theme-value="brand">Brand</button>
+        </div>
+
+        <div class="section-title">Preview settings</div>
+        <div class="control-grid">
+          <div class="control-group full">
+            <label for="sizeControl">Size <span class="range-value" id="sizeValue">100%</span></label>
+            <input id="sizeControl" type="range" min="70" max="150" value="100" step="5">
+          </div>
+          <div class="control-group">
+            <label for="speedControl">Animation speed</label>
+            <select id="speedControl">
+              <option value="1.45">Slow</option>
+              <option value="1" selected>Normal</option>
+              <option value="0.65">Fast</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="accentControl">Accent colour</label>
+            <input id="accentControl" class="select-control" type="color" value="#3b63f3" aria-label="Loader accent colour">
+          </div>
+          <div class="control-group full">
+            <label class="check-row" for="labelToggle"><span>Show loading label</span><span class="checkbox-target"><input id="labelToggle" type="checkbox" checked><span class="checkbox-visual" aria-hidden="true"></span></span></label>
+          </div>
+        </div>
+
+        <section id="loaderControlsSection" hidden>
+          <div class="section-title">Application state</div>
+          <div class="control-grid loader-control-grid" id="loaderControls"></div>
+        </section>
+
+        <div class="section-title">Actions</div>
+        <div class="action-grid">
+          <button class="button" id="fullPreviewButton" type="button">Open full preview</button>
+          <button class="button primary" id="copyAllButton" type="button">Copy full snippet</button>
+        </div>
+
+        <div class="section-title">Vanilla snippet</div>
+        <div class="code-tabs" id="codeTabs" role="group" aria-label="Snippet sections">
+          <button class="code-tab is-active" type="button" data-code-tab="html">HTML</button>
+          <button class="code-tab" type="button" data-code-tab="css">CSS</button>
+          <button class="code-tab" type="button" data-code-tab="js">JavaScript</button>
+          <button class="code-tab" type="button" data-code-tab="all">All</button>
+        </div>
+
+        <div class="code-shell">
+          <div class="code-toolbar"><span id="codeLanguage">HTML</span><button class="copy-code-button" id="copyCodeButton" type="button">Copy code</button></div>
+          <pre><code id="codeOutput"></code></pre>
+        </div>
+
+        <div class="selection-tip"><strong>Full snippet auto-runs after pasting</strong> so you can see the animation immediately. For production, remove the final demo call, then use <strong>AppLoader.show('Saving…')</strong> and <strong>AppLoader.hide()</strong>.</div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="panel-backdrop" id="mobileBackdrop" aria-hidden="true"></div>
+
+  <div class="full-preview" id="fullPreview" hidden>
+    <div class="full-preview-panel" role="dialog" aria-modal="true" aria-labelledby="fullPreviewTitle">
+      <button class="full-preview-close" id="fullPreviewClose" type="button" aria-label="Close full preview">×</button>
+      <div class="full-preview-content">
+        <div id="fullPreviewLoader"></div>
+        <p id="fullPreviewTitle">Loading data…</p>
+        <button class="button ghost full-preview-motion" id="fullPreviewMotionToggle" type="button" aria-pressed="false">Ⅱ Pause motion</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">✓ <span id="toastMessage">Copied</span></div>
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+{
+  "projectId": "project_69be700d-ca6a-4def-8b2a-6e05eeea7d0d",
+  "findings": [
+    {
+      "title": "3 innerHTML/outerHTML assignment(s)",
+      "detail": "Direct innerHTML/outerHTML assignment is a common XSS vector if user-controlled data flows in.",
+      "severity": "high",
+      "category": "security",
+      "filePath": "js/ui/collection-view.js",
+      "lineStart": 31,
+      "evidence": ") {\n  refs.filterRow.innerHTML = categories.map(category => `\n    <button class=",
+      "suggestion": "Use textContent for plain text, or a trusted sanitizer (DOMPurify) for HTML output."
+    },
+    {
+      "title": "1 innerHTML/outerHTML assignment(s)",
+      "detail": "Direct innerHTML/outerHTML assignment is a common XSS vector if user-controlled data flows in.",
+      "severity": "high",
+      "category": "security",
+      "filePath": "js/ui/icon-library.js",
+      "lineStart": 27,
+      "evidence": "urn;\n    }\n\n    slot.innerHTML = icon.trim();\n  });\n}",
+      "suggestion": "Use textContent for plain text, or a trusted sanitizer (DOMPurify) for HTML output."
+    },
+    {
+      "title": "3 innerHTML/outerHTML assignment(s)",
+      "detail": "Direct innerHTML/outerHTML assignment is a common XSS vector if user-controlled data flows in.",
+      "severity": "high",
+      "category": "security",
+      "filePath": "js/ui/inspector-view.js",
+      "lineStart": 7,
+      "evidence": "refs.selectedPreview.innerHTML = loader.markup;\n  refs.fullPreviewLoader.innerHT",
+      "suggestion": "Use textContent for plain text, or a trusted sanitizer (DOMPurify) for HTML output."
+    },
+    {
+      "title": "1 innerHTML/outerHTML assignment(s)",
+      "detail": "Direct innerHTML/outerHTML assignment is a common XSS vector if user-controlled data flows in.",
+      "severity": "high",
+      "category": "security",
+      "filePath": "js/ui/preview-view.js",
+      "lineStart": 30,
+      "evidence": "fs.fullPreviewLoader.innerHTML = loader.markup;\n  refs.fullPreviewTitle.textCont",
+      "suggestion": "Use textContent for plain text, or a trusted sanitizer (DOMPurify) for HTML output."
+    },
+    {
+      "title": "Large CSS file (813 lines)",
+      "detail": "This CSS file has 813 lines. Large CSS files are harder to maintain and can slow initial render.",
+      "severity": "medium",
+      "category": "maintainability",
+      "filePath": "css/components.css",
+      "evidence": "813 lines",
+      "suggestion": "Split into smaller component-scoped CSS files."
+    },
+    {
+      "title": "Large script file (304 lines)",
+      "detail": "This file has 304 lines. Oversized scripts are harder to test and maintain.",
+      "severity": "medium",
+      "category": "maintainability",
+      "filePath": "loaders/matrix.js",
+      "evidence": "304 lines",
+      "suggestion": "Split into smaller single-responsibility modules."
+    },
+    {
+      "title": "Large inline <script> block (58 lines)",
+      "detail": "An inline <script> block has 58 lines. Large inline scripts are hard to test, cache, and maintain.",
+      "severity": "medium",
+      "category": "performance",
+      "filePath": "qa/snippet-paste-smoke.html",
+      "lineStart": 16,
+      "evidence": "Inline script of 58 lines",
+      "suggestion": "Extract to a separate .js file and load with <script src=\"...\">."
+    },
+    {
+      "title": "Repeated hardcoded pixel values (e.g. 1px used 27×)",
+      "detail": "Repeated hardcoded pixel values indicate missing CSS custom properties (design tokens).",
+      "severity": "low",
+      "category": "duplication",
+      "filePath": "css/components.css",
+      "evidence": "1px ×27, 8px ×27, 12px ×24",
+      "suggestion": "Extract repeated values into CSS custom properties (--spacing-md: 16px) and reference them."
+    }
+  ],
+  "metrics": {
+    "filesScanned": 34,
+    "totalFilesInProject": 51,
+    "totalSizeBytes": 161683,
+    "findingsTotal": 8,
+    "findingsCritical": 0,
+    "findingsHigh": 4,
+    "findingsMedium": 3,
+    "findingsLow": 1
+  },
+  "nextActions": [
+    "Address all security findings first — innerHTML, eval, and XSS risks.",
+    "Extract large inline scripts/styles into separate files for better caching.",
+    "Break up oversized or mixed-responsibility files into single-purpose modules.",
+    "Extract repeated values into CSS custom properties or shared constants."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "projectId": "project_69be700d-ca6a-4def-8b2a-6e05eeea7d0d",
+  "findings": [
+    {
+      "title": "3 innerHTML/outerHTML assignment(s)",
+      "detail": "Direct innerHTML/outerHTML assignment is a common XSS vector if user-controlled data flows in.",
+      "severity": "high",
+      "category": "security",
+      "filePath": "js/ui/collection-view.js",
+      "lineStart": 31,
+      "evidence": ") {\n  refs.filterRow.innerHTML = categories.map(category => `\n    <button class=",
+      "suggestion": "Use textContent for plain text, or a trusted sanitizer (DOMPurify) for HTML output."
+    },
+    {
+      "title": "Large script file (314 lines)",
+      "detail": "This file has 314 lines. Oversized scripts are harder to test and maintain.",
+      "severity": "medium",
+      "category": "maintainability",
+      "filePath": "loaders/common-panels.js",
+      "evidence": "314 lines",
+      "suggestion": "Split into smaller single-responsibility modules."
+    }
+  ],
+  "metrics": {
+    "filesScanned": 4,
+    "totalFilesInProject": 74,
+    "totalSizeBytes": 23064,
+    "findingsTotal": 2,
+    "findingsCritical": 0,
+    "findingsHigh": 1,
+    "findingsMedium": 1,
+    "findingsLow": 0
+  },
+  "nextActions": [
+    "Address all security findings first — innerHTML, eval, and XSS risks.",
+    "Break up oversized or mixed-responsibility files into single-purpose modules."
+  ]
+}

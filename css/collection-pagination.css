@@ -1,0 +1,77 @@
+.collection-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.collection-pagination[hidden] { display: none; }
+
+.collection-pagination-copy {
+  min-width: min(280px, 48vw);
+  display: grid;
+  gap: 7px;
+}
+
+.collection-pagination-copy strong {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.collection-progress {
+  width: 100%;
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 12%, var(--surface-3));
+}
+
+.collection-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--primary);
+  transition: width .24s ease;
+}
+
+.collection-auto-status {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.collection-load-more {
+  min-width: 132px;
+  flex: 0 0 auto;
+}
+
+.collection-pagination.is-auto-loading .collection-load-more {
+  opacity: .68;
+  pointer-events: none;
+}
+
+.collection-pagination.is-auto-loading .collection-progress span {
+  animation: collection-progress-breathe .8s ease-in-out infinite alternate;
+}
+
+.collection-sentinel {
+  width: 100%;
+  height: 1px;
+  margin-top: 1px;
+  pointer-events: none;
+}
+
+.collection-sentinel[hidden] { display: none; }
+
+@keyframes collection-progress-breathe {
+  from { opacity: .62; }
+  to { opacity: 1; }
+}

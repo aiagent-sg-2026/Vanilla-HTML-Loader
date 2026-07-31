@@ -1,0 +1,52 @@
+.main {
+  --main-topbar-height: 80px;
+  padding: 0 24px 40px;
+  scroll-padding-top: calc(var(--main-topbar-height) + 96px);
+}
+
+.topbar {
+  top: 0;
+  z-index: 60;
+  min-height: var(--main-topbar-height);
+  margin: 0 -24px 16px;
+  padding: 10px 24px;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 88%, transparent);
+  background: var(--bg);
+  backdrop-filter: none;
+  box-shadow: 0 10px 24px -22px rgba(15, 23, 42, .72);
+  isolation: isolate;
+}
+
+.collection-toolbar {
+  top: var(--main-topbar-height);
+  z-index: 50;
+  border-bottom-color: color-mix(in srgb, var(--line) 88%, transparent);
+  background: var(--bg);
+  backdrop-filter: none;
+  box-shadow: 0 12px 22px -22px rgba(15, 23, 42, .72);
+}
+
+@media (max-width: 1199px) {
+  .main {
+    --main-topbar-height: 76px;
+    padding: 0 18px 36px;
+    scroll-padding-top: calc(var(--main-topbar-height) + 88px);
+  }
+
+  .topbar {
+    margin: 0 -18px 18px;
+    padding: 10px 18px;
+  }
+}
+
+@media (max-width: 767px) {
+  .main {
+    --main-topbar-height: 72px;
+    padding: 0 14px 32px;
+  }
+
+  .topbar {
+    margin: 0 -14px 18px;
+    padding: 8px 14px;
+  }
+}

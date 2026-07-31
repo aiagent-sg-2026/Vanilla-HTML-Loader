@@ -1,0 +1,47 @@
+export const css3dPack8LoadersB = [
+  {
+    id: 'halo-stack-3d',
+    name: '3D Halo Stack',
+    category: 'CSS 3D',
+    tech: 'CSS 3D',
+    description: 'Four luminous halos float at different depths and pulse through a slowly rotating vertical stack.',
+    markup: `<div class="vl-halo-stack-3d" aria-hidden="true"><div><span style="--y:-24px;--s:.7;--i:0"></span><span style="--y:-8px;--s:.86;--i:1"></span><span style="--y:8px;--s:1;--i:2"></span><span style="--y:24px;--s:1.14;--i:3"></span><i></i></div></div>`,
+    css: `.vl-halo-stack-3d{width:94px;height:94px;display:grid;place-items:center;perspective:640px}.vl-halo-stack-3d>div{position:relative;width:58px;height:58px;transform-style:preserve-3d;animation:vl-halo-stack-scene calc(var(--loader-speed)*2.6) linear infinite}.vl-halo-stack-3d span{position:absolute;left:7px;top:18px;width:44px;height:22px;border:3px solid var(--loader-accent);border-radius:50%;box-shadow:0 0 13px color-mix(in srgb,var(--loader-accent) 52%,transparent),inset 0 0 10px color-mix(in srgb,var(--loader-accent) 28%,transparent);transform:translateY(var(--y)) scale(var(--s)) rotateX(68deg);animation:vl-halo-stack-ring calc(var(--loader-speed)*1.45) ease-in-out infinite;animation-delay:calc(var(--loader-speed)*-.18*var(--i))}.vl-halo-stack-3d i{position:absolute;left:24px;top:24px;width:10px;height:10px;border-radius:50%;background:var(--loader-accent);box-shadow:0 0 16px var(--loader-accent);transform:translateZ(14px)}@keyframes vl-halo-stack-scene{0%{transform:rotateX(-8deg) rotateY(0)}100%{transform:rotateX(-8deg) rotateY(360deg)}}@keyframes vl-halo-stack-ring{0%,100%{opacity:.3;filter:brightness(.8)}50%{opacity:1;filter:brightness(1.4)}}`
+  },
+  {
+    id: 'folding-cross-3d',
+    name: '3D Folding Cross',
+    category: 'CSS 3D',
+    tech: 'CSS 3D',
+    description: 'Four hinged arms fold toward a glowing center and reopen as the cross tilts through depth.',
+    markup: `<div class="vl-folding-cross-3d" aria-hidden="true"><div><i></i><span class="north"></span><span class="east"></span><span class="south"></span><span class="west"></span></div></div>`,
+    css: `.vl-folding-cross-3d{width:92px;height:92px;display:grid;place-items:center;perspective:600px}.vl-folding-cross-3d>div{position:relative;width:58px;height:58px;transform-style:preserve-3d;transform:rotateX(56deg) rotateZ(45deg)}.vl-folding-cross-3d span{position:absolute;background:linear-gradient(135deg,color-mix(in srgb,var(--loader-accent) 82%,white),color-mix(in srgb,var(--loader-accent) 42%,#0f172a));border:1px solid color-mix(in srgb,var(--loader-accent) 70%,white);box-shadow:0 0 10px color-mix(in srgb,var(--loader-accent) 24%,transparent);backface-visibility:hidden}.vl-folding-cross-3d .north,.vl-folding-cross-3d .south{left:21px;width:16px;height:24px}.vl-folding-cross-3d .north{top:0;transform-origin:50% 100%;animation:vl-fold-cross-n calc(var(--loader-speed)*1.9) ease-in-out infinite}.vl-folding-cross-3d .south{bottom:0;transform-origin:50% 0;animation:vl-fold-cross-s calc(var(--loader-speed)*1.9) ease-in-out infinite}.vl-folding-cross-3d .east,.vl-folding-cross-3d .west{top:21px;width:24px;height:16px}.vl-folding-cross-3d .east{right:0;transform-origin:0 50%;animation:vl-fold-cross-e calc(var(--loader-speed)*1.9) ease-in-out infinite}.vl-folding-cross-3d .west{left:0;transform-origin:100% 50%;animation:vl-fold-cross-w calc(var(--loader-speed)*1.9) ease-in-out infinite}.vl-folding-cross-3d i{position:absolute;left:21px;top:21px;width:16px;height:16px;border-radius:4px;background:var(--loader-accent);box-shadow:0 0 16px var(--loader-accent);transform:translateZ(8px)}@keyframes vl-fold-cross-n{0%,100%{transform:rotateX(0)}50%{transform:rotateX(-72deg)}}@keyframes vl-fold-cross-s{0%,100%{transform:rotateX(0)}50%{transform:rotateX(72deg)}}@keyframes vl-fold-cross-e{0%,100%{transform:rotateY(0)}50%{transform:rotateY(72deg)}}@keyframes vl-fold-cross-w{0%,100%{transform:rotateY(0)}50%{transform:rotateY(-72deg)}}`
+  },
+  {
+    id: 'orbital-frames-3d',
+    name: '3D Orbital Frames',
+    category: 'CSS 3D',
+    tech: 'CSS 3D',
+    description: 'Three square frames intersect on different axes and orbit around a bright suspended core.',
+    markup: `<div class="vl-orbital-frames-3d" aria-hidden="true"><div><span class="a"></span><span class="b"></span><span class="c"></span><i></i></div></div>`,
+    css: `.vl-orbital-frames-3d{width:94px;height:94px;display:grid;place-items:center;perspective:650px}.vl-orbital-frames-3d>div{position:relative;width:54px;height:54px;transform-style:preserve-3d;animation:vl-orbital-frames-scene calc(var(--loader-speed)*2.7) linear infinite}.vl-orbital-frames-3d span{position:absolute;inset:3px;border:3px solid var(--loader-accent);border-radius:9px;box-shadow:0 0 12px color-mix(in srgb,var(--loader-accent) 44%,transparent),inset 0 0 10px color-mix(in srgb,var(--loader-accent) 18%,transparent);animation:vl-orbital-frame-glow calc(var(--loader-speed)*1.4) ease-in-out infinite}.vl-orbital-frames-3d .a{transform:rotateX(70deg)}.vl-orbital-frames-3d .b{transform:rotateY(70deg);animation-delay:calc(var(--loader-speed)*-.45)}.vl-orbital-frames-3d .c{transform:rotateX(54deg) rotateY(54deg);animation-delay:calc(var(--loader-speed)*-.9)}.vl-orbital-frames-3d i{position:absolute;left:21px;top:21px;width:12px;height:12px;border-radius:50%;background:var(--loader-accent);box-shadow:0 0 18px var(--loader-accent);transform:translateZ(10px)}@keyframes vl-orbital-frames-scene{0%{transform:rotateX(-18deg) rotateY(0) rotateZ(0)}100%{transform:rotateX(342deg) rotateY(360deg) rotateZ(180deg)}}@keyframes vl-orbital-frame-glow{0%,100%{opacity:.35}50%{opacity:1;filter:brightness(1.4)}}`
+  },
+  {
+    id: 'corner-flip-3d',
+    name: '3D Corner Flip',
+    category: 'CSS 3D',
+    tech: 'CSS 3D',
+    description: 'Four corner panels flip in sequence around an empty center, producing a crisp spatial loading cycle.',
+    markup: `<div class="vl-corner-flip-3d" aria-hidden="true"><div><span class="tl"><i></i></span><span class="tr"><i></i></span><span class="br"><i></i></span><span class="bl"><i></i></span></div></div>`,
+    css: `.vl-corner-flip-3d{width:90px;height:90px;display:grid;place-items:center;perspective:560px}.vl-corner-flip-3d>div{position:relative;width:58px;height:58px;transform-style:preserve-3d;transform:rotateX(56deg) rotateZ(45deg)}.vl-corner-flip-3d span{position:absolute;width:22px;height:22px;transform-style:preserve-3d}.vl-corner-flip-3d .tl{left:0;top:0}.vl-corner-flip-3d .tr{right:0;top:0}.vl-corner-flip-3d .br{right:0;bottom:0}.vl-corner-flip-3d .bl{left:0;bottom:0}.vl-corner-flip-3d i{display:block;width:100%;height:100%;border-radius:5px;background:linear-gradient(145deg,color-mix(in srgb,var(--loader-accent) 84%,white),color-mix(in srgb,var(--loader-accent) 38%,#0f172a));border:1px solid color-mix(in srgb,var(--loader-accent) 68%,white);box-shadow:0 0 11px color-mix(in srgb,var(--loader-accent) 28%,transparent);backface-visibility:hidden;animation:vl-corner-panel calc(var(--loader-speed)*1.65) ease-in-out infinite}.vl-corner-flip-3d .tr i{animation-delay:calc(var(--loader-speed)*-.4)}.vl-corner-flip-3d .br i{animation-delay:calc(var(--loader-speed)*-.8)}.vl-corner-flip-3d .bl i{animation-delay:calc(var(--loader-speed)*-1.2)}@keyframes vl-corner-panel{0%,18%,100%{transform:rotateY(0) translateZ(0);opacity:.38}48%,62%{transform:rotateY(180deg) translateZ(12px);opacity:1}}`
+  },
+  {
+    id: 'holo-cage-3d',
+    name: '3D Holo Cage',
+    category: 'CSS 3D',
+    tech: 'CSS 3D',
+    description: 'Three transparent lattice planes intersect to form a rotating holographic cage around a pulsing core.',
+    markup: `<div class="vl-holo-cage-3d" aria-hidden="true"><div><span class="xy"></span><span class="xz"></span><span class="yz"></span><i></i></div></div>`,
+    css: `.vl-holo-cage-3d{width:94px;height:94px;display:grid;place-items:center;perspective:680px}.vl-holo-cage-3d>div{position:relative;width:52px;height:52px;transform-style:preserve-3d;animation:vl-holo-cage-scene calc(var(--loader-speed)*2.8) linear infinite}.vl-holo-cage-3d span{position:absolute;inset:0;border:2px solid var(--loader-accent);border-radius:8px;background:repeating-linear-gradient(90deg,color-mix(in srgb,var(--loader-accent) 20%,transparent) 0 2px,transparent 2px 12px),repeating-linear-gradient(0deg,color-mix(in srgb,var(--loader-accent) 18%,transparent) 0 2px,transparent 2px 12px);box-shadow:0 0 12px color-mix(in srgb,var(--loader-accent) 34%,transparent);backface-visibility:visible;animation:vl-holo-cage-plane calc(var(--loader-speed)*1.5) ease-in-out infinite}.vl-holo-cage-3d .xy{transform:translateZ(0)}.vl-holo-cage-3d .xz{transform:rotateX(90deg);animation-delay:calc(var(--loader-speed)*-.5)}.vl-holo-cage-3d .yz{transform:rotateY(90deg);animation-delay:calc(var(--loader-speed)*-1)}.vl-holo-cage-3d i{position:absolute;left:20px;top:20px;width:12px;height:12px;border-radius:3px;background:var(--loader-accent);box-shadow:0 0 18px var(--loader-accent);transform:translateZ(18px);animation:vl-holo-core calc(var(--loader-speed)*1.2) ease-in-out infinite}@keyframes vl-holo-cage-scene{0%{transform:rotateX(-22deg) rotateY(0) rotateZ(0)}100%{transform:rotateX(338deg) rotateY(360deg) rotateZ(180deg)}}@keyframes vl-holo-cage-plane{0%,100%{opacity:.28}50%{opacity:.88}}@keyframes vl-holo-core{0%,100%{transform:translateZ(18px) scale(.65)}50%{transform:translateZ(18px) scale(1.2)}}`
+  }
+];

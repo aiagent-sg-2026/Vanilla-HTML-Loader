@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loader snippet paste smoke test</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body { background: #dfe5ef; font-family: system-ui, sans-serif; }
+    iframe { width: 100%; height: 100%; border: 0; display: block; background: #fff; }
+  </style>
+</head>
+<body data-motion-test="pending" data-motion-mode="pending">
+  <iframe id="snippetFrame" title="Exact generated loader snippet smoke test"></iframe>
+  <script type="module">
+    import { loaders } from '../loaders/index.js';
+    import { getCombinedSnippet } from '../js/snippet-service.js';
+
+    const loader = loaders.find(item => item.id === 'matrix-cube-field');
+    const snippet = getCombinedSnippet(loader, '#EA580C');
+    const frame = document.getElementById('snippetFrame');
+
+    window.addEventListener('message', event => {
+      if (event.data?.type !== 'loader-motion-smoke') return;
+      document.body.dataset.motionTest = event.data.playState;
+      document.body.dataset.motionMode = event.data.motionMode;
+    });
+
+    frame.srcdoc = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * { box-sizing: border-box; }
+    body { min-height: 160vh; margin: 0; background: linear-gradient(135deg, #f8fafc, #dbe5f4); color: #172033; font-family: system-ui, sans-serif; }
+    .demo-page { width: min(1040px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0; }
+    .demo-page h1 { margin: 0 0 12px; font-size: clamp(30px, 6vw, 60px); }
+    .demo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 34px; }
+    .demo-card { min-height: 180px; padding: 22px; border: 1px solid #cbd5e1; border-radius: 18px; background: rgba(255,255,255,.88); box-shadow: 0 14px 40px rgba(15,23,42,.08); }
+    .simulate-reduced .vl-matrix-grid,
+    .simulate-reduced .vl-matrix-cell { animation-play-state: paused; }
+    @media (max-width: 700px) { .demo-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="simulate-reduced">
+  <main class="demo-page">
+    <h1>Existing application content</h1>
+    <p>The copied loader must cover this whole viewport and visibly animate after paste.</p>
+    <div class="demo-grid">
+      <article class="demo-card">Dashboard card</article>
+      <article class="demo-card">Report card</article>
+      <article class="demo-card">Activity card</article>
+    </div>
+  </main>
+  ${snippet}
+  <script>
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        const cell = document.querySelector('.vl-matrix-cell');
+        const overlay = document.getElementById('appLoader');
+        parent.postMessage({
+          type: 'loader-motion-smoke',
+          playState: cell ? getComputedStyle(cell).animationPlayState : 'missing',
+          motionMode: overlay?.dataset.motion || 'auto'
+        }, '*');
+      }, 120);
+    });
+  <\/script>
+</body>
+</html>`;
+  </script>
+</body>
+</html>

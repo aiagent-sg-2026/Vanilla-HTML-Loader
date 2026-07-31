@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "projectId": "project_69be700d-ca6a-4def-8b2a-6e05eeea7d0d",
+  "updatedAt": "2026-07-16T04:55:12.949Z",
+  "events": [
+    {
+      "type": "other",
+      "status": "succeeded",
+      "title": "Centralized motion control",
+      "detail": "Fixed Matrix and Holographic loaders appearing static when the device reports prefers-reduced-motion. Component CSS now pauses animations instead of removing them; a dedicated motion-controller.js initializes from system preference and allows the existing Resume motion control to force animations to run. Verified full preview and pause/resume behavior with no runtime errors.",
+      "toolName": "Code-MCP",
+      "paths": [
+        "loaders/matrix.js",
+        "loaders/holographic.js",
+        "js/ui/motion-controller.js",
+        "js/ui/event-controller.js",
+        "css/components.css"
+      ],
+      "artifacts": [
+        "https://gmb01.xyz/share/46243a48-3ce9-4061-8511-d948a7893f20/interaction-flow-fb6dde93-1bd2-4ffa-93ce-ba4702c318d6.html",
+        "backup_69be700d-ca6_mrn155zb"
+      ],
+      "metadata": {},
+      "id": "audit_mrn1ce2d_rl68qr",
+      "occurredAt": "2026-07-16T04:55:12.949Z"
+    }
+  ]
+}

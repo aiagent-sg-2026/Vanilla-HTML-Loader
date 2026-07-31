@@ -1,0 +1,376 @@
+{
+  "projectId": "project_69be700d-ca6a-4def-8b2a-6e05eeea7d0d",
+  "scannedFiles": [
+    "audit-log/audit-log.json",
+    "css/components.css",
+    "css/icons.css",
+    "css/layout.css",
+    "css/responsive.css",
+    "css/tokens.css",
+    "docs/modular-refactor.md",
+    "index.html",
+    "js/app.js",
+    "js/loader-style-service.js",
+    "js/snippet-service.js",
+    "js/state.js",
+    "js/storage.js",
+    "js/ui/accent-controller.js",
+    "js/ui/collection-view.js",
+    "js/ui/event-controller.js",
+    "js/ui/icon-library.js",
+    "js/ui/inspector-view.js",
+    "js/ui/motion-controller.js",
+    "js/ui/preview-view.js",
+    "js/ui/shell-controller.js",
+    "knowledge-base/brand-sidebar-toggle.md",
+    "knowledge-base/circular-ring-visual-fix.md",
+    "knowledge-base/codepen-auto-motion.md",
+    "knowledge-base/copied-snippet-fullscreen-overlay.md",
+    "knowledge-base/cyber-animation-visibility-fix.md",
+    "knowledge-base/cyber-matrix-loaders.md",
+    "knowledge-base/five-functional-loaders.md",
+    "knowledge-base/global-accent-palette.md",
+    "knowledge-base/inspector-svg-icons.md",
+    "knowledge-base/large-desktop-grid.md",
+    "knowledge-base/mobile-filter-toolbar.md",
+    "knowledge-base/release-1-responsive-shell.md",
+    "knowledge-base/release-2-collection-density.md",
+    "loaders/bars.js",
+    "loaders/css-3d.js",
+    "loaders/dots.js",
+    "loaders/holographic.js",
+    "loaders/index.js",
+    "loaders/matrix.js",
+    "loaders/operations.js",
+    "loaders/progress.js",
+    "loaders/shared.js",
+    "loaders/skeletons.js",
+    "loaders/spinners.js",
+    "loaders/svg.js",
+    "loaders/text.js",
+    "loaders/utility.js",
+    "qa/snippet-paste-smoke.html",
+    "review/current-review.json",
+    "review/current-review.md",
+    "review/fresh-code-review.json",
+    "review/fresh-code-review.md"
+  ],
+  "findingCount": 34,
+  "riskCounts": {
+    "medium": 33,
+    "low": 1
+  },
+  "findings": [
+    {
+      "id": "browser-api-local-storage-sensitive",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "js/storage.js",
+      "evidence": ", fallback) { try { const value = localStorage.getItem(key); return value ? JSON.parse(value) : fallback; } catch { return f",
+      "message": "Sensitive values should not be stored in localStorage.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-local-storage-sensitive",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "js/storage.js",
+      "evidence": "t function saveFavorites(favorites) { localStorage.setItem(STORAGE_KEYS.favorites, JSON.stringify([...favorites])); } export function loa",
+      "message": "Sensitive values should not be stored in localStorage.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-local-storage-sensitive",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "js/storage.js",
+      "evidence": "export function saveRecent(recent) { localStorage.setItem(STORAGE_KEYS.recent, JSON.stringify(recent)); } export function loadTheme() {",
+      "message": "Sensitive values should not be stored in localStorage.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-local-storage-sensitive",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "js/storage.js",
+      "evidence": "export function loadTheme() { return localStorage.getItem(STORAGE_KEYS.theme) === 'dark' ? 'dark' : 'light'; } export function saveTheme",
+      "message": "Sensitive values should not be stored in localStorage.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-local-storage-sensitive",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "js/storage.js",
+      "evidence": "} export function saveTheme(theme) { localStorage.setItem(STORAGE_KEYS.theme, theme); } export function loadAccent() { const value = l",
+      "message": "Sensitive values should not be stored in localStorage.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-local-storage-sensitive",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "js/storage.js",
+      "evidence": "function loadAccent() { const value = localStorage.getItem(STORAGE_KEYS.accent); return /^#[0-9a-f]{6}$/i.test(value || '') ? value.toUp",
+      "message": "Sensitive values should not be stored in localStorage.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-local-storage-sensitive",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "js/storage.js",
+      "evidence": "export function saveAccent(accent) { localStorage.setItem(STORAGE_KEYS.accent, accent); } export function loadShellPreferences() { con",
+      "message": "Sensitive values should not be stored in localStorage.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-local-storage-sensitive",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "js/storage.js",
+      "evidence": "unction saveShellPreferences(shell) { localStorage.setItem(STORAGE_KEYS.shell, JSON.stringify({ sidebarCollapsed: Boolean(shell.sideba",
+      "message": "Sensitive values should not be stored in localStorage.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "js/ui/collection-view.js",
+      "evidence": "s, categories, state) { refs.filterRow.innerHTML = categories.map(category => ` <button class=\"filter-button ${state.category === cate",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "js/ui/collection-view.js",
+      "evidence": "`; if (!items.length) { refs.grid.innerHTML = '<div class=\"empty-state\"><strong>No loaders found.</strong><br>Try another category or",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "js/ui/collection-view.js",
+      "evidence": "rm.</div>'; return; } refs.grid.innerHTML = items.map(loader => ` <article class=\"loader-card ${loader.id === state.selectedId",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "js/ui/icon-library.js",
+      "evidence": "uiIcon}`); return; } slot.innerHTML = icon.trim(); }); }",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "js/ui/inspector-view.js",
+      "evidence": "ader.description; refs.selectedPreview.innerHTML = loader.markup; refs.fullPreviewLoader.innerHTML = loader.markup; updateCode(refs, l",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "js/ui/inspector-view.js",
+      "evidence": "loader.markup; refs.fullPreviewLoader.innerHTML = loader.markup; updateCode(refs, loader, state); } export function updateCode(refs, l",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "js/ui/inspector-view.js",
+      "evidence": "refs, loader, state) { refs.codeOutput.innerHTML = escapeHtml(getSnippet(loader, state.activeCodeTab, state.accent)); refs.codeLanguage.",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "js/ui/preview-view.js",
+      "evidence": "refs, loader) { refs.fullPreviewLoader.innerHTML = loader.markup; refs.fullPreviewTitle.textContent = 'Loading data…'; updatePreviewSe",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-clipboard",
+      "category": "browser-api",
+      "severity": "low",
+      "path": "js/ui/preview-view.js",
+      "evidence": "efs, text, message) { try { await navigator.clipboard.writeText(text); } catch { const textarea = document.createElement('textar",
+      "message": "Clipboard access should be user-initiated and explained.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "iframe-no-sandbox",
+      "category": "headers",
+      "severity": "medium",
+      "path": "qa/snippet-paste-smoke.html",
+      "message": "iframe lacks sandbox restrictions.",
+      "recommendation": "Add a scoped sandbox attribute or avoid embedding untrusted pages."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "review/current-review.json",
+      "evidence": "\"evidence\": \") {\\n refs.filterRow.innerHTML = categories.map(category => `\\n <button class=\", \"suggestion\": \"Use textContent",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "review/current-review.json",
+      "evidence": "\"evidence\": \"urn;\\n }\\n\\n slot.innerHTML = icon.trim();\\n });\\n}\", \"suggestion\": \"Use textContent for plain text, or a trus",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "review/current-review.json",
+      "evidence": "\"evidence\": \"refs.selectedPreview.innerHTML = loader.markup;\\n refs.fullPreviewLoader.innerHT\", \"suggestion\": \"Use textContent",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "review/current-review.json",
+      "evidence": "\"evidence\": \"fs.fullPreviewLoader.innerHTML = loader.markup;\\n refs.fullPreviewTitle.textCont\", \"suggestion\": \"Use textContent",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "review/current-review.md",
+      "evidence": "ity - **Evidence**: ) { refs.filterRow.innerHTML = categories.map(category => ` <button class= - **Suggestion**: Use textContent for p",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "review/current-review.md",
+      "evidence": "ity - **Evidence**: urn; } slot.innerHTML = icon.trim(); }); } - **Suggestion**: Use textContent for plain text, or a trusted san",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "review/current-review.md",
+      "evidence": "ity - **Evidence**: refs.selectedPreview.innerHTML = loader.markup; refs.fullPreviewLoader.innerHT - **Suggestion**: Use textContent for p",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "review/current-review.md",
+      "evidence": "ity - **Evidence**: fs.fullPreviewLoader.innerHTML = loader.markup; refs.fullPreviewTitle.textCont - **Suggestion**: Use textContent for p",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "review/fresh-code-review.json",
+      "evidence": "\"evidence\": \") {\\n refs.filterRow.innerHTML = categories.map(category => `\\n <button class=\", \"suggestion\": \"Use textContent",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "review/fresh-code-review.json",
+      "evidence": "\"evidence\": \"urn;\\n }\\n\\n slot.innerHTML = icon.trim();\\n });\\n}\", \"suggestion\": \"Use textContent for plain text, or a trus",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "review/fresh-code-review.json",
+      "evidence": "\"evidence\": \"refs.selectedPreview.innerHTML = loader.markup;\\n refs.fullPreviewLoader.innerHT\", \"suggestion\": \"Use textContent",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "review/fresh-code-review.json",
+      "evidence": "\"evidence\": \"fs.fullPreviewLoader.innerHTML = loader.markup;\\n refs.fullPreviewTitle.textCont\", \"suggestion\": \"Use textContent",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "review/fresh-code-review.md",
+      "evidence": "ity - **Evidence**: ) { refs.filterRow.innerHTML = categories.map(category => ` <button class= - **Suggestion**: Use textContent for p",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "review/fresh-code-review.md",
+      "evidence": "ity - **Evidence**: urn; } slot.innerHTML = icon.trim(); }); } - **Suggestion**: Use textContent for plain text, or a trusted san",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "review/fresh-code-review.md",
+      "evidence": "ity - **Evidence**: refs.selectedPreview.innerHTML = loader.markup; refs.fullPreviewLoader.innerHT - **Suggestion**: Use textContent for p",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    },
+    {
+      "id": "browser-api-inner-html",
+      "category": "browser-api",
+      "severity": "medium",
+      "path": "review/fresh-code-review.md",
+      "evidence": "ity - **Evidence**: fs.fullPreviewLoader.innerHTML = loader.markup; refs.fullPreviewTitle.textCont - **Suggestion**: Use textContent for p",
+      "message": "innerHTML assignment can introduce XSS if data is not sanitized.",
+      "recommendation": "Review usage and add sanitization, consent, or safer browser APIs as appropriate."
+    }
+  ],
+  "nextSteps": [
+    "Review critical/high findings before publish.",
+    "Vendor or pin CDN dependencies.",
+    "Rotate any real secrets found in source.",
+    "Run npm audit in the bound workspace when package-lock.json is available."
+  ]
+}

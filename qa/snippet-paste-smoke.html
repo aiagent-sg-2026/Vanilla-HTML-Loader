@@ -6,70 +6,247 @@
   <title>Loader snippet paste smoke test</title>
   <style>
     * { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; }
-    body { background: #dfe5ef; font-family: system-ui, sans-serif; }
-    iframe { width: 100%; height: 100%; border: 0; display: block; background: #fff; }
+    body { margin: 0; background: #eef2f8; color: #172033; font: 14px/1.5 system-ui, sans-serif; }
+    header { position: sticky; top: 0; z-index: 2; padding: 16px 20px; background: #fff; border-bottom: 1px solid #cbd5e1; }
+    h1 { margin: 0 0 4px; font-size: 18px; }
+    .hint { margin: 0 0 12px; color: #475569; }
+    .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; }
+    button { min-height: 40px; padding: 0 16px; border: 1px solid #94a3b8; border-radius: 8px; background: #fff; font: inherit; cursor: pointer; }
+    button[disabled] { opacity: .5; cursor: default; }
+    .stats { display: flex; gap: 18px; flex-wrap: wrap; font-variant-numeric: tabular-nums; }
+    .stats b { font-size: 20px; display: block; }
+    .pass b { color: #047857; }
+    .fail b { color: #b91c1c; }
+    .track { height: 8px; margin-top: 10px; border-radius: 99px; background: #dbe3ee; overflow: hidden; }
+    .track span { display: block; height: 100%; width: 0; background: #3b63f3; transition: width .1s linear; }
+    main { padding: 16px 20px 40px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 12px; background: #fff; }
+    th, td { padding: 7px 10px; border-bottom: 1px solid #e2e8f0; text-align: left; vertical-align: top; }
+    th { position: sticky; top: 148px; background: #f8fafc; }
+    td.reason { color: #b91c1c; font-family: ui-monospace, monospace; font-size: 12px; }
+    iframe { width: 320px; height: 220px; border: 1px solid #cbd5e1; border-radius: 10px; background: #fff; }
+    .stage { margin-top: 16px; }
   </style>
 </head>
-<body data-motion-test="pending" data-motion-mode="pending">
-  <iframe id="snippetFrame" title="Exact generated loader snippet smoke test"></iframe>
+<body data-smoke-state="idle">
+  <header>
+    <h1>Loader snippet paste smoke test</h1>
+    <p class="hint">
+      Pastes each loader's exact <strong>Copy full snippet</strong> output into a blank page and asserts the
+      overlay mounts and something inside it is actually animating. Failures are listed below.
+    </p>
+    <div class="controls">
+      <button id="runAll" type="button">Run all loaders</button>
+      <button id="runSample" type="button">Run first 25</button>
+      <button id="stop" type="button" disabled>Stop</button>
+      <label>Category
+        <select id="categoryFilter"></select>
+      </label>
+    </div>
+    <div class="stats">
+      <div class="pass"><b id="passCount">0</b> passed</div>
+      <div class="fail"><b id="failCount">0</b> failed</div>
+      <div><b id="progressCount">0 / 0</b> checked</div>
+      <div><b id="elapsed">0.0s</b> elapsed</div>
+    </div>
+    <div class="track"><span id="progressFill"></span></div>
+  </header>
+
+  <main>
+    <div class="stage">
+      <iframe id="snippetFrame" title="Snippet under test"></iframe>
+    </div>
+    <table>
+      <thead><tr><th>Loader</th><th>Category</th><th>Result</th><th>Reason</th></tr></thead>
+      <tbody id="results"></tbody>
+    </table>
+  </main>
+
   <script type="module">
     import { loaders } from '../loaders/index.js';
     import { getCombinedSnippet } from '../js/snippet-service.js';
 
-    const loader = loaders.find(item => item.id === 'matrix-cube-field');
-    const snippet = getCombinedSnippet(loader, '#EA580C');
+    const FRAME_TIMEOUT_MS = 4000;
+    const ACCENT = '#EA580C';
+
     const frame = document.getElementById('snippetFrame');
+    const results = document.getElementById('results');
+    const passCount = document.getElementById('passCount');
+    const failCount = document.getElementById('failCount');
+    const progressCount = document.getElementById('progressCount');
+    const progressFill = document.getElementById('progressFill');
+    const elapsedLabel = document.getElementById('elapsed');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const runAllButton = document.getElementById('runAll');
+    const runSampleButton = document.getElementById('runSample');
+    const stopButton = document.getElementById('stop');
 
-    window.addEventListener('message', event => {
-      if (event.data?.type !== 'loader-motion-smoke') return;
-      document.body.dataset.motionTest = event.data.playState;
-      document.body.dataset.motionMode = event.data.motionMode;
-    });
+    let cancelled = false;
 
-    frame.srcdoc = `<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    * { box-sizing: border-box; }
-    body { min-height: 160vh; margin: 0; background: linear-gradient(135deg, #f8fafc, #dbe5f4); color: #172033; font-family: system-ui, sans-serif; }
-    .demo-page { width: min(1040px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0; }
-    .demo-page h1 { margin: 0 0 12px; font-size: clamp(30px, 6vw, 60px); }
-    .demo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 34px; }
-    .demo-card { min-height: 180px; padding: 22px; border: 1px solid #cbd5e1; border-radius: 18px; background: rgba(255,255,255,.88); box-shadow: 0 14px 40px rgba(15,23,42,.08); }
-    .simulate-reduced .vl-matrix-grid,
-    .simulate-reduced .vl-matrix-cell { animation-play-state: paused; }
-    @media (max-width: 700px) { .demo-grid { grid-template-columns: 1fr; } }
-  </style>
-</head>
-<body class="simulate-reduced">
-  <main class="demo-page">
-    <h1>Existing application content</h1>
-    <p>The copied loader must cover this whole viewport and visibly animate after paste.</p>
-    <div class="demo-grid">
-      <article class="demo-card">Dashboard card</article>
-      <article class="demo-card">Report card</article>
-      <article class="demo-card">Activity card</article>
-    </div>
-  </main>
-  ${snippet}
-  <script>
-    requestAnimationFrame(() => {
+    for (const category of ['All', ...new Set(loaders.map(loader => loader.category))]) {
+      categoryFilter.append(new Option(category, category));
+    }
+
+    // Determinate loaders — progress bars, rings, the native <progress> element —
+    // legitimately have no CSS animation: they render a percentage that their JS
+    // API drives. Asserting "everything animates" would fail them for behaving
+    // correctly, so what to expect is derived from each loader's own CSS.
+    const expectsAnimation = loader => /@keyframes|animation\s*:/.test(loader.css || '');
+
+    // The probe runs inside the pasted page and knows nothing about the loader
+    // beyond whether motion was expected of it.
+    //
+    // Deliberately no requestAnimationFrame: browsers throttle rAF in hidden or
+    // background tabs, which would stall the probe and report healthy loaders
+    // as timeouts. A plain timer fires regardless of visibility.
+    const buildProbe = motionExpected => `
       setTimeout(() => {
-        const cell = document.querySelector('.vl-matrix-cell');
-        const overlay = document.getElementById('appLoader');
-        parent.postMessage({
-          type: 'loader-motion-smoke',
-          playState: cell ? getComputedStyle(cell).animationPlayState : 'missing',
-          motionMode: overlay?.dataset.motion || 'auto'
-        }, '*');
-      }, 120);
-    });
-  <\/script>
-</body>
-</html>`;
+        const send = payload => parent.postMessage({ type: 'loader-motion-smoke', ...payload }, '*');
+        try {
+          const overlay = document.getElementById('appLoader');
+          if (!overlay) return send({ ok: false, reason: 'no #appLoader in pasted snippet' });
+          if (overlay.hidden) return send({ ok: false, reason: 'overlay still hidden after demo call' });
+
+          const content = overlay.querySelector('.vl-loader-content');
+          if (!content) return send({ ok: false, reason: 'overlay mounted without .vl-loader-content' });
+          if (!content.getBoundingClientRect().height) {
+            return send({ ok: false, reason: 'loader content has zero height' });
+          }
+
+          const nodes = [overlay, ...overlay.querySelectorAll('*')];
+          let animatedNodes = 0;
+          let pausedOnly = 0;
+
+          for (const node of nodes) {
+            for (const pseudo of [null, '::before', '::after']) {
+              const style = getComputedStyle(node, pseudo);
+              if (!style.animationName || style.animationName === 'none') continue;
+              if (style.animationPlayState === 'running') animatedNodes += 1;
+              else pausedOnly += 1;
+            }
+          }
+
+          if (!${motionExpected}) {
+            // Determinate loader: mounting with visible content is the contract.
+            return send({ ok: true, determinate: true, animatedNodes });
+          }
+          if (animatedNodes > 0) return send({ ok: true, animatedNodes });
+          if (pausedOnly > 0) return send({ ok: false, reason: 'animations present but all paused' });
+          send({ ok: false, reason: 'CSS declares animation but none is live in the overlay' });
+        } catch (error) {
+          send({ ok: false, reason: 'probe threw: ' + error.message });
+        }
+      }, 200);
+    `;
+
+    function buildPage(snippet, motionExpected) {
+      const open = '<' + 'script>';
+      const close = '<' + '/' + 'script>';
+      return `<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><style>
+  body { min-height: 140vh; margin: 0; background: linear-gradient(135deg,#f8fafc,#dbe5f4); font-family: system-ui, sans-serif; }
+  .demo-page { padding: 24px; }
+</style></head>
+<body>
+  <main class="demo-page"><h1>Existing application content</h1></main>
+  ${snippet}
+  ${open}${buildProbe(motionExpected)}${close}
+</body></html>`;
+    }
+
+    function checkLoader(loader) {
+      return new Promise(resolve => {
+        let settled = false;
+
+        const finish = outcome => {
+          if (settled) return;
+          settled = true;
+          window.clearTimeout(timer);
+          window.removeEventListener('message', onMessage);
+          resolve(outcome);
+        };
+
+        const onMessage = event => {
+          if (event.data?.type !== 'loader-motion-smoke') return;
+          finish(event.data);
+        };
+
+        const timer = window.setTimeout(
+          () => finish({ ok: false, reason: `no response within ${FRAME_TIMEOUT_MS}ms (script error in snippet?)` }),
+          FRAME_TIMEOUT_MS
+        );
+
+        window.addEventListener('message', onMessage);
+
+        try {
+          frame.srcdoc = buildPage(getCombinedSnippet(loader, ACCENT), expectsAnimation(loader));
+        } catch (error) {
+          finish({ ok: false, reason: 'snippet generation threw: ' + error.message });
+        }
+      });
+    }
+
+    function addRow(loader, outcome) {
+      const row = results.insertRow();
+      row.insertCell().textContent = `${loader.name} (${loader.id})`;
+      row.insertCell().textContent = loader.category;
+      row.insertCell().textContent = outcome.ok
+        ? (outcome.determinate ? 'PASS (determinate)' : 'PASS')
+        : 'FAIL';
+      const reason = row.insertCell();
+      reason.className = 'reason';
+      reason.textContent = outcome.ok ? '' : outcome.reason || 'unknown';
+      if (!outcome.ok) results.prepend(row);
+    }
+
+    async function run(limit) {
+      cancelled = false;
+      results.replaceChildren();
+      runAllButton.disabled = runSampleButton.disabled = categoryFilter.disabled = true;
+      stopButton.disabled = false;
+      document.body.dataset.smokeState = 'running';
+
+      const category = categoryFilter.value;
+      const queue = loaders
+        .filter(loader => category === 'All' || loader.category === category)
+        .slice(0, limit ?? Infinity);
+
+      let passed = 0;
+      let failed = 0;
+      const startedAt = performance.now();
+
+      for (const [index, loader] of queue.entries()) {
+        if (cancelled) break;
+        const outcome = await checkLoader(loader);
+        outcome.ok ? passed += 1 : failed += 1;
+        addRow(loader, outcome);
+
+        passCount.textContent = passed;
+        failCount.textContent = failed;
+        progressCount.textContent = `${index + 1} / ${queue.length}`;
+        progressFill.style.width = `${((index + 1) / queue.length) * 100}%`;
+        elapsedLabel.textContent = `${((performance.now() - startedAt) / 1000).toFixed(1)}s`;
+      }
+
+      frame.srcdoc = '';
+      runAllButton.disabled = runSampleButton.disabled = categoryFilter.disabled = false;
+      stopButton.disabled = true;
+
+      // Exposed so an automated driver can read the verdict without scraping.
+      window.__smokeResult = { total: queue.length, passed, failed, cancelled };
+      document.body.dataset.smokeState = cancelled ? 'cancelled' : failed ? 'failed' : 'passed';
+    }
+
+    runAllButton.addEventListener('click', () => run());
+    runSampleButton.addEventListener('click', () => run(25));
+    stopButton.addEventListener('click', () => { cancelled = true; });
+
+    // Allow an automated run: qa/snippet-paste-smoke.html?autorun=1[&limit=50]
+    const params = new URLSearchParams(location.search);
+    if (params.has('autorun')) {
+      if (params.has('category')) categoryFilter.value = params.get('category');
+      run(params.has('limit') ? Number(params.get('limit')) : undefined);
+    }
   </script>
 </body>
 </html>

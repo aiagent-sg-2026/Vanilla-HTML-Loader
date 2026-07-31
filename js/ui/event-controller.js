@@ -32,6 +32,7 @@ import {
 } from '../storage.js';
 
 const SEARCH_DEBOUNCE_MS = 150;
+const LOADER_QUERY_PARAM = 'loader';
 
 export function createEventController({ refs, loaders, categories, state }) {
   const shell = createShellController({ refs, state });
@@ -104,6 +105,52 @@ export function createEventController({ refs, loaders, categories, state }) {
     saveRecent(state.recent);
   }
 
+  /**
+   * Keep ?loader= in sync with the selection so the address bar is always a
+   * shareable link to what is on screen. replaceState, not pushState: browsing
+   * a gallery should not bury the Back button under one entry per card.
+   */
+  function syncLocation(id) {
+    const url = new URL(window.location.href);
+    if (url.searchParams.get(LOADER_QUERY_PARAM) === id) return;
+    url.searchParams.set(LOADER_QUERY_PARAM, id);
+    window.history.replaceState(null, '', url);
+  }
+
+  /** Grow the pagination window in whole pages until the target card renders. */
+  function revealLoader(id) {
+    const index = getCurrentCollection(loaders, state).findIndex(loader => loader.id === id);
+    if (index < 0) return false;
+
+    const pageSize = state.collection.pageSize;
+    const requiredLimit = (Math.floor(index / pageSize) + 1) * pageSize;
+    if (requiredLimit > state.collection.visibleLimit) {
+      state.collection.visibleLimit = requiredLimit;
+    }
+    return true;
+  }
+
+  function applyDeepLink() {
+    const requestedId = new URLSearchParams(window.location.search).get(LOADER_QUERY_PARAM);
+    if (!requestedId || !loaders.some(loader => loader.id === requestedId)) return false;
+
+    // A shared link points at one loader, so start from an unfiltered library
+    // view; otherwise a stale category or query could hide the target.
+    state.view = 'library';
+    state.category = 'All';
+    state.query = '';
+    refs.search.value = '';
+    state.selectedId = requestedId;
+    revealLoader(requestedId);
+    return true;
+  }
+
+  function scrollToSelectedCard() {
+    const card = refs.grid.querySelector(`[data-loader-id="${CSS.escape(state.selectedId)}"]`);
+    if (!card) return;
+    card.scrollIntoView({ block: 'center', behavior: 'auto' });
+  }
+
   function selectLoader(id, openInspector = true, trigger = null) {
     if (!loaders.some(loader => loader.id === id)) return;
     const previousId = state.selectedId;
@@ -117,6 +164,7 @@ export function createEventController({ refs, loaders, categories, state }) {
     else updateSelectionHighlight(refs, previousId, id);
 
     renderInspector(refs, selectedLoader(), state);
+    syncLocation(id);
 
     if (openInspector) {
       const currentTrigger = refs.grid.querySelector(`[data-select-id="${id}"]`) || trigger;
@@ -296,11 +344,21 @@ export function createEventController({ refs, loaders, categories, state }) {
     accent.initialize();
     motion.initialize();
     applyLayoutMode();
+
+    // Resolve ?loader= before the first render so the target card is inside the
+    // pagination window instead of appearing after a second pass.
+    const isDeepLink = applyDeepLink();
+
     renderAll();
     updatePreviewSettings(refs);
     visibility.initialize();
     bindEvents();
     infiniteScroll.initialize();
+
+    if (isDeepLink) {
+      scrollToSelectedCard();
+      shell.openInspector(refs.grid.querySelector(`[data-select-id="${CSS.escape(state.selectedId)}"]`));
+    }
   }
 
   return { initialize, selectLoader };

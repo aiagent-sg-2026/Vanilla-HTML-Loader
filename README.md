@@ -63,11 +63,19 @@ node qa/registry-lint.mjs
 
 Verifies unique loader ids, `@keyframes` names that are not redefined with a different body, generic class names never used as unscoped top-level selectors, and required fields. It exits non-zero on violation and prints the category count table that the docs must quote — never hand-count.
 
-For snippet integrity, open `qa/snippet-paste-smoke.html` and run it. It pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and actually animates. A full run over all 555 loaders takes about 6 seconds. Append `?autorun=1` to start immediately, `&category=SVG` to narrow it, `&limit=25` for a quick pass.
+In CI, or locally against headless Chrome:
+
+```bash
+node qa/run-smoke-ci.mjs
+```
+
+This serves the repository, drives the smoke page over the Chrome DevTools Protocol and exits non-zero on any failure — no npm install, because it uses Node's built-in server and global `WebSocket` plus the Chrome that CI images already ship. Add `--category SVG` or `--limit 25` to narrow it.
+
+To watch it instead, open `qa/snippet-paste-smoke.html` and run it. It pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and actually animates. A full run over all 555 loaders takes about 6 seconds. Append `?autorun=1` to start immediately, `&category=SVG` to narrow it, `&limit=25` for a quick pass.
 
 ## Deployment
 
-Pushing to `main` publishes the site to GitHub Pages via `.github/workflows/deploy.yml`. The workflow runs the registry lint first and **only deploys if it passes**, then publishes the runtime files (`index.html`, `css/`, `js/`, `loaders/`, `qa/`) — not the review, audit or research records.
+Pushing to `main` publishes the site to GitHub Pages via `.github/workflows/deploy.yml`. The workflow runs the registry lint and the snippet smoke test first and **only deploys if both pass**, then publishes the runtime files (`index.html`, `css/`, `js/`, `loaders/`, `qa/`) — not the review, audit or research records.
 
 One-time setup in the repository: **Settings → Pages → Build and deployment → Source: GitHub Actions**. Without that, the workflow runs but has nothing to deploy to.
 

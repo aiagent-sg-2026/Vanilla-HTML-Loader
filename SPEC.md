@@ -104,12 +104,13 @@ Status legend: ✅ Implemented · 🟡 Partial · ⬜ Not implemented · ❌ Won
 
 - `node qa/registry-lint.mjs`: unique ids, `@keyframes` redefinition conflicts, unscoped generic selectors, required fields; non-zero exit on violation; prints the canonical category count table.
 - `qa/snippet-paste-smoke.html`: pastes every loader's combined snippet into a blank page and asserts the overlay mounts and animates; supports `?autorun=1`, `&limit=`, `&category=`, and exposes `window.__smokeResult`. A full 555-loader run takes about 6 seconds.
-- Neither introduces a dependency, preserving D-01.
+- `node qa/run-smoke-ci.mjs`: runs the smoke page in headless Chrome over CDP and exits non-zero on failure. Both checks gate the GitHub Pages deploy.
+- None of these introduces a dependency, preserving D-01 (D-20).
 
 ## NFR / not implemented
 
 | Item | Status | Note |
 | --- | --- | --- |
 | PWA installability (manifest, service worker, offline) | ❌ Won't-do | Product decision D-14: this is a reference gallery, not an installable app. Audit warnings are expected. |
-| Automated tests wired into CI | 🟡 | The two checks in FR-15 exist and are zero-dependency, but are run by hand. TASK T-205. |
+| Automated tests wired into CI | ✅ | Both checks run on every push to `main` and gate the deploy. Still zero-dependency (D-20). |
 | Deep-link window cost for late loaders | ✅ | Resolved by T-208 / D-17 — see FR-14. Worst case measured at 76 cards and 1,704 DOM nodes, down from 504 cards and 9,699 nodes. |

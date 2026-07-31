@@ -94,6 +94,7 @@ Every loader is a plain object: `{ id, name, category, description, markup, css 
 | D-17 | A deep link scopes the view to the target's **own category**, not the whole library | Both guarantee the card is reachable, but scoping cuts the initial render from a mean of 290 cards to 41 (max 576 → 96) while keeping the visible set a contiguous prefix. Landing among related loaders also suits a gallery; **All** is one click away and resets the window. |
 | D-18 | Eager-load the whole registry; no per-category lazy loading | Measured 2026-07-31 (research/lazy-loading-experiment-2026-07-31.md): eager loading costs ~10 ms of CPU total, and deferring the 584 KB of loader CSS saves ~0.6 ms. The 84% payload ceiling is only reachable by splitting every loader into metadata and payload, which breaks D-02. |
 | D-19 | Card preview fragments are parsed once per loader and cloned; growing the pagination window appends the new tail instead of rebuilding the grid | Measured 2026-07-31: parsing the whole registry's markup fell from 24.4ms to 4.1ms, and Load more went from 7.6→14.2ms growing with the total rendered to a flat ~4.5ms. Appending also leaves existing cards in place, so their animations no longer restart. Guarded: it only applies when the rendered cards are exactly the unchanged prefix. |
+| D-20 | CI drives headless Chrome over CDP with Node built-ins rather than adopting Playwright or Puppeteer | Enforcing the smoke test was worth doing, but a browser driver would have been this repository's first dev dependency and its first `node_modules`, contradicting D-01. Node has had a global `WebSocket` since 22 and CI images ship Chrome, so ~180 lines of `qa/run-smoke-ci.mjs` buy the same coverage with nothing installed. |
 
 ## 4. Cross-cutting behaviours
 
@@ -108,6 +109,8 @@ Two automated checks, both zero-dependency:
 
 - `node qa/registry-lint.mjs` — registry invariants: unique ids, no `@keyframes` name redefined with a different body, no generic class name used as an unscoped top-level selector, required fields present. Exits non-zero on violation and prints the category count table that every doc must quote.
 - `qa/snippet-paste-smoke.html` — pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and something inside it is genuinely animating. The parent reads the srcdoc iframe directly on its load event, so a full 555-loader run takes about 6 seconds. `?autorun=1` runs headlessly enough for a driver to read `window.__smokeResult`.
+
+Both run in CI on every push to `main` and gate the deploy (`.github/workflows/deploy.yml`). `qa/run-smoke-ci.mjs` drives the smoke page in headless Chrome over CDP using only Node built-ins and the browser CI images already provide, so the repository still has no dependencies.
 
 Around those, each 10-loader pack ships with: desktop + mobile interaction QA (Inspector, Full Preview, progressive loading to the final card) → responsive/network inspection → axe accessibility audit (zero-violation bar) → Chromium/Firefox/WebKit cross-browser QA → focused code review recorded in `review/` (JSON + MD pair).
 

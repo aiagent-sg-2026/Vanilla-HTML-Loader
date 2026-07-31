@@ -36,6 +36,7 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 | C11 | T-207 project-memory backfill for SVG packs 6–7; T-209 lazy-loading experiment measured and closed |
 | C12 | T-210: preview fragments cached and window growth appends instead of rebuilding — Load more now flat ~4.5ms (D-19) |
 | C13 | T-211: smoke run 9 minutes → 6.3s for all 555 loaders by probing the iframe on load instead of waiting on a throttled timer |
+| C14 | T-205: snippet smoke test enforced in CI over CDP with zero dependencies — both checks now gate the deploy (D-20) |
 
 ## Now
 
@@ -43,11 +44,11 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 
 ## Next
 
-2. **T-205** CI enforcement of the snippet smoke test (E8). The registry lint already gates deploys; the smoke page needs a headless browser, which would be the first dev dependency — decide against D-01.
+Nothing queued. Both automated checks gate the deploy, so the next work is whatever the product calls for — see Later.
 
 ## Later
 
-3. Further loader packs (E3 is open-ended) — pattern is established: 10 loaders, A/B modules, barrel registration, lint + smoke + full QA gate, review record.
+2. Further loader packs (E3 is open-ended) — pattern is established: 10 loaders, A/B modules, barrel registration, lint + smoke + full QA gate, review record.
 
 ## Closed — won't do
 

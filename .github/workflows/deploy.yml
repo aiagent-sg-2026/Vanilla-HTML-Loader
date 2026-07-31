@@ -18,20 +18,27 @@ concurrency:
 
 jobs:
   verify:
-    name: Registry lint
+    name: Checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       # The loader registry is ESM written in .js files with no package.json,
       # so Node must detect module syntax. That is on by default from 22.7;
-      # on Node 20 the lint dies with "is a CommonJS module".
+      # on Node 20 the lint dies with "is a CommonJS module". Node 22+ also
+      # gives the smoke runner a global WebSocket to speak CDP over.
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
 
       - name: Check loader registry invariants
         run: node qa/registry-lint.mjs
+
+      # Drives the paste smoke test in the Chrome the runner image already
+      # ships, over CDP, with no npm install — so the repository still has no
+      # dependencies and no node_modules. Takes a few seconds for all loaders.
+      - name: Check every snippet still pastes and animates
+        run: node qa/run-smoke-ci.mjs
 
   deploy:
     name: Deploy

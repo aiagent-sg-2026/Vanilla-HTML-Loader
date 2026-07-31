@@ -11,7 +11,7 @@ Last verified against code: 2026-07-31. Task-level detail lives in [TASK.md](TAS
 | E5 | Quality gates & review governance | ✅ Done — automated checks landed 2026-07-31 |
 | E6 | Documentation & repo hygiene | ✅ Done |
 | E7 | Sharing & distribution | ✅ Done — deep links shipped; PWA closed won't-do |
-| E8 | CI enforcement & deployment | 🟡 Lint gates deploy; smoke test still manual |
+| E8 | CI enforcement & deployment | ✅ Done — both checks gate the deploy |
 
 ## E1 — Studio shell & modular architecture ✅
 
@@ -61,10 +61,10 @@ Closed as won't-do: PWA manifest, service worker and offline support. Product de
 
 The initial cost of a deep link was cut in a follow-up (T-208, D-17): scoping the view to the target's own category rather than the whole library takes the initial render from a mean of 290 cards to 41, worst case 576 to 96, without breaking Load-more contiguity.
 
-## E8 — CI enforcement & deployment 🟡
+## E8 — CI enforcement & deployment ✅
 
 Delivered 2026-07-31: `.github/workflows/deploy.yml` publishes the site to GitHub Pages on every push to `main`, gated on `qa/registry-lint.mjs` exiting 0. A registry violation now blocks the deploy rather than shipping. Only runtime files are published (`index.html`, `css/`, `js/`, `loaders/`, `qa/`) — 175 files instead of the repo's 341.
 
 Node is pinned to 24 because the registry is ESM in `.js` files with no `package.json`; module detection is on by default from 22.7 and the lint dies on Node 20. Verified by running the lint locally with `--no-experimental-detect-module`, which reproduces the failure.
 
-Still open: the snippet smoke page runs in a browser and is therefore still manual. Driving it in CI needs a headless browser, which would be the project's first dev dependency — a decision against D-01 that has not been taken. (T-205)
+The snippet smoke test is enforced too (T-205). The obstacle was that driving a browser normally means Playwright or Puppeteer — this repository's first dev dependency. `qa/run-smoke-ci.mjs` avoids that: Node's built-in HTTP server, the global `WebSocket` Node has had since 22, and the Chrome CI images already ship are enough to drive the page over CDP. All 555 loaders are checked in about 6 seconds, and D-01 survives intact (D-20).

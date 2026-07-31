@@ -37,12 +37,13 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 | C12 | T-210: preview fragments cached and window growth appends instead of rebuilding — Load more now flat ~4.5ms (D-19) |
 | C13 | T-211: smoke run 9 minutes → 6.3s for all 555 loaders by probing the iframe on load instead of waiting on a throttled timer |
 | C14 | T-205: snippet smoke test enforced in CI over CDP with zero dependencies — both checks now gate the deploy (D-20) |
+| C15 | Dots Pack 4: 10 new CSS-only Dots loaders (Dots 30 → 40, collection 555 → **565**) |
+
+### Live
+
+The site is deployed and serving at <https://yapweijun1996.github.io/Vanilla-HTML-Loader/>. Verified 2026-07-31: 565 loaders, 16 category filters, deep links and category scoping all working; 277 KB transferred across 146 module requests on a cold visit, which matches the 239 KB gzipped estimate from the lazy-loading experiment.
 
 ## Now
-
-1. **T-212** Enable **Settings → Pages → Source: GitHub Actions**, then confirm the first deployment served. The workflow is committed but has never run, and without that setting the deploy job fails.
-
-## Next
 
 Nothing queued. Both automated checks gate the deploy, so the next work is whatever the product calls for — see Later.
 

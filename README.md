@@ -1,6 +1,6 @@
 # Loader Studio
 
-A zero-dependency gallery of **555 loading animations** across 15 categories. Browse them live, tune size, speed, accent colour and per-loader application state, then copy production-ready HTML, CSS and JavaScript you can paste straight into any page.
+A zero-dependency gallery of **565 loading animations** across 15 categories. Browse them live, tune size, speed, accent colour and per-loader application state, then copy production-ready HTML, CSS and JavaScript you can paste straight into any page.
 
 No framework. No bundler. No CDN. No build step. Open the folder and it runs.
 
@@ -55,6 +55,8 @@ The registry is the source of truth for everything the docs claim. The establish
 4. Keep CSS scoped to loader-specific class names, keep motion markup decorative (`aria-hidden`, `focusable="false"`), and give button loaders real `disabled` + `aria-busy`.
 5. Run the checks below, then update the counts in the root docs from the lint output.
 
+One gotcha when verifying a new pack in a browser: the page keeps the ES module graph it already imported, and a cache-busting query on `loaders/index.js` does **not** propagate to its nested imports — so the page can silently show the previous loader count and appear to pass. Assert the expected total before trusting what you see, or use a fresh origin. `node qa/run-smoke-ci.mjs` is immune: it serves the files itself with `cache-control: no-store`.
+
 ## Checks
 
 ```bash
@@ -71,7 +73,7 @@ node qa/run-smoke-ci.mjs
 
 This serves the repository, drives the smoke page over the Chrome DevTools Protocol and exits non-zero on any failure — no npm install, because it uses Node's built-in server and global `WebSocket` plus the Chrome that CI images already ship. Add `--category SVG` or `--limit 25` to narrow it.
 
-To watch it instead, open `qa/snippet-paste-smoke.html` and run it. It pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and actually animates. A full run over all 555 loaders takes about 6 seconds. Append `?autorun=1` to start immediately, `&category=SVG` to narrow it, `&limit=25` for a quick pass.
+To watch it instead, open `qa/snippet-paste-smoke.html` and run it. It pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and actually animates. A full run over all 565 loaders takes about 7 seconds. Append `?autorun=1` to start immediately, `&category=SVG` to narrow it, `&limit=25` for a quick pass.
 
 ## Deployment
 
@@ -89,7 +91,7 @@ MIT — see [LICENSE](LICENSE). Copy the snippets into anything, including comme
 
 ## 简介（中文摘要）
 
-Loader Studio 是一个**零依赖**的加载动画画廊，收录 **555 个动画**，分 15 个分类。浏览、调整（尺寸/速度/主色/应用状态）后可直接复制可用于生产的 HTML、CSS 和 JavaScript。
+Loader Studio 是一个**零依赖**的加载动画画廊，收录 **565 个动画**，分 15 个分类。浏览、调整（尺寸/速度/主色/应用状态）后可直接复制可用于生产的 HTML、CSS 和 JavaScript。
 
 没有框架、没有打包工具、没有构建步骤。用任意静态服务器打开即可（ES 模块不支持 `file://` 直接打开）：
 

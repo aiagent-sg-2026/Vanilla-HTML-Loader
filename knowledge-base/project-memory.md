@@ -744,3 +744,22 @@ Sources:
 - loaders/svg-pack-8-a.js
 - loaders/svg-pack-8-b.js
 - qa/registry-lint.mjs
+
+## Dots Loader Pack 4
+
+Recorded: 2026-07-31
+Tags: loader-studio, dots, css-loaders, ci-gated, release, qa
+
+Added 10 modular CSS-only Dots loaders through dots-pack-4-a.js and dots-pack-4-b.js, registered in dots-index.js: Metronome Arc Dots, Carousel Swap Dots, Gravity Well Dots, Relay Baton Dots, Scatter Gather Dots, Conveyor Belt Dots, Newton Cradle Dots, Radar Sweep Dots, Stack Tower Dots, and Morse Signal Dots. Dots increased from 30 to 40 loaders and the full collection from 555 to 565. Dots was chosen because it was the smallest of the core animation categories.
+
+First pack released through the fully automated gate: `node qa/registry-lint.mjs` (565 loaders, 0 duplicate ids, 764 keyframe names with no conflicts) and `node qa/run-smoke-ci.mjs` (565/565 in 7.4s in headless Chrome). Both now also run in CI and block the GitHub Pages deploy.
+
+Browser checks: all 10 render within their preview bounds, declare their animations, carry aria-hidden, and centre correctly inside the card stage with no overflow. Two loaders use `color-mix()` for a halo — confirmed supported and resolving rather than falling back.
+
+Note repeated from SVG Pack 8: verifying a new pack in an already-open page can report the OLD loader count, because the ES module graph is cached and a cache-busting query on the entry module does not reach its nested imports. Assert the expected total before trusting a browser check; the CI runner is immune because it serves with cache-control: no-store.
+
+Sources:
+- loaders/dots-index.js
+- loaders/dots-pack-4-a.js
+- loaders/dots-pack-4-b.js
+- https://yapweijun1996.github.io/Vanilla-HTML-Loader/

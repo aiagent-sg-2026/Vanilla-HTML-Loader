@@ -13,7 +13,6 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 
 | ID | Task | Priority | Notes |
 | --- | --- | --- | --- |
-| T-212 | Confirm the first Pages deployment actually served | P1 | The workflow is committed but has never run. It needs **Settings → Pages → Source: GitHub Actions** enabled by hand first; until then the deploy job fails. Check the Actions run and load the published URL. |
 
 ## Closed — won't do
 
@@ -35,6 +34,8 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 | C6 | Snippet paste smoke test generalised from one hardcoded loader to the whole registry, with a generic animation probe, per-loader timeout, category filter and `?autorun=1`. Fixed a harness defect where `requestAnimationFrame` never fired in a hidden tab and reported healthy loaders as timeouts. |
 | T-206 / C7 | README (English + Chinese summary) and MIT LICENSE; all five root docs synced. |
 | C8 | GitHub Pages auto-deploy on push to `main`, gated on the registry lint. Staging verified locally: 175 files / 1.5MB, every asset `index.html` references present, the staged copy boots with 545 loaders and a working deep link, no console errors. |
+| C15 | Dots Pack 4 — 10 CSS-only Dots loaders (Metronome Arc, Carousel Swap, Gravity Well, Relay Baton, Scatter Gather, Conveyor Belt, Newton Cradle, Radar Sweep, Stack Tower, Morse Signal). Dots 30 → 40, collection 555 → 565. First pack to go through the fully automated gate. |
+| T-212 | GitHub Pages deployment confirmed live at https://yapweijun1996.github.io/Vanilla-HTML-Loader/ — 565 loaders serving, deep links and category scoping working, 277 KB across 146 requests on a cold visit. |
 | T-205 / C14 | Snippet smoke test now runs in CI and gates the deploy, without adding a dependency. `qa/run-smoke-ci.mjs` serves the repo from `node:http`, launches the Chrome already present on the runner, and drives the page over CDP using Node's global `WebSocket` (D-20). Verified locally: 555/555 in 5.6s exit 0, and exit 1 with the offending loader named when a deliberate regression suppressed animations inside the overlay. |
 | T-211 / C13 | Snippet smoke run cut from about 9 minutes to 6.3 seconds for all 555 loaders. The cause was not the results table: the injected probe waited on a `setTimeout`, and hidden-tab timer clamping turned a nominal 200ms into ~1000ms per loader. The parent now reads the srcdoc iframe directly on its load event — no timer, no postMessage, and nothing injected into the page under test. Pass rows are also batched to the end. All six failure modes re-verified against deliberately broken pages, plus healthy animated and determinate controls. |
 | T-210 / C12 | Card preview fragments cached per loader and cloned (registry-wide parse 24.4ms → 4.1ms), and growing the window now appends the new page instead of rebuilding the grid (Load more 7.6→14.2ms growing → flat ~4.5ms; deep link to the last CSS 3D loader 258ms → 167ms). Verified clones keep `inert`, `aria-hidden` and the button→div preview transform across three renders, and that filter, search, empty state, Favorites unstar and Recently-viewed reorder all still rebuild (D-19). |
@@ -57,7 +58,7 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 | 07-28 | task_040–051 | Shapes packs 1–4 (345→375); Buttons packs 1–3 (385→405); Text packs 1–5 (415→455) |
 | 07-28/29 | task_052–058 | CSS 3D packs 3–8 (465→515); SVG packs 5–7 (525→545) |
 
-Intermediate totals are as narrated in `knowledge-base/project-memory.md`; the authoritative current total (555) comes from `qa/registry-lint.mjs`.
+Intermediate totals are as narrated in `knowledge-base/project-memory.md`; the authoritative current total (565) comes from `qa/registry-lint.mjs`.
 
 ## Watch
 

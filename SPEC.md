@@ -8,7 +8,7 @@ Status legend: ✅ Implemented · 🟡 Partial · ⬜ Not implemented · ❌ Won
 
 ## FR-1 Loader collection browsing — ✅
 
-- 555 loaders in 15 categories exposed from `loaders/index.js`; category filter row is generated from the registry (`All` + unique categories).
+- 565 loaders in 15 categories exposed from `loaders/index.js`; category filter row is generated from the registry (`All` + unique categories).
 - Views: **Library**, **Favorites**, **Recently viewed** (last 8, most recent first). Switching view resets category, search, and the pagination window.
 - Text search matches name + category + description (case-insensitive substring).
 - Empty result set renders a friendly empty state.
@@ -97,13 +97,13 @@ Status legend: ✅ Implemented · 🟡 Partial · ⬜ Not implemented · ❌ Won
 - `?loader=<id>` opens directly on that loader: the view resets to `library`, the category is set to **the target's own category**, the query is cleared, the pagination window grows in whole pages until the card exists, and the card is selected, scrolled into view and shown in the Inspector.
 - Every subsequent selection mirrors the id into the URL with `replaceState`, so the address bar always matches the screen without adding a history entry per card (D-16).
 - Unknown or malformed ids fall through to the default selection with no error.
-- Scoping to the category rather than the whole library keeps the render window small: across all 555 loaders the initial render drops from a mean of 290 cards (max 576) to a mean of 41 (max 96, and 76 in practice because categories cap it). The visible set stays a contiguous prefix of the filtered collection, so Load more is unchanged; clicking **All** returns to the full library with the window reset to one page.
+- Scoping to the category rather than the whole library keeps the render window small: measured across the whole registry, the initial render drops from a mean of 290 cards (max 576) to a mean of 41 (max 96, and 76 in practice because categories cap it). The visible set stays a contiguous prefix of the filtered collection, so Load more is unchanged; clicking **All** returns to the full library with the window reset to one page.
 - Evidence: `applyDeepLink`, `revealLoader`, `syncLocation` in `js/ui/event-controller.js`.
 
 ## FR-15 Automated registry and snippet checks — ✅
 
 - `node qa/registry-lint.mjs`: unique ids, `@keyframes` redefinition conflicts, unscoped generic selectors, required fields; non-zero exit on violation; prints the canonical category count table.
-- `qa/snippet-paste-smoke.html`: pastes every loader's combined snippet into a blank page and asserts the overlay mounts and animates; supports `?autorun=1`, `&limit=`, `&category=`, and exposes `window.__smokeResult`. A full 555-loader run takes about 6 seconds.
+- `qa/snippet-paste-smoke.html`: pastes every loader's combined snippet into a blank page and asserts the overlay mounts and animates; supports `?autorun=1`, `&limit=`, `&category=`, and exposes `window.__smokeResult`. A full 565-loader run takes about 7 seconds.
 - `node qa/run-smoke-ci.mjs`: runs the smoke page in headless Chrome over CDP and exits non-zero on failure. Both checks gate the GitHub Pages deploy.
 - None of these introduces a dependency, preserving D-01 (D-20).
 

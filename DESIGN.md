@@ -7,7 +7,7 @@ Related docs: [README.md](README.md) · [SPEC.md](SPEC.md) · [EPIC.md](EPIC.md)
 
 ## 1. What this is
 
-Loader Studio is a zero-dependency, no-build, vanilla HTML/CSS/ES-module web app that showcases **555 loading animations across 15 categories**. Users browse, search, filter, preview, customise (size, speed, accent, label, per-loader application state) and copy production-ready HTML/CSS/JS snippets. It ships as static files — open `index.html` or serve the folder; there is no package.json, bundler, framework, or CDN asset.
+Loader Studio is a zero-dependency, no-build, vanilla HTML/CSS/ES-module web app that showcases **565 loading animations across 15 categories**. Users browse, search, filter, preview, customise (size, speed, accent, label, per-loader application state) and copy production-ready HTML/CSS/JS snippets. It ships as static files — open `index.html` or serve the folder; there is no package.json, bundler, framework, or CDN asset.
 
 ## 2. Architecture overview
 
@@ -54,7 +54,7 @@ index.html                     static shell (sidebar, topbar, toolbar, grid, ins
 
 ### Loader definition contract
 
-Every loader is a plain object: `{ id, name, category, description, markup, css }`, optionally `tech`, `js` (copyable runtime API, 76 loaders), `controls` (declarative Inspector schema, 71 loaders) and `applyControls(container, values)`. IDs are unique across the whole registry (verified 2026-07-31: 555 loaders, 0 duplicates).
+Every loader is a plain object: `{ id, name, category, description, markup, css }`, optionally `tech`, `js` (copyable runtime API, 76 loaders), `controls` (declarative Inspector schema, 71 loaders) and `applyControls(container, values)`. IDs are unique across the whole registry (verified 2026-07-31: 565 loaders, 0 duplicates).
 
 ### Category counts (from `loaders/index.js`, 2026-07-31)
 
@@ -62,14 +62,14 @@ Every loader is a plain object: `{ id, name, category, description, markup, css 
 | --- | --- | --- | --- | --- |
 | CSS 3D | 76 | | Bars | 38 |
 | SVG | 75 | | Buttons | 36 |
-| Spinners | 66 | | Dots | 30 |
+| Spinners | 66 | | Dots | 40 |
 | Text | 57 | | Progress | 19 |
 | Common UI | 53 | | Application | 5 |
 | Skeletons | 53 | | Matrix | 3 |
 | Shapes | 41 | | Holographic | 2 |
 | | | | Operations | 1 |
 
-**Total: 555 loaders, 15 categories** (plus the synthetic "All" filter).
+**Total: 565 loaders, 15 categories** (plus the synthetic "All" filter).
 
 ## 3. Durable design decisions
 
@@ -78,9 +78,9 @@ Every loader is a plain object: `{ id, name, category, description, markup, css 
 | D-01 | Zero dependencies, no build step | Deliverable is copy-paste vanilla snippets; the studio itself must prove the same constraint. |
 | D-02 | Barrel-module SSOT registry (`loaders/index.js` → category `*-index.js` → pack files) | Packs of 10 stay reviewable; category order is stable; no file grows unbounded. |
 | D-03 | DOM APIs + trusted `DOMParser` instead of `innerHTML` assignment | Security-review outcome (2026-07-20); loader markup is first-party but the renderer avoids the innerHTML pattern anyway. |
-| D-04 | Progressive rendering: 24-card initial window, +24 per batch | Full 555-card render was the mobile bottleneck (26,907px → 6,106px initial document height at 115 loaders). |
+| D-04 | Progressive rendering: 24-card initial window, +24 per batch | Full 565-card render was the mobile bottleneck (26,907px → 6,106px initial document height at 115 loaders). |
 | D-05 | Infinite scroll via bottom-sentinel IntersectionObserver, armed only after genuine user scroll/keyboard input; Load More button kept as accessible fallback | Research-backed (research/loading-pattern-research-2026-07-22.md); prevents instant page-load expansion and keyboard exclusion. |
-| D-06 | Visible-only animation: per-card IntersectionObserver + pause-all when tab hidden | Keeps 555 simultaneous CSS animations cheap; summary pill reports "N animations · M visible active". |
+| D-06 | Visible-only animation: per-card IntersectionObserver + pause-all when tab hidden | Keeps 565 simultaneous CSS animations cheap; summary pill reports "N animations · M visible active". |
 | D-07 | Motion defaults to running (`state.paused = false`) even under OS reduced-motion; Pause/Resume controls always available | Product decision 2026-07-16: a loader gallery whose loaders don't move fails its purpose; user keeps explicit control. |
 | D-08 | Masonry default layout via responsive CSS columns, persisted Masonry/Grid toggle, stable per-loader card sizes (hash of id + category) | Pinterest-style browsing without JS layout thrash; deterministic heights avoid reflow. |
 | D-09 | Sticky topbar/toolbar stack isolated in `sticky-shell.css` with `--main-topbar-height` variable | Fixed overlap bugs once; per-breakpoint heights 80/76/72px. |
@@ -108,7 +108,7 @@ Every loader is a plain object: `{ id, name, category, description, markup, css 
 Two automated checks, both zero-dependency:
 
 - `node qa/registry-lint.mjs` — registry invariants: unique ids, no `@keyframes` name redefined with a different body, no generic class name used as an unscoped top-level selector, required fields present. Exits non-zero on violation and prints the category count table that every doc must quote.
-- `qa/snippet-paste-smoke.html` — pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and something inside it is genuinely animating. The parent reads the srcdoc iframe directly on its load event, so a full 555-loader run takes about 6 seconds. `?autorun=1` runs headlessly enough for a driver to read `window.__smokeResult`.
+- `qa/snippet-paste-smoke.html` — pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and something inside it is genuinely animating. The parent reads the srcdoc iframe directly on its load event, so a full 565-loader run takes about 7 seconds. `?autorun=1` runs headlessly enough for a driver to read `window.__smokeResult`.
 
 Both run in CI on every push to `main` and gate the deploy (`.github/workflows/deploy.yml`). `qa/run-smoke-ci.mjs` drives the smoke page in headless Chrome over CDP using only Node built-ins and the browser CI images already provide, so the repository still has no dependencies.
 

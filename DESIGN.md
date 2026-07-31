@@ -1,9 +1,9 @@
 # DESIGN.md — Loader Studio (Vanilla-HTML-Loader)
 
-Last verified against code: 2026-07-31.
+Last verified against code: 2026-07-31 (counts from `node qa/registry-lint.mjs`).
 **Source of truth is the code** (`index.html`, `css/`, `js/`, `loaders/`). This document is a projection; when it disagrees with the code, the code wins.
 
-Related docs: [SPEC.md](SPEC.md) · [EPIC.md](EPIC.md) · [ROADMAP.md](ROADMAP.md) · [TASK.md](TASK.md) · [docs/modular-refactor.md](docs/modular-refactor.md) · history in [knowledge-base/project-memory.md](knowledge-base/project-memory.md)
+Related docs: [README.md](README.md) · [SPEC.md](SPEC.md) · [EPIC.md](EPIC.md) · [ROADMAP.md](ROADMAP.md) · [TASK.md](TASK.md) · [docs/modular-refactor.md](docs/modular-refactor.md) · history in [knowledge-base/project-memory.md](knowledge-base/project-memory.md)
 
 ## 1. What this is
 
@@ -88,6 +88,9 @@ Every loader is a plain object: `{ id, name, category, description, markup, css 
 | D-11 | localStorage keys frozen in `storage.js` (`loaderStudioFavorites/Recent/Theme/Accent/Shell/CollectionLayout`) | Backwards compatibility with every earlier release. |
 | D-12 | All loader motion elements are decorative: `aria-hidden`, `focusable=false`; buttons use real `disabled` + `aria-busy`; ≥44×44px interaction targets | Accessibility bar established 2026-07-16 and enforced in every pack QA (axe: zero violations). |
 | D-13 | Per-loader "Application state" controls are a declarative schema (`controls[]` + `applyControls`) rendered with DOM APIs | Trusted-internal-only control rendering; values persist per loader and sync selected + full previews. |
+| D-14 | Loader Studio is a **reference gallery**, not an installable app. PWA (manifest, service worker, offline) is **won't-do**. | Decided 2026-07-31. Visitors arrive to browse and copy a snippet, then leave; installability buys nothing for that journey. PWA audit warnings are expected and are not defects. |
+| D-15 | Favorite toggles and selection changes mutate only the affected nodes; only Favorites (membership changes) and Recently viewed (order changes) re-render the collection | A full grid rebuild re-parsed every card and restarted all visible animations for a single star click. |
+| D-16 | Selection is mirrored into `?loader=<id>` with `replaceState`, never `pushState` | The address bar stays shareable, but browsing a gallery must not bury the Back button under one history entry per card. |
 
 ## 4. Cross-cutting behaviours
 
@@ -98,12 +101,16 @@ Every loader is a plain object: `{ id, name, category, description, markup, css 
 
 ## 5. Quality gates (as practised per pack release)
 
-Each 10-loader pack ships with: static validation over all project files → desktop + mobile interaction QA (Inspector, Full Preview, progressive loading to the final card) → responsive/network inspection → axe accessibility audit (zero-violation bar) → Chromium/Firefox/WebKit cross-browser QA → focused code review recorded in `review/` (JSON + MD pair). `qa/snippet-paste-smoke.html` is a manual smoke harness verifying the exact combined snippet animates inside a sandboxed iframe.
+Two automated checks, both zero-dependency:
+
+- `node qa/registry-lint.mjs` — registry invariants: unique ids, no `@keyframes` name redefined with a different body, no generic class name used as an unscoped top-level selector, required fields present. Exits non-zero on violation and prints the category count table that every doc must quote.
+- `qa/snippet-paste-smoke.html` — pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and something inside it is genuinely animating. `?autorun=1` runs headlessly enough for a driver to read `window.__smokeResult`.
+
+Around those, each 10-loader pack ships with: desktop + mobile interaction QA (Inspector, Full Preview, progressive loading to the final card) → responsive/network inspection → axe accessibility audit (zero-violation bar) → Chromium/Firefox/WebKit cross-browser QA → focused code review recorded in `review/` (JSON + MD pair).
 
 ## 6. Known gaps / accepted debt
 
-- Static fallback text in `index.html` is stale before JS runs: hero pill "30 animations running", pagination "Showing 24 of 115", `aria-valuemax="125"`. Runtime JS overwrites all of them; cosmetic only. (TASK T-202)
-- No PWA manifest or service worker — repeatedly flagged by PWA audits, deliberately out of scope so far. (TASK T-204)
-- No automated test runner/CI; quality relies on the manual per-pack gate above. (TASK T-205)
-- The whole implementation is uncommitted on top of the initial commit; git history does not yet reflect the release history. (TASK T-201)
+- Deep-linking to a late loader renders the whole preceding window: `?loader=` at collection position 500 produces 504 cards, a 59,000px document and a 354ms load, against a 24-card / 3,298px / 135ms baseline. Visible-only animation keeps the animation cost flat (7 running), so this is DOM weight rather than jank, but it does partly undo D-04 for shared links. (TASK T-208)
+- No automated test runner or CI; the two checks above are run by hand. (TASK T-205)
 - `knowledge-base/project-memory.md` narrates history only through SVG Pack 5 (525 loaders); SVG Packs 6–7 landed afterwards. Code and `review/` are authoritative. (TASK T-207)
+- PWA installability warnings will keep appearing in audits. Expected — see D-14, not a defect.

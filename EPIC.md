@@ -8,9 +8,10 @@ Last verified against code: 2026-07-31. Task-level detail lives in [TASK.md](TAS
 | E2 | Collection performance at scale | ✅ Done |
 | E3 | Loader library expansion (30 → 545) | ✅ Done (open-ended: new packs welcome) |
 | E4 | Accessibility & motion policy | ✅ Done |
-| E5 | Quality gates & review governance | ✅ Done (manual), automation open under E7 |
-| E6 | Documentation & repo hygiene | 🟡 In progress |
-| E7 | Productionisation (PWA, tests/CI) | ⬜ Not started |
+| E5 | Quality gates & review governance | ✅ Done — automated checks landed 2026-07-31 |
+| E6 | Documentation & repo hygiene | ✅ Done |
+| E7 | Sharing & distribution | ✅ Done — deep links shipped; PWA closed won't-do |
+| E8 | CI enforcement | ⬜ Not started |
 
 ## E1 — Studio shell & modular architecture ✅
 
@@ -34,16 +35,32 @@ Registry invariants: unique ids (verified: 0 duplicates), category barrels as SS
 44×44px minimum interaction targets; decorative motion markup (`aria-hidden`, `focusable=false`, `inert` preview stages); real `disabled`/`aria-busy` button semantics; feed/progressbar/live-region semantics for the infinite collection; axe zero-violation bar per pack.
 Deliberate exception D-07: motion runs by default even under OS reduced-motion; explicit Pause/Resume is the mitigation.
 
-## E5 — Quality gates & review governance ✅ (manual)
+## E5 — Quality gates & review governance ✅
 
-Per-pack pipeline: static validation → desktop/mobile interaction QA → responsive/network checks → axe audit → 3-browser QA → focused code review. 144 review artifacts in `review/`, audit log in `audit-log/`, research notes in `research/`, release narratives in `knowledge-base/`. Snippet integrity harness: `qa/snippet-paste-smoke.html`.
-Remaining risk: the pipeline is human/agent-driven, not CI-enforced → E7.
+Per-pack pipeline: registry lint → desktop/mobile interaction QA → responsive/network checks → axe audit → 3-browser QA → focused code review. 144 review artifacts in `review/`, audit log in `audit-log/`, research notes in `research/`, release narratives in `knowledge-base/`.
 
-## E6 — Documentation & repo hygiene 🟡
+Automation landed 2026-07-31, both zero-dependency so D-01 holds:
+- `qa/registry-lint.mjs` — the invariants a shared-CSS registry can break silently: duplicate ids, `@keyframes` redefined with a different body, unscoped generic selectors, missing fields. Self-tested against a poisoned registry so it cannot quietly always pass.
+- `qa/snippet-paste-smoke.html` — every loader's combined snippet pasted into a blank page, asserting the overlay mounts and animates. Generic probe, no per-loader selectors.
 
-Done (2026-07-31): DESIGN/SPEC/EPIC/ROADMAP/TASK created from a code-first audit; `docs/modular-refactor.md` corrected (was claiming "30 loaders total").
-Open: initial git commit of the entire implementation (T-201), README + LICENSE + .gitignore (T-206), backfill `knowledge-base/project-memory.md` for SVG packs 6–7 (T-207), fix stale static fallback literals in `index.html` (T-202).
+Remaining risk: both are run by hand, not enforced → E8.
 
-## E7 — Productionisation ⬜
+## E6 — Documentation & repo hygiene ✅
 
-Candidate scope, not yet committed: PWA manifest + service worker + offline (repeat audit finding, T-204); automated regression tests and CI enforcement of the E5 gate (T-205). Needs a product decision on whether Loader Studio is a hosted tool (PWA worth it) or a reference gallery (skip).
+DESIGN/SPEC/EPIC/ROADMAP/TASK created from a code-first audit; `docs/modular-refactor.md` corrected (was claiming "30 loaders total"); README (English + Chinese summary) and MIT LICENSE added; `.gitignore` added and the full implementation brought under version control as a baseline commit; stale static counts in `index.html` fixed.
+
+Standing rule, recorded in TASK.md: any change ships with its doc updates in the same round, and every count quoted in a doc is copied from `qa/registry-lint.mjs` output — never hand-counted.
+
+Open: backfill `knowledge-base/project-memory.md` for SVG packs 6–7 (T-207).
+
+## E7 — Sharing & distribution ✅
+
+Delivered: `?loader=<id>` deep links with `replaceState` mirroring (D-16, FR-14), making any loader shareable and bookmarkable.
+
+Closed as won't-do: PWA manifest, service worker and offline support. Product decision D-14 — Loader Studio is a reference gallery whose visitors browse, copy a snippet and leave, so installability buys nothing. PWA audit warnings are expected output, not defects.
+
+Known trade-off carried forward: deep-linking to a late loader renders the whole preceding window (T-208).
+
+## E8 — CI enforcement ⬜
+
+Not started. Scope: run `qa/registry-lint.mjs` on every change and drive the snippet smoke page headlessly, so the E5 gate cannot be skipped. Blocked on nothing except a decision about which runner is acceptable given D-01 — the checks themselves are already dependency-free, but a browser driver for the smoke page would be the project's first dev dependency. (T-205)

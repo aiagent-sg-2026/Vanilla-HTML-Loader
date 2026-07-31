@@ -2,9 +2,9 @@
 
 Last verified against code: 2026-07-31. Code is the source of truth; statuses below were checked against the implementation, not against intentions.
 
-Related docs: [DESIGN.md](DESIGN.md) · [EPIC.md](EPIC.md) · [ROADMAP.md](ROADMAP.md) · [TASK.md](TASK.md)
+Related docs: [README.md](README.md) · [DESIGN.md](DESIGN.md) · [EPIC.md](EPIC.md) · [ROADMAP.md](ROADMAP.md) · [TASK.md](TASK.md)
 
-Status legend: ✅ Implemented · 🟡 Partial · ⬜ Not implemented
+Status legend: ✅ Implemented · 🟡 Partial · ⬜ Not implemented · ❌ Won't-do
 
 ## FR-1 Loader collection browsing — ✅
 
@@ -91,11 +91,24 @@ Status legend: ✅ Implemented · 🟡 Partial · ⬜ Not implemented
 - No frameworks, no CDN, no build step, ES modules only (`<script type="module">`), works as static files.
 - Fail-fast startup on missing DOM refs.
 
+## FR-14 Shareable deep links — ✅
+
+- `?loader=<id>` opens directly on that loader: view resets to an unfiltered library (`view=library`, `category=All`, empty query) so no filter can hide the target, the pagination window grows in whole pages until the card exists, and the card is selected, scrolled into view and shown in the Inspector.
+- Every subsequent selection mirrors the id into the URL with `replaceState`, so the address bar always matches the screen without adding a history entry per card (D-16).
+- Unknown or malformed ids fall through to the default selection with no error.
+- Trade-off: deep-linking to a late loader renders the whole preceding window (see DESIGN.md §6, TASK T-208).
+- Evidence: `applyDeepLink`, `revealLoader`, `syncLocation` in `js/ui/event-controller.js`.
+
+## FR-15 Automated registry and snippet checks — ✅
+
+- `node qa/registry-lint.mjs`: unique ids, `@keyframes` redefinition conflicts, unscoped generic selectors, required fields; non-zero exit on violation; prints the canonical category count table.
+- `qa/snippet-paste-smoke.html`: pastes every loader's combined snippet into a blank page and asserts the overlay mounts and animates; supports `?autorun=1`, `&limit=`, `&category=`, and exposes `window.__smokeResult`.
+- Neither introduces a dependency, preserving D-01.
+
 ## NFR / not implemented
 
 | Item | Status | Note |
 | --- | --- | --- |
-| PWA installability (manifest, service worker, offline) | ⬜ | Repeatedly reported by audits; not yet scoped. TASK T-204. |
-| Automated tests / CI | ⬜ | Manual per-pack QA gate only (see DESIGN.md §5). TASK T-205. |
-| Static no-JS fallback text accuracy in `index.html` | 🟡 | Stale literals ("30 animations", "115 loaders", `aria-valuemax="125"`); overwritten at runtime. TASK T-202. |
-| README / LICENSE / .gitignore | ⬜ | Repo has no top-level readme or license. TASK T-206. |
+| PWA installability (manifest, service worker, offline) | ❌ Won't-do | Product decision D-14: this is a reference gallery, not an installable app. Audit warnings are expected. |
+| Automated tests wired into CI | 🟡 | The two checks in FR-15 exist and are zero-dependency, but are run by hand. TASK T-205. |
+| Deep-link window cost for late loaders | 🟡 | Measured: 504 cards / 59k px / 354ms vs 24-card baseline 3.3k px / 135ms. TASK T-208. |

@@ -73,15 +73,47 @@ function createCardPreviewFragment(loader) {
   return fragment;
 }
 
-function createFavoriteButton(loader, state) {
-  const button = document.createElement('button');
-  const isFavorite = state.favorites.has(loader.id);
-  button.className = `favorite-button ${isFavorite ? 'is-active' : ''}`.trim();
-  button.type = 'button';
-  button.dataset.favoriteId = loader.id;
+function applyFavoriteButtonState(button, isFavorite) {
+  button.classList.toggle('is-active', isFavorite);
   button.setAttribute('aria-label', `${isFavorite ? 'Remove from' : 'Add to'} favorites`);
   button.textContent = isFavorite ? '★' : '☆';
+}
+
+function createFavoriteButton(loader, state) {
+  const button = document.createElement('button');
+  button.className = 'favorite-button';
+  button.type = 'button';
+  button.dataset.favoriteId = loader.id;
+  applyFavoriteButtonState(button, state.favorites.has(loader.id));
   return button;
+}
+
+/**
+ * Repaint one star in place. Rebuilding the whole grid for a favorite toggle
+ * restarts every visible card animation, so the card set is left untouched.
+ */
+export function updateFavoriteButton(refs, loaderId, isFavorite) {
+  const button = refs.grid.querySelector(`[data-favorite-id="${CSS.escape(loaderId)}"]`);
+  if (button) applyFavoriteButtonState(button, isFavorite);
+}
+
+/** Move the selected-card highlight without re-rendering the collection. */
+export function updateSelectionHighlight(refs, previousId, nextId) {
+  if (previousId === nextId) return;
+
+  const previous = previousId
+    ? refs.grid.querySelector(`[data-loader-id="${CSS.escape(previousId)}"]`)
+    : null;
+  if (previous) {
+    previous.classList.remove('is-selected');
+    previous.removeAttribute('aria-current');
+  }
+
+  const next = refs.grid.querySelector(`[data-loader-id="${CSS.escape(nextId)}"]`);
+  if (next) {
+    next.classList.add('is-selected');
+    next.setAttribute('aria-current', 'true');
+  }
 }
 
 function createActionButton(label, className, dataName, loaderId) {

@@ -1,4 +1,10 @@
-import { getCurrentCollection, renderCollection, renderFilters } from './collection-view.js';
+import {
+  getCurrentCollection,
+  renderCollection,
+  renderFilters,
+  updateFavoriteButton,
+  updateSelectionHighlight
+} from './collection-view.js';
 import { renderInspector, updateCode } from './inspector-view.js';
 import {
   closeFullPreview,
@@ -24,6 +30,8 @@ import {
   saveRecent,
   saveTheme
 } from '../storage.js';
+
+const SEARCH_DEBOUNCE_MS = 150;
 
 export function createEventController({ refs, loaders, categories, state }) {
   const shell = createShellController({ refs, state });
@@ -98,9 +106,16 @@ export function createEventController({ refs, loaders, categories, state }) {
 
   function selectLoader(id, openInspector = true, trigger = null) {
     if (!loaders.some(loader => loader.id === id)) return;
+    const previousId = state.selectedId;
     state.selectedId = id;
     rememberRecent(id);
-    renderCards();
+
+    // The Recently viewed collection is ordered by state.recent, which just
+    // changed, so it needs a real re-render. Every other view keeps the same
+    // cards in the same order — only the highlight moves.
+    if (state.view === 'recent') renderCards();
+    else updateSelectionHighlight(refs, previousId, id);
+
     renderInspector(refs, selectedLoader(), state);
 
     if (openInspector) {
@@ -143,11 +158,17 @@ export function createEventController({ refs, loaders, categories, state }) {
       infiniteScroll.reset();
     });
 
+    let searchTimer = 0;
     refs.search.addEventListener('input', event => {
-      state.query = event.target.value.trim();
-      resetCollectionWindow();
-      renderCards();
-      infiniteScroll.reset();
+      const query = event.target.value.trim();
+      window.clearTimeout(searchTimer);
+      searchTimer = window.setTimeout(() => {
+        if (query === state.query) return;
+        state.query = query;
+        resetCollectionWindow();
+        renderCards();
+        infiniteScroll.reset();
+      }, SEARCH_DEBOUNCE_MS);
     });
 
     refs.loadMoreButton.addEventListener('click', () => {
@@ -171,9 +192,14 @@ export function createEventController({ refs, loaders, categories, state }) {
       const favorite = event.target.closest('[data-favorite-id]');
       if (favorite) {
         const id = favorite.dataset.favoriteId;
-        state.favorites.has(id) ? state.favorites.delete(id) : state.favorites.add(id);
+        const isFavorite = !state.favorites.has(id);
+        isFavorite ? state.favorites.add(id) : state.favorites.delete(id);
         saveFavorites(state.favorites);
-        renderCards();
+
+        // Only the Favorites view changes membership when a star is toggled;
+        // elsewhere repaint the single star and leave the animations running.
+        if (state.view === 'favorites') renderCards();
+        else updateFavoriteButton(refs, id, isFavorite);
         return;
       }
 

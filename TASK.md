@@ -18,6 +18,7 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 | T-205 | CI enforcement of the two checks (E8) | P3 | The checks exist and are dependency-free; wiring the snippet smoke page into CI needs a headless driver, which would be the project's first dev dependency — decide against D-01 first. |
 | T-209 | Per-category lazy loading of the registry | P3 | ~1.3MB of modules and 571KB of loader CSS load eagerly. Measure first; experiment against D-02. |
 | T-210 | Cache parsed card fragments by loader id | P3 | `parseTrustedMarkup` re-parses identical markup on every render; cache + `cloneNode(true)`. Verify cloned nodes keep animation and `inert` behaviour. |
+| T-211 | Smoke harness slows down as its results table grows | P3 | A full 545 run starts at ~1s per loader and degrades to ~5s once several hundred rows exist, because every `insertRow` relayouts a large table. Batch the rows, virtualise them, or only render failures plus a running tally. Cosmetic — the verdict is unaffected. |
 
 ## Closed — won't do
 

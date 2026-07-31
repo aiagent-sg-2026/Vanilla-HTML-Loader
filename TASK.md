@@ -34,6 +34,7 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 | C6 | Snippet paste smoke test generalised from one hardcoded loader to the whole registry, with a generic animation probe, per-loader timeout, category filter and `?autorun=1`. Fixed a harness defect where `requestAnimationFrame` never fired in a hidden tab and reported healthy loaders as timeouts. |
 | T-206 / C7 | README (English + Chinese summary) and MIT LICENSE; all five root docs synced. |
 | C8 | GitHub Pages auto-deploy on push to `main`, gated on the registry lint. Staging verified locally: 175 files / 1.5MB, every asset `index.html` references present, the staged copy boots with 545 loaders and a working deep link, no console errors. |
+| C16 | SVG Pack 9 — 10 inline SVG loaders (Sundial Shadow, Suspension Bridge, Galaxy Arms, Crane Lift, Fountain Jets, Lighthouse Beam, Zipper Close, Anemometer Cups, Hourglass Turn, Domino Topple). SVG 75 to 85, collection 565 to 575; SVG is now the largest category. |
 | C15 | Dots Pack 4 — 10 CSS-only Dots loaders (Metronome Arc, Carousel Swap, Gravity Well, Relay Baton, Scatter Gather, Conveyor Belt, Newton Cradle, Radar Sweep, Stack Tower, Morse Signal). Dots 30 → 40, collection 555 → 565. First pack to go through the fully automated gate. |
 | T-212 | GitHub Pages deployment confirmed live at https://yapweijun1996.github.io/Vanilla-HTML-Loader/ — 565 loaders serving, deep links and category scoping working, 277 KB across 146 requests on a cold visit. |
 | T-205 / C14 | Snippet smoke test now runs in CI and gates the deploy, without adding a dependency. `qa/run-smoke-ci.mjs` serves the repo from `node:http`, launches the Chrome already present on the runner, and drives the page over CDP using Node's global `WebSocket` (D-20). Verified locally: 555/555 in 5.6s exit 0, and exit 1 with the offending loader named when a deliberate regression suppressed animations inside the overlay. |
@@ -58,7 +59,7 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 | 07-28 | task_040–051 | Shapes packs 1–4 (345→375); Buttons packs 1–3 (385→405); Text packs 1–5 (415→455) |
 | 07-28/29 | task_052–058 | CSS 3D packs 3–8 (465→515); SVG packs 5–7 (525→545) |
 
-Intermediate totals are as narrated in `knowledge-base/project-memory.md`; the authoritative current total (565) comes from `qa/registry-lint.mjs`.
+Intermediate totals are as narrated in `knowledge-base/project-memory.md`; the authoritative current total (575) comes from `qa/registry-lint.mjs`.
 
 ## Watch
 

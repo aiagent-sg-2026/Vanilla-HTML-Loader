@@ -763,3 +763,20 @@ Sources:
 - loaders/dots-pack-4-a.js
 - loaders/dots-pack-4-b.js
 - https://yapweijun1996.github.io/Vanilla-HTML-Loader/
+
+## SVG Loader Pack 9
+
+Recorded: 2026-07-31
+Tags: loader-studio, svg, svg-loaders, ci-gated, release, qa
+
+Added 10 modular inline SVG loaders through svg-pack-9-a.js and svg-pack-9-b.js, registered in svg-index.js: SVG Sundial Shadow, SVG Suspension Bridge, SVG Galaxy Arms, SVG Crane Lift, SVG Fountain Jets, SVG Lighthouse Beam, SVG Zipper Close, SVG Anemometer Cups, SVG Hourglass Turn, and SVG Domino Topple. SVG increased from 75 to 85 loaders and the full collection from 565 to 575. SVG is now the largest category, ahead of CSS 3D at 76.
+
+Released through the automated gate: registry lint reported 575 loaders, 0 duplicate ids and 785 keyframe names with no conflicting definitions; the headless-Chrome snippet smoke run passed 575/575 in 5.6s. Both also run in CI and block the deploy.
+
+Browser checks on a fresh origin (port changed so the module cache could not serve a stale registry): all 10 render at the pack's 86x66 size, declare their animations, carry aria-hidden and focusable="false", define no shared defs ids, and sit centred inside the card stage without overflow. `transform-box: fill-box`, used by Domino Topple, was confirmed supported rather than silently ignored.
+
+Sources:
+- loaders/svg-index.js
+- loaders/svg-pack-9-a.js
+- loaders/svg-pack-9-b.js
+- https://yapweijun1996.github.io/Vanilla-HTML-Loader/

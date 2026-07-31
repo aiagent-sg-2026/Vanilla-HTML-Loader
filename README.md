@@ -1,6 +1,6 @@
 # Loader Studio
 
-A zero-dependency gallery of **595 loading animations** across 15 categories. Browse them live, tune size, speed, accent colour and per-loader application state, then copy production-ready HTML, CSS and JavaScript you can paste straight into any page.
+A zero-dependency gallery of **605 loading animations** across 16 categories. Browse them live, tune size, speed, accent colour and per-loader application state, then copy production-ready HTML, CSS and JavaScript you can paste straight into any page.
 
 No framework. No bundler. No CDN. No build step. Open the folder and it runs.
 
@@ -50,7 +50,7 @@ Architecture and the durable decisions behind it: [DESIGN.md](DESIGN.md). Featur
 The registry is the source of truth for everything the docs claim. The established pattern:
 
 1. Add ten loaders as two modules, `<category>-pack-<n>-a.js` and `-b.js` (roughly five each).
-2. Register both in the category barrel, `<category>-index.js`. Only add to `loaders/index.js` when introducing a brand-new category.
+2. Register both in the category barrel, `<category>-index.js`. A brand-new category also needs its own `<category>-index.js`, an entry in `loaders/index.js`, and a line in `getCardSize` in `js/ui/collection-view.js` — without that last one its cards fall to the smallest size.
 3. Each loader is a plain object: `{ id, name, category, description, markup, css }`, optionally `tech`, `js` (copyable runtime API), `controls` (declarative Inspector schema) and `applyControls`.
 4. Keep CSS scoped to loader-specific class names, keep motion markup decorative (`aria-hidden`, `focusable="false"`), and give button loaders real `disabled` + `aria-busy`.
 5. Run the checks below, then update the counts in the root docs from the lint output.
@@ -73,7 +73,7 @@ node qa/run-smoke-ci.mjs
 
 This serves the repository, drives the smoke page over the Chrome DevTools Protocol and exits non-zero on any failure — no npm install, because it uses Node's built-in server and global `WebSocket` plus the Chrome that CI images already ship. Add `--category SVG` or `--limit 25` to narrow it.
 
-To watch it instead, open `qa/snippet-paste-smoke.html` and run it. It pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and actually animates. A full run over all 595 loaders takes about 6 seconds. Append `?autorun=1` to start immediately, `&category=SVG` to narrow it, `&limit=25` for a quick pass.
+To watch it instead, open `qa/snippet-paste-smoke.html` and run it. It pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and actually animates. A full run over all 605 loaders takes about 6 seconds. Append `?autorun=1` to start immediately, `&category=SVG` to narrow it, `&limit=25` for a quick pass.
 
 ## Deployment
 
@@ -91,7 +91,7 @@ MIT — see [LICENSE](LICENSE). Copy the snippets into anything, including comme
 
 ## 简介（中文摘要）
 
-Loader Studio 是一个**零依赖**的加载动画画廊，收录 **595 个动画**，分 15 个分类。浏览、调整（尺寸/速度/主色/应用状态）后可直接复制可用于生产的 HTML、CSS 和 JavaScript。
+Loader Studio 是一个**零依赖**的加载动画画廊，收录 **605 个动画**，分 16 个分类。浏览、调整（尺寸/速度/主色/应用状态）后可直接复制可用于生产的 HTML、CSS 和 JavaScript。
 
 没有框架、没有打包工具、没有构建步骤。用任意静态服务器打开即可（ES 模块不支持 `file://` 直接打开）：
 

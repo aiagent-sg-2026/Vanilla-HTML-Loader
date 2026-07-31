@@ -9,6 +9,7 @@ import { textPackLoaders } from './text-index.js';
 import { css3dPackLoaders } from './css-3d-index.js';
 import { svgPackLoaders } from './svg-index.js';
 import { progressLoaders } from './progress.js';
+import { chartPackLoaders } from './charts-index.js';
 import { skeletonLoaders } from './skeletons.js';
 import { operationLoaders } from './operations.js';
 import { matrixLoaders } from './matrix.js';
@@ -27,6 +28,7 @@ export const loaders = [
   ...css3dPackLoaders,
   ...svgPackLoaders,
   ...progressLoaders,
+  ...chartPackLoaders,
   ...skeletonLoaders,
   ...operationLoaders,
   ...matrixLoaders,

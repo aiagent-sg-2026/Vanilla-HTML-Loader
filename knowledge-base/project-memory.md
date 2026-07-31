@@ -816,3 +816,26 @@ Sources:
 - loaders/svg-pack-11-a.js
 - loaders/svg-pack-11-b.js
 - https://yapweijun1996.github.io/Vanilla-HTML-Loader/
+
+## Charts Category — Pack 1
+
+Recorded: 2026-07-31
+Tags: loader-studio, charts, new-category, css-loaders, svg-loaders, ci-gated, release, qa
+
+Added a new **Charts** category with 10 data-visualisation loaders through charts-pack-1-a.js and charts-pack-1-b.js, behind a new charts-index.js barrel: Bar Chart Build, Line Chart Draw, Donut Fill, Area Chart Rise, Scatter Plot Populate, Candlestick Stream, Gauge Needle, Sparkline Pulse, Heatmap Cells, and Stacked Bars. The collection went from 595 to 605 loaders and from 15 to 16 categories. The gap it fills: the library had static chart skeletons but no animated loading states for dashboards.
+
+Adding a category touches three places a normal pack does not:
+1. its own `<category>-index.js` barrel;
+2. an import and spread in `loaders/index.js` (the only file a new category is added to);
+3. `getCardSize` in `js/ui/collection-view.js` — categories not listed there fall through to the smallest sm/md sizes, which is wrong for anything with axes. Charts was put in the Progress/Matrix/Holographic/CSS 3D group (xl/lg) and verified rendering as 6 lg + 4 xl.
+
+Two techniques were rejected during the build and are worth avoiding here: `conic-gradient` plus a solid disc to fake a donut hole (the disc needs a background colour, which breaks on the dark and brand preview themes and on whatever page the snippet is pasted into), and `@property` to animate that gradient. The donut uses SVG `stroke-dasharray` instead, so the centre is genuinely transparent.
+
+Gates: registry lint 605 loaders / 16 categories / 0 duplicate ids / 839 keyframe names with no conflicts; snippet smoke 605/605. Browser verification on a fresh origin confirmed the Charts filter button appears, deep links scope to Charts, and no chart overflows its card.
+
+Sources:
+- loaders/charts-index.js
+- loaders/charts-pack-1-a.js
+- loaders/charts-pack-1-b.js
+- loaders/index.js
+- js/ui/collection-view.js

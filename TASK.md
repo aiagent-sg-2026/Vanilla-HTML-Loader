@@ -13,9 +13,8 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 
 | ID | Task | Priority | Notes |
 | --- | --- | --- | --- |
-| T-205 | CI enforcement of the snippet smoke test (E8) | P3 | Registry lint now gates deploys (done). The smoke page needs a browser, so wiring it into CI means adopting a headless driver — the project's first dev dependency. Decide against D-01 first. |
+| T-205 | CI enforcement of the snippet smoke test (E8) | P2 | Registry lint already gates deploys. The smoke run is now ~6s for all 555 loaders (was ~9 min), so runtime is no longer the obstacle — the remaining question is whether a headless browser driver is an acceptable first dev dependency under D-01. |
 | T-212 | Confirm the first Pages deployment actually served | P1 | The workflow is committed but has never run. It needs **Settings → Pages → Source: GitHub Actions** enabled by hand first; until then the deploy job fails. Check the Actions run and load the published URL. |
-| T-211 | Smoke harness slows down as its results table grows | P3 | A full run starts at ~1s per loader and degrades to ~5s once several hundred rows exist, because every `insertRow` relayouts a large table. Batch the rows, virtualise them, or only render failures plus a running tally. Cosmetic — the verdict is unaffected. |
 
 ## Closed — won't do
 
@@ -37,6 +36,7 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 | C6 | Snippet paste smoke test generalised from one hardcoded loader to the whole registry, with a generic animation probe, per-loader timeout, category filter and `?autorun=1`. Fixed a harness defect where `requestAnimationFrame` never fired in a hidden tab and reported healthy loaders as timeouts. |
 | T-206 / C7 | README (English + Chinese summary) and MIT LICENSE; all five root docs synced. |
 | C8 | GitHub Pages auto-deploy on push to `main`, gated on the registry lint. Staging verified locally: 175 files / 1.5MB, every asset `index.html` references present, the staged copy boots with 545 loaders and a working deep link, no console errors. |
+| T-211 / C13 | Snippet smoke run cut from about 9 minutes to 6.3 seconds for all 555 loaders. The cause was not the results table: the injected probe waited on a `setTimeout`, and hidden-tab timer clamping turned a nominal 200ms into ~1000ms per loader. The parent now reads the srcdoc iframe directly on its load event — no timer, no postMessage, and nothing injected into the page under test. Pass rows are also batched to the end. All six failure modes re-verified against deliberately broken pages, plus healthy animated and determinate controls. |
 | T-210 / C12 | Card preview fragments cached per loader and cloned (registry-wide parse 24.4ms → 4.1ms), and growing the window now appends the new page instead of rebuilding the grid (Load more 7.6→14.2ms growing → flat ~4.5ms; deep link to the last CSS 3D loader 258ms → 167ms). Verified clones keep `inert`, `aria-hidden` and the button→div preview transform across three renders, and that filter, search, empty state, Favorites unstar and Recently-viewed reorder all still rebuild (D-19). |
 | T-207 / C11 | Backfilled `knowledge-base/project-memory.md` for SVG packs 6 and 7 from surviving evidence — the pack modules, their registration, and the static review reports. Both entries are labelled reconstructed and deliberately claim no browser, accessibility or cross-browser QA, because no such record survives. Invariants re-verified today: all 20 loaders decorative, accent/speed aware, no shared defs ids. |
 | T-209 / C11 | Lazy-loading experiment run and written up; closed as not worth the structural cost. |

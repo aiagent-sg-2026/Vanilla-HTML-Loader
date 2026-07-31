@@ -63,7 +63,7 @@ node qa/registry-lint.mjs
 
 Verifies unique loader ids, `@keyframes` names that are not redefined with a different body, generic class names never used as unscoped top-level selectors, and required fields. It exits non-zero on violation and prints the category count table that the docs must quote — never hand-count.
 
-For snippet integrity, open `qa/snippet-paste-smoke.html` and run it. It pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and actually animates. Append `?autorun=1` to start immediately, `&limit=25` for a quick pass.
+For snippet integrity, open `qa/snippet-paste-smoke.html` and run it. It pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and actually animates. A full run over all 555 loaders takes about 6 seconds. Append `?autorun=1` to start immediately, `&category=SVG` to narrow it, `&limit=25` for a quick pass.
 
 ## Deployment
 

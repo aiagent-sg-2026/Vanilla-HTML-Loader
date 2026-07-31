@@ -93,55 +93,53 @@
     // correctly, so what to expect is derived from each loader's own CSS.
     const expectsAnimation = loader => /@keyframes|animation\s*:/.test(loader.css || '');
 
-    // The probe runs inside the pasted page and knows nothing about the loader
-    // beyond whether motion was expected of it.
-    //
-    // Deliberately no requestAnimationFrame: browsers throttle rAF in hidden or
-    // background tabs, which would stall the probe and report healthy loaders
-    // as timeouts. A plain timer fires regardless of visibility.
-    const buildProbe = motionExpected => `
-      setTimeout(() => {
-        const send = payload => parent.postMessage({ type: 'loader-motion-smoke', ...payload }, '*');
-        try {
-          const overlay = document.getElementById('appLoader');
-          if (!overlay) return send({ ok: false, reason: 'no #appLoader in pasted snippet' });
-          if (overlay.hidden) return send({ ok: false, reason: 'overlay still hidden after demo call' });
+    /**
+     * The page under test carries no probe of its own. A srcdoc iframe is
+     * same-origin, so the parent inspects the finished document directly on the
+     * load event — by which point the snippet's scripts have run and styles are
+     * resolved.
+     *
+     * The earlier design injected a probe that waited on a timer and replied by
+     * postMessage. Browsers clamp timers to about a second in hidden and
+     * background tabs, so a nominal 200ms wait actually cost ~1000ms per loader
+     * and a full run took roughly nine minutes. Reading the document on load
+     * removes the timer entirely: ~8ms per loader, and nothing is added to the
+     * page whose behaviour is being judged.
+     */
+    function probeFrame(motionExpected) {
+      const doc = frame.contentDocument;
+      const win = frame.contentWindow;
+      if (!doc || !win) return { ok: false, reason: 'iframe document unavailable' };
 
-          const content = overlay.querySelector('.vl-loader-content');
-          if (!content) return send({ ok: false, reason: 'overlay mounted without .vl-loader-content' });
-          if (!content.getBoundingClientRect().height) {
-            return send({ ok: false, reason: 'loader content has zero height' });
-          }
+      const overlay = doc.getElementById('appLoader');
+      if (!overlay) return { ok: false, reason: 'no #appLoader in pasted snippet' };
+      if (overlay.hidden) return { ok: false, reason: 'overlay still hidden after demo call' };
 
-          const nodes = [overlay, ...overlay.querySelectorAll('*')];
-          let animatedNodes = 0;
-          let pausedOnly = 0;
+      const content = overlay.querySelector('.vl-loader-content');
+      if (!content) return { ok: false, reason: 'overlay mounted without .vl-loader-content' };
+      if (!content.getBoundingClientRect().height) {
+        return { ok: false, reason: 'loader content has zero height' };
+      }
 
-          for (const node of nodes) {
-            for (const pseudo of [null, '::before', '::after']) {
-              const style = getComputedStyle(node, pseudo);
-              if (!style.animationName || style.animationName === 'none') continue;
-              if (style.animationPlayState === 'running') animatedNodes += 1;
-              else pausedOnly += 1;
-            }
-          }
-
-          if (!${motionExpected}) {
-            // Determinate loader: mounting with visible content is the contract.
-            return send({ ok: true, determinate: true, animatedNodes });
-          }
-          if (animatedNodes > 0) return send({ ok: true, animatedNodes });
-          if (pausedOnly > 0) return send({ ok: false, reason: 'animations present but all paused' });
-          send({ ok: false, reason: 'CSS declares animation but none is live in the overlay' });
-        } catch (error) {
-          send({ ok: false, reason: 'probe threw: ' + error.message });
+      let animatedNodes = 0;
+      let pausedOnly = 0;
+      for (const node of [overlay, ...overlay.querySelectorAll('*')]) {
+        for (const pseudo of [null, '::before', '::after']) {
+          const style = win.getComputedStyle(node, pseudo);
+          if (!style.animationName || style.animationName === 'none') continue;
+          if (style.animationPlayState === 'running') animatedNodes += 1;
+          else pausedOnly += 1;
         }
-      }, 200);
-    `;
+      }
 
-    function buildPage(snippet, motionExpected) {
-      const open = '<' + 'script>';
-      const close = '<' + '/' + 'script>';
+      // Determinate loader: mounting with visible content is the whole contract.
+      if (!motionExpected) return { ok: true, determinate: true, animatedNodes };
+      if (animatedNodes > 0) return { ok: true, animatedNodes };
+      if (pausedOnly > 0) return { ok: false, reason: 'animations present but all paused' };
+      return { ok: false, reason: 'CSS declares animation but none is live in the overlay' };
+    }
+
+    function buildPage(snippet) {
       return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><style>
   body { min-height: 140vh; margin: 0; background: linear-gradient(135deg,#f8fafc,#dbe5f4); font-family: system-ui, sans-serif; }
@@ -150,7 +148,6 @@
 <body>
   <main class="demo-page"><h1>Existing application content</h1></main>
   ${snippet}
-  ${open}${buildProbe(motionExpected)}${close}
 </body></html>`;
     }
 
@@ -162,41 +159,49 @@
           if (settled) return;
           settled = true;
           window.clearTimeout(timer);
-          window.removeEventListener('message', onMessage);
+          frame.removeEventListener('load', onLoad);
           resolve(outcome);
         };
 
-        const onMessage = event => {
-          if (event.data?.type !== 'loader-motion-smoke') return;
-          finish(event.data);
+        const onLoad = () => {
+          try {
+            finish(probeFrame(expectsAnimation(loader)));
+          } catch (error) {
+            finish({ ok: false, reason: 'probe threw: ' + error.message });
+          }
         };
 
+        // Only a guard against a page that never fires load. Timers are clamped
+        // in hidden tabs, so this fires late rather than early — which is fine
+        // for a backstop.
         const timer = window.setTimeout(
-          () => finish({ ok: false, reason: `no response within ${FRAME_TIMEOUT_MS}ms (script error in snippet?)` }),
+          () => finish({ ok: false, reason: `no load event within ${FRAME_TIMEOUT_MS}ms` }),
           FRAME_TIMEOUT_MS
         );
 
-        window.addEventListener('message', onMessage);
+        frame.addEventListener('load', onLoad, { once: true });
 
         try {
-          frame.srcdoc = buildPage(getCombinedSnippet(loader, ACCENT), expectsAnimation(loader));
+          frame.srcdoc = buildPage(getCombinedSnippet(loader, ACCENT));
         } catch (error) {
           finish({ ok: false, reason: 'snippet generation threw: ' + error.message });
         }
       });
     }
 
-    function addRow(loader, outcome) {
-      const row = results.insertRow();
-      row.insertCell().textContent = `${loader.name} (${loader.id})`;
-      row.insertCell().textContent = loader.category;
-      row.insertCell().textContent = outcome.ok
-        ? (outcome.determinate ? 'PASS (determinate)' : 'PASS')
-        : 'FAIL';
-      const reason = row.insertCell();
-      reason.className = 'reason';
-      reason.textContent = outcome.ok ? '' : outcome.reason || 'unknown';
-      if (!outcome.ok) results.prepend(row);
+    function buildRow(loader, outcome) {
+      const row = document.createElement('tr');
+      const cell = text => {
+        const td = document.createElement('td');
+        td.textContent = text;
+        row.append(td);
+        return td;
+      };
+      cell(`${loader.name} (${loader.id})`);
+      cell(loader.category);
+      cell(outcome.ok ? (outcome.determinate ? 'PASS (determinate)' : 'PASS') : 'FAIL');
+      cell(outcome.ok ? '' : outcome.reason || 'unknown').className = 'reason';
+      return row;
     }
 
     async function run(limit) {
@@ -214,12 +219,22 @@
       let passed = 0;
       let failed = 0;
       const startedAt = performance.now();
+      const passRows = [];
 
       for (const [index, loader] of queue.entries()) {
         if (cancelled) break;
         const outcome = await checkLoader(loader);
-        outcome.ok ? passed += 1 : failed += 1;
-        addRow(loader, outcome);
+
+        // Failures go in straight away — they are what someone is watching for,
+        // and there are few of them. Passes are held back and flushed once at
+        // the end, so a growing table cannot slow the run down.
+        if (outcome.ok) {
+          passed += 1;
+          passRows.push(buildRow(loader, outcome));
+        } else {
+          failed += 1;
+          results.prepend(buildRow(loader, outcome));
+        }
 
         passCount.textContent = passed;
         failCount.textContent = failed;
@@ -228,6 +243,7 @@
         elapsedLabel.textContent = `${((performance.now() - startedAt) / 1000).toFixed(1)}s`;
       }
 
+      results.append(...passRows);
       frame.srcdoc = '';
       runAllButton.disabled = runSampleButton.disabled = categoryFilter.disabled = false;
       stopButton.disabled = true;

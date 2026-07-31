@@ -103,7 +103,7 @@ Status legend: ✅ Implemented · 🟡 Partial · ⬜ Not implemented · ❌ Won
 ## FR-15 Automated registry and snippet checks — ✅
 
 - `node qa/registry-lint.mjs`: unique ids, `@keyframes` redefinition conflicts, unscoped generic selectors, required fields; non-zero exit on violation; prints the canonical category count table.
-- `qa/snippet-paste-smoke.html`: pastes every loader's combined snippet into a blank page and asserts the overlay mounts and animates; supports `?autorun=1`, `&limit=`, `&category=`, and exposes `window.__smokeResult`.
+- `qa/snippet-paste-smoke.html`: pastes every loader's combined snippet into a blank page and asserts the overlay mounts and animates; supports `?autorun=1`, `&limit=`, `&category=`, and exposes `window.__smokeResult`. A full 555-loader run takes about 6 seconds.
 - Neither introduces a dependency, preserving D-01.
 
 ## NFR / not implemented

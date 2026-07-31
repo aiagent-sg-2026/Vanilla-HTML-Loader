@@ -107,7 +107,7 @@ Every loader is a plain object: `{ id, name, category, description, markup, css 
 Two automated checks, both zero-dependency:
 
 - `node qa/registry-lint.mjs` — registry invariants: unique ids, no `@keyframes` name redefined with a different body, no generic class name used as an unscoped top-level selector, required fields present. Exits non-zero on violation and prints the category count table that every doc must quote.
-- `qa/snippet-paste-smoke.html` — pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and something inside it is genuinely animating. `?autorun=1` runs headlessly enough for a driver to read `window.__smokeResult`.
+- `qa/snippet-paste-smoke.html` — pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and something inside it is genuinely animating. The parent reads the srcdoc iframe directly on its load event, so a full 555-loader run takes about 6 seconds. `?autorun=1` runs headlessly enough for a driver to read `window.__smokeResult`.
 
 Around those, each 10-loader pack ships with: desktop + mobile interaction QA (Inspector, Full Preview, progressive loading to the final card) → responsive/network inspection → axe accessibility audit (zero-violation bar) → Chromium/Firefox/WebKit cross-browser QA → focused code review recorded in `review/` (JSON + MD pair).
 

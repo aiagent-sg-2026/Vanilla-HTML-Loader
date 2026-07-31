@@ -35,6 +35,7 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 | C10 | T-208: deep links scope to the target's category — initial render mean 290 → 41 cards, worst 576 → 96 (D-17) |
 | C11 | T-207 project-memory backfill for SVG packs 6–7; T-209 lazy-loading experiment measured and closed |
 | C12 | T-210: preview fragments cached and window growth appends instead of rebuilding — Load more now flat ~4.5ms (D-19) |
+| C13 | T-211: smoke run 9 minutes → 6.3s for all 555 loaders by probing the iframe on load instead of waiting on a throttled timer |
 
 ## Now
 
@@ -46,8 +47,7 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 
 ## Later
 
-3. **T-211** Smoke harness slows as its results table grows (~1s → ~5s per loader).
-4. Further loader packs (E3 is open-ended) — pattern is established: 10 loaders, A/B modules, barrel registration, lint + smoke + full QA gate, review record.
+3. Further loader packs (E3 is open-ended) — pattern is established: 10 loaders, A/B modules, barrel registration, lint + smoke + full QA gate, review record.
 
 ## Closed — won't do
 

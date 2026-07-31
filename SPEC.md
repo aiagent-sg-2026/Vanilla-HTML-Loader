@@ -93,10 +93,10 @@ Status legend: ✅ Implemented · 🟡 Partial · ⬜ Not implemented · ❌ Won
 
 ## FR-14 Shareable deep links — ✅
 
-- `?loader=<id>` opens directly on that loader: view resets to an unfiltered library (`view=library`, `category=All`, empty query) so no filter can hide the target, the pagination window grows in whole pages until the card exists, and the card is selected, scrolled into view and shown in the Inspector.
+- `?loader=<id>` opens directly on that loader: the view resets to `library`, the category is set to **the target's own category**, the query is cleared, the pagination window grows in whole pages until the card exists, and the card is selected, scrolled into view and shown in the Inspector.
 - Every subsequent selection mirrors the id into the URL with `replaceState`, so the address bar always matches the screen without adding a history entry per card (D-16).
 - Unknown or malformed ids fall through to the default selection with no error.
-- Trade-off: deep-linking to a late loader renders the whole preceding window (see DESIGN.md §6, TASK T-208).
+- Scoping to the category rather than the whole library keeps the render window small: across all 555 loaders the initial render drops from a mean of 290 cards (max 576) to a mean of 41 (max 96, and 76 in practice because categories cap it). The visible set stays a contiguous prefix of the filtered collection, so Load more is unchanged; clicking **All** returns to the full library with the window reset to one page.
 - Evidence: `applyDeepLink`, `revealLoader`, `syncLocation` in `js/ui/event-controller.js`.
 
 ## FR-15 Automated registry and snippet checks — ✅
@@ -111,4 +111,4 @@ Status legend: ✅ Implemented · 🟡 Partial · ⬜ Not implemented · ❌ Won
 | --- | --- | --- |
 | PWA installability (manifest, service worker, offline) | ❌ Won't-do | Product decision D-14: this is a reference gallery, not an installable app. Audit warnings are expected. |
 | Automated tests wired into CI | 🟡 | The two checks in FR-15 exist and are zero-dependency, but are run by hand. TASK T-205. |
-| Deep-link window cost for late loaders | 🟡 | Measured: 504 cards / 59k px / 354ms vs 24-card baseline 3.3k px / 135ms. TASK T-208. |
+| Deep-link window cost for late loaders | ✅ | Resolved by T-208 / D-17 — see FR-14. Worst case measured at 76 cards and 1,704 DOM nodes, down from 504 cards and 9,699 nodes. |

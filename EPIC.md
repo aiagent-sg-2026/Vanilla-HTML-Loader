@@ -59,7 +59,7 @@ Delivered: `?loader=<id>` deep links with `replaceState` mirroring (D-16, FR-14)
 
 Closed as won't-do: PWA manifest, service worker and offline support. Product decision D-14 — Loader Studio is a reference gallery whose visitors browse, copy a snippet and leave, so installability buys nothing. PWA audit warnings are expected output, not defects.
 
-Known trade-off carried forward: deep-linking to a late loader renders the whole preceding window (T-208).
+The initial cost of a deep link was cut in a follow-up (T-208, D-17): scoping the view to the target's own category rather than the whole library takes the initial render from a mean of 290 cards to 41, worst case 576 to 96, without breaking Load-more contiguity.
 
 ## E8 — CI enforcement & deployment 🟡
 

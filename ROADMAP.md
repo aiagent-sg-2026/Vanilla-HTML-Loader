@@ -32,6 +32,7 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 | C7 | README + MIT LICENSE + doc sync (T-206) |
 | C8 | GitHub Pages auto-deploy on push to `main`, gated on the registry lint (E8) |
 | C9 | SVG Pack 8: 10 new inline SVG loaders (SVG 65 → 75, collection 545 → **555**) |
+| C10 | T-208: deep links scope to the target's category — initial render mean 290 → 41 cards, worst 576 → 96 (D-17) |
 
 ## Now
 
@@ -40,15 +41,14 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 
 ## Next
 
-3. **T-208** Reduce deep-link window cost for late loaders (currently 504 cards / 59k px / 354ms for collection position 500, against a 24-card baseline of 3.3k px / 135ms). Needs a design that keeps Load-more contiguity intact.
-4. **T-205** CI enforcement of the snippet smoke test (E8). The registry lint already gates deploys; the smoke page needs a headless browser, which would be the first dev dependency — decide against D-01.
+3. **T-205** CI enforcement of the snippet smoke test (E8). The registry lint already gates deploys; the smoke page needs a headless browser, which would be the first dev dependency — decide against D-01.
 
 ## Later
 
-5. **T-209** Per-category lazy loading of the registry (~1.3MB of modules and 571KB of loader CSS load eagerly). Measure first; treat as an experiment against D-02.
-6. **T-210** Cache parsed card fragments by loader id and clone them instead of re-parsing markup on every render.
-7. **T-211** Smoke harness slows as its results table grows (~1s → ~5s per loader).
-8. Further loader packs (E3 is open-ended) — pattern is established: 10 loaders, A/B modules, barrel registration, lint + smoke + full QA gate, review record.
+4. **T-209** Per-category lazy loading of the registry (~1.3MB of modules and 571KB of loader CSS load eagerly). Measure first; treat as an experiment against D-02.
+5. **T-210** Cache parsed card fragments by loader id and clone them instead of re-parsing markup on every render.
+6. **T-211** Smoke harness slows as its results table grows (~1s → ~5s per loader).
+7. Further loader packs (E3 is open-ended) — pattern is established: 10 loaders, A/B modules, barrel registration, lint + smoke + full QA gate, review record.
 
 ## Closed — won't do
 

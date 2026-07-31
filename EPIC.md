@@ -6,7 +6,7 @@ Last verified against code: 2026-07-31. Task-level detail lives in [TASK.md](TAS
 | --- | --- | --- |
 | E1 | Studio shell & modular architecture | ✅ Done |
 | E2 | Collection performance at scale | ✅ Done |
-| E3 | Loader library expansion (30 → 545) | ✅ Done (open-ended: new packs welcome) |
+| E3 | Loader library expansion (30 → 555) | ✅ Done (open-ended: new packs welcome) |
 | E4 | Accessibility & motion policy | ✅ Done |
 | E5 | Quality gates & review governance | ✅ Done — automated checks landed 2026-07-31 |
 | E6 | Documentation & repo hygiene | ✅ Done |
@@ -26,8 +26,8 @@ Acceptance evidence: mobile initial document height 26,907px → 6,106px; axe ze
 
 ## E3 — Loader library expansion ✅ (open-ended)
 
-Grow the registry from 30 (post-refactor) to **545** loaders in 15 categories through 10-loader packs, each with its own QA + review record in `review/`.
-Highlights: Common UI production packs 1–14, Spinners packs 2–6, CSS 3D packs 2–8, SVG packs 2–7, Text packs 1–5, Bars 2–4, Dots 2–3, Shapes 1–4, Buttons 1–3, research-driven pack (Material/Ant/Bootstrap/MDN patterns), functional Application loaders with JS APIs (AI streaming, ERP transaction, bulk import, network retry, dashboard skeleton).
+Grow the registry from 30 (post-refactor) to **555** loaders in 15 categories through 10-loader packs, each with its own QA + review record in `review/`.
+Highlights: Common UI production packs 1–14, Spinners packs 2–6, CSS 3D packs 2–8, SVG packs 2–8, Text packs 1–5, Bars 2–4, Dots 2–3, Shapes 1–4, Buttons 1–3, research-driven pack (Material/Ant/Bootstrap/MDN patterns), functional Application loaders with JS APIs (AI streaming, ERP transaction, bulk import, network retry, dashboard skeleton).
 Registry invariants: unique ids (verified: 0 duplicates), category barrels as SSOT, packs split A/B, per-loader controls schema where interactivity matters (71 loaders), copyable JS APIs (76 loaders).
 
 ## E4 — Accessibility & motion policy ✅

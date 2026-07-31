@@ -13,13 +13,13 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 
 | ID | Task | Priority | Notes |
 | --- | --- | --- | --- |
-| T-207 | Backfill project-memory for SVG packs 6–7 | P2 | `knowledge-base/project-memory.md` ends at SVG pack 5 (525); code is at 545. `review/svg-loader-pack-6/7-review.*` exist. Alternative: declare `review/` + code the only records going forward. |
+| T-207 | Backfill project-memory for SVG packs 6–7 | P2 | `knowledge-base/project-memory.md` ends at SVG pack 8 (555) but omits packs 6-7. `review/svg-loader-pack-6/7-review.*` exist. Alternative: declare `review/` + code the only records going forward. |
 | T-208 | Reduce deep-link window cost for late loaders | P2 | Measured 2026-07-31: `?loader=` at collection position 500 renders 504 cards, 59k px document, 354ms load, 9,699 DOM nodes — against a 24-card baseline of 3.3k px, 135ms, 622 nodes. Visible-only animation holds the animation cost flat (7 running), so this is DOM weight. Any fix must keep Load-more contiguity. |
 | T-205 | CI enforcement of the snippet smoke test (E8) | P3 | Registry lint now gates deploys (done). The smoke page needs a browser, so wiring it into CI means adopting a headless driver — the project's first dev dependency. Decide against D-01 first. |
 | T-212 | Confirm the first Pages deployment actually served | P1 | The workflow is committed but has never run. It needs **Settings → Pages → Source: GitHub Actions** enabled by hand first; until then the deploy job fails. Check the Actions run and load the published URL. |
 | T-209 | Per-category lazy loading of the registry | P3 | ~1.3MB of modules and 571KB of loader CSS load eagerly. Measure first; experiment against D-02. |
 | T-210 | Cache parsed card fragments by loader id | P3 | `parseTrustedMarkup` re-parses identical markup on every render; cache + `cloneNode(true)`. Verify cloned nodes keep animation and `inert` behaviour. |
-| T-211 | Smoke harness slows down as its results table grows | P3 | A full 545 run starts at ~1s per loader and degrades to ~5s once several hundred rows exist, because every `insertRow` relayouts a large table. Batch the rows, virtualise them, or only render failures plus a running tally. Cosmetic — the verdict is unaffected. |
+| T-211 | Smoke harness slows down as its results table grows | P3 | A full run starts at ~1s per loader and degrades to ~5s once several hundred rows exist, because every `insertRow` relayouts a large table. Batch the rows, virtualise them, or only render failures plus a running tally. Cosmetic — the verdict is unaffected. |
 
 ## Closed — won't do
 
@@ -40,6 +40,7 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 | C6 | Snippet paste smoke test generalised from one hardcoded loader to the whole registry, with a generic animation probe, per-loader timeout, category filter and `?autorun=1`. Fixed a harness defect where `requestAnimationFrame` never fired in a hidden tab and reported healthy loaders as timeouts. |
 | T-206 / C7 | README (English + Chinese summary) and MIT LICENSE; all five root docs synced. |
 | C8 | GitHub Pages auto-deploy on push to `main`, gated on the registry lint. Staging verified locally: 175 files / 1.5MB, every asset `index.html` references present, the staged copy boots with 545 loaders and a working deep link, no console errors. |
+| C9 | SVG Pack 8 — 10 inline SVG loaders (Metronome Swing, Sonar Ping, Typewriter Carriage, Origami Fold, Funnel Drip, Turnstile Gate, Kite Tail, Piston Cycle, Ripple Stones, Elevator Floors). SVG 65 → 75, collection 545 → 555. First pack gated by the automated checks. |
 | — | Snippet smoke coverage completed across all 545 loaders, zero failures. Assembled from the main run (indices 0–489) plus full category runs for SVG 65/65, Skeletons 53/53, Progress 19/19, Application 5/5, Matrix 3/3, Holographic 2/2, Operations 1/1 — the original single continuous run was lost when its tab closed at 490/545. |
 
 ## Done — release history (mapped from Code-MCP tasks)
@@ -55,7 +56,7 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 | 07-28 | task_040–051 | Shapes packs 1–4 (345→375); Buttons packs 1–3 (385→405); Text packs 1–5 (415→455) |
 | 07-28/29 | task_052–058 | CSS 3D packs 3–8 (465→515); SVG packs 5–7 (525→545) |
 
-Intermediate totals are as narrated in `knowledge-base/project-memory.md`; the authoritative current total (545) comes from `qa/registry-lint.mjs`.
+Intermediate totals are as narrated in `knowledge-base/project-memory.md`; the authoritative current total (555) comes from `qa/registry-lint.mjs`.
 
 ## Watch
 

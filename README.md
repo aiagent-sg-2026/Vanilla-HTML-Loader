@@ -1,6 +1,6 @@
 # Loader Studio
 
-A zero-dependency gallery of **545 loading animations** across 15 categories. Browse them live, tune size, speed, accent colour and per-loader application state, then copy production-ready HTML, CSS and JavaScript you can paste straight into any page.
+A zero-dependency gallery of **555 loading animations** across 15 categories. Browse them live, tune size, speed, accent colour and per-loader application state, then copy production-ready HTML, CSS and JavaScript you can paste straight into any page.
 
 No framework. No bundler. No CDN. No build step. Open the folder and it runs.
 
@@ -81,7 +81,7 @@ MIT — see [LICENSE](LICENSE). Copy the snippets into anything, including comme
 
 ## 简介（中文摘要）
 
-Loader Studio 是一个**零依赖**的加载动画画廊，收录 **545 个动画**，分 15 个分类。浏览、调整（尺寸/速度/主色/应用状态）后可直接复制可用于生产的 HTML、CSS 和 JavaScript。
+Loader Studio 是一个**零依赖**的加载动画画廊，收录 **555 个动画**，分 15 个分类。浏览、调整（尺寸/速度/主色/应用状态）后可直接复制可用于生产的 HTML、CSS 和 JavaScript。
 
 没有框架、没有打包工具、没有构建步骤。用任意静态服务器打开即可（ES 模块不支持 `file://` 直接打开）：
 

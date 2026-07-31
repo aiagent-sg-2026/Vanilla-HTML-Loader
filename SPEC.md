@@ -8,7 +8,7 @@ Status legend: ✅ Implemented · 🟡 Partial · ⬜ Not implemented · ❌ Won
 
 ## FR-1 Loader collection browsing — ✅
 
-- 545 loaders in 15 categories exposed from `loaders/index.js`; category filter row is generated from the registry (`All` + unique categories).
+- 555 loaders in 15 categories exposed from `loaders/index.js`; category filter row is generated from the registry (`All` + unique categories).
 - Views: **Library**, **Favorites**, **Recently viewed** (last 8, most recent first). Switching view resets category, search, and the pagination window.
 - Text search matches name + category + description (case-insensitive substring).
 - Empty result set renders a friendly empty state.

@@ -703,3 +703,20 @@ Sources:
 - loaders/svg-pack-5-b.js
 - https://content.gmb01.xyz/share/project_69be700d-ca6a-4def-8b2a-6e05eeea7d0d/index.html
 
+
+## SVG Loader Pack 8
+
+Recorded: 2026-07-31
+Tags: loader-studio, svg, svg-loaders, registry-lint, accessibility, release, qa
+
+Added 10 modular inline SVG loaders in svg-pack-8-a.js and svg-pack-8-b.js, registered through svg-index.js: SVG Metronome Swing, SVG Sonar Ping, SVG Typewriter Carriage, SVG Origami Fold, SVG Funnel Drip, SVG Turnstile Gate, SVG Kite Tail, SVG Piston Cycle, SVG Ripple Stones, and SVG Elevator Floors. SVG increased from 65 to 75 loaders and the full collection from 545 to 555. All are self-contained without shared defs IDs, use aria-hidden and focusable=false, inherit the global accent and speed variables, and animate with scoped CSS only.
+
+This is the first pack gated by the automated checks added earlier the same day: `node qa/registry-lint.mjs` (unique ids, no @keyframes redefinition, no unscoped generic selectors, required fields) and the whole-registry snippet paste smoke test.
+
+Note for future runs: after adding loader files, the browser keeps the previously imported ES module graph, and a cache-busting query on the entry module does not propagate to its nested imports. A stale smoke run will silently report the old loader count — open a fresh tab and confirm the expected total before trusting the result.
+
+Sources:
+- loaders/svg-index.js
+- loaders/svg-pack-8-a.js
+- loaders/svg-pack-8-b.js
+- qa/registry-lint.mjs

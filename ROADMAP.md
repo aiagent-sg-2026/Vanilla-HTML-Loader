@@ -31,6 +31,7 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 | C6 | Snippet paste smoke test generalised from 1 loader to all 545 |
 | C7 | README + MIT LICENSE + doc sync (T-206) |
 | C8 | GitHub Pages auto-deploy on push to `main`, gated on the registry lint (E8) |
+| C9 | SVG Pack 8: 10 new inline SVG loaders (SVG 65 → 75, collection 545 → **555**) |
 
 ## Now
 

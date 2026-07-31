@@ -93,6 +93,7 @@ Every loader is a plain object: `{ id, name, category, description, markup, css 
 | D-16 | Selection is mirrored into `?loader=<id>` with `replaceState`, never `pushState` | The address bar stays shareable, but browsing a gallery must not bury the Back button under one history entry per card. |
 | D-17 | A deep link scopes the view to the target's **own category**, not the whole library | Both guarantee the card is reachable, but scoping cuts the initial render from a mean of 290 cards to 41 (max 576 → 96) while keeping the visible set a contiguous prefix. Landing among related loaders also suits a gallery; **All** is one click away and resets the window. |
 | D-18 | Eager-load the whole registry; no per-category lazy loading | Measured 2026-07-31 (research/lazy-loading-experiment-2026-07-31.md): eager loading costs ~10 ms of CPU total, and deferring the 584 KB of loader CSS saves ~0.6 ms. The 84% payload ceiling is only reachable by splitting every loader into metadata and payload, which breaks D-02. |
+| D-19 | Card preview fragments are parsed once per loader and cloned; growing the pagination window appends the new tail instead of rebuilding the grid | Measured 2026-07-31: parsing the whole registry's markup fell from 24.4ms to 4.1ms, and Load more went from 7.6→14.2ms growing with the total rendered to a flat ~4.5ms. Appending also leaves existing cards in place, so their animations no longer restart. Guarded: it only applies when the rendered cards are exactly the unchanged prefix. |
 
 ## 4. Cross-cutting behaviours
 

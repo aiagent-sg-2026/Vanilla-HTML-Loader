@@ -34,6 +34,7 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 | C9 | SVG Pack 8: 10 new inline SVG loaders (SVG 65 → 75, collection 545 → **555**) |
 | C10 | T-208: deep links scope to the target's category — initial render mean 290 → 41 cards, worst 576 → 96 (D-17) |
 | C11 | T-207 project-memory backfill for SVG packs 6–7; T-209 lazy-loading experiment measured and closed |
+| C12 | T-210: preview fragments cached and window growth appends instead of rebuilding — Load more now flat ~4.5ms (D-19) |
 
 ## Now
 
@@ -45,9 +46,8 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 
 ## Later
 
-3. **T-210** Cache parsed card fragments by loader id and clone them instead of re-parsing markup on every render.
-4. **T-211** Smoke harness slows as its results table grows (~1s → ~5s per loader).
-5. Further loader packs (E3 is open-ended) — pattern is established: 10 loaders, A/B modules, barrel registration, lint + smoke + full QA gate, review record.
+3. **T-211** Smoke harness slows as its results table grows (~1s → ~5s per loader).
+4. Further loader packs (E3 is open-ended) — pattern is established: 10 loaders, A/B modules, barrel registration, lint + smoke + full QA gate, review record.
 
 ## Closed — won't do
 

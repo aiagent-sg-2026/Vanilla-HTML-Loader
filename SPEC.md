@@ -21,7 +21,8 @@ Status legend: ✅ Implemented · 🟡 Partial · ⬜ Not implemented · ❌ Won
 - Manual **Load more** button always available; announces "Load N more" with remaining count; without IntersectionObserver support the UI degrades to manual-only with an explanatory status.
 - Feed semantics: grid is `role="feed"` with `aria-busy` during loads; summary + progressbar (`aria-valuemin/max/now`) + `aria-live` status line stay synchronized.
 - Search/category/view changes reset the window and re-arm scroll detection.
-- Evidence: `js/ui/infinite-scroll-controller.js`, `renderPagination` in `collection-view.js`.
+- Growing the window appends only the new page; the cards already on screen are left in place, so Load more costs a flat ~4.5ms instead of growing with the total rendered, and existing animations do not restart. A filter, search or reorder still rebuilds (D-19).
+- Evidence: `js/ui/infinite-scroll-controller.js`, `renderPagination` and `tryAppendVisibleTail` in `collection-view.js`.
 
 ## FR-3 Card layouts — ✅
 

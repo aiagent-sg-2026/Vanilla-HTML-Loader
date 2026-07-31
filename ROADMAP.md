@@ -33,25 +33,25 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 | C8 | GitHub Pages auto-deploy on push to `main`, gated on the registry lint (E8) |
 | C9 | SVG Pack 8: 10 new inline SVG loaders (SVG 65 → 75, collection 545 → **555**) |
 | C10 | T-208: deep links scope to the target's category — initial render mean 290 → 41 cards, worst 576 → 96 (D-17) |
+| C11 | T-207 project-memory backfill for SVG packs 6–7; T-209 lazy-loading experiment measured and closed |
 
 ## Now
 
 1. **T-212** Enable **Settings → Pages → Source: GitHub Actions**, then confirm the first deployment served. The workflow is committed but has never run, and without that setting the deploy job fails.
-2. **T-207** Backfill `knowledge-base/project-memory.md` for SVG packs 6–7 so the narrative record matches the code — or explicitly declare `review/` + code as the only records going forward.
 
 ## Next
 
-3. **T-205** CI enforcement of the snippet smoke test (E8). The registry lint already gates deploys; the smoke page needs a headless browser, which would be the first dev dependency — decide against D-01.
+2. **T-205** CI enforcement of the snippet smoke test (E8). The registry lint already gates deploys; the smoke page needs a headless browser, which would be the first dev dependency — decide against D-01.
 
 ## Later
 
-4. **T-209** Per-category lazy loading of the registry (~1.3MB of modules and 571KB of loader CSS load eagerly). Measure first; treat as an experiment against D-02.
-5. **T-210** Cache parsed card fragments by loader id and clone them instead of re-parsing markup on every render.
-6. **T-211** Smoke harness slows as its results table grows (~1s → ~5s per loader).
-7. Further loader packs (E3 is open-ended) — pattern is established: 10 loaders, A/B modules, barrel registration, lint + smoke + full QA gate, review record.
+3. **T-210** Cache parsed card fragments by loader id and clone them instead of re-parsing markup on every render.
+4. **T-211** Smoke harness slows as its results table grows (~1s → ~5s per loader).
+5. Further loader packs (E3 is open-ended) — pattern is established: 10 loaders, A/B modules, barrel registration, lint + smoke + full QA gate, review record.
 
 ## Closed — won't do
 
+- **T-209** Per-category lazy loading. Closed 2026-07-31 after measurement — see [research/lazy-loading-experiment-2026-07-31.md](research/lazy-loading-experiment-2026-07-31.md).
 - **T-204** PWA manifest / service worker / offline. Closed 2026-07-31 by D-14. Installability warnings from audits are expected and should not be re-filed.
 
 ## Blockers

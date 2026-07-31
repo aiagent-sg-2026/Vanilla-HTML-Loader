@@ -13,10 +13,8 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 
 | ID | Task | Priority | Notes |
 | --- | --- | --- | --- |
-| T-207 | Backfill project-memory for SVG packs 6–7 | P2 | `knowledge-base/project-memory.md` ends at SVG pack 8 (555) but omits packs 6-7. `review/svg-loader-pack-6/7-review.*` exist. Alternative: declare `review/` + code the only records going forward. |
 | T-205 | CI enforcement of the snippet smoke test (E8) | P3 | Registry lint now gates deploys (done). The smoke page needs a browser, so wiring it into CI means adopting a headless driver — the project's first dev dependency. Decide against D-01 first. |
 | T-212 | Confirm the first Pages deployment actually served | P1 | The workflow is committed but has never run. It needs **Settings → Pages → Source: GitHub Actions** enabled by hand first; until then the deploy job fails. Check the Actions run and load the published URL. |
-| T-209 | Per-category lazy loading of the registry | P3 | ~1.3MB of modules and 571KB of loader CSS load eagerly. Measure first; experiment against D-02. |
 | T-210 | Cache parsed card fragments by loader id | P3 | `parseTrustedMarkup` re-parses identical markup on every render; cache + `cloneNode(true)`. Verify cloned nodes keep animation and `inert` behaviour. |
 | T-211 | Smoke harness slows down as its results table grows | P3 | A full run starts at ~1s per loader and degrades to ~5s once several hundred rows exist, because every `insertRow` relayouts a large table. Batch the rows, virtualise them, or only render failures plus a running tally. Cosmetic — the verdict is unaffected. |
 
@@ -24,6 +22,7 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 
 | ID | Task | Decision |
 | --- | --- | --- |
+| T-209 | Per-category lazy loading of the registry | Closed 2026-07-31 by **D-18** after measurement — see [research/lazy-loading-experiment-2026-07-31.md](research/lazy-loading-experiment-2026-07-31.md). Eager loading costs about 10 ms of CPU (9 ms registry parse, ~1.2 ms to install all 584 KB of loader CSS); deferring the CSS saves ~0.6 ms. The real cost is 239 KB gzipped over 150 render-blocking requests, and reaching the 84% ceiling means splitting every loader into metadata and payload, which breaks D-02. Revisit only if the registry doubles or a throttled mobile cold load proves unacceptable. |
 | T-204 | PWA manifest, service worker, offline | Closed 2026-07-31 by **D-14**: Loader Studio is a reference gallery, not an installable app. PWA audit warnings are expected output and should not be re-filed as defects. |
 
 ## Done — 2026-07-31
@@ -39,6 +38,8 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 | C6 | Snippet paste smoke test generalised from one hardcoded loader to the whole registry, with a generic animation probe, per-loader timeout, category filter and `?autorun=1`. Fixed a harness defect where `requestAnimationFrame` never fired in a hidden tab and reported healthy loaders as timeouts. |
 | T-206 / C7 | README (English + Chinese summary) and MIT LICENSE; all five root docs synced. |
 | C8 | GitHub Pages auto-deploy on push to `main`, gated on the registry lint. Staging verified locally: 175 files / 1.5MB, every asset `index.html` references present, the staged copy boots with 545 loaders and a working deep link, no console errors. |
+| T-207 / C11 | Backfilled `knowledge-base/project-memory.md` for SVG packs 6 and 7 from surviving evidence — the pack modules, their registration, and the static review reports. Both entries are labelled reconstructed and deliberately claim no browser, accessibility or cross-browser QA, because no such record survives. Invariants re-verified today: all 20 loaders decorative, accent/speed aware, no shared defs ids. |
+| T-209 / C11 | Lazy-loading experiment run and written up; closed as not worth the structural cost. |
 | T-208 / C10 | Deep links now scope to the target's own category (D-17). Initial render across all 555 loaders drops from a mean of 290 cards / max 576 to a mean of 41 / max 96 — measured worst case 76 cards and 1,704 DOM nodes for the last CSS 3D loader, against 504 cards and 9,699 nodes before. Load-more contiguity verified as a true prefix; **All** resets to 24. Also hardened the deep-link scroll with a bounded verify-and-retry after finding it can land unscrolled on a cold load. |
 | C9 | SVG Pack 8 — 10 inline SVG loaders (Metronome Swing, Sonar Ping, Typewriter Carriage, Origami Fold, Funnel Drip, Turnstile Gate, Kite Tail, Piston Cycle, Ripple Stones, Elevator Floors). SVG 65 → 75, collection 545 → 555. First pack gated by the automated checks. |
 | — | Snippet smoke coverage completed across all 545 loaders, zero failures. Assembled from the main run (indices 0–489) plus full category runs for SVG 65/65, Skeletons 53/53, Progress 19/19, Application 5/5, Matrix 3/3, Holographic 2/2, Operations 1/1 — the original single continuous run was lost when its tab closed at 490/545. |

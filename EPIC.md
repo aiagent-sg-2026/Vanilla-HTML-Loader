@@ -51,7 +51,7 @@ DESIGN/SPEC/EPIC/ROADMAP/TASK created from a code-first audit; `docs/modular-ref
 
 Standing rule, recorded in TASK.md: any change ships with its doc updates in the same round, and every count quoted in a doc is copied from `qa/registry-lint.mjs` output — never hand-counted.
 
-Open: backfill `knowledge-base/project-memory.md` for SVG packs 6–7 (T-207).
+The one gap in the narrative record — SVG packs 6 and 7 shipping without a project-memory entry — was backfilled on 2026-07-31 from surviving evidence, with the reconstructed entries explicitly claiming no QA they cannot evidence (T-207).
 
 ## E7 — Sharing & distribution ✅
 

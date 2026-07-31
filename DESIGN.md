@@ -92,6 +92,7 @@ Every loader is a plain object: `{ id, name, category, description, markup, css 
 | D-15 | Favorite toggles and selection changes mutate only the affected nodes; only Favorites (membership changes) and Recently viewed (order changes) re-render the collection | A full grid rebuild re-parsed every card and restarted all visible animations for a single star click. |
 | D-16 | Selection is mirrored into `?loader=<id>` with `replaceState`, never `pushState` | The address bar stays shareable, but browsing a gallery must not bury the Back button under one history entry per card. |
 | D-17 | A deep link scopes the view to the target's **own category**, not the whole library | Both guarantee the card is reachable, but scoping cuts the initial render from a mean of 290 cards to 41 (max 576 → 96) while keeping the visible set a contiguous prefix. Landing among related loaders also suits a gallery; **All** is one click away and resets the window. |
+| D-18 | Eager-load the whole registry; no per-category lazy loading | Measured 2026-07-31 (research/lazy-loading-experiment-2026-07-31.md): eager loading costs ~10 ms of CPU total, and deferring the 584 KB of loader CSS saves ~0.6 ms. The 84% payload ceiling is only reachable by splitting every loader into metadata and payload, which breaks D-02. |
 
 ## 4. Cross-cutting behaviours
 
@@ -112,5 +113,4 @@ Around those, each 10-loader pack ships with: desktop + mobile interaction QA (I
 ## 6. Known gaps / accepted debt
 
 - No automated test runner or CI; the two checks above are run by hand. (TASK T-205)
-- `knowledge-base/project-memory.md` narrates history only through SVG Pack 5 (525 loaders); SVG Packs 6–7 landed afterwards. Code and `review/` are authoritative. (TASK T-207)
 - PWA installability warnings will keep appearing in audits. Expected — see D-14, not a defect.

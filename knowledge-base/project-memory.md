@@ -704,6 +704,30 @@ Sources:
 - https://content.gmb01.xyz/share/project_69be700d-ca6a-4def-8b2a-6e05eeea7d0d/index.html
 
 
+## SVG Loader Pack 6 (backfilled)
+
+Recorded: 2026-07-31 — reconstructed, not contemporaneous. See the note below.
+Tags: loader-studio, svg, svg-loaders, backfill, release
+
+Added 10 modular inline SVG loaders through svg-pack-6-a.js and svg-pack-6-b.js, registered in svg-index.js: SVG Contour Bands, SVG Vector Rain, SVG Lens Sweep, SVG Arc Cascade, SVG Tangent Chords, SVG Maze Pulse, SVG Flow Splitter, SVG Chevron Stream, SVG Crosshair Lock, and SVG Node Exchange. SVG went from 45 to 55 loaders and the collection from 525 to 535.
+
+Evidence this rests on: the pack modules themselves, their registration in svg-index.js, and review/svg-loader-pack-6-review.{md,json}, which records a static review of 3 files with 0 findings at a project size of 329 files. Re-checked on 2026-07-31 against the current code: all 10 loaders are decorative (aria-hidden, focusable="false"), inherit the global accent and speed variables, and define no shared defs ids.
+
+## SVG Loader Pack 7 (backfilled)
+
+Recorded: 2026-07-31 — reconstructed, not contemporaneous. See the note below.
+Tags: loader-studio, svg, svg-loaders, backfill, release
+
+Added 10 modular inline SVG loaders through svg-pack-7-a.js and svg-pack-7-b.js, registered in svg-index.js: SVG Gear Mesh, SVG ECG Trace, SVG Shutter Iris, SVG Barcode Scan, SVG Loom Weave, SVG Satellite Link, SVG Sprout Grow, SVG Abacus Slide, SVG Caliper Measure, and SVG Stitch Seam. SVG went from 55 to 65 loaders and the collection from 535 to 545.
+
+Evidence this rests on: the pack modules, their registration in svg-index.js, and review/svg-loader-pack-7-review.{md,json}, recording a static review of 3 files with 0 findings at a project size of 333 files. The same invariant re-check on 2026-07-31 passed for all 10.
+
+### Note on these two entries
+
+Packs 6 and 7 were released without a project-memory entry; the gap was found during the 2026-07-31 documentation audit and tracked as T-207. These entries were written from what the repository still holds — the loader modules and the static review reports — so they state the delivery and the invariants that can be verified today.
+
+They deliberately do NOT claim the browser QA, accessibility audit, cross-browser run or rollback backup that every other pack entry records, because no such record survives for these two. Absence of a claim here means absence of evidence, not a failed check. Both packs were subsequently exercised by the whole-registry snippet smoke test on 2026-07-31 (SVG 75/75 pass), which covers them today even though it says nothing about their original release.
+
 ## SVG Loader Pack 8
 
 Recorded: 2026-07-31

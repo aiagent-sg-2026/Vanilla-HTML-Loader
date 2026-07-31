@@ -34,6 +34,7 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 | C6 | Snippet paste smoke test generalised from one hardcoded loader to the whole registry, with a generic animation probe, per-loader timeout, category filter and `?autorun=1`. Fixed a harness defect where `requestAnimationFrame` never fired in a hidden tab and reported healthy loaders as timeouts. |
 | T-206 / C7 | README (English + Chinese summary) and MIT LICENSE; all five root docs synced. |
 | C8 | GitHub Pages auto-deploy on push to `main`, gated on the registry lint. Staging verified locally: 175 files / 1.5MB, every asset `index.html` references present, the staged copy boots with 545 loaders and a working deep link, no console errors. |
+| C18 | SVG Pack 11 — 10 inline SVG loaders (Escalator Steps, Windmill Sails, Film Reel, Telescope Focus, Pulley Hoist, Traffic Signal, Bubble Level, Ink Diffuse, Rocket Ascent, Page Flip). SVG 95 to 105, collection 585 to 595. |
 | C17 | SVG Pack 10 — 10 inline SVG loaders (Ferris Wheel, Water Wheel, Vinyl Spin, Balance Scale, Combination Lock, Semaphore Flags, Bellows Breath, Snowflake Grow, Paper Plane, Thermometer Rise). SVG 85 to 95, collection 575 to 585. |
 | C16 | SVG Pack 9 — 10 inline SVG loaders (Sundial Shadow, Suspension Bridge, Galaxy Arms, Crane Lift, Fountain Jets, Lighthouse Beam, Zipper Close, Anemometer Cups, Hourglass Turn, Domino Topple). SVG 75 to 85, collection 565 to 575; SVG is now the largest category. |
 | C15 | Dots Pack 4 — 10 CSS-only Dots loaders (Metronome Arc, Carousel Swap, Gravity Well, Relay Baton, Scatter Gather, Conveyor Belt, Newton Cradle, Radar Sweep, Stack Tower, Morse Signal). Dots 30 → 40, collection 555 → 565. First pack to go through the fully automated gate. |
@@ -60,7 +61,7 @@ Last verified against code: 2026-07-31. Statuses audited against the codebase, `
 | 07-28 | task_040–051 | Shapes packs 1–4 (345→375); Buttons packs 1–3 (385→405); Text packs 1–5 (415→455) |
 | 07-28/29 | task_052–058 | CSS 3D packs 3–8 (465→515); SVG packs 5–7 (525→545) |
 
-Intermediate totals are as narrated in `knowledge-base/project-memory.md`; the authoritative current total (585) comes from `qa/registry-lint.mjs`.
+Intermediate totals are as narrated in `knowledge-base/project-memory.md`; the authoritative current total (595) comes from `qa/registry-lint.mjs`.
 
 ## Watch
 

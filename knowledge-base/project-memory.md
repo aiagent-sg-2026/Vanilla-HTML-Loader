@@ -799,3 +799,20 @@ Sources:
 - loaders/svg-pack-10-a.js
 - loaders/svg-pack-10-b.js
 - https://yapweijun1996.github.io/Vanilla-HTML-Loader/
+
+## SVG Loader Pack 11
+
+Recorded: 2026-07-31
+Tags: loader-studio, svg, svg-loaders, ci-gated, release, qa
+
+Added 10 modular inline SVG loaders through svg-pack-11-a.js and svg-pack-11-b.js, registered in svg-index.js: SVG Escalator Steps, SVG Windmill Sails, SVG Film Reel, SVG Telescope Focus, SVG Pulley Hoist, SVG Traffic Signal, SVG Bubble Level, SVG Ink Diffuse, SVG Rocket Ascent, and SVG Page Flip. SVG increased from 95 to 105 loaders and the full collection from 585 to 595.
+
+Gates: registry lint reported 595 loaders, 0 duplicate ids and 825 keyframe names with no conflicting definitions; the headless-Chrome snippet smoke run passed 595/595. Browser checks on a fresh origin with the total asserted first: all 10 render at 86x66, animate, stay decorative with no shared defs ids, and centre in the card stage without overflow. Page Flip uses rotateY, so 3D transform support was confirmed explicitly rather than assumed.
+
+Deployment note from this round: a freshly pushed file can return 404 from the GitHub Pages CDN for a short window even after the workflow reports success. Retry before concluding the deploy failed — and check the Actions API rather than the browser, whose module cache lies in the other direction.
+
+Sources:
+- loaders/svg-index.js
+- loaders/svg-pack-11-a.js
+- loaders/svg-pack-11-b.js
+- https://yapweijun1996.github.io/Vanilla-HTML-Loader/

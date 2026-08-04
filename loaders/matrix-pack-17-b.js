@@ -5,7 +5,7 @@ export const matrixPack17LoadersB = [
     category: 'Matrix',
     tech: 'CSS',
     description: 'Rings drift in quantum rhythm, colliding into harmonic alignment points.',
-    markup: `<div class="vl-matrix17-quantum-rings" aria-hidden="true">
+    markup: `<div class="vl-matrix17-quantum-rings" role="img" aria-label="Quantum drift rings">
       <span class="vl-matrix17-ring" style="--d:0;--s:34px;--t:40px"></span>
       <span class="vl-matrix17-ring" style="--d:.18;--s:46px;--t:12px"></span>
       <span class="vl-matrix17-ring" style="--d:.36;--s:58px;--t:-16px"></span>
@@ -65,7 +65,7 @@ export const matrixPack17LoadersB = [
     category: 'Matrix',
     tech: 'CSS',
     description: 'A focused lens array gathers entropy spikes and redistributes them into even cadence.',
-    markup: `<div class="vl-matrix17-entropy-array" aria-hidden="true">
+    markup: `<div class="vl-matrix17-entropy-array" role="img" aria-label="Entropy lens array">
       <span style="--x:12px;--d:0;--h:34px"></span>
       <span style="--x:44px;--d:.1;--h:48px"></span>
       <span style="--x:76px;--d:.2;--h:30px"></span>
@@ -122,7 +122,7 @@ export const matrixPack17LoadersB = [
     category: 'Matrix',
     tech: 'CSS',
     description: 'Binary blocks rotate around a torsion axis and ripple in a delayed matrix wave.',
-    markup: `<div class="vl-matrix17-binary-torsion" aria-hidden="true">
+    markup: `<div class="vl-matrix17-binary-torsion" role="img" aria-label="Binary wave torsion">
       <span class="vl-matrix17-bit" style="--x:16px;--d:0"></span>
       <span class="vl-matrix17-bit" style="--x:50px;--d:.16"></span>
       <span class="vl-matrix17-bit" style="--x:84px;--d:.32"></span>
@@ -164,7 +164,7 @@ export const matrixPack17LoadersB = [
     category: 'Matrix',
     tech: 'CSS',
     description: 'Three orbital bands cradle around a low-frequency nucleus and swap depth order.',
-    markup: `<div class="vl-matrix17-orbital-cradle" aria-hidden="true">
+    markup: `<div class="vl-matrix17-orbital-cradle" role="img" aria-label="Matrix orbital cradle">
       <span class="vl-matrix17-cradle-band" style="--s:42px;--d:0;--z:0px"></span>
       <span class="vl-matrix17-cradle-band" style="--s:52px;--d:.15;--z:-8px"></span>
       <span class="vl-matrix17-cradle-band" style="--s:62px;--d:.3;--z:4px"></span>
@@ -222,7 +222,7 @@ export const matrixPack17LoadersB = [
     category: 'Matrix',
     tech: 'CSS',
     description: 'Hash-like pulses ripple across a radiant lattice and phase-lock to a glowing grid.',
-    markup: `<div class="vl-matrix17-hash-lattice" aria-hidden="true">
+    markup: `<div class="vl-matrix17-hash-lattice" role="img" aria-label="Radiant hash lattice">
       <span style="--x:10px;--y:12px;--d:0"></span>
       <span style="--x:46px;--y:12px;--d:.12"></span>
       <span style="--x:82px;--y:12px;--d:.24"></span>

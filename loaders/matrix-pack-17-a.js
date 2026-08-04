@@ -5,7 +5,7 @@ export const matrixPack17LoadersA = [
     category: 'Matrix',
     tech: 'CSS',
     description: 'Alternating strobes sweep through a strict matrix and rebalance into a soft pulse field.',
-    markup: `<div class="vl-matrix17-strobe-grid" aria-hidden="true">
+    markup: `<div class="vl-matrix17-strobe-grid" role="img" aria-label="Strobe cascade grid">
       <span style="--x:12px;--y:10px;--d:0;--h:32px"></span>
       <span style="--x:47px;--y:10px;--d:.09;--h:40px"></span>
       <span style="--x:82px;--y:10px;--d:.18;--h:28px"></span>
@@ -52,7 +52,7 @@ export const matrixPack17LoadersA = [
     category: 'Matrix',
     tech: 'CSS',
     description: 'A gated lattice opens and closes in rhythmic bursts, creating a living checksum clock.',
-    markup: `<div class="vl-matrix17-lattice-gates" aria-hidden="true">
+    markup: `<div class="vl-matrix17-lattice-gates" role="img" aria-label="Lattice rhythm gates pattern">
       <span style="--x:18px;--d:0;--o:0"></span>
       <span style="--x:46px;--d:.14;--o:2px"></span>
       <span style="--x:74px;--d:.28;--o:-2px"></span>
@@ -107,7 +107,7 @@ export const matrixPack17LoadersA = [
     category: 'Matrix',
     tech: 'CSS',
     description: 'Diagonal photon threads interlace and fold, then snap to a compact pulse seam.',
-    markup: `<div class="vl-matrix17-photon-loo" aria-hidden="true">
+    markup: `<div class="vl-matrix17-photon-loo" role="img" aria-label="Photon loom grid">
       <span class="vl-matrix17-photon" style="--x:14px;--y:8px;--d:0;--l:74px"></span>
       <span class="vl-matrix17-photon" style="--x:58px;--y:18px;--d:.13;--l:64px"></span>
       <span class="vl-matrix17-photon" style="--x:102px;--y:8px;--d:.26;--l:70px"></span>
@@ -152,7 +152,7 @@ export const matrixPack17LoadersA = [
     category: 'Matrix',
     tech: 'CSS',
     description: 'Neon fragments orbit a radar sweep then settle into a synchronized lattice pulse.',
-    markup: `<div class="vl-matrix17-fragment-radar" aria-hidden="true">
+    markup: `<div class="vl-matrix17-fragment-radar" role="img" aria-label="Neon fragment radar">
       <span class="vl-matrix17-frag" style="--a:0deg;--r:20px;--d:0"></span>
       <span class="vl-matrix17-frag" style="--a:72deg;--r:30px;--d:.12"></span>
       <span class="vl-matrix17-frag" style="--a:144deg;--r:40px;--d:.24"></span>
@@ -223,7 +223,7 @@ export const matrixPack17LoadersA = [
     category: 'Matrix',
     tech: 'CSS',
     description: 'Axon-like arcs orbit around a dark seam then reverse phase together.',
-    markup: `<div class="vl-matrix17-axon-orbit" aria-hidden="true">
+    markup: `<div class="vl-matrix17-axon-orbit" role="img" aria-label="Axon thread orbit">
       <span style="--o:28px;--d:0"></span>
       <span style="--o:34px;--d:.18"></span>
       <span style="--o:40px;--d:.36"></span>

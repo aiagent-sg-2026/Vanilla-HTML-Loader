@@ -371,12 +371,12 @@ export const functionalLoaders = [
     markup: `<div class="vl-tool-timeline" role="status" aria-live="polite" data-step="search">
   <strong class="vl-tool-timeline-title">Tool Calling Progress</strong>
   <ol class="vl-tool-timeline-steps">
-    <li class="vl-tool-timeline-step" data-id="search">
+    <li class="vl-tool-timeline-step is-done" data-id="search">
       <span class="vl-tool-timeline-dot" aria-hidden="true"></span>
       <span class="vl-tool-timeline-copy"><strong>Search Tool</strong><small>discovering context</small></span>
-      <span class="vl-tool-timeline-status">Running</span>
+      <span class="vl-tool-timeline-status">Done</span>
     </li>
-    <li class="vl-tool-timeline-step" data-id="sql">
+    <li class="vl-tool-timeline-step is-active" data-id="sql">
       <span class="vl-tool-timeline-dot" aria-hidden="true"></span>
       <span class="vl-tool-timeline-copy"><strong>SQL Tool</strong><small>querying business tables</small></span>
       <span class="vl-tool-timeline-status">Queued</span>
@@ -874,7 +874,7 @@ export const functionalLoaders = [
   <strong class="vl-order-title">Order Fulfilment</strong>
   <div class="vl-order-steps">
     <span class="vl-order-step is-done">Confirmed</span>
-    <span class="vl-order-step">Picking</span>
+    <span class="vl-order-step is-active">Picking</span>
     <span class="vl-order-step">Packing</span>
     <span class="vl-order-step">Shipping</span>
     <span class="vl-order-step">Delivered</span>

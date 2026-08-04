@@ -3798,6 +3798,666 @@ export const categoryExpansionLoaders = [
 .vl-cat-holographic-prism-lattice .l3 { width: 36px; animation-duration: calc(var(--loader-speed) * 0.9); opacity: .7; }
 .vl-cat-holographic-prism-lattice .l3 { animation-duration: calc(var(--loader-speed) * 1.3); }
 @keyframes vl-cat-holographic-prism-lattice-spin { 0% { transform: translate(-50%, -50%) rotate(0deg) scale(.72); opacity:.22; } 50% { transform: translate(-50%, -50%) rotate(180deg) scale(1); opacity:1; } 100% { transform: translate(-50%, -50%) rotate(360deg) scale(.72); opacity:.22; } }` 
-  }
-
+  },
+  {
+    id: 'application-flow-beacon',
+    name: 'Flow Beacon Application',
+    category: 'Application',
+    tech: 'CSS',
+    description: 'Small app-like steps chase each other through an onboarding-inspired workflow.',
+    markup: `<div class="vl-cat-application-flow-beacon" role="img" aria-label="Flow beacon application">
+  <span class="step one"></span>
+  <span class="step two"></span>
+  <span class="step three"></span>
+</div>`,
+    css: `.vl-cat-application-flow-beacon {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 23%, #1e6088);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(174deg, #081d35, #0e304a 64%, #040a14);
+  display: grid;
+  place-items: center;
+}
+.vl-cat-application-flow-beacon .step {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 72%, transparent);
+  background: color-mix(in srgb, var(--loader-accent) 16%, #fff 8%);
+  animation: vl-cat-application-flow-beacon-pulse calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+.vl-cat-application-flow-beacon .one { left: 34px; animation-delay: 0s; }
+.vl-cat-application-flow-beacon .two { left: 84px; animation-delay: -.2s; }
+.vl-cat-application-flow-beacon .three { left: 134px; animation-delay: -.4s; }
+@keyframes vl-cat-application-flow-beacon-pulse {
+  0%,100% { transform: translateY(0) scale(.55); opacity:.2; }
+  25% { transform: translateY(12px) scale(.92); opacity:1; }
+  50% { transform: translateY(0) scale(.8); opacity:.62; }
+  75% { transform: translateY(-12px) scale(.92); opacity:1; }
+}`
+  },
+  {
+    id: 'bars-arc-stack',
+    name: 'Arc Stack Bars',
+    category: 'Bars',
+    tech: 'CSS',
+    description: 'Stacked bars rise and fall in a smooth arc pattern.',
+    markup: `<div class="vl-cat-bars-arc-stack" role="img" aria-label="Arc stack bars">
+  <span class="bar b1"></span>
+  <span class="bar b2"></span>
+  <span class="bar b3"></span>
+  <span class="bar b4"></span>
+</div>`,
+    css: `.vl-cat-bars-arc-stack {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 26%, #1f5f8a);
+  border-radius: 14px;
+  display: flex;
+  align-items: end;
+  gap: 10px;
+  padding: 14px;
+  background: linear-gradient(180deg, #071e35, #0a2d4a 64%, #040a14);
+}
+.vl-cat-bars-arc-stack .bar {
+  width: 18px;
+  border-radius: 9px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--loader-accent) 22%, transparent), color-mix(in srgb, var(--loader-accent) 88%, #fff));
+  animation: vl-cat-bars-arc-stack-wave calc(var(--loader-speed) * 1.15) ease-in-out infinite;
+}
+.vl-cat-bars-arc-stack .b1 { height: 36px; animation-delay: -.0s; }
+.vl-cat-bars-arc-stack .b2 { height: 56px; animation-delay: -.15s; }
+.vl-cat-bars-arc-stack .b3 { height: 52px; animation-delay: -.3s; }
+.vl-cat-bars-arc-stack .b4 { height: 40px; animation-delay: -.45s; }
+@keyframes vl-cat-bars-arc-stack-wave {
+  0%,100% { transform: scaleY(.44); opacity:.25; }
+  50% { transform: scaleY(1); opacity:1; }
+}`
+  },
+  {
+    id: 'button-wave-ribbon',
+    name: 'Wave Ribbon Button',
+    category: 'Buttons',
+    tech: 'CSS',
+    description: 'Ribbon-like button accents pulse across three zones.',
+    markup: `<div class="vl-cat-button-wave-ribbon" role="img" aria-label="Wave ribbon button">
+  <span class="frame"></span>
+  <span class="band b1"></span>
+  <span class="band b2"></span>
+</div>`,
+    css: `.vl-cat-button-wave-ribbon {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #205f8a);
+  border-radius: 14px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, #071b32, #0b2b45 66%, #040a14);
+  overflow: hidden;
+}
+.vl-cat-button-wave-ribbon .frame {
+  width: 118px;
+  height: 34px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 40%, transparent);
+}
+.vl-cat-button-wave-ribbon .band {
+  position: absolute;
+  left: 22px;
+  width: 146px;
+  height: 4px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--loader-accent) 82%, #fff 8%);
+  animation: vl-cat-button-wave-ribbon-flow calc(var(--loader-speed) * 1.1) ease-in-out infinite;
+}
+.vl-cat-button-wave-ribbon .b1 { top: 38px; animation-delay: 0s; }
+.vl-cat-button-wave-ribbon .b2 { top: 52px; animation-delay: -.2s; }
+@keyframes vl-cat-button-wave-ribbon-flow {
+  0%,100% { opacity:.22; transform: translateX(-24px) scaleX(.72); }
+  50% { opacity:1; transform: translateX(24px) scaleX(1); }
+}`
+  },
+  {
+    id: 'css3d-orbit-prism',
+    name: 'Orbit Prism CSS 3D',
+    category: 'CSS 3D',
+    tech: 'CSS 3D',
+    description: 'Interlaced prism panels rotate on opposite 3D trajectories.',
+    markup: `<div class="vl-cat-css3d-orbit-prism" role="img" aria-label="Orbit prism CSS 3D">
+  <span class="pane p1"></span>
+  <span class="pane p2"></span>
+  <span class="pane p3"></span>
+</div>`,
+    css: `.vl-cat-css3d-orbit-prism {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 27%, #1f5b8a);
+  border-radius: 14px;
+  position: relative;
+  perspective: 700px;
+  overflow: hidden;
+  background: linear-gradient(170deg, #081f37, #14324b 63%, #040a14);
+}
+.vl-cat-css3d-orbit-prism .pane {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 76px;
+  height: 24px;
+  margin: -12px;
+  border-radius: 8px;
+  transform-style: preserve-3d;
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 68%, transparent);
+  animation: vl-cat-css3d-orbit-prism-spin calc(var(--loader-speed) * 1.4) linear infinite;
+}
+.vl-cat-css3d-orbit-prism .p1 { transform: rotateX(16deg) rotateZ(0deg); animation-delay: 0s; }
+.vl-cat-css3d-orbit-prism .p2 { transform: rotateY(32deg) rotateZ(60deg); animation-delay: -.28s; }
+.vl-cat-css3d-orbit-prism .p3 { transform: rotateX(16deg) rotateZ(120deg); animation-delay: -.56s; }
+@keyframes vl-cat-css3d-orbit-prism-spin {
+  0% { transform: translate(-50%, -50%) rotateX(18deg) rotateZ(0deg) scale(.82); }
+  50% { transform: translate(-50%, -50%) rotateX(74deg) rotateZ(180deg) scale(1); }
+  100% { transform: translate(-50%, -50%) rotateX(18deg) rotateZ(360deg) scale(.82); }
+}`
+  },
+  {
+    id: 'charts-curve-throb',
+    name: 'Curve Throb Charts',
+    category: 'Charts',
+    tech: 'CSS',
+    description: 'A pair of chart lines throb in synchronized, offset motion.',
+    markup: `<div class="vl-cat-charts-curve-throb" role="img" aria-label="Curve throb charts">
+  <span class="axis"></span>
+  <span class="line one"></span>
+  <span class="line two"></span>
+  <span class="line three"></span>
+</div>`,
+    css: `.vl-cat-charts-curve-throb {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 22%, #1e5f88);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #071d35, #0f2e4c 66%, #040a14);
+}
+.vl-cat-charts-curve-throb .axis {
+  position: absolute;
+  inset: 14px 0 14px 0;
+  border-left: 1px solid color-mix(in srgb, var(--loader-accent) 34%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--loader-accent) 34%, transparent);
+}
+.vl-cat-charts-curve-throb .line {
+  position: absolute;
+  height: 2px;
+  left: 18px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--loader-accent) 88%, #fff 10%);
+  animation: vl-cat-charts-curve-throb-wave calc(var(--loader-speed) * 1.25) ease-in-out infinite;
+}
+.vl-cat-charts-curve-throb .one { width: 150px; top: 42px; animation-delay: 0s; }
+.vl-cat-charts-curve-throb .two { width: 124px; top: 58px; animation-delay: -.2s; }
+.vl-cat-charts-curve-throb .three { width: 102px; top: 72px; animation-delay: -.4s; }
+@keyframes vl-cat-charts-curve-throb-wave {
+  0%,100% { opacity:.3; transform: scaleX(.56); transform-origin: left; }
+  50% { opacity:1; transform: scaleX(1); }
+}`
+  },
+  {
+    id: 'common-ui-shell-wave',
+    name: 'Shell Wave Common UI',
+    category: 'Common UI',
+    tech: 'CSS',
+    description: 'A utility-shell shell indicator ripples softly with card-like timing.',
+    markup: `<div class="vl-cat-common-ui-shell-wave" role="img" aria-label="Shell wave common UI">
+  <span class="shell s1"></span>
+  <span class="shell s2"></span>
+</div>`,
+    css: `.vl-cat-common-ui-shell-wave {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 25%, #1e5d86);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #061d33, #0d2b45 64%, #040a14);
+  display: grid;
+  place-items: center;
+}
+.vl-cat-common-ui-shell-wave .shell {
+  position: absolute;
+  width: 102px;
+  height: 46px;
+  border-radius: 12px;
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 48%, transparent);
+  opacity: .22;
+  animation: vl-cat-common-ui-shell-wave-beat calc(var(--loader-speed) * 1.18) ease-in-out infinite;
+}
+.vl-cat-common-ui-shell-wave .s1 { animation-delay: 0s; }
+.vl-cat-common-ui-shell-wave .s2 { animation-delay: -.4s; width: 128px; }
+@keyframes vl-cat-common-ui-shell-wave-beat {
+  0%,100% { transform: scale(.58); opacity:.22; }
+  50% { transform: scale(1); opacity:1; }
+}`
+  },
+  {
+    id: 'dot-scan-grid',
+    name: 'Scan Grid Dots',
+    category: 'Dots',
+    tech: 'CSS',
+    description: 'Dot clusters scan through a compact grid with soft staggered pops.',
+    markup: `<div class="vl-cat-dot-scan-grid" role="img" aria-label="Scan grid dots">
+  <span class="dot d1"></span>
+  <span class="dot d2"></span>
+  <span class="dot d3"></span>
+  <span class="dot d4"></span>
+</div>`,
+    css: `.vl-cat-dot-scan-grid {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 27%, #1f5d87);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #061b2f, #0a2944 63%, #040a14);
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  justify-items: center;
+  padding: 17px;
+}
+.vl-cat-dot-scan-grid .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 90%, #fff 10%);
+  animation: vl-cat-dot-scan-grid-pop calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+.vl-cat-dot-scan-grid .d1 { animation-delay: 0s; }
+.vl-cat-dot-scan-grid .d2 { animation-delay: -.2s; }
+.vl-cat-dot-scan-grid .d3 { animation-delay: -.4s; }
+.vl-cat-dot-scan-grid .d4 { animation-delay: -.6s; }
+@keyframes vl-cat-dot-scan-grid-pop {
+  0%,100% { transform: scale(.42); opacity:.24; }
+  50% { transform: scale(1.1); opacity:1; }
+}`
+  },
+  {
+    id: 'holographic-wave-field',
+    name: 'Wave Field Holographic',
+    category: 'Holographic',
+    tech: 'CSS',
+    description: 'Overlapping waves sweep across a holographic field in alternating directions.',
+    markup: `<div class="vl-cat-holographic-wave-field" role="img" aria-label="Wave field holographic">
+  <span class="wave w1"></span>
+  <span class="wave w2"></span>
+</div>`,
+    css: `.vl-cat-holographic-wave-field {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 23%, #1d5f88);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 56%, color-mix(in srgb, var(--loader-accent) 18%, transparent), transparent 52%), linear-gradient(175deg, #081c34, #0f3049 60%, #050c14);
+}
+.vl-cat-holographic-wave-field .wave {
+  position: absolute;
+  left: -30px;
+  right: -30px;
+  top: 50%;
+  height: 8px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--loader-accent) 52%, transparent);
+  transform-origin: center;
+  animation: vl-cat-holographic-wave-field-roll calc(var(--loader-speed) * 1.4) linear infinite;
+}
+.vl-cat-holographic-wave-field .w1 { animation-delay: 0s; }
+.vl-cat-holographic-wave-field .w2 { animation-delay: -.6s; opacity: .68; }
+@keyframes vl-cat-holographic-wave-field-roll {
+  0% { transform: translateY(-34px) scaleX(.44); opacity:.2; }
+  50% { transform: translateY(34px) scaleX(1); opacity:1; }
+  100% { transform: translateY(-34px) scaleX(.44); opacity:.2; }
+}`
+  },
+  {
+    id: 'maps-grid-latency',
+    name: 'Latency Grid Maps',
+    category: 'Maps',
+    tech: 'CSS',
+    description: 'A route grid breathes in two-color latency pulses.',
+    markup: `<div class="vl-cat-maps-grid-latency" role="img" aria-label="Latency grid maps">
+  <span class="node n1"></span>
+  <span class="node n2"></span>
+  <span class="path"></span>
+</div>`,
+    css: `.vl-cat-maps-grid-latency {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1d5f86);
+  border-radius: 14px;
+  background: linear-gradient(170deg, #061d34, #0f2f4a 63%, #040a14);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-maps-grid-latency .path {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 50%;
+  height: 3px;
+  background: color-mix(in srgb, var(--loader-accent) 64%, #fff 10%);
+  transform-origin: left;
+  animation: vl-cat-maps-grid-latency-line calc(var(--loader-speed) * 1.3) ease-in-out infinite;
+}
+.vl-cat-maps-grid-latency .node {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 80%, transparent);
+}
+.vl-cat-maps-grid-latency .n1 { left: 47px; top: 46px; animation: vl-cat-maps-grid-latency-node calc(var(--loader-speed) * 1.25) linear infinite; }
+.vl-cat-maps-grid-latency .n2 { left: 128px; top: 60px; animation: vl-cat-maps-grid-latency-node calc(var(--loader-speed) * 1.25) linear infinite reverse; }
+@keyframes vl-cat-maps-grid-latency-line { 0%,100% { transform: scaleX(.2); opacity:.2; } 50% { transform: scaleX(1); opacity:1; } }
+@keyframes vl-cat-maps-grid-latency-node { 0%,100% { transform: scale(.52); opacity:.2; } 50% { transform: scale(1.2); opacity:1; } }`
+  },
+  {
+    id: 'matrix-luminous-glyph-array',
+    name: 'Luminous Glyph Matrix',
+    category: 'Matrix',
+    tech: 'CSS',
+    description: 'Glyph cells burst sequentially from a compact luminous matrix.',
+    markup: `<div class="vl-cat-matrix-luminous-glyph-array" role="img" aria-label="Luminous glyph matrix">
+  <span class="glyph g1"></span>
+  <span class="glyph g2"></span>
+  <span class="glyph g3"></span>
+  <span class="glyph g4"></span>
+  <span class="glyph g5"></span>
+</div>`,
+    css: `.vl-cat-matrix-luminous-glyph-array {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 23%, #1d5b88);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #071b34, #0a2a45 64%, #040a14);
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  gap: 8px;
+  padding: 0 18px;
+}
+.vl-cat-matrix-luminous-glyph-array .glyph {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  transform: translateZ(0);
+  background: color-mix(in srgb, var(--loader-accent) 84%, #fff 8%);
+  animation: vl-cat-matrix-luminous-glyph-array-pulse calc(var(--loader-speed) * 1.08) ease-in-out infinite;
+}
+.vl-cat-matrix-luminous-glyph-array .g1 { animation-delay: 0s; }
+.vl-cat-matrix-luminous-glyph-array .g2 { animation-delay: -.18s; }
+.vl-cat-matrix-luminous-glyph-array .g3 { animation-delay: -.36s; }
+.vl-cat-matrix-luminous-glyph-array .g4 { animation-delay: -.54s; }
+.vl-cat-matrix-luminous-glyph-array .g5 { animation-delay: -.72s; }
+@keyframes vl-cat-matrix-luminous-glyph-array-pulse {
+  0%,100% { opacity:.22; transform: scale(.5) rotate(0deg); }
+  50% { opacity:1; transform: scale(1.25) rotate(45deg); }
+}`
+  },
+  {
+    id: 'operation-signal-beacon',
+    name: 'Signal Beacon Operations',
+    category: 'Operations',
+    tech: 'CSS',
+    description: 'Two concentric beacons rotate in and out as operations sync.',
+    markup: `<div class="vl-cat-operation-signal-beacon" role="img" aria-label="Signal beacon operations">
+  <span class="orbit outer"></span>
+  <span class="orbit inner"></span>
+</div>`,
+    css: `.vl-cat-operation-signal-beacon {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #235b88);
+  border-radius: 14px;
+  background: radial-gradient(circle at 50% 56%, color-mix(in srgb, var(--loader-accent) 24%, transparent), transparent 56%), linear-gradient(176deg, #071b34, #0c2d49 62%, #040a14);
+  position: relative;
+}
+.vl-cat-operation-signal-beacon .orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  border: 1.5px dashed color-mix(in srgb, var(--loader-accent) 56%, transparent);
+  transform: translate(-50%, -50%);
+  animation: vl-cat-operation-signal-beacon-spin calc(var(--loader-speed) * 1.28) linear infinite;
+}
+.vl-cat-operation-signal-beacon .outer { width: 74px; height: 74px; }
+.vl-cat-operation-signal-beacon .inner { width: 46px; height: 46px; animation-direction: reverse; animation-duration: calc(var(--loader-speed) * .94); }
+@keyframes vl-cat-operation-signal-beacon-spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); opacity:.22; }
+  50% { transform: translate(-50%, -50%) rotate(180deg); opacity:1; }
+  100% { transform: translate(-50%, -50%) rotate(360deg); opacity:.22; }
+}`
+  },
+  {
+    id: 'progress-wave-kick',
+    name: 'Kickoff Wave Progress',
+    category: 'Progress',
+    tech: 'CSS',
+    description: 'A segmented progress strip advances in wave form with a clean pulse.',
+    markup: `<div class="vl-cat-progress-wave-kick" role="img" aria-label="Kickoff wave progress">
+  <span class="seg one"></span>
+  <span class="seg two"></span>
+  <span class="seg three"></span>
+  <span class="seg four"></span>
+</div>`,
+    css: `.vl-cat-progress-wave-kick {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 26%, #1f5f87);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #071f36, #0b2c46 66%, #040a14);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+}
+.vl-cat-progress-wave-kick .seg {
+  width: 34px;
+  height: 16px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--loader-accent) 58%, #fff 8%);
+  opacity: .28;
+  animation: vl-cat-progress-wave-kick-wave calc(var(--loader-speed) * 1.25) ease-in-out infinite;
+}
+.vl-cat-progress-wave-kick .one { animation-delay: 0s; }
+.vl-cat-progress-wave-kick .two { animation-delay: -.2s; }
+.vl-cat-progress-wave-kick .three { animation-delay: -.4s; }
+.vl-cat-progress-wave-kick .four { animation-delay: -.6s; }
+@keyframes vl-cat-progress-wave-kick-wave {
+  0%,100% { transform: translateY(9px); opacity:.22; }
+  50% { transform: translateY(-9px); opacity:1; }
+}`
+  },
+  {
+    id: 'svg-digital-orbit',
+    name: 'Digital Orbit SVG',
+    category: 'SVG',
+    tech: 'SVG',
+    description: 'A small SVG token orbits over a concentric shell and pulses stroke alpha.',
+    markup: `<div class="vl-cat-svg-digital-orbit" role="img" aria-label="Digital orbit SVG">
+  <svg viewBox="0 0 96 96" width="76" height="76" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <circle class="track" cx="48" cy="48" r="24"></circle>
+    <circle class="token" cx="48" cy="24" r="7"></circle>
+  </svg>
+</div>`,
+    css: `.vl-cat-svg-digital-orbit {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 23%, #1e5d89);
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, #061c35, #0b2844 66%, #040a14);
+}
+.vl-cat-svg-digital-orbit svg {
+  overflow: visible;
+  animation: vl-cat-svg-digital-orbit-spin calc(var(--loader-speed) * 1.1) linear infinite;
+}
+.vl-cat-svg-digital-orbit .track {
+  stroke: color-mix(in srgb, var(--loader-accent) 36%, transparent);
+  stroke-width: 4px;
+}
+.vl-cat-svg-digital-orbit .token {
+  fill: color-mix(in srgb, var(--loader-accent) 90%, #fff 10%);
+  animation: vl-cat-svg-digital-orbit-token calc(var(--loader-speed) * 1.1) ease-in-out infinite;
+}
+@keyframes vl-cat-svg-digital-orbit-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes vl-cat-svg-digital-orbit-token { 0%,100% { opacity:.2; } 50% { opacity:1; } }`
+  },
+  {
+    id: 'shape-ribbon-ring',
+    name: 'Ribbon Ring Shape',
+    category: 'Shapes',
+    tech: 'CSS',
+    description: 'A ring of ribbon shapes expands and contracts in linked rhythm.',
+    markup: `<div class="vl-cat-shape-ribbon-ring" role="img" aria-label="Ribbon ring shape">
+  <span class="tile t1"></span>
+  <span class="tile t2"></span>
+  <span class="tile t3"></span>
+</div>`,
+    css: `.vl-cat-shape-ribbon-ring {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 27%, #1e5c89);
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--loader-accent) 18%, transparent), transparent 48%), linear-gradient(164deg, #071d35, #0d2d47 63%, #040a14);
+  position: relative;
+}
+.vl-cat-shape-ribbon-ring .tile {
+  position: absolute;
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 72%, transparent);
+  border-radius: 8px;
+  width: 70px;
+  height: 32px;
+  transform-origin: center;
+  animation: vl-cat-shape-ribbon-ring-flow calc(var(--loader-speed) * 1.22) ease-in-out infinite;
+}
+.vl-cat-shape-ribbon-ring .t1 { transform: rotate(0deg); animation-delay: 0s; }
+.vl-cat-shape-ribbon-ring .t2 { transform: rotate(90deg); animation-delay: -.22s; }
+.vl-cat-shape-ribbon-ring .t3 { transform: rotate(180deg); animation-delay: -.44s; }
+@keyframes vl-cat-shape-ribbon-ring-flow {
+  0%,100% { transform: scale(.68) rotate(var(--spin-angle, 0deg)); opacity:.28; }
+  50% { transform: scale(1) rotate(calc(var(--spin-angle, 0deg) + 180deg)); opacity:1; }
+}`
+  },
+  {
+    id: 'skeleton-scan-trace',
+    name: 'Scan Trace Skeletons',
+    category: 'Skeletons',
+    tech: 'CSS',
+    description: 'Skeleton traces fade in a scanning pass across card-shaped bars.',
+    markup: `<div class="vl-cat-skeleton-scan-trace" role="img" aria-label="Scan trace skeletons">
+  <span class="bar b1"></span>
+  <span class="bar b2"></span>
+  <span class="bar b3"></span>
+</div>`,
+    css: `.vl-cat-skeleton-scan-trace {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1f5b87);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #071b2f, #0a2f47 64%, #040a14);
+  display: grid;
+  place-items: center;
+}
+.vl-cat-skeleton-scan-trace .bar {
+  width: 120px;
+  height: 18px;
+  margin: 5px 0;
+  border-radius: 8px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--loader-accent) 16%, transparent), color-mix(in srgb, var(--loader-accent) 82%, white 12%), color-mix(in srgb, var(--loader-accent) 16%, transparent));
+  background-size: 220% 100%;
+  animation: vl-cat-skeleton-scan-trace-shine calc(var(--loader-speed) * 1.1) linear infinite;
+}
+.vl-cat-skeleton-scan-trace .b1 { animation-delay: 0s; }
+.vl-cat-skeleton-scan-trace .b2 { animation-delay: -.36s; width: 146px; }
+.vl-cat-skeleton-scan-trace .b3 { animation-delay: -.72s; width: 110px; }
+@keyframes vl-cat-skeleton-scan-trace-shine { 0% { background-position: 220% 0; opacity:.22; } 100% { background-position: -220% 0; opacity:1; } }`
+  },
+  {
+    id: 'spinner-galactic-loop',
+    name: 'Galactic Loop Spinner',
+    category: 'Spinners',
+    tech: 'CSS',
+    description: 'Interlocked arcs sweep in alternating directions and nested radii.',
+    markup: `<div class="vl-cat-spinner-galactic-loop" role="img" aria-label="Galactic loop spinner">
+  <span class="arc a1"></span>
+  <span class="arc a2"></span>
+</div>`,
+    css: `.vl-cat-spinner-galactic-loop {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 25%, #1f5b89);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 55%, color-mix(in srgb, var(--loader-accent) 16%, transparent), transparent 52%), linear-gradient(174deg, #081f35, #15314b 61%, #040a14);
+}
+.vl-cat-spinner-galactic-loop .arc {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 54px;
+  height: 54px;
+  margin: -27px;
+  border: 5px solid transparent;
+  border-top-color: color-mix(in srgb, var(--loader-accent) 84%, #fff 10%);
+  border-radius: 50%;
+  animation: vl-cat-spinner-galactic-loop-spin calc(var(--loader-speed) * 1.3) linear infinite;
+}
+.vl-cat-spinner-galactic-loop .a1 { animation-duration: calc(var(--loader-speed) * 1.3); }
+.vl-cat-spinner-galactic-loop .a2 { width: 34px; height: 34px; margin: -17px; animation-direction: reverse; animation-duration: calc(var(--loader-speed) * .92); border-top-color: color-mix(in srgb, var(--loader-accent) 62%, #fff 12%); }
+@keyframes vl-cat-spinner-galactic-loop-spin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }`
+  },
+  {
+    id: 'text-wave-marker',
+    name: 'Wave Marker Text',
+    category: 'Text',
+    tech: 'CSS Text',
+    description: 'A compact loading phrase moves in a soft wave, then settles and rebounds.',
+    markup: `<div class="vl-cat-text-wave-marker" role="img" aria-label="Wave marker text">
+  <span>LOADING</span>
+</div>`,
+    css: `.vl-cat-text-wave-marker {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 22%, #205d8a);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #061c31, #0a2c45 64%, #040a13);
+  display: grid;
+  place-items: center;
+  color: color-mix(in srgb, var(--loader-accent) 84%, #fff 10%);
+  font: 700 12px/1.2 'SFMono-Regular', Menlo, Consolas, monospace;
+  letter-spacing: .24em;
+  overflow: hidden;
+}
+.vl-cat-text-wave-marker span {
+  animation: vl-cat-text-wave-marker-ripple calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+@keyframes vl-cat-text-wave-marker-ripple {
+  0%,100% { transform: translateY(0); opacity:.2; }
+  50% { transform: translateY(-9px); opacity:1; }
+}`
+  },
 ];

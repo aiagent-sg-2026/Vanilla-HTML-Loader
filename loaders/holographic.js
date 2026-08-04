@@ -1,4 +1,6 @@
-export const holographicLoaders = [
+import { holographicPack2Loaders } from './holographic-pack-2.js';
+
+const baseLoaders = [
   {
     id: 'holographic-data-core',
     name: 'Holographic Data Core',
@@ -156,3 +158,5 @@ export const holographicLoaders = [
 }`
   }
 ];
+
+export const holographicLoaders = [...baseLoaders, ...holographicPack2Loaders];

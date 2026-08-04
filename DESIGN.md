@@ -1,13 +1,13 @@
 # DESIGN.md — Loader Studio (Vanilla-HTML-Loader)
 
-Last verified against code: 2026-07-31 (counts from `node qa/registry-lint.mjs`).
+Last verified against code: 2026-08-04 (counts from `node qa/registry-lint.mjs`).
 **Source of truth is the code** (`index.html`, `css/`, `js/`, `loaders/`). This document is a projection; when it disagrees with the code, the code wins.
 
 Related docs: [README.md](README.md) · [SPEC.md](SPEC.md) · [EPIC.md](EPIC.md) · [ROADMAP.md](ROADMAP.md) · [TASK.md](TASK.md) · [docs/modular-refactor.md](docs/modular-refactor.md) · history in [knowledge-base/project-memory.md](knowledge-base/project-memory.md)
 
 ## 1. What this is
 
-Loader Studio is a zero-dependency, no-build, vanilla HTML/CSS/ES-module web app that showcases **615 loading animations across 17 categories**. Users browse, search, filter, preview, customise (size, speed, accent, label, per-loader application state) and copy production-ready HTML/CSS/JS snippets. Development runs on Vite (`npm run dev`), and `npm run build` emits a static `dist/` with no runtime framework or CDN asset. The snippets it hands to users stay plain HTML, CSS and JavaScript — that constraint is the product, and it is verified per release (D-22).
+Loader Studio is a zero-dependency, no-build, vanilla HTML/CSS/ES-module web app that showcases **818 loading animations across 17 categories**. Users browse, search, filter, preview, customise (size, speed, accent, label, per-loader application state) and copy production-ready HTML/CSS/JS snippets. Development runs on Vite (`npm run dev`), and `npm run build` emits a static `dist/` with no runtime framework or CDN asset. The snippets it hands to users stay plain HTML, CSS and JavaScript — that constraint is the product, and it is verified per release (D-22).
 
 ## 2. Architecture overview
 
@@ -54,23 +54,23 @@ index.html                     static shell (sidebar, topbar, toolbar, grid, ins
 
 ### Loader definition contract
 
-Every loader is a plain object: `{ id, name, category, description, markup, css }`, optionally `tech`, `js` (copyable runtime API, 76 loaders), `controls` (declarative Inspector schema, 71 loaders) and `applyControls(container, values)`. IDs are unique across the whole registry (verified 2026-07-31: 615 loaders, 0 duplicates).
+Every loader is a plain object: `{ id, name, category, description, markup, css }`, optionally `tech`, `js` (copyable runtime API, 76 loaders), `controls` (declarative Inspector schema, 71 loaders) and `applyControls(container, values)`. IDs are unique across the whole registry (verified 2026-08-04: 818 loaders, 0 duplicates).
 
-### Category counts (from `loaders/index.js`, 2026-07-31)
+### Category counts (from `loaders/index.js`, 2026-08-04)
 
 | Category | Count | | Category | Count |
 | --- | --- | --- | --- | --- |
 | SVG | 105 | | Buttons | 36 |
 | CSS 3D | 76 | | Progress | 19 |
-| Spinners | 66 | | Charts | 10 |
-| Text | 57 | | Maps | 10 |
-| Common UI | 53 | | Application | 5 |
-| Skeletons | 53 | | Matrix | 3 |
-| Shapes | 41 | | Holographic | 2 |
-| Dots | 40 | | Operations | 1 |
+| Spinners | 66 | | Charts | 20 |
+| Text | 57 | | Maps | 20 |
+| Common UI | 53 | | Application | 15 |
+| Skeletons | 53 | | Matrix | 162 |
+| Shapes | 41 | | Holographic | 7 |
+| Dots | 40 | | Operations | 10 |
 | Bars | 38 | |  |  |
 
-**Total: 615 loaders, 17 categories** (plus the synthetic "All" filter).
+**Total: 818 loaders, 17 categories** (plus the synthetic "All" filter).
 
 ## 3. Durable design decisions
 
@@ -79,9 +79,9 @@ Every loader is a plain object: `{ id, name, category, description, markup, css 
 | D-01 | ~~Zero dependencies, no build step~~ **Superseded by D-21 on 2026-07-31.** The *snippets* stay dependency-free; the *studio* is now built with Vite. | The original reasoning — that the studio should prove the same constraint it sells — held until the studio outgrew it. See D-21. |
 | D-02 | Barrel-module SSOT registry (`loaders/index.js` → category `*-index.js` → pack files) | Packs of 10 stay reviewable; category order is stable; no file grows unbounded. |
 | D-03 | DOM APIs + trusted `DOMParser` instead of `innerHTML` assignment | Security-review outcome (2026-07-20); loader markup is first-party but the renderer avoids the innerHTML pattern anyway. |
-| D-04 | Progressive rendering: 24-card initial window, +24 per batch | Full 615-card render was the mobile bottleneck (26,907px → 6,106px initial document height at 115 loaders). |
+| D-04 | Progressive rendering: 24-card initial window, +24 per batch | Full-library render was the mobile bottleneck (26,907px → 6,106px initial document height at 115 loaders). |
 | D-05 | Infinite scroll via bottom-sentinel IntersectionObserver, armed only after genuine user scroll/keyboard input; Load More button kept as accessible fallback | Research-backed (research/loading-pattern-research-2026-07-22.md); prevents instant page-load expansion and keyboard exclusion. |
-| D-06 | Visible-only animation: per-card IntersectionObserver + pause-all when tab hidden | Keeps 615 simultaneous CSS animations cheap; summary pill reports "N animations · M visible active". |
+| D-06 | Visible-only animation: per-card IntersectionObserver + pause-all when tab hidden | Keeps full-library simultaneous CSS animations cheap; summary pill reports "N animations · M visible active". |
 | D-07 | Motion defaults to running (`state.paused = false`) even under OS reduced-motion; Pause/Resume controls always available | Product decision 2026-07-16: a loader gallery whose loaders don't move fails its purpose; user keeps explicit control. |
 | D-08 | Masonry default layout via responsive CSS columns, persisted Masonry/Grid toggle, stable per-loader card sizes (hash of id + category) | Pinterest-style browsing without JS layout thrash; deterministic heights avoid reflow. |
 | D-09 | Sticky topbar/toolbar stack isolated in `sticky-shell.css` with `--main-topbar-height` variable | Fixed overlap bugs once; per-breakpoint heights 80/76/72px. |
@@ -96,8 +96,8 @@ Every loader is a plain object: `{ id, name, category, description, markup, css 
 | D-18 | Eager-load the whole registry; no per-category lazy loading | Measured 2026-07-31 (research/lazy-loading-experiment-2026-07-31.md): eager loading costs ~10 ms of CPU total, and deferring the 584 KB of loader CSS saves ~0.6 ms. The 84% payload ceiling is only reachable by splitting every loader into metadata and payload, which breaks D-02. |
 | D-19 | Card preview fragments are parsed once per loader and cloned; growing the pagination window appends the new tail instead of rebuilding the grid | Measured 2026-07-31: parsing the whole registry's markup fell from 24.4ms to 4.1ms, and Load more went from 7.6→14.2ms growing with the total rendered to a flat ~4.5ms. Appending also leaves existing cards in place, so their animations no longer restart. Guarded: it only applies when the rendered cards are exactly the unchanged prefix. |
 | D-20 | CI drives headless Chrome over CDP with Node built-ins rather than adopting Playwright or Puppeteer | Enforcing the smoke test was worth doing, but a browser driver would have been this repository's first dev dependency and its first `node_modules`, contradicting D-01. Node has had a global `WebSocket` since 22 and CI images ship Chrome, so ~180 lines of `qa/run-smoke-ci.mjs` buy the same coverage with nothing installed. |
-| D-21 | The studio is built with Vite (`npm run dev` / `npm run build`); the snippets it produces remain plain HTML, CSS and JS with no dependencies | Supersedes D-01. At 615 loaders across 150 modules a visitor was fetching 277 KB over 146 render-blocking requests; bundling takes that to 3 requests and ~178 KB gzipped, and gives editing a loader hot reload instead of a manual refresh. The constraint that actually matters to users — that a copied snippet needs no toolchain — is unaffected, and is now enforced rather than assumed (D-22). |
-| D-22 | Every release proves the build did not alter a single byte of any snippet (`qa/verify-snippet-parity.mjs`) | The product *is* the snippet text. A bundler is allowed to rewrite the application around the registry, but a loader's markup and CSS are template-literal data that must reach the clipboard untouched. The check generates all 615 snippets from source and from the minified bundle and compares them byte for byte; it is self-tested by tampering with a built chunk and confirming it exits 1. |
+| D-21 | The studio is built with Vite (`npm run dev` / `npm run build`); the snippets it produces remain plain HTML, CSS and JS with no dependencies | Supersedes D-01. At full-library scale a visitor was fetching 277 KB over 146 render-blocking requests; bundling takes that to 3 requests and ~178 KB gzipped, and gives editing a loader hot reload instead of a manual refresh. The constraint that actually matters to users — that a copied snippet needs no toolchain — is unaffected, and is now enforced rather than assumed (D-22). |
+| D-22 | Every release proves the build did not alter a single byte of any snippet (`qa/verify-snippet-parity.mjs`) | The product *is* the snippet text. A bundler is allowed to rewrite the application around the registry, but a loader's markup and CSS are template-literal data that must reach the clipboard untouched. The check generates all loader snippets from source and from the minified bundle and compares them byte for byte; it is self-tested by tampering with a built chunk and confirming it exits 1. |
 
 ## 4. Cross-cutting behaviours
 
@@ -111,7 +111,7 @@ Every loader is a plain object: `{ id, name, category, description, markup, css 
 Two automated checks, both zero-dependency:
 
 - `node qa/registry-lint.mjs` — registry invariants: unique ids, no `@keyframes` name redefined with a different body, no generic class name used as an unscoped top-level selector, required fields present. Exits non-zero on violation and prints the category count table that every doc must quote.
-- `qa/snippet-paste-smoke.html` — pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and something inside it is genuinely animating. The parent reads the srcdoc iframe directly on its load event, so a full 615-loader run takes about 6 seconds. `?autorun=1` runs headlessly enough for a driver to read `window.__smokeResult`.
+- `qa/snippet-paste-smoke.html` — pastes each loader's exact combined snippet into a blank page and asserts the overlay mounts and something inside it is genuinely animating. The parent reads the srcdoc iframe directly on its load event, so a full run over all loaders takes about 6 seconds. `?autorun=1` runs headlessly enough for a driver to read `window.__smokeResult`.
 
 Both run in CI on every push to `main` and gate the deploy (`.github/workflows/deploy.yml`). `qa/run-smoke-ci.mjs` drives the smoke page in headless Chrome over CDP using only Node built-ins and the browser CI images already provide, so the repository still has no dependencies.
 

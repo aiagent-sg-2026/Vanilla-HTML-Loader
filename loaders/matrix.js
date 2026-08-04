@@ -1,4 +1,36 @@
-export const matrixLoaders = [
+import { matrixPack2Loaders } from './matrix-pack-2.js';
+import { matrixPack3LoadersA } from './matrix-pack-3-a.js';
+import { matrixPack3LoadersB } from './matrix-pack-3-b.js';
+import { matrixPack4LoadersA } from './matrix-pack-4-a.js';
+import { matrixPack4LoadersB } from './matrix-pack-4-b.js';
+import { matrixPack5LoadersA } from './matrix-pack-5-a.js';
+import { matrixPack5LoadersB } from './matrix-pack-5-b.js';
+import { matrixPack6LoadersA } from './matrix-pack-6-a.js';
+import { matrixPack6LoadersB } from './matrix-pack-6-b.js';
+import { matrixPack7LoadersA } from './matrix-pack-7-a.js';
+import { matrixPack7LoadersB } from './matrix-pack-7-b.js';
+import { matrixPack8LoadersA } from './matrix-pack-8-a.js';
+import { matrixPack8LoadersB } from './matrix-pack-8-b.js';
+import { matrixPack9LoadersA } from './matrix-pack-9-a.js';
+import { matrixPack9LoadersB } from './matrix-pack-9-b.js';
+import { matrixPack10LoadersA } from './matrix-pack-10-a.js';
+import { matrixPack10LoadersB } from './matrix-pack-10-b.js';
+import { matrixPack11LoadersA } from './matrix-pack-11-a.js';
+import { matrixPack11LoadersB } from './matrix-pack-11-b.js';
+import { matrixPack12LoadersA } from './matrix-pack-12-a.js';
+import { matrixPack12LoadersB } from './matrix-pack-12-b.js';
+import { matrixPack13LoadersA } from './matrix-pack-13-a.js';
+import { matrixPack13LoadersB } from './matrix-pack-13-b.js';
+import { matrixPack14LoadersA } from './matrix-pack-14-a.js';
+import { matrixPack14LoadersB } from './matrix-pack-14-b.js';
+import { matrixPack15LoadersA } from './matrix-pack-15-a.js';
+import { matrixPack15LoadersB } from './matrix-pack-15-b.js';
+import { matrixPack16LoadersA } from './matrix-pack-16-a.js';
+import { matrixPack16LoadersB } from './matrix-pack-16-b.js';
+import { matrixPack17LoadersA } from './matrix-pack-17-a.js';
+import { matrixPack17LoadersB } from './matrix-pack-17-b.js';
+
+const matrixBaseLoaders = [
   {
     id: 'matrix-cube-field',
     name: '3D Matrix Cube Field',
@@ -300,4 +332,39 @@ export const matrixLoaders = [
   .vl-voxel-cluster, .vl-voxel-cluster span, .vl-voxel-scene::before { animation-play-state: paused; }
 }`
   }
+];
+
+export const matrixLoaders = [
+  ...matrixBaseLoaders,
+  ...matrixPack2Loaders,
+  ...matrixPack3LoadersA,
+  ...matrixPack3LoadersB,
+  ...matrixPack4LoadersA,
+  ...matrixPack4LoadersB,
+  ...matrixPack5LoadersA,
+  ...matrixPack5LoadersB,
+  ...matrixPack6LoadersA,
+  ...matrixPack6LoadersB,
+  ...matrixPack7LoadersA,
+  ...matrixPack7LoadersB,
+  ...matrixPack8LoadersA,
+  ...matrixPack8LoadersB,
+  ...matrixPack9LoadersA,
+  ...matrixPack9LoadersB,
+  ...matrixPack10LoadersA,
+  ...matrixPack10LoadersB,
+  ...matrixPack11LoadersA,
+  ...matrixPack11LoadersB,
+  ...matrixPack12LoadersA,
+  ...matrixPack12LoadersB,
+  ...matrixPack13LoadersA,
+  ...matrixPack13LoadersB,
+  ...matrixPack14LoadersA,
+  ...matrixPack14LoadersB,
+  ...matrixPack15LoadersA,
+  ...matrixPack15LoadersB,
+  ...matrixPack16LoadersA,
+  ...matrixPack16LoadersB,
+  ...matrixPack17LoadersA,
+  ...matrixPack17LoadersB
 ];

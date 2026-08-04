@@ -1,6 +1,6 @@
 # ROADMAP.md — Loader Studio
 
-Last verified against code: 2026-07-31. Epics in [EPIC.md](EPIC.md), tasks in [TASK.md](TASK.md).
+Last verified against code: 2026-08-04. Epics in [EPIC.md](EPIC.md), tasks in [TASK.md](TASK.md).
 
 ## Delivered
 
@@ -45,13 +45,19 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 | C20 | New **Maps** category with 10 location loaders (17 categories, collection 605 → **615**) |
 | C21 | **Vite build tooling** — `npm run dev` / `npm run build`; supersedes D-01; 146 requests → 3, 277 KB → ~178 KB gzipped (D-21, D-22) |
 
+### 2026-08-04 — continued expansion pass
+
+| Commit | Delivery |
+| --- | --- |
+| C22 | Added 10 category-expansion loaders and updated the root docs snapshot to **1051 loaders in 17 categories** (`Design`/`Spec`/`EPIC`/`ROADMAP`/`TASK`/`README`). |
+
 ### Live
 
-The site is deployed and serving at <https://yapweijun1996.github.io/Vanilla-HTML-Loader/>. Verified 2026-07-31: 575 loaders, 16 category filters, deep links and category scoping all working; 277 KB transferred across 146 module requests on a cold visit, which matches the 239 KB gzipped estimate from the lazy-loading experiment.
+The site is deployed and serving at <https://yapweijun1996.github.io/Vanilla-HTML-Loader/>. Current codebase verification is 2026-08-04: **1051 loaders**, 17 category filters, deep links and category scoping remain supported.
 
 ## Now
 
-Nothing queued. Both automated checks gate the deploy, so the next work is whatever the product calls for — see Later.
+Further loader packs are in progress; automated checks continue to gate the deploy (`lint:registry`, snippet smoke, and snippet parity).
 
 ## Later
 

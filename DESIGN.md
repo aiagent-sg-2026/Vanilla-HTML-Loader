@@ -7,7 +7,7 @@ Related docs: [README.md](README.md) · [SPEC.md](SPEC.md) · [EPIC.md](EPIC.md)
 
 ## 1. What this is
 
-Loader Studio is a zero-dependency, no-build, vanilla HTML/CSS/ES-module web app that showcases **818 loading animations across 17 categories**. Users browse, search, filter, preview, customise (size, speed, accent, label, per-loader application state) and copy production-ready HTML/CSS/JS snippets. Development runs on Vite (`npm run dev`), and `npm run build` emits a static `dist/` with no runtime framework or CDN asset. The snippets it hands to users stay plain HTML, CSS and JavaScript — that constraint is the product, and it is verified per release (D-22).
+Loader Studio is a Vite-based vanilla HTML/CSS/ES-module gallery that showcases **1051 loading animations across 17 categories**. Users browse, search, filter, preview, customise (size, speed, accent, label, per-loader application state) and copy production-ready HTML/CSS/JS snippets. The published gallery is Vite-built, while every copied snippet is dependency-free and plain HTML/CSS/JavaScript. The snippet contract is verified per release (D-22).
 
 ## 2. Architecture overview
 
@@ -54,23 +54,23 @@ index.html                     static shell (sidebar, topbar, toolbar, grid, ins
 
 ### Loader definition contract
 
-Every loader is a plain object: `{ id, name, category, description, markup, css }`, optionally `tech`, `js` (copyable runtime API, 76 loaders), `controls` (declarative Inspector schema, 71 loaders) and `applyControls(container, values)`. IDs are unique across the whole registry (verified 2026-08-04: 818 loaders, 0 duplicates).
+Every loader is a plain object: `{ id, name, category, description, markup, css }`, optionally `tech`, `js` (copyable runtime API, 95 loaders), `controls` (declarative Inspector schema, 90 loaders) and `applyControls(container, values)`. IDs are unique across the whole registry (verified 2026-08-04: 1051 loaders, 0 duplicates).
 
 ### Category counts (from `loaders/index.js`, 2026-08-04)
 
 | Category | Count | | Category | Count |
 | --- | --- | --- | --- | --- |
-| SVG | 105 | | Buttons | 36 |
-| CSS 3D | 76 | | Progress | 19 |
-| Spinners | 66 | | Charts | 20 |
-| Text | 57 | | Maps | 20 |
-| Common UI | 53 | | Application | 15 |
-| Skeletons | 53 | | Matrix | 162 |
-| Shapes | 41 | | Holographic | 7 |
-| Dots | 40 | | Operations | 10 |
-| Bars | 38 | |  |  |
+| SVG | 114 | | Application | 21 |
+| CSS 3D | 85 | | Maps | 26 |
+| Spinners | 75 | | Holographic | 13 |
+| Text | 66 | | Operations | 16 |
+| Common UI | 62 | | Matrix | 269 |
+| Skeletons | 59 | | Bars | 47 |
+| Shapes | 50 | | Charts | 26 |
+| Dots | 49 | | Progress | 28 |
+|  |  | | Buttons | 45 |
 
-**Total: 818 loaders, 17 categories** (plus the synthetic "All" filter).
+**Total: 1051 loaders, 17 categories** (plus the synthetic "All" filter).
 
 ## 3. Durable design decisions
 
@@ -119,5 +119,5 @@ Around those, each 10-loader pack ships with: desktop + mobile interaction QA (I
 
 ## 6. Known gaps / accepted debt
 
-- No automated test runner or CI; the two checks above are run by hand. (TASK T-205)
+- Automated checks run in CI (TASK T-205) and also run locally before release. The two checks above plus the snippet parity build check are the hard gate.
 - PWA installability warnings will keep appearing in audits. Expected — see D-14, not a defect.

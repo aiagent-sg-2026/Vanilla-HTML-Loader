@@ -1,12 +1,12 @@
 # EPIC.md — Loader Studio epics
 
-Last verified against code: 2026-07-31. Task-level detail lives in [TASK.md](TASK.md); timeline in [ROADMAP.md](ROADMAP.md).
+Last verified against code: 2026-08-04. Task-level detail lives in [TASK.md](TASK.md); timeline in [ROADMAP.md](ROADMAP.md).
 
 | Epic | Title | Status |
 | --- | --- | --- |
 | E1 | Studio shell & modular architecture | ✅ Done |
 | E2 | Collection performance at scale | ✅ Done |
-| E3 | Loader library expansion (30 → 615) | ✅ Done (open-ended: new packs welcome) |
+| E3 | Loader library expansion (30 → 1051) | ✅ Done (open-ended: new packs welcome) |
 | E4 | Accessibility & motion policy | ✅ Done |
 | E5 | Quality gates & review governance | ✅ Done — automated checks landed 2026-07-31 |
 | E6 | Documentation & repo hygiene | ✅ Done |
@@ -27,9 +27,9 @@ Acceptance evidence: mobile initial document height 26,907px → 6,106px; axe ze
 
 ## E3 — Loader library expansion ✅ (open-ended)
 
-Grow the registry from 30 (post-refactor) to **615** loaders in 17 categories through 10-loader packs, each with its own QA + review record in `review/`.
+Grow the registry from 30 (post-refactor) to **1051** loaders in 17 categories through 10-loader packs, each with its own QA + review record in `review/`.
 Highlights: Common UI production packs 1–14, Spinners packs 2–6, CSS 3D packs 2–8, SVG packs 2–11, dedicated Charts and Maps categories, Text packs 1–5, Bars 2–4, Dots 2–3, Shapes 1–4, Buttons 1–3, research-driven pack (Material/Ant/Bootstrap/MDN patterns), functional Application loaders with JS APIs (AI streaming, ERP transaction, bulk import, network retry, dashboard skeleton).
-Registry invariants: unique ids (verified: 0 duplicates), category barrels as SSOT, packs split A/B, per-loader controls schema where interactivity matters (71 loaders), copyable JS APIs (76 loaders).
+Registry invariants: unique ids (verified: 0 duplicates), category barrels as SSOT, packs split A/B, per-loader controls schema where interactivity matters (90 loaders), copyable JS APIs (95 loaders).
 
 ## E4 — Accessibility & motion policy ✅
 
@@ -44,7 +44,7 @@ Automation landed 2026-07-31, both zero-dependency so D-01 holds:
 - `qa/registry-lint.mjs` — the invariants a shared-CSS registry can break silently: duplicate ids, `@keyframes` redefined with a different body, unscoped generic selectors, missing fields. Self-tested against a poisoned registry so it cannot quietly always pass.
 - `qa/snippet-paste-smoke.html` — every loader's combined snippet pasted into a blank page, asserting the overlay mounts and animates. Generic probe, no per-loader selectors.
 
-Remaining risk: both are run by hand, not enforced → E8.
+Remaining risk: both are enforced in CI via E8.
 
 ## E6 — Documentation & repo hygiene ✅
 
@@ -68,13 +68,13 @@ Delivered 2026-07-31: `.github/workflows/deploy.yml` publishes the site to GitHu
 
 Node is pinned to 24 because the registry is ESM in `.js` files with no `package.json`; module detection is on by default from 22.7 and the lint dies on Node 20. Verified by running the lint locally with `--no-experimental-detect-module`, which reproduces the failure.
 
-The snippet smoke test is enforced too (T-205). The obstacle was that driving a browser normally means Playwright or Puppeteer — this repository's first dev dependency. `qa/run-smoke-ci.mjs` avoids that: Node's built-in HTTP server, the global `WebSocket` Node has had since 22, and the Chrome CI images already ship are enough to drive the page over CDP. All 615 loaders are checked in about 6 seconds, and D-01 survives intact (D-20).
+The snippet smoke test is enforced too (T-205). The obstacle was that driving a browser normally means Playwright or Puppeteer — this repository's first dev dependency. `qa/run-smoke-ci.mjs` avoids that: Node's built-in HTTP server, the global `WebSocket` Node has had since 22, and the Chrome CI images already ship are enough to drive the page over CDP. All 1051 loaders are checked in about 6 seconds, and D-01 survives intact (D-20).
 
 ## E9 — Build tooling ✅
 
 Delivered 2026-07-31: the studio is developed and built with Vite. `npm run dev` gives hot reload while editing a loader; `npm run build` emits a static `dist/`.
 
-This supersedes D-01, the founding constraint that the project have no build step. The reasoning that retired it: at 615 loaders across 150 modules a first visit fetched 277 KB over 146 render-blocking requests, and the only dependency-free fix — splitting every loader into metadata and payload — was rejected under T-209 because it breaks the registry. Bundling delivers the same win without touching the registry: 3 requests, ~178 KB gzipped, 129ms load in local preview against 1252ms before.
+This supersedes D-01, the founding constraint that the project have no build step. The reasoning that retired it: at 1051 loaders across 150 modules a first visit fetched 277 KB over 146 render-blocking requests, and the only dependency-free fix — splitting every loader into metadata and payload — was rejected under T-209 because it breaks the registry. Bundling delivers the same win without touching the registry: 3 requests, ~178 KB gzipped, 129ms load in local preview against 1252ms before.
 
 What did **not** change is the constraint users actually depend on: a copied snippet is still plain HTML, CSS and JavaScript needing no toolchain. That is no longer an assumption — `qa/verify-snippet-parity.mjs` proves per release that the minified bundle produces byte-identical snippets to the source (D-22), and it is self-tested against a tampered chunk.
 

@@ -7,7 +7,7 @@ Related docs: [README.md](README.md) · [SPEC.md](SPEC.md) · [EPIC.md](EPIC.md)
 
 ## 1. What this is
 
-Loader Studio is a Vite-based vanilla HTML/CSS/ES-module gallery that showcases **1082 loading animations across 17 categories**. Users browse, search, filter, preview, customise (size, speed, accent, label, per-loader application state) and copy production-ready HTML/CSS/JS snippets. The published gallery is Vite-built, while every copied snippet is dependency-free and plain HTML/CSS/JavaScript. The snippet contract is verified per release (D-22).
+Loader Studio is a Vite-based vanilla HTML/CSS/ES-module gallery that showcases **1092 loading animations across 17 categories**. Users browse, search, filter, preview, customise (size, speed, accent, label, per-loader application state) and copy production-ready HTML/CSS/JS snippets. The published gallery is Vite-built, while every copied snippet is dependency-free and plain HTML/CSS/JavaScript. The snippet contract is verified per release (D-22).
 
 ## 2. Architecture overview
 
@@ -54,7 +54,7 @@ index.html                     static shell (sidebar, topbar, toolbar, grid, ins
 
 ### Loader definition contract
 
-Every loader is a plain object: `{ id, name, category, description, markup, css }`, optionally `tech`, `js` (copyable runtime API, 95 loaders), `controls` (declarative Inspector schema, 90 loaders) and `applyControls(container, values)`. IDs are unique across the whole registry (verified 2026-08-04: 1082 loaders, 0 duplicates).
+Every loader is a plain object: `{ id, name, category, description, markup, css }`, optionally `tech`, `js` (copyable runtime API, 95 loaders), `controls` (declarative Inspector schema, 90 loaders) and `applyControls(container, values)`. IDs are unique across the whole registry (verified 2026-08-04: 1092 loaders, 0 duplicates).
 
 ### Category counts (from `loaders/index.js`, 2026-08-04)
 
@@ -62,15 +62,15 @@ Every loader is a plain object: `{ id, name, category, description, markup, css 
 | --- | --- | --- | --- | --- |
 | SVG | 114 | | Application | 23 |
 | CSS 3D | 85 | | Maps | 29 |
-| Spinners | 78 | | Holographic | 16 |
-| Text | 68 | | Operations | 19 |
-| Common UI | 65 | | Matrix | 272 |
-| Skeletons | 62 | | Bars | 47 |
-| Shapes | 50 | | Charts | 28 |
-| Dots | 52 | | Progress | 29 |
-|  |  | | Buttons | 45 |
+| Spinners | 79 | | Holographic | 16 |
+| Text | 69 | | Operations | 19 |
+| Common UI | 66 | | Matrix | 272 |
+| Skeletons | 63 | | Bars | 48 |
+| Shapes | 51 | | Charts | 28 |
+| Dots | 53 | | Progress | 30 |
+|  |  | | Buttons | 46 |
 
-**Total: 1082 loaders, 17 categories** (plus the synthetic "All" filter).
+**Total: 1092 loaders, 17 categories** (plus the synthetic "All" filter).
 
 ## 3. Durable design decisions
 

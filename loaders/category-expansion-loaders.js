@@ -7059,5 +7059,416 @@ export const categoryExpansionLoaders = [
   0%,100% { opacity: .22; transform: translateY(0) scaleX(.72); }
   50% { opacity: 1; transform: translateY(-9px) scaleX(1.03); }
 }`
+  },
+  {
+    id: 'spinner-nebula-ring',
+    name: 'Nebula Ring Spinner',
+    category: 'Spinners',
+    tech: 'CSS',
+    description: 'Nested rings drift and fade to simulate depth with staggered orbiting motion.',
+    markup: `<div class="vl-cat-spinner-nebula-ring" role="img" aria-label="Nebula ring spinner">
+  <span class="ring r1"></span>
+  <span class="ring r2"></span>
+  <span class="ring r3"></span>
+</div>`,
+    css: `.vl-cat-spinner-nebula-ring {
+  width: 92px;
+  height: 92px;
+  position: relative;
+}
+.vl-cat-spinner-nebula-ring .ring {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid;
+  border-color: color-mix(in srgb, var(--loader-accent) 40%, #eef3f9) transparent transparent transparent;
+  animation: vl-cat-spinner-nebula-ring-spin calc(var(--loader-speed) * 1.2) linear infinite;
+}
+.vl-cat-spinner-nebula-ring .r2 { animation-duration: calc(var(--loader-speed) * 0.95); animation-direction: reverse; opacity: 0.8; transform: scale(0.72); }
+.vl-cat-spinner-nebula-ring .r3 { animation-duration: calc(var(--loader-speed) * 0.72); animation-direction: reverse; opacity: 0.6; transform: scale(0.5); }
+@keyframes vl-cat-spinner-nebula-ring-spin {
+  to { transform: rotate(360deg); }
+}`
+  },
+  {
+    id: 'dots-wave-pulse',
+    name: 'Wave Pulse Dots',
+    category: 'Dots',
+    tech: 'CSS',
+    description: 'Small dots ripple with alternating phase to create a wave-like loading rhythm.',
+    markup: `<div class="vl-cat-dots-wave-pulse" role="img" aria-label="Wave pulse dots loader">
+  <span class="dot d1"></span>
+  <span class="dot d2"></span>
+  <span class="dot d3"></span>
+  <span class="dot d4"></span>
+  <span class="dot d5"></span>
+</div>`,
+    css: `.vl-cat-dots-wave-pulse {
+  width: 128px;
+  height: 18px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+.vl-cat-dots-wave-pulse .dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 88%, #e9f1ff 12%);
+  animation: vl-cat-dots-wave-pulse-bounce calc(var(--loader-speed) * 0.8) ease-in-out infinite;
+}
+.vl-cat-dots-wave-pulse .d2 { animation-delay: -.05s; }
+.vl-cat-dots-wave-pulse .d3 { animation-delay: -.1s; }
+.vl-cat-dots-wave-pulse .d4 { animation-delay: -.15s; }
+.vl-cat-dots-wave-pulse .d5 { animation-delay: -.2s; }
+@keyframes vl-cat-dots-wave-pulse-bounce {
+  0%, 80%, 100% { transform: scale(0.55); opacity: .45; }
+  40% { transform: scale(1); opacity: 1; }
+}`
+  },
+  {
+    id: 'bars-rhythm-bar',
+    name: 'Rhythm Bar Loader',
+    category: 'Bars',
+    tech: 'CSS',
+    description: 'Bars stretch in sequence with mirrored timing for a metronome-like motion.',
+    markup: `<div class="vl-cat-bars-rhythm-bar" role="img" aria-label="Rhythm bar loader">
+  <span class="bar b1"></span>
+  <span class="bar b2"></span>
+  <span class="bar b3"></span>
+  <span class="bar b4"></span>
+  <span class="bar b5"></span>
+</div>`,
+    css: `.vl-cat-bars-rhythm-bar {
+  width: 150px;
+  height: 44px;
+  display: flex;
+  align-items: end;
+  gap: 10px;
+}
+.vl-cat-bars-rhythm-bar .bar {
+  width: 16px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--loader-accent) 84%, #d3e3f7);
+  animation: vl-cat-bars-rhythm-bar-hop calc(var(--loader-speed) * 0.8) cubic-bezier(.42,0,.58,1) infinite;
+}
+.vl-cat-bars-rhythm-bar .b1 { height: 22px; animation-delay: 0s; }
+.vl-cat-bars-rhythm-bar .b2 { height: 30px; animation-delay: -.1s; }
+.vl-cat-bars-rhythm-bar .b3 { height: 38px; animation-delay: -.2s; }
+.vl-cat-bars-rhythm-bar .b4 { height: 30px; animation-delay: -.1s; }
+.vl-cat-bars-rhythm-bar .b5 { height: 22px; animation-delay: 0s; }
+@keyframes vl-cat-bars-rhythm-bar-hop {
+  0%, 100% { transform: scaleY(0.65); opacity: .55; }
+  50% { transform: scaleY(1.1); opacity: 1; }
+}`
+  },
+  {
+    id: 'shapes-halo-glide',
+    name: 'Halo Glide Shape',
+    category: 'Shapes',
+    tech: 'CSS',
+    description: 'A small shape pulses and orbits along a halo path to suggest motion continuity.',
+    markup: `<div class="vl-cat-shapes-halo-glide" role="img" aria-label="Halo glide shape loader">
+  <span class="halo ring"></span>
+  <span class="halo orb"></span>
+  <span class="halo tail"></span>
+</div>`,
+    css: `.vl-cat-shapes-halo-glide {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  border: 1px dashed color-mix(in srgb, var(--loader-accent) 22%, #cfe0ef);
+  position: relative;
+  animation: vl-cat-shapes-halo-glide-rotate calc(var(--loader-speed) * 2.5) linear infinite;
+}
+.vl-cat-shapes-halo-glide .ring {
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 34%, #f0f6fb);
+}
+.vl-cat-shapes-halo-glide .orb {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  left: 48px;
+  top: 0;
+  animation: vl-cat-shapes-halo-glide-orbit calc(var(--loader-speed) * 1.6) linear infinite;
+}
+.vl-cat-shapes-halo-glide .tail {
+  position: absolute;
+  left: 40px;
+  top: 40px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--loader-accent) 24%, transparent);
+  animation: vl-cat-shapes-halo-glide-shimmer calc(var(--loader-speed) * 1.6) ease-in-out infinite;
+}
+@keyframes vl-cat-shapes-halo-glide-rotate {
+  to { transform: rotate(360deg); }
+}
+@keyframes vl-cat-shapes-halo-glide-orbit {
+  to { transform: rotate(360deg); transform-origin: 6px 54px; }
+}
+@keyframes vl-cat-shapes-halo-glide-shimmer {
+  0%,100% { transform: scale(.68); opacity:.35; }
+  50% { transform: scale(1.05); opacity:1; }
+}`
+  },
+  {
+    id: 'button-wave-arc',
+    name: 'Arc Wave Button',
+    category: 'Buttons',
+    tech: 'CSS',
+    description: 'Arc stroke sweeps inside a pill to indicate interactive loading state.',
+    markup: `<div class="vl-cat-buttons-wave-arc" role="img" aria-label="Arc wave button loader">
+  <span class="body">
+    <span class="spark s1"></span>
+    <span class="spark s2"></span>
+  </span>
+</div>`,
+    css: `.vl-cat-buttons-wave-arc {
+  width: 130px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 28%, #d4e1f0);
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.vl-cat-buttons-wave-arc .body {
+  width: 108px;
+  height: 26px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 22%, #dbe8f4);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-buttons-wave-arc .spark {
+  position: absolute;
+  width: 24px;
+  height: 100%;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--loader-accent) 16%, transparent);
+  top: 0;
+  left: 0;
+  animation: vl-cat-buttons-wave-arc-run calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+.vl-cat-buttons-wave-arc .s2 { animation-delay: -.6s; opacity: .55; }
+@keyframes vl-cat-buttons-wave-arc-run {
+  0% { transform: translateX(-28px); }
+  100% { transform: translateX(100px); }
+}`
+  },
+  {
+    id: 'skeleton-grid-glow',
+    name: 'Grid Glow Skeleton',
+    category: 'Skeletons',
+    tech: 'CSS',
+    description: 'Compact rectangle grid with phase-shifted shimmer strips.',
+    markup: `<div class="vl-cat-skeleton-grid-glow" role="img" aria-label="Grid glow skeleton loader">
+  <span class="block b1"></span>
+  <span class="block b2"></span>
+  <span class="block b3"></span>
+  <span class="block b4"></span>
+  <span class="block b5"></span>
+</div>`,
+    css: `.vl-cat-skeleton-grid-glow {
+  width: 156px;
+  height: 72px;
+  display: grid;
+  grid-template-columns: repeat(5, 26px);
+  gap: 8px;
+  align-content: center;
+}
+.vl-cat-skeleton-grid-glow .block {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--loader-accent) 18%, #e9f0f8);
+  animation: vl-cat-skeleton-grid-glow-shimmer calc(var(--loader-speed) * 1.2) linear infinite;
+}
+.vl-cat-skeleton-grid-glow .b1 { animation-delay: 0s; }
+.vl-cat-skeleton-grid-glow .b2 { animation-delay: -.1s; }
+.vl-cat-skeleton-grid-glow .b3 { animation-delay: -.2s; }
+.vl-cat-skeleton-grid-glow .b4 { animation-delay: -.3s; }
+.vl-cat-skeleton-grid-glow .b5 { animation-delay: -.4s; }
+@keyframes vl-cat-skeleton-grid-glow-shimmer {
+  0%, 100% { transform: translateY(0); opacity: .52; }
+  50% { transform: translateY(-3px); opacity: 1; }
+}`
+  },
+  {
+    id: 'text-rune-binary',
+    name: 'Binary Rune Text',
+    category: 'Text',
+    tech: 'CSS',
+    description: 'Text-like strips flicker in coded rhythm for a lightweight typing proxy.',
+    markup: `<div class="vl-cat-text-rune-binary" role="img" aria-label="Binary rune text loader">
+  <span class="line l1"></span>
+  <span class="line l2"></span>
+  <span class="line l3"></span>
+</div>`,
+    css: `.vl-cat-text-rune-binary {
+  width: 132px;
+  height: 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+.vl-cat-text-rune-binary .line {
+  height: 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--loader-accent) 32%, #edf3fb);
+}
+.vl-cat-text-rune-binary .l1 { width: 96px; animation: vl-cat-text-rune-binary-flicker calc(var(--loader-speed) * .9) infinite; }
+.vl-cat-text-rune-binary .l2 { width: 114px; animation: vl-cat-text-rune-binary-flicker calc(var(--loader-speed) * .9) infinite; animation-delay: -.22s; }
+.vl-cat-text-rune-binary .l3 { width: 72px; animation: vl-cat-text-rune-binary-flicker calc(var(--loader-speed) * .9) infinite; animation-delay: -.11s; }
+@keyframes vl-cat-text-rune-binary-flicker {
+  0%,100% { opacity: .38; }
+  50% { opacity: 1; }
+}`
+  },
+  {
+    id: 'progress-stripe-clock',
+    name: 'Stripe Clock Progress',
+    category: 'Progress',
+    tech: 'CSS',
+    description: 'Stripe segments rotate with periodic fill pulses for clear progress-like motion.',
+    markup: `<div class="vl-cat-progress-stripe-clock" role="img" aria-label="Stripe clock progress loader">
+  <span class="track"></span>
+  <span class="tick t1"></span>
+  <span class="tick t2"></span>
+  <span class="tick t3"></span>
+</div>`,
+    css: `.vl-cat-progress-stripe-clock {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 26%, #cadcf2);
+  position: relative;
+}
+.vl-cat-progress-stripe-clock .track {
+  position: absolute;
+  inset: 20px;
+  border-radius: 50%;
+  border: 4px solid color-mix(in srgb, var(--loader-accent) 18%, transparent);
+  border-top-color: var(--loader-accent);
+  animation: vl-cat-progress-stripe-clock-spin calc(var(--loader-speed) * 1.1) linear infinite;
+}
+.vl-cat-progress-stripe-clock .tick {
+  position: absolute;
+  width: 10px;
+  height: 18px;
+  left: 34px;
+  top: -2px;
+  background: color-mix(in srgb, var(--loader-accent) 78%, #ebf2fb);
+  border-radius: 5px;
+  animation: vl-cat-progress-stripe-clock-flicker calc(var(--loader-speed) * 1.3) ease-in-out infinite;
+}
+.vl-cat-progress-stripe-clock .t2 { animation-delay: -.2s; opacity: .7; }
+.vl-cat-progress-stripe-clock .t3 { animation-delay: -.4s; opacity: .45; }
+@keyframes vl-cat-progress-stripe-clock-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes vl-cat-progress-stripe-clock-flicker {
+  0%,100% { transform: scaleY(0.65); opacity:.45; }
+  50% { transform: scaleY(1.05); opacity:1; }
+}`
+  },
+  {
+    id: 'maps-orbit-grid',
+    name: 'Orbit Grid Map',
+    category: 'Maps',
+    tech: 'CSS',
+    description: 'A map-like grid with moving markers orbiting a central focus.',
+    markup: `<div class="vl-cat-maps-orbit-grid" role="img" aria-label="Orbit grid map loader">
+  <span class="axis a1"></span>
+  <span class="axis a2"></span>
+  <span class="pin p1"></span>
+  <span class="pin p2"></span>
+  <span class="pin p3"></span>
+</div>`,
+    css: `.vl-cat-maps-orbit-grid {
+  width: 120px;
+  height: 100px;
+  position: relative;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #deebf8);
+  background: linear-gradient(180deg, #ffffff 0%, #f4f9ff 100%);
+}
+.vl-cat-maps-orbit-grid .axis {
+  position: absolute;
+  background: color-mix(in srgb, var(--loader-accent) 24%, #e0ebf8);
+}
+.vl-cat-maps-orbit-grid .a1 { left: 16px; right: 16px; top: 50%; height: 1px; }
+.vl-cat-maps-orbit-grid .a2 { top: 16px; bottom: 16px; left: 50%; width: 1px; }
+.vl-cat-maps-orbit-grid .pin {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  position: absolute;
+  left: 55px;
+  top: 45px;
+  animation: vl-cat-maps-orbit-grid-orbit calc(var(--loader-speed) * 1.4) linear infinite;
+}
+.vl-cat-maps-orbit-grid .p2 { animation-delay: -.47s; }
+.vl-cat-maps-orbit-grid .p3 { animation-delay: -.94s; }
+@keyframes vl-cat-maps-orbit-grid-orbit {
+  0% { transform: translate(0, 0) scale(.75); }
+  25% { transform: translate(34px, -18px) scale(1); }
+  50% { transform: translate(0, -34px) scale(.9); }
+  75% { transform: translate(-34px, -18px) scale(1); }
+  100% { transform: translate(0, 0) scale(.75); }
+}`
+  },
+  {
+    id: 'common-ui-scan-line',
+    name: 'Scan Line Common UI',
+    category: 'Common UI',
+    tech: 'CSS',
+    description: 'A narrow scan line crosses a card-like surface for subtle activity signaling.',
+    markup: `<div class="vl-cat-common-ui-scan-line" role="img" aria-label="Scan line common UI loader">
+  <span class="surface"></span>
+  <span class="line"></span>
+</div>`,
+    css: `.vl-cat-common-ui-scan-line {
+  width: 150px;
+  height: 84px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #d7e2ee);
+  background: linear-gradient(170deg, #fff, #edf4fc);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-common-ui-scan-line .surface {
+  position: absolute;
+  inset: 18px;
+  border-radius: 8px;
+  border: 1px dashed color-mix(in srgb, var(--loader-accent) 22%, #d8e4f3);
+}
+.vl-cat-common-ui-scan-line .line {
+  position: absolute;
+  left: -16px;
+  top: 42px;
+  width: 182px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--loader-accent) 78%, #fff), transparent);
+  animation: vl-cat-common-ui-scan-line-sweep calc(var(--loader-speed) * 1.25) ease-in-out infinite;
+}
+@keyframes vl-cat-common-ui-scan-line-sweep {
+  0% { transform: translateX(-150px); opacity: .25; }
+  50% { opacity: 1; }
+  100% { transform: translateX(150px); opacity: .25; }
+}`
   }
 ];

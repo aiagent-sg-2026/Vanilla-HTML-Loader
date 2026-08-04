@@ -64,7 +64,7 @@ Last verified against code: 2026-08-04. Statuses audited against the codebase, `
 | 07-28 | task_040–051 | Shapes packs 1–4 (345→375); Buttons packs 1–3 (385→405); Text packs 1–5 (415→455) |
 | 07-28/29 | task_052–058 | CSS 3D packs 3–8 (465→515); SVG packs 5–7 (525→545) |
 
-Intermediate totals are as narrated in `knowledge-base/project-memory.md`; the authoritative current total (1092) comes from `qa/registry-lint.mjs`.
+Intermediate totals are as narrated in `knowledge-base/project-memory.md`; the authoritative current total (1102) comes from `qa/registry-lint.mjs`.
 
 ## Done — 2026-08-04
 
@@ -74,6 +74,7 @@ Intermediate totals are as narrated in `knowledge-base/project-memory.md`; the a
 | C23 | Added 10 additional loaders in `loaders/category-expansion-loaders.js`, updated the registry snapshot to 1072 loaders, and synchronized `DESIGN.md` / `SPEC.md` / `EPIC.md` / `ROADMAP.md` / `TASK.md` / `README.md` with that total. |
 | C24 | Added 10 additional loaders in `loaders/category-expansion-loaders.js`, updated the registry snapshot to 1082 loaders, and synchronized `DESIGN.md` / `SPEC.md` / `EPIC.md` / `ROADMAP.md` / `TASK.md` / `README.md` with that total. |
 | C25 | Added 10 additional loaders in `loaders/category-expansion-loaders.js`, updated the registry snapshot to 1092 loaders, and synchronized `DESIGN.md` / `SPEC.md` / `EPIC.md` / `ROADMAP.md` / `TASK.md` / `README.md` with that total. |
+| C26 | Added 10 additional loaders in `loaders/category-expansion-loaders.js`, updated the registry snapshot to 1102 loaders, and synchronized `DESIGN.md` / `SPEC.md` / `EPIC.md` / `ROADMAP.md` / `TASK.md` / `README.md` with that total. |
 
 ## Watch
 

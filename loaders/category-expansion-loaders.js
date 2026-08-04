@@ -7470,5 +7470,405 @@ export const categoryExpansionLoaders = [
   50% { opacity: 1; }
   100% { transform: translateX(150px); opacity: .25; }
 }`
+  },
+  {
+    id: 'spinner-comet-vortex',
+    name: 'Comet Vortex Spinner',
+    category: 'Spinners',
+    tech: 'CSS',
+    description: 'Nested arcs rotate with offset speed to create a layered comet-like sweep.',
+    markup: `<div class="vl-cat-spinner-comet-vortex" role="img" aria-label="Comet vortex spinner">
+  <span class="ring"></span>
+  <span class="arc a"></span>
+  <span class="arc b"></span>
+  <span class="arc c"></span>
+</div>`,
+    css: `.vl-cat-spinner-comet-vortex {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 20%, #dfe9f6);
+  position: relative;
+}
+.vl-cat-spinner-comet-vortex .ring,
+.vl-cat-spinner-comet-vortex .arc {
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+}
+.vl-cat-spinner-comet-vortex .ring {
+  border: 2px dashed transparent;
+  border-top-color: color-mix(in srgb, var(--loader-accent) 70%, #c8dcf0);
+  animation: vl-cat-spinner-comet-vortex-spin calc(var(--loader-speed) * 1.3) linear infinite;
+}
+.vl-cat-spinner-comet-vortex .a { inset: 8px; border: 3px solid transparent; border-right-color: color-mix(in srgb, var(--loader-accent) 84%, #ecf4ff); animation: vl-cat-spinner-comet-vortex-orbit calc(var(--loader-speed) * .95) reverse linear infinite; }
+.vl-cat-spinner-comet-vortex .b { inset: 14px; border: 2px solid transparent; border-bottom-color: color-mix(in srgb, var(--loader-accent) 62%, #d7e6f6); animation: vl-cat-spinner-comet-vortex-orbit calc(var(--loader-speed) * 1.05) linear infinite; }
+.vl-cat-spinner-comet-vortex .c { inset: 20px; border: 2px solid transparent; border-left-color: color-mix(in srgb, var(--loader-accent) 50%, #f2f8ff); animation: vl-cat-spinner-comet-vortex-orbit calc(var(--loader-speed) * .82) reverse linear infinite; }
+@keyframes vl-cat-spinner-comet-vortex-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes vl-cat-spinner-comet-vortex-orbit {
+  to { transform: rotate(360deg); }
+}`
+  },
+  {
+    id: 'dots-matrix-cascade',
+    name: 'Matrix Cascade Dots',
+    category: 'Dots',
+    tech: 'CSS',
+    description: 'Dots emerge in a staggered matrix, rising and fading along a diagonal rhythm.',
+    markup: `<div class="vl-cat-dots-matrix-cascade" role="img" aria-label="Matrix cascade dots loader">
+  <span class="dot d1"></span>
+  <span class="dot d2"></span>
+  <span class="dot d3"></span>
+  <span class="dot d4"></span>
+  <span class="dot d5"></span>
+  <span class="dot d6"></span>
+  <span class="dot d7"></span>
+  <span class="dot d8"></span>
+</div>`,
+    css: `.vl-cat-dots-matrix-cascade {
+  width: 128px;
+  height: 36px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.vl-cat-dots-matrix-cascade .dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  justify-self: center;
+  align-self: center;
+  background: color-mix(in srgb, var(--loader-accent) 86%, #dce8f6);
+  animation: vl-cat-dots-matrix-cascade-wave calc(var(--loader-speed) * .9) ease-in-out infinite;
+}
+.vl-cat-dots-matrix-cascade .d2 { animation-delay: -.05s; }
+.vl-cat-dots-matrix-cascade .d3 { animation-delay: -.1s; }
+.vl-cat-dots-matrix-cascade .d4 { animation-delay: -.15s; }
+.vl-cat-dots-matrix-cascade .d5 { animation-delay: -.2s; }
+.vl-cat-dots-matrix-cascade .d6 { animation-delay: -.25s; }
+.vl-cat-dots-matrix-cascade .d7 { animation-delay: -.3s; }
+.vl-cat-dots-matrix-cascade .d8 { animation-delay: -.35s; }
+@keyframes vl-cat-dots-matrix-cascade-wave {
+  0%, 100% { transform: scale(.48); opacity: .4; }
+  50% { transform: scale(1.06); opacity: 1; }
+}`
+  },
+  {
+    id: 'bars-flicker-ramp',
+    name: 'Flicker Ramp Bars',
+    category: 'Bars',
+    tech: 'CSS',
+    description: 'Bars rise and settle in a left-to-right ramp then reverse for motion continuity.',
+    markup: `<div class="vl-cat-bars-flicker-ramp" role="img" aria-label="Flicker ramp bars loader">
+  <span class="bar b1"></span>
+  <span class="bar b2"></span>
+  <span class="bar b3"></span>
+  <span class="bar b4"></span>
+  <span class="bar b5"></span>
+  <span class="bar b6"></span>
+</div>`,
+    css: `.vl-cat-bars-flicker-ramp {
+  width: 150px;
+  height: 46px;
+  display: flex;
+  align-items: end;
+  gap: 8px;
+}
+.vl-cat-bars-flicker-ramp .bar {
+  width: 11px;
+  background: color-mix(in srgb, var(--loader-accent) 90%, #e2effb);
+  border-radius: 8px 8px 0 0;
+  transform-origin: bottom;
+  animation: vl-cat-bars-flicker-ramp-pulse calc(var(--loader-speed) * .75) cubic-bezier(.4, 0, .6, 1) infinite;
+}
+.vl-cat-bars-flicker-ramp .b1 { height: 11px; animation-delay: 0s; }
+.vl-cat-bars-flicker-ramp .b2 { height: 17px; animation-delay: -.08s; }
+.vl-cat-bars-flicker-ramp .b3 { height: 25px; animation-delay: -.16s; }
+.vl-cat-bars-flicker-ramp .b4 { height: 33px; animation-delay: -.24s; }
+.vl-cat-bars-flicker-ramp .b5 { height: 25px; animation-delay: -.16s; }
+.vl-cat-bars-flicker-ramp .b6 { height: 17px; animation-delay: -.08s; }
+@keyframes vl-cat-bars-flicker-ramp-pulse {
+  0%,100% { transform: scaleY(.58); opacity: .42; }
+  50% { transform: scaleY(1.08); opacity: 1; }
+}`
+  },
+  {
+    id: 'shapes-kite-rings',
+    name: 'Kite Rings Shapes',
+    category: 'Shapes',
+    tech: 'CSS',
+    description: 'Three ring silhouettes chase a shared centerline, giving a lightweight motion illusion.',
+    markup: `<div class="vl-cat-shapes-kite-rings" role="img" aria-label="Kite rings shape loader">
+  <span class="ring r1"></span>
+  <span class="ring r2"></span>
+  <span class="ring r3"></span>
+</div>`,
+    css: `.vl-cat-shapes-kite-rings {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  position: relative;
+}
+.vl-cat-shapes-kite-rings .ring {
+  position: absolute;
+  inset: 18px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 28%, #dce8f6);
+  transform-origin: 37px 37px;
+  animation: vl-cat-shapes-kite-rings-spin calc(var(--loader-speed) * 1.2) linear infinite;
+}
+.vl-cat-shapes-kite-rings .r1 { animation-delay: 0s; border-left-color: transparent; }
+.vl-cat-shapes-kite-rings .r2 { inset: 28px; animation-duration: calc(var(--loader-speed) * 0.88); animation-direction: reverse; border-top-color: transparent; }
+.vl-cat-shapes-kite-rings .r3 { inset: 38px; animation-duration: calc(var(--loader-speed) * 0.72); animation-direction: reverse; border-right-color: transparent; }
+@keyframes vl-cat-shapes-kite-rings-spin {
+  to { transform: rotate(360deg); }
+}`
+  },
+  {
+    id: 'buttons-sheen-glyph',
+    name: 'Sheen Glyph Button',
+    category: 'Buttons',
+    tech: 'CSS',
+    description: 'A rounded button body carries a shimmering glyph to indicate activity.',
+    markup: `<div class="vl-cat-buttons-sheen-glyph" role="img" aria-label="Sheen glyph button loader">
+  <span class="glyph"></span>
+</div>`,
+    css: `.vl-cat-buttons-sheen-glyph {
+  width: 130px;
+  height: 42px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #d2e1f1);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-buttons-sheen-glyph .glyph {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 4px;
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 84%, #dce8f3);
+  transform: rotate(45deg);
+  animation: vl-cat-buttons-sheen-glyph-give calc(var(--loader-speed) * 1.1) ease-in-out infinite;
+}
+@keyframes vl-cat-buttons-sheen-glyph-give {
+  0% { transform: translateX(-24px) rotate(45deg) scale(.8); opacity: .4; }
+  50% { transform: translateX(24px) rotate(45deg) scale(1.16); opacity: 1; }
+  100% { transform: translateX(-24px) rotate(45deg) scale(.8); opacity: .4; }
+}`
+  },
+  {
+    id: 'skeleton-column-wave',
+    name: 'Column Wave Skeleton',
+    category: 'Skeletons',
+    tech: 'CSS',
+    description: 'Vertical skeleton blocks pulse with offset timing for perceived loading data rhythm.',
+    markup: `<div class="vl-cat-skeleton-column-wave" role="img" aria-label="Column wave skeleton loader">
+  <span class="col c1"></span>
+  <span class="col c2"></span>
+  <span class="col c3"></span>
+  <span class="col c4"></span>
+  <span class="col c5"></span>
+</div>`,
+    css: `.vl-cat-skeleton-column-wave {
+  width: 140px;
+  height: 54px;
+  display: flex;
+  align-items: end;
+  gap: 8px;
+}
+.vl-cat-skeleton-column-wave .col {
+  width: 22px;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--loader-accent) 16%, #e6eff8);
+  animation: vl-cat-skeleton-column-wave-tide calc(var(--loader-speed) * 1.1) ease-in-out infinite;
+}
+.vl-cat-skeleton-column-wave .c1 { height: 28px; animation-delay: 0s; }
+.vl-cat-skeleton-column-wave .c2 { height: 36px; animation-delay: -.11s; }
+.vl-cat-skeleton-column-wave .c3 { height: 44px; animation-delay: -.22s; }
+.vl-cat-skeleton-column-wave .c4 { height: 36px; animation-delay: -.11s; }
+.vl-cat-skeleton-column-wave .c5 { height: 28px; animation-delay: 0s; }
+@keyframes vl-cat-skeleton-column-wave-tide {
+  0%, 100% { transform: translateY(2px) scaleY(.6); opacity: .45; }
+  50% { transform: translateY(-3px) scaleY(1.02); opacity: 1; }
+}`
+  },
+  {
+    id: 'text-mono-glow',
+    name: 'Mono Glow Text',
+    category: 'Text',
+    tech: 'CSS',
+    description: 'Monoline text placeholders shimmer in a left-to-right sweep.',
+    markup: `<div class="vl-cat-text-mono-glow" role="img" aria-label="Mono glow text loader">
+  <span class="line l1"></span>
+  <span class="line l2"></span>
+  <span class="line l3"></span>
+  <span class="line l4"></span>
+</div>`,
+    css: `.vl-cat-text-mono-glow {
+  width: 136px;
+  height: 54px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 9px;
+}
+.vl-cat-text-mono-glow .line {
+  height: 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--loader-accent) 24%, #eef4fb);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-text-mono-glow .l1 { width: 100%; animation: vl-cat-text-mono-glow-flow calc(var(--loader-speed) * .95) infinite; }
+.vl-cat-text-mono-glow .l2 { width: 86%; animation: vl-cat-text-mono-glow-flow calc(var(--loader-speed) * .95) infinite; animation-delay: -.16s; }
+.vl-cat-text-mono-glow .l3 { width: 72%; animation: vl-cat-text-mono-glow-flow calc(var(--loader-speed) * .95) infinite; animation-delay: -.32s; }
+.vl-cat-text-mono-glow .l4 { width: 58%; animation: vl-cat-text-mono-glow-flow calc(var(--loader-speed) * .95) infinite; animation-delay: -.48s; }
+@keyframes vl-cat-text-mono-glow-flow {
+  0%,100% { opacity: .42; }
+  50% { opacity: 1; }
+}`
+  },
+  {
+    id: 'progress-beat-ring',
+    name: 'Beat Ring Progress',
+    category: 'Progress',
+    tech: 'CSS',
+    description: 'Ring beat markers expand and contract around a single spinning core.',
+    markup: `<div class="vl-cat-progress-beat-ring" role="img" aria-label="Beat ring progress loader">
+  <span class="core"></span>
+  <span class="marker m1"></span>
+  <span class="marker m2"></span>
+  <span class="marker m3"></span>
+  <span class="marker m4"></span>
+</div>`,
+    css: `.vl-cat-progress-beat-ring {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  position: relative;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #d5e3f2);
+}
+.vl-cat-progress-beat-ring .core {
+  position: absolute;
+  inset: 20px;
+  border-radius: 50%;
+  border: 4px solid color-mix(in srgb, var(--loader-accent) 20%, transparent);
+  border-top-color: var(--loader-accent);
+  animation: vl-cat-progress-beat-ring-spin calc(var(--loader-speed) * 1.1) linear infinite;
+}
+.vl-cat-progress-beat-ring .marker {
+  position: absolute;
+  width: 7px;
+  height: 14px;
+  left: 38px;
+  top: 1px;
+  border-radius: 4px;
+  background: var(--loader-accent);
+  transform-origin: 3.5px 41px;
+  --marker-rot: 0deg;
+  animation: vl-cat-progress-beat-ring-beat calc(var(--loader-speed) * .9) ease-in-out infinite;
+}
+.vl-cat-progress-beat-ring .m2 { --marker-rot: 90deg; animation-delay: -.2s; opacity: .75; }
+.vl-cat-progress-beat-ring .m3 { --marker-rot: 180deg; animation-delay: -.4s; opacity: .55; }
+.vl-cat-progress-beat-ring .m4 { --marker-rot: 270deg; animation-delay: -.6s; opacity: .75; }
+@keyframes vl-cat-progress-beat-ring-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes vl-cat-progress-beat-ring-beat {
+  0%,100% { transform: rotate(var(--marker-rot, 0deg)) scaleY(.55); opacity: .45; }
+  50% { transform: rotate(var(--marker-rot, 0deg)) scaleY(1.08); opacity: 1; }
+}`
+  },
+  {
+    id: 'maps-route-grid',
+    name: 'Route Grid Map',
+    category: 'Maps',
+    tech: 'CSS',
+    description: 'A compact grid map with a route tracer moving along alternating cells.',
+    markup: `<div class="vl-cat-maps-route-grid" role="img" aria-label="Route grid map loader">
+  <span class="grid g1"></span>
+  <span class="grid g2"></span>
+  <span class="grid g3"></span>
+  <span class="grid g4"></span>
+  <span class="grid g5"></span>
+  <span class="dot d1"></span>
+</div>`,
+    css: `.vl-cat-maps-route-grid {
+  width: 122px;
+  height: 92px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #dbe7f5);
+  position: relative;
+  background: linear-gradient(180deg, #fff, #f2f8fe);
+}
+.vl-cat-maps-route-grid .grid {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 16%, #dfeaf5);
+}
+.vl-cat-maps-route-grid .g1 { left: 12px; top: 12px; }
+.vl-cat-maps-route-grid .g2 { left: 68px; top: 12px; }
+.vl-cat-maps-route-grid .g3 { left: 12px; top: 48px; }
+.vl-cat-maps-route-grid .g4 { left: 68px; top: 48px; }
+.vl-cat-maps-route-grid .g5 { left: 40px; top: 30px; width: 42px; height: 26px; border-style: dashed; }
+.vl-cat-maps-route-grid .dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  left: 17px;
+  top: 17px;
+  animation: vl-cat-maps-route-grid-trace calc(var(--loader-speed) * 1.4) linear infinite;
+}
+@keyframes vl-cat-maps-route-grid-trace {
+  0% { transform: translate(0, 0); opacity: .35; }
+  25% { transform: translate(56px, 0); opacity: 1; }
+  50% { transform: translate(56px, 36px); opacity: .65; }
+  75% { transform: translate(0, 36px); opacity: 1; }
+  100% { transform: translate(0, 0); opacity: .35; }
+}`
+  },
+  {
+    id: 'common-ui-crumb-trail',
+    name: 'Crumb Trail Common UI',
+    category: 'Common UI',
+    tech: 'CSS',
+    description: 'Breadcrumb-like blocks animate in a chain to represent step-by-step progress.',
+    markup: `<div class="vl-cat-common-ui-crumb-trail" role="img" aria-label="Crumb trail common UI loader">
+  <span class="crumb c1"></span>
+  <span class="crumb c2"></span>
+  <span class="crumb c3"></span>
+  <span class="crumb c4"></span>
+</div>`,
+    css: `.vl-cat-common-ui-crumb-trail {
+  width: 162px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.vl-cat-common-ui-crumb-trail .crumb {
+  width: 34px;
+  height: 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--loader-accent) 24%, #deebf7);
+  animation: vl-cat-common-ui-crumb-trail-flip calc(var(--loader-speed) * .82) ease-in-out infinite;
+}
+.vl-cat-common-ui-crumb-trail .c2 { animation-delay: -.08s; }
+.vl-cat-common-ui-crumb-trail .c3 { animation-delay: -.16s; }
+.vl-cat-common-ui-crumb-trail .c4 { animation-delay: -.24s; }
+@keyframes vl-cat-common-ui-crumb-trail-flip {
+  0%, 100% { opacity: .42; transform: scaleY(.7); }
+  50% { opacity: 1; transform: scaleY(1.05); }
+}`
   }
 ];

@@ -16,6 +16,7 @@ import { operationLoaders } from './operations.js';
 import { matrixLoaders } from './matrix.js';
 import { holographicLoaders } from './holographic.js';
 import { functionalLoaders } from './functional.js';
+import { categoryExpansionLoaders } from './category-expansion-loaders.js';
 
 export const loaders = [
   ...spinnerPackLoaders,
@@ -35,7 +36,8 @@ export const loaders = [
   ...operationLoaders,
   ...matrixLoaders,
   ...holographicLoaders,
-  ...functionalLoaders
+  ...functionalLoaders,
+  ...categoryExpansionLoaders
 ];
 
 export const categories = ['All', ...new Set(loaders.map(loader => loader.category))];

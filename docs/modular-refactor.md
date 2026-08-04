@@ -20,4 +20,4 @@ The single-file Loader Studio was split into focused vanilla HTML, CSS, and ES m
 
 ## Historical note
 
-At refactor time the collection held 30 loaders (Text 6, CSS 3D 6, SVG 5, and others). The library has since grown to **935 loaders across 17 categories** through incremental 10-loader packs — see [../ROADMAP.md](../ROADMAP.md) for the release history and `loaders/index.js` for the authoritative registry.
+At refactor time the collection held 30 loaders (Text 6, CSS 3D 6, SVG 5, and others). The library has since grown to **952 loaders across 17 categories** through incremental 10-loader packs — see [../ROADMAP.md](../ROADMAP.md) for the release history and `loaders/index.js` for the authoritative registry.

@@ -4885,5 +4885,401 @@ export const categoryExpansionLoaders = [
 .vl-cat-common-ui-shell-waveboard .c { left: 142px; top: 30px; animation-delay: -.4s; }
 .vl-cat-common-ui-shell-waveboard .d { left: 88px; top: 74px; animation-delay: -.6s; }
 @keyframes vl-cat-common-ui-shell-waveboard-node { 0%,100% { opacity: .2; transform: scale(.55); } 50% { opacity: 1; transform: scale(1.25); } }`
+  },
+  {
+    id: 'spinner-orbital-cascade',
+    name: 'Orbital Cascade Spinner',
+    category: 'Spinners',
+    tech: 'CSS',
+    description: 'Nested orbital strokes collapse and re-expand in controlled phase offsets.',
+    markup: `<div class="vl-cat-spinner-orbital-cascade" role="img" aria-label="Orbital cascade spinner">
+  <span class="ring r1"></span>
+  <span class="ring r2"></span>
+  <span class="ring r3"></span>
+</div>`,
+    css: `.vl-cat-spinner-orbital-cascade {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1d5c86);
+  border-radius: 14px;
+  background: linear-gradient(178deg, #071d32, #0a2b49 62%, #040a14);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-spinner-orbital-cascade .ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 72%, #f0f6fb);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: vl-cat-spinner-orbital-cascade-spin calc(var(--loader-speed) * 1.5) linear infinite;
+}
+.vl-cat-spinner-orbital-cascade .r1 { width: 56px; height: 56px; animation-duration: calc(var(--loader-speed) * 1.15); }
+.vl-cat-spinner-orbital-cascade .r2 { width: 40px; height: 40px; border-style: dashed; animation-direction: reverse; animation-duration: calc(var(--loader-speed) * 0.9); }
+.vl-cat-spinner-orbital-cascade .r3 { width: 24px; height: 24px; animation-duration: calc(var(--loader-speed) * 1.45); }
+@keyframes vl-cat-spinner-orbital-cascade-spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(.45); opacity: .3; }
+  50% { transform: translate(-50%, -50%) rotate(180deg) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) rotate(360deg) scale(.45); opacity: .3; }
+}`
+  },
+  {
+    id: 'dot-kite-lattice',
+    name: 'Kite Lattice Dots',
+    category: 'Dots',
+    tech: 'CSS',
+    description: 'A lattice of dots drifts along a mirrored kite pattern and rebounds in loops.',
+    markup: `<div class="vl-cat-dot-kite-lattice" role="img" aria-label="Kite lattice dots">
+  <span style="--i:0"></span>
+  <span style="--i:1"></span>
+  <span style="--i:2"></span>
+  <span style="--i:3"></span>
+</div>`,
+    css: `.vl-cat-dot-kite-lattice {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 23%, #1e5f89);
+  border-radius: 14px;
+  position: relative;
+  background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--loader-accent) 22%, transparent), #04111d 58%);
+}
+.vl-cat-dot-kite-lattice span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 90%, #f1f7fc);
+  transform-origin: 0 0;
+  transform: translate(
+    calc(cos(calc(var(--i) * 1.15rad)) * 18px),
+    calc(sin(calc(var(--i) * 1.15rad)) * 18px)
+  );
+  animation: vl-cat-dot-kite-lattice-hop calc(var(--loader-speed) * 1.1) ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.16s);
+}
+@keyframes vl-cat-dot-kite-lattice-hop {
+  0%, 100% { transform: translate(calc(cos(calc(var(--i) * 1.15rad)) * 18px), calc(sin(calc(var(--i) * 1.15rad)) * 18px)) scale(.62); opacity:.2; }
+  50% { transform: translate(calc(cos(calc(var(--i) * 1.15rad)) * 32px), calc(sin(calc(var(--i) * 1.15rad)) * 32px)) scale(1.18); opacity:1; }
+}`
+  },
+  {
+    id: 'bar-mesh-wave',
+    name: 'Mesh Wave Bars',
+    category: 'Bars',
+    tech: 'CSS',
+    description: 'Cross-stitched bars ripple through a compact mesh with mirrored timings.',
+    markup: `<div class="vl-cat-bar-mesh-wave" role="img" aria-label="Mesh wave bars">
+  <span style="--d:0"></span>
+  <span style="--d:1"></span>
+  <span style="--d:2"></span>
+  <span style="--d:3"></span>
+</div>`,
+    css: `.vl-cat-bar-mesh-wave {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1d5d87);
+  border-radius: 14px;
+  padding: 14px 12px 12px;
+  display: grid;
+  align-content: end;
+  gap: 8px;
+  background: linear-gradient(175deg, #061d34, #0a2e4c 63%, #040a14);
+}
+.vl-cat-bar-mesh-wave span {
+  display: block;
+  height: calc(16px + var(--d) * 5px);
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--loader-accent) 22%, #e1ecf3);
+  animation: vl-cat-bar-mesh-wave-sway calc(var(--loader-speed) * 1.1) ease-in-out infinite;
+  animation-delay: calc(var(--d) * -0.12s);
+}
+@keyframes vl-cat-bar-mesh-wave-sway { 0%, 100% { transform: translateY(0) scaleX(.6); opacity: .2; } 50% { transform: translateY(-6px) scaleX(1); opacity: 1; } }`
+  },
+  {
+    id: 'shape-prism-halo',
+    name: 'Prism Halo Shape',
+    category: 'Shapes',
+    tech: 'CSS',
+    description: 'Overlapping facets reflect a halo edge and rotate through three locked phases.',
+    markup: `<div class="vl-cat-shape-prism-halo" role="img" aria-label="Prism halo shape">
+  <span class="plane p1"></span>
+  <span class="plane p2"></span>
+  <span class="plane p3"></span>
+</div>`,
+    css: `.vl-cat-shape-prism-halo {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1e618a);
+  border-radius: 14px;
+  background: radial-gradient(circle at 50% 54%, color-mix(in srgb, var(--loader-accent) 18%, transparent), transparent 52%), linear-gradient(152deg, #081f37, #0f314e 62%, #050d14);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-shape-prism-halo .plane {
+  position: absolute;
+  width: 44px;
+  height: 32px;
+  left: 50%;
+  top: 50%;
+  margin: -16px -22px;
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 72%, transparent);
+  border-radius: 4px;
+  transform-origin: 50% 50%;
+  animation: vl-cat-shape-prism-halo-spin calc(var(--loader-speed) * 1.4) linear infinite;
+}
+.vl-cat-shape-prism-halo .p1 { animation-duration: calc(var(--loader-speed) * 1.2); }
+.vl-cat-shape-prism-halo .p2 { animation-duration: calc(var(--loader-speed) * .96); animation-direction: reverse; }
+.vl-cat-shape-prism-halo .p3 { animation-duration: calc(var(--loader-speed) * 1.5); width: 30px; height: 48px; }
+@keyframes vl-cat-shape-prism-halo-spin { 0% { transform: translate(-50%, -50%) rotate(0deg) scale(.45); opacity:.3; } 50% { transform: translate(-50%, -50%) rotate(180deg) scale(1); opacity:1; } 100% { transform: translate(-50%, -50%) rotate(360deg) scale(.45); opacity:.3; } }`
+  },
+  {
+    id: 'button-echo-tap',
+    name: 'Echo Tap Button',
+    category: 'Buttons',
+    tech: 'CSS',
+    description: 'A button shell issues synchronized echoes across mirrored edges.',
+    markup: `<div class="vl-cat-button-echo-tap" role="img" aria-label="Echo tap button">
+  <span class="plate"></span>
+  <span class="echo e1"></span>
+  <span class="echo e2"></span>
+</div>`,
+    css: `.vl-cat-button-echo-tap {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 22%, #1f5f8b);
+  border-radius: 14px;
+  background: linear-gradient(182deg, #071b30, #0a2a44 63%, #040a14);
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.vl-cat-button-echo-tap .plate {
+  width: 82px;
+  height: 26px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 35%, #dbe6f0);
+}
+.vl-cat-button-echo-tap .echo {
+  position: absolute;
+  inset: 38px auto auto 54px;
+  width: 82px;
+  height: 26px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 60%, #ffffff33);
+  animation: vl-cat-button-echo-tap-pulse calc(var(--loader-speed) * 1.3) ease-in-out infinite;
+}
+.vl-cat-button-echo-tap .e1 { animation-delay: 0s; }
+.vl-cat-button-echo-tap .e2 { inset: 38px auto auto 80px; animation-delay: -.5s; }
+@keyframes vl-cat-button-echo-tap-pulse { 0%, 100% { transform: scale(.86); opacity:.2; } 50% { transform: scale(1.14); opacity:1; } }`
+  },
+  {
+    id: 'text-ripple-caption',
+    name: 'Ripple Caption Text',
+    category: 'Text',
+    tech: 'CSS Text',
+    description: 'A caption wordmark ripples per letter with staggered timing.',
+    markup: `<div class="vl-cat-text-ripple-caption" role="img" aria-label="Ripple caption text">
+  <span>L</span>
+  <span>O</span>
+  <span>A</span>
+  <span>D</span>
+  <span>I</span>
+  <span>N</span>
+  <span>G</span>
+</div>`,
+    css: `.vl-cat-text-ripple-caption {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 22%, #205d88);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #061c33, #0a2b47 64%, #040a13);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font: 700 13px/1 'SFMono-Regular', Menlo, Consolas, monospace;
+  letter-spacing: .1em;
+  color: color-mix(in srgb, var(--loader-accent) 80%, #d9e8f3);
+}
+.vl-cat-text-ripple-caption span {
+  animation: vl-cat-text-ripple-caption-wave calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+.vl-cat-text-ripple-caption span:nth-child(1) { animation-delay: 0s; }
+.vl-cat-text-ripple-caption span:nth-child(2) { animation-delay: .08s; }
+.vl-cat-text-ripple-caption span:nth-child(3) { animation-delay: .16s; }
+.vl-cat-text-ripple-caption span:nth-child(4) { animation-delay: .24s; }
+.vl-cat-text-ripple-caption span:nth-child(5) { animation-delay: .32s; }
+.vl-cat-text-ripple-caption span:nth-child(6) { animation-delay: .40s; }
+.vl-cat-text-ripple-caption span:nth-child(7) { animation-delay: .48s; }
+@keyframes vl-cat-text-ripple-caption-wave { 0%,100% { transform: translateY(0); opacity:.25; } 50% { transform: translateY(-7px); opacity:1; } }`
+  },
+  {
+    id: 'common-ui-shell-trace',
+    name: 'Shell Trace Common UI',
+    category: 'Common UI',
+    tech: 'CSS',
+    description: 'Common UI frame pulses across a segmented trace bar and status chips.',
+    markup: `<div class="vl-cat-common-ui-shell-trace" role="img" aria-label="Shell trace common UI">
+  <span class="trace-line"></span>
+  <span class="chip"></span>
+  <span class="chip"></span>
+  <span class="chip"></span>
+</div>`,
+    css: `.vl-cat-common-ui-shell-trace {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 23%, #d9e5ef);
+  border-radius: 14px;
+  background: linear-gradient(176deg, #061d34, #0a2e49 64%, #040a14);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-common-ui-shell-trace .trace-line {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 42px;
+  height: 2px;
+  background: color-mix(in srgb, var(--loader-accent) 30%, #dce7f0);
+  animation: vl-cat-common-ui-shell-trace-sweep calc(var(--loader-speed) * 1.3) ease-in-out infinite;
+}
+.vl-cat-common-ui-shell-trace .chip {
+  position: absolute;
+  width: 36px;
+  height: 10px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 45%, #f0f6ff);
+  border-radius: 12px;
+  top: 56px;
+  animation: vl-cat-common-ui-shell-trace-chip calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+.vl-cat-common-ui-shell-trace .chip:nth-child(2) { left: 20px; animation-delay: 0s; }
+.vl-cat-common-ui-shell-trace .chip:nth-child(3) { left: 76px; animation-delay: -.4s; }
+.vl-cat-common-ui-shell-trace .chip:nth-child(4) { left: 132px; animation-delay: -.8s; }
+@keyframes vl-cat-common-ui-shell-trace-sweep { 0% { transform: scaleX(.2); opacity:.22; } 50% { transform: scaleX(1); opacity:1; } 100% { transform: scaleX(.2); opacity:.22; } }
+@keyframes vl-cat-common-ui-shell-trace-chip { 0%,100% { opacity:.2; transform: translateY(0); } 50% { opacity:1; transform: translateY(10px); } }`
+  },
+  {
+    id: 'css3d-cascade-cage',
+    name: 'Cascade Cage',
+    category: 'CSS 3D',
+    tech: 'CSS 3D',
+    description: '3D bars form a rotating cage with layered depth and a delayed pulse seam.',
+    markup: `<div class="vl-cat-css3d-cascade-cage" role="img" aria-label="Cascade cage 3D">
+  <span class="face f1"></span>
+  <span class="face f2"></span>
+  <span class="face f3"></span>
+</div>`,
+    css: `.vl-cat-css3d-cascade-cage {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1f5d87);
+  border-radius: 14px;
+  perspective: 420px;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(176deg, #071d34, #102c4b 62%, #040a14);
+}
+.vl-cat-css3d-cascade-cage .face {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 60px;
+  height: 34px;
+  margin: -17px -30px;
+  border-radius: 9px;
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 80%, #f1f7fc);
+  transform-style: preserve-3d;
+  animation: vl-cat-css3d-cascade-cage-spin calc(var(--loader-speed) * 1.7) linear infinite;
+}
+.vl-cat-css3d-cascade-cage .f1 { transform: translate3d(-24px, 0, 14px) rotateY(30deg); }
+.vl-cat-css3d-cascade-cage .f2 { transform: translate3d(0, 0, 0) rotateY(60deg) scale(.88); animation-duration: calc(var(--loader-speed) * 1.3); }
+.vl-cat-css3d-cascade-cage .f3 { transform: translate3d(24px, 0, -14px) rotateY(90deg) scale(.74); animation-duration: calc(var(--loader-speed) * 1); animation-direction: reverse; }
+@keyframes vl-cat-css3d-cascade-cage-spin { 0% { transform: rotateY(0deg); opacity:.3; } 50% { transform: rotateY(180deg); opacity:1; } 100% { transform: rotateY(360deg); opacity:.3; } }`
+  },
+  {
+    id: 'svg-arc-segment',
+    name: 'Arc Segment SVG',
+    category: 'SVG',
+    tech: 'SVG',
+    description: 'A rotating segmented ring emits soft arcs and a trailing cap pulse.',
+    markup: `<div class="vl-cat-svg-arc-segment" role="img" aria-label="Arc segment SVG">
+  <svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <circle class="track" cx="60" cy="40" r="24" fill="none" />
+    <circle class="active" cx="60" cy="40" r="24" fill="none" />
+    <circle class="cap" cx="76" cy="28" r="3.5" />
+  </svg>
+</div>`,
+    css: `.vl-cat-svg-arc-segment {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1e5f87);
+  border-radius: 14px;
+  background: linear-gradient(178deg, #071d34, #0a2945 60%, #040a14);
+  display: grid;
+  place-items: center;
+}
+.vl-cat-svg-arc-segment svg { width: 100px; height: 66px; }
+.vl-cat-svg-arc-segment .track {
+  stroke: color-mix(in srgb, var(--loader-accent) 16%, transparent);
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+.vl-cat-svg-arc-segment .active {
+  stroke: color-mix(in srgb, var(--loader-accent) 88%, #ecf4fb);
+  stroke-width: 8;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 60px 40px;
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: vl-cat-svg-arc-segment-arc calc(var(--loader-speed) * 1.35) linear infinite;
+}
+.vl-cat-svg-arc-segment .cap { fill: color-mix(in srgb, var(--loader-accent) 90%, #fff); animation: vl-cat-svg-arc-segment-cap calc(var(--loader-speed) * 1.35) linear infinite; }
+@keyframes vl-cat-svg-arc-segment-arc { 0% { stroke-dashoffset: 140; opacity:.2; } 50% { stroke-dashoffset: 40; opacity:1; } 100% { stroke-dashoffset: 140; opacity:.2; } }
+@keyframes vl-cat-svg-arc-segment-cap { 0%,100% { transform: scale(.4); opacity:.2; } 50% { transform: scale(1.2); opacity:1; } }`
+  },
+  {
+    id: 'progress-lattice-pulse',
+    name: 'Lattice Pulse Progress',
+    category: 'Progress',
+    tech: 'CSS',
+    description: 'A stepped lattice grows and sinks in a repeating progress-like cadence.',
+    markup: `<div class="vl-cat-progress-lattice-pulse" role="img" aria-label="Lattice pulse progress">
+  <span class="node n1"></span>
+  <span class="node n2"></span>
+  <span class="node n3"></span>
+  <span class="node n4"></span>
+  <span class="node n5"></span>
+</div>`,
+    css: `.vl-cat-progress-lattice-pulse {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 25%, #1f5e88);
+  border-radius: 14px;
+  background: linear-gradient(182deg, #071d33, #0a2d47 61%, #040a14);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: end;
+  gap: 9px;
+  padding: 16px 12px;
+}
+.vl-cat-progress-lattice-pulse .node {
+  width: 100%;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--loader-accent) 24%, #dde8f2);
+  align-self: end;
+  animation: vl-cat-progress-lattice-pulse-wave calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+.vl-cat-progress-lattice-pulse .n1 { height: 24px; animation-delay: 0s; }
+.vl-cat-progress-lattice-pulse .n2 { height: 44px; animation-delay: -.12s; }
+.vl-cat-progress-lattice-pulse .n3 { height: 56px; animation-delay: -.24s; }
+.vl-cat-progress-lattice-pulse .n4 { height: 34px; animation-delay: -.36s; }
+.vl-cat-progress-lattice-pulse .n5 { height: 48px; animation-delay: -.48s; }
+@keyframes vl-cat-progress-lattice-pulse-wave { 0%,100% { transform: scaleY(.5); opacity:.22; } 50% { transform: scaleY(1); opacity:1; } }`
   }
 ];

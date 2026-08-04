@@ -14,7 +14,7 @@
 
 import { loaders } from '../loaders/index.js';
 
-const EXPECTED_MATRIX_COUNT = 252;
+const EXPECTED_MATRIX_COUNT = 262;
 const EXPECTED_MATRIX_IDS = [
   'matrix-cube-field',
   'digital-rain-tunnel',
@@ -267,7 +267,17 @@ const EXPECTED_MATRIX_IDS = [
   'matrix-helix-cascade-lens',
   'matrix-fractal-glyph-vector',
   'matrix-vector-gate-rain',
-  'matrix-skyline-matrix-loom'
+  'matrix-skyline-matrix-loom',
+  'matrix-cascade-lens-vector',
+  'matrix-holo-spiral-beacon',
+  'matrix-nebula-ribbon-scan',
+  'matrix-vortex-glyph-array',
+  'matrix-quantum-grid-needle',
+  'matrix-photon-strobe-rack',
+  'matrix-orbital-rail-gate',
+  'matrix-axiom-wave-cascade',
+  'matrix-fractal-vector-loom',
+  'matrix-helix-pulse-lattice'
 ];
 const REQUIRED_FIELDS = ['id', 'name', 'category', 'description', 'markup', 'css'];
 

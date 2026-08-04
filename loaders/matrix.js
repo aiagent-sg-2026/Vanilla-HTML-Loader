@@ -38,6 +38,7 @@ import { matrixPack17LoadersH } from './matrix-pack-17-h.js';
 import { matrixPack17LoadersI } from './matrix-pack-17-i.js';
 import { matrixPack17LoadersJ } from './matrix-pack-17-j.js';
 import { matrixPack17LoadersK } from './matrix-pack-17-k.js';
+import { matrixPack17LoadersL } from './matrix-pack-17-l.js';
 
 const matrixBaseLoaders = [
   {
@@ -384,5 +385,6 @@ export const matrixLoaders = [
   ...matrixPack17LoadersH,
   ...matrixPack17LoadersI,
   ...matrixPack17LoadersJ,
-  ...matrixPack17LoadersK
+  ...matrixPack17LoadersK,
+  ...matrixPack17LoadersL
 ];

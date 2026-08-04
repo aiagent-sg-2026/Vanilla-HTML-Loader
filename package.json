@@ -11,9 +11,9 @@
     "preview": "vite preview",
     "lint:registry": "node qa/registry-lint.mjs",
     "test:snippets": "node qa/run-smoke-ci.mjs",
-    "test:snippets:matrix": "node qa/verify-matrix-loaders.mjs && node qa/run-smoke-ci.mjs --category Matrix --limit 202",
+    "test:snippets:matrix": "node qa/verify-matrix-loaders.mjs && node qa/run-smoke-ci.mjs --category Matrix --limit 212",
     "test:dist": "node qa/run-smoke-ci.mjs --root dist",
-    "test:dist:matrix": "node qa/run-smoke-ci.mjs --root dist --category Matrix --limit 202",
+    "test:dist:matrix": "node qa/run-smoke-ci.mjs --root dist --category Matrix --limit 212",
     "check": "npm run lint:registry && npm run test:snippets"
   },
   "devDependencies": {

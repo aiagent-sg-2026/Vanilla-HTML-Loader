@@ -8,7 +8,7 @@ Status legend: ✅ Implemented · 🟡 Partial · ⬜ Not implemented · ❌ Won
 
 ## FR-1 Loader collection browsing — ✅
 
-- 1072 loaders in 17 categories exposed from `loaders/index.js`; category filter row is generated from the registry (`All` + unique categories).
+- 1082 loaders in 17 categories exposed from `loaders/index.js`; category filter row is generated from the registry (`All` + unique categories).
 - Views: **Library**, **Favorites**, **Recently viewed** (last 8, most recent first). Switching view resets category, search, and the pagination window.
 - Text search matches name + category + description (case-insensitive substring).
 - Empty result set renders a friendly empty state.
@@ -104,7 +104,7 @@ Status legend: ✅ Implemented · 🟡 Partial · ⬜ Not implemented · ❌ Won
 ## FR-15 Automated registry and snippet checks — ✅
 
 - `node qa/registry-lint.mjs`: unique ids, `@keyframes` redefinition conflicts, unscoped generic selectors, required fields; non-zero exit on violation; prints the canonical category count table.
-- `qa/snippet-paste-smoke.html`: pastes every loader's combined snippet into a blank page and asserts the overlay mounts and animates; supports `?autorun=1`, `&limit=`, `&category=`, and exposes `window.__smokeResult`. A full 1072-loader run takes about 6 seconds.
+- `qa/snippet-paste-smoke.html`: pastes every loader's combined snippet into a blank page and asserts the overlay mounts and animates; supports `?autorun=1`, `&limit=`, `&category=`, and exposes `window.__smokeResult`. A full 1082-loader run takes about 6 seconds.
 - `node qa/run-smoke-ci.mjs`: runs the smoke page in headless Chrome over CDP and exits non-zero on failure. Both checks gate the GitHub Pages deploy.
 - Vite is the only dependency; the QA runners still use nothing but Node built-ins and a CI-provided Chrome (D-20).
 

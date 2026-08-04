@@ -14,7 +14,7 @@
 
 import { loaders } from '../loaders/index.js';
 
-const EXPECTED_MATRIX_COUNT = 265;
+const EXPECTED_MATRIX_COUNT = 266;
 const EXPECTED_MATRIX_IDS = [
   'matrix-cube-field',
   'digital-rain-tunnel',
@@ -280,7 +280,8 @@ const EXPECTED_MATRIX_IDS = [
   'matrix-helix-pulse-lattice',
   'matrix-pulse-gateway',
   'matrix-sine-gate-spiral',
-  'matrix-wave-lattice-ring'
+  'matrix-wave-lattice-ring',
+  'matrix-cascade-omega-loop'
 ];
 const REQUIRED_FIELDS = ['id', 'name', 'category', 'description', 'markup', 'css'];
 

@@ -2307,5 +2307,744 @@ export const categoryExpansionLoaders = [
 }
 @keyframes vl-cat-holographic-lens-flares-spin { 0% { transform: rotate(0deg) translateY(-26px) rotate(90deg); } 100% { transform: rotate(360deg) translateY(-26px) rotate(90deg); } }
 @keyframes vl-cat-holographic-lens-flares-center { 0%, 100% { transform: scale(.6); opacity: .3; } 50% { transform: scale(1.15); opacity: 1; } }`
+  },
+  {
+    id: 'spinner-helix-gate',
+    name: 'Helix Gate Spinner',
+    category: 'Spinners',
+    tech: 'CSS',
+    description: 'A helix-like gate rotates around a compact central nucleus with synchronized pulses.',
+    markup: `<div class="vl-cat-spinner-helix-gate" role="img" aria-label="Helix gate spinner">
+  <span class="ring"></span>
+  <span class="ring b"></span>
+  <span class="dot" style="--i:0"></span>
+  <span class="dot" style="--i:1"></span>
+  <span class="dot" style="--i:2"></span>
+</div>`,
+    css: `.vl-cat-spinner-helix-gate {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #215b8a);
+  border-radius: 14px;
+  background: linear-gradient(176deg, #061d31, #0b2d48 64%, #040a13);
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.vl-cat-spinner-helix-gate .ring {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid color-mix(in srgb, var(--loader-accent) 68%, transparent);
+  animation: vl-cat-spinner-helix-gate-ring calc(var(--loader-speed) * 1.25) linear infinite;
+}
+.vl-cat-spinner-helix-gate .b { width: 36px; height: 36px; border-style: dashed; animation-direction: reverse; }
+.vl-cat-spinner-helix-gate .dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  margin: -3px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  transform: rotate(calc(var(--i) * 120deg)) translateX(26px);
+  animation: vl-cat-spinner-helix-gate-dot calc(var(--loader-speed) * 1.1) ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.14s);
+}
+@keyframes vl-cat-spinner-helix-gate-ring { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes vl-cat-spinner-helix-gate-dot { 0%, 100% { opacity: .2; transform: rotate(calc(var(--i) * 120deg)) translateX(26px) scale(.6); } 50% { opacity: 1; transform: rotate(calc(var(--i) * 120deg)) translateX(18px) scale(1.15); } }`
+  },
+  {
+    id: 'dot-asteroid-field',
+    name: 'Asteroid Field Dots',
+    category: 'Dots',
+    tech: 'CSS',
+    description: 'Small particles orbit and fade in a short asteroid-field rhythm.',
+    markup: `<div class="vl-cat-dot-asteroid-field" role="img" aria-label="Asteroid field dots">
+  <span style="--x:50%;--y:50%;--r:0;--d:0"></span>
+  <span style="--x:50%;--y:50%;--r:22px;--d:1"></span>
+  <span style="--x:50%;--y:50%;--r:34px;--d:2"></span>
+  <span style="--x:50%;--y:50%;--r:46px;--d:3"></span>
+</div>`,
+    css: `.vl-cat-dot-asteroid-field {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 23%, #1f5f89);
+  border-radius: 14px;
+  background: linear-gradient(164deg, #061d31, #0b2c44 64%, #040a14);
+  position: relative;
+}
+.vl-cat-dot-asteroid-field span {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  left: var(--x);
+  top: var(--y);
+  margin: -3px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 95%, #fff 5%);
+  transform: rotate(calc(var(--d) * 90deg)) translateX(var(--r));
+  animation: vl-cat-dot-asteroid-field-hop calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+  animation-delay: calc(var(--d) * -0.15s);
+}
+@keyframes vl-cat-dot-asteroid-field-hop { 0%, 100% { opacity: .22; transform: rotate(calc(var(--d) * 90deg)) translateX(var(--r)) scale(.55); } 50% { opacity: 1; transform: rotate(calc(var(--d) * 90deg + 180deg)) translateX(calc(var(--r) - 10px)) scale(1.2); } }`
+  },
+  {
+    id: 'bar-lattice-flicker',
+    name: 'Lattice Flicker Bars',
+    category: 'Bars',
+    tech: 'CSS',
+    description: 'A micro lattice of bars flickers in rhythmic pairs and fades.',
+    markup: `<div class="vl-cat-bar-lattice-flicker" role="img" aria-label="Lattice flicker bars">
+  <span class="p" style="--h:22px;--d:0"></span>
+  <span class="p" style="--h:46px;--d:1"></span>
+  <span class="p" style="--h:62px;--d:2"></span>
+  <span class="p" style="--h:36px;--d:3"></span>
+  <span class="p" style="--h:58px;--d:4"></span>
+  <span class="p" style="--h:42px;--d:5"></span>
+</div>`,
+    css: `.vl-cat-bar-lattice-flicker {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 27%, #1d5e87);
+  border-radius: 14px;
+  display: grid;
+  gap: 7px;
+  padding: 15px;
+  grid-template-columns: repeat(6, 1fr);
+  align-items: end;
+  background: linear-gradient(186deg, #071c31, #0a2a42 64%, #040a14);
+}
+.vl-cat-bar-lattice-flicker .p {
+  width: 10px;
+  margin: 0 auto;
+  border-radius: 6px;
+  height: var(--h);
+  background: color-mix(in srgb, var(--loader-accent) 26%, #dde5ee);
+  animation: vl-cat-bar-lattice-flicker-wave calc(var(--loader-speed) * 1.15) ease-in-out infinite;
+  animation-delay: calc(var(--d) * -0.09s);
+}
+@keyframes vl-cat-bar-lattice-flicker-wave { 0%, 100% { opacity: .2; transform: scaleY(.4); } 50% { opacity: 1; transform: scaleY(1); } }`
+  },
+  {
+    id: 'shape-shard-ring',
+    name: 'Shard Ring Shape',
+    category: 'Shapes',
+    tech: 'CSS',
+    description: 'Interlocked shards rotate around shared points in a geometric loop.',
+    markup: `<div class="vl-cat-shape-shard-ring" role="img" aria-label="Shard ring shape">
+  <span class="shard a"></span>
+  <span class="shard b"></span>
+  <span class="shard c"></span>
+</div>`,
+    css: `.vl-cat-shape-shard-ring {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 28%, #1d5e8a);
+  border-radius: 14px;
+  background: radial-gradient(circle at 50% 56%, color-mix(in srgb, var(--loader-accent) 17%, transparent), transparent 47%), linear-gradient(148deg, #081f36, #0e2f4b 61%, #050c14);
+  overflow: hidden;
+  position: relative;
+}
+.vl-cat-shape-shard-ring .shard {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 46px;
+  height: 46px;
+  margin: -23px;
+  clip-path: polygon(50% 2%, 95% 43%, 95% 97%, 50% 60%, 5% 97%, 5% 43%);
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 72%, transparent);
+}
+.vl-cat-shape-shard-ring .a { animation: vl-cat-shape-shard-ring-rot calc(var(--loader-speed) * 1.5) linear infinite; }
+.vl-cat-shape-shard-ring .b { animation: vl-cat-shape-shard-ring-rot2 calc(var(--loader-speed) * 1.5) linear infinite; border-style: dashed; }
+.vl-cat-shape-shard-ring .c { width: 30px; height: 30px; margin: -15px; animation: vl-cat-shape-shard-ring-rot3 calc(var(--loader-speed) * 1.5) linear infinite; }
+@keyframes vl-cat-shape-shard-ring-rot { 0% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(.65); } 100% { transform: rotate(360deg) scale(1); } }
+@keyframes vl-cat-shape-shard-ring-rot2 { 0% { transform: rotate(360deg) scale(.8); } 50% { transform: rotate(180deg) scale(.65); } 100% { transform: rotate(0deg) scale(.8); } }
+@keyframes vl-cat-shape-shard-ring-rot3 { 0% { transform: rotate(0deg); } 50% { transform: rotate(-180deg); } 100% { transform: rotate(-360deg); } }`
+  },
+  {
+    id: 'button-flow-pulse',
+    name: 'Flow Pulse Button',
+    category: 'Buttons',
+    tech: 'CSS',
+    description: 'A compact button shell with directional flow pulses and trailing nodes.',
+    markup: `<div class="vl-cat-button-flow-pulse" role="img" aria-label="Flow pulse button">
+  <span class="frame"></span>
+  <span class="mark" style="--i:0"></span>
+  <span class="mark" style="--i:1"></span>
+  <span class="mark" style="--i:2"></span>
+  <span class="mark" style="--i:3"></span>
+</div>`,
+    css: `.vl-cat-button-flow-pulse {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 22%, #1e5f89);
+  border-radius: 14px;
+  background: linear-gradient(182deg, #071b2f, #0a2c44 63%, #040a14);
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-button-flow-pulse .frame {
+  width: 130px;
+  height: 34px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 42%, transparent);
+  border-radius: 10px;
+  animation: vl-cat-button-flow-pulse-frame calc(var(--loader-speed) * 1.3) linear infinite;
+}
+.vl-cat-button-flow-pulse .mark {
+  position: absolute;
+  top: 50%;
+  left: 28px;
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  transform: translateX(calc(var(--i) * 26px));
+  animation: vl-cat-button-flow-pulse-node calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+.vl-cat-button-flow-pulse .mark:nth-child(3) { animation-delay: -.15s; }
+.vl-cat-button-flow-pulse .mark:nth-child(4) { animation-delay: -.3s; }
+.vl-cat-button-flow-pulse .mark:nth-child(5) { animation-delay: -.45s; }
+@keyframes vl-cat-button-flow-pulse-frame { 0%, 100% { box-shadow: 0 0 0 transparent; opacity: .22; } 50% { box-shadow: 0 0 14px color-mix(in srgb, var(--loader-accent) 40%, transparent); opacity: 1; } }
+@keyframes vl-cat-button-flow-pulse-node { 0%, 100% { transform: translateX(calc(var(--i) * 26px)) scale(.55); opacity: .2; } 50% { transform: translateX(calc(var(--i) * 26px)) scale(1.2); opacity: 1; } }`
+  },
+  {
+    id: 'text-neon-banner',
+    name: 'Neon Banner Text',
+    category: 'Text',
+    tech: 'CSS Text',
+    description: 'A banner wordmark with repeated neon streaks passing along its edge.',
+    markup: `<div class="vl-cat-text-neon-banner" role="img" aria-label="Neon banner text">
+  <span>SYNC STATE</span>
+  <span class="band"></span>
+</div>`,
+    css: `.vl-cat-text-neon-banner {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 25%, #205f89);
+  border-radius: 14px;
+  background: linear-gradient(179deg, #061d34, #0a2b45 65%, #040a13);
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  color: color-mix(in srgb, var(--loader-accent) 82%, white 12%);
+  font: 900 11px/1.2 system-ui, sans-serif;
+  letter-spacing: .14em;
+}
+.vl-cat-text-neon-banner span { position: relative; z-index: 1; }
+.vl-cat-text-neon-banner .band {
+  position: absolute;
+  height: 13px;
+  left: -30px;
+  right: -30px;
+  top: 47px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--loader-accent) 50%, transparent), transparent);
+  animation: vl-cat-text-neon-banner-surge calc(var(--loader-speed) * 1.4) linear infinite;
+}
+@keyframes vl-cat-text-neon-banner-surge { 0% { transform: translateX(-220px); opacity: .2; } 50% { opacity: 1; } 100% { transform: translateX(220px); opacity: .2; } }`
+  },
+  {
+    id: 'css3d-tetra-spin',
+    name: 'Tetra Spin 3D',
+    category: 'CSS 3D',
+    tech: 'CSS 3D',
+    description: 'A three-sided tetra prism shifts along two axes with a central beat.',
+    markup: `<div class="vl-cat-css3d-tetra-spin" role="img" aria-label="Tetra spin 3D">
+  <span class="one"></span>
+  <span class="two"></span>
+  <span class="core"></span>
+</div>`,
+    css: `.vl-cat-css3d-tetra-spin {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 22%, #1f638a);
+  border-radius: 14px;
+  background: radial-gradient(circle at 50% 54%, color-mix(in srgb, var(--loader-accent) 14%, transparent), transparent 47%), linear-gradient(166deg, #081f36, #0f304f 61%, #050c14);
+  position: relative;
+  perspective: 690px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.vl-cat-css3d-tetra-spin span {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 72%, transparent);
+  transform-style: preserve-3d;
+  animation: vl-cat-css3d-tetra-spin-face calc(var(--loader-speed) * 1.3) linear infinite;
+}
+.vl-cat-css3d-tetra-spin .two { width: 44px; height: 44px; border-style: dashed; animation-direction: reverse; }
+.vl-cat-css3d-tetra-spin .core {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  animation: vl-cat-css3d-tetra-spin-core calc(var(--loader-speed) * 1.1) ease-in-out infinite;
+}
+@keyframes vl-cat-css3d-tetra-spin-face { 0% { transform: rotateX(20deg) rotateZ(0deg); } 50% { transform: rotateX(80deg) rotateZ(180deg); } 100% { transform: rotateX(140deg) rotateZ(360deg); } }
+@keyframes vl-cat-css3d-tetra-spin-core { 0%, 100% { transform: scale(.55); opacity: .3; } 50% { transform: scale(1.15); opacity: 1; } }`
+  },
+  {
+    id: 'svg-twist-segment',
+    name: 'Twist Segment SVG',
+    category: 'SVG',
+    tech: 'SVG',
+    description: 'A segmented twist motif pulses in a narrow wave with offset delays.',
+    markup: `<div class="vl-cat-svg-twist-segment" role="img" aria-label="Twist segment SVG">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>`,
+    css: `.vl-cat-svg-twist-segment {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 25%, #1e5f8a);
+  border-radius: 14px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(178deg, #071c33, #0a2d46 61%, #040a13);
+}
+.vl-cat-svg-twist-segment span {
+  width: 15px;
+  height: 30px;
+  border-radius: 6px;
+  transform: skewX(-16deg);
+  background: color-mix(in srgb, var(--loader-accent) 83%, #fff 10%);
+  animation: vl-cat-svg-twist-segment-flow calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+.vl-cat-svg-twist-segment span:nth-child(2) { animation-delay: -.1s; }
+.vl-cat-svg-twist-segment span:nth-child(3) { animation-delay: -.2s; }
+.vl-cat-svg-twist-segment span:nth-child(4) { animation-delay: -.3s; }
+@keyframes vl-cat-svg-twist-segment-flow { 0%, 100% { transform: skewX(-16deg) scaleY(.4); opacity: .2; } 50% { transform: skewX(-16deg) scaleY(1); opacity: 1; } }`
+  },
+  {
+    id: 'progress-pulse-pinnacle',
+    name: 'Pulse Pinnacle Progress',
+    category: 'Progress',
+    tech: 'CSS',
+    description: 'A pinnacle shape moves through stacked bars to express advancing checkpoints.',
+    markup: `<div class="vl-cat-progress-pulse-pinnacle" role="img" aria-label="Pulse pinnacle progress">
+  <span></span><span></span><span></span><span></span>
+</div>`,
+    css: `.vl-cat-progress-pulse-pinnacle {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1f5f8a);
+  border-radius: 14px;
+  background: linear-gradient(176deg, #071d33, #0a2b46 61%, #040a14);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 16px;
+  align-items: end;
+}
+.vl-cat-progress-pulse-pinnacle span {
+  height: 100%;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--loader-accent) 17%, #dce5ee);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-progress-pulse-pinnacle span::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateY(120%);
+  background: linear-gradient(180deg, transparent, var(--loader-accent), transparent);
+  animation: vl-cat-progress-pulse-pinnacle-surge calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+.vl-cat-progress-pulse-pinnacle span:nth-child(2)::after { animation-delay: -.2s; }
+.vl-cat-progress-pulse-pinnacle span:nth-child(3)::after { animation-delay: -.4s; }
+.vl-cat-progress-pulse-pinnacle span:nth-child(4)::after { animation-delay: -.6s; }
+@keyframes vl-cat-progress-pulse-pinnacle-surge { 0% { transform: translateY(120%); } 50% { transform: translateY(-120%); } 100% { transform: translateY(120%); } }`
+  },
+  {
+    id: 'chart-helix-lattice',
+    name: 'Helix Lattice Chart',
+    category: 'Charts',
+    tech: 'CSS',
+    description: 'Vertical columns pulse as a helix-like lattice to imply layered chart states.',
+    markup: `<div class="vl-cat-chart-helix-lattice" role="img" aria-label="Helix lattice chart">
+  <span></span><span></span><span></span><span></span>
+</div>`,
+    css: `.vl-cat-chart-helix-lattice {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1e5e8b);
+  border-radius: 14px;
+  background: linear-gradient(177deg, #071d34, #0a2943 61%, #040a13);
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px;
+  padding: 16px;
+}
+.vl-cat-chart-helix-lattice span {
+  height: 40px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--loader-accent) 18%, #dce6f0);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-chart-helix-lattice span::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--loader-accent) 80%, #fff 10%), transparent);
+  animation: vl-cat-chart-helix-lattice-lift calc(var(--loader-speed) * 1.3) ease-in-out infinite;
+}
+.vl-cat-chart-helix-lattice span:nth-child(2)::after { animation-delay: -.16s; }
+.vl-cat-chart-helix-lattice span:nth-child(3)::after { animation-delay: -.32s; }
+.vl-cat-chart-helix-lattice span:nth-child(4)::after { animation-delay: -.48s; }
+@keyframes vl-cat-chart-helix-lattice-lift { 0%, 100% { transform: translateY(110%); } 50% { transform: translateY(-110%); } }`
+  },
+  {
+    id: 'map-quad-grid-wave',
+    name: 'Quad Grid Wave Map',
+    category: 'Maps',
+    tech: 'CSS',
+    description: 'A map-like quad grid pulses in layered wave shifts.',
+    markup: `<div class="vl-cat-map-quad-grid-wave" role="img" aria-label="Quad grid wave map">
+  <span class="row r1"></span>
+  <span class="row r2"></span>
+  <span class="row r3"></span>
+  <span class="row r4"></span>
+</div>`,
+    css: `.vl-cat-map-quad-grid-wave {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 25%, #1e6189);
+  border-radius: 14px;
+  background: linear-gradient(152deg, #061b2f, #0a2a45 61%, #040a14);
+  padding: 13px;
+  display: grid;
+  gap: 9px;
+  align-content: center;
+}
+.vl-cat-map-quad-grid-wave .row {
+  height: 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--loader-accent) 18%, #dbe7ef);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-map-quad-grid-wave .row::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, var(--loader-accent), transparent);
+  animation: vl-cat-map-quad-grid-wave-ride calc(var(--loader-speed) * 1.3) ease-in-out infinite;
+}
+.vl-cat-map-quad-grid-wave .r2::after { animation-delay: -.18s; }
+.vl-cat-map-quad-grid-wave .r3::after { animation-delay: -.36s; }
+.vl-cat-map-quad-grid-wave .r4::after { animation-delay: -.54s; }
+@keyframes vl-cat-map-quad-grid-wave-ride { 0% { transform: translateX(-110%); opacity: .2; } 50% { transform: translateX(110%); opacity: 1; } 100% { transform: translateX(110%); opacity: .2; } }`
+  },
+  {
+    id: 'skeleton-panel-wave',
+    name: 'Panel Wave Skeleton',
+    category: 'Skeletons',
+    tech: 'Vanilla CSS',
+    description: 'Panel blocks fade and pulse in alternating waves across a lightweight layout.',
+    markup: `<div class="vl-cat-skeleton-panel-wave" role="img" aria-label="Panel wave skeleton">
+  <span class="panel a"></span>
+  <span class="panel b"></span>
+  <span class="panel c"></span>
+  <span class="panel b"></span>
+</div>`,
+    css: `.vl-cat-skeleton-panel-wave {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 22%, #d9e5ef);
+  border-radius: 14px;
+  padding: 13px;
+  display: grid;
+  gap: 8px;
+  background: #fff;
+}
+.vl-cat-skeleton-panel-wave .panel {
+  height: 12px;
+  border-radius: 7px;
+  position: relative;
+  overflow: hidden;
+  background: #e8edf6;
+}
+.vl-cat-skeleton-panel-wave .a { width: 85%; }
+.vl-cat-skeleton-panel-wave .b { width: 100%; }
+.vl-cat-skeleton-panel-wave .c { width: 62%; }
+.vl-cat-skeleton-panel-wave .panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-110%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.9), transparent);
+  animation: vl-cat-skeleton-panel-wave-shimmer calc(var(--loader-speed) * 1.25) linear infinite;
+}
+.vl-cat-skeleton-panel-wave .panel:nth-child(2)::after { animation-delay: -.2s; }
+.vl-cat-skeleton-panel-wave .panel:nth-child(3)::after { animation-delay: -.4s; }
+.vl-cat-skeleton-panel-wave .panel:nth-child(4)::after { animation-delay: -.6s; }
+@keyframes vl-cat-skeleton-panel-wave-shimmer { 0% { transform: translateX(-110%); } 50% { transform: translateX(110%); } 100% { transform: translateX(110%); } }`
+  },
+  {
+    id: 'operation-stream-lattice',
+    name: 'Stream Lattice Operations',
+    category: 'Operations',
+    tech: 'CSS',
+    description: 'Streaming lattice nodes pulse as a central bar alternates energy.',
+    markup: `<div class="vl-cat-operation-stream-lattice" role="img" aria-label="Stream lattice operations">
+  <span class="stream"></span>
+  <span class="p" style="--x:38px;--d:0"></span>
+  <span class="p" style="--x:88px;--d:1"></span>
+  <span class="p" style="--x:138px;--d:2"></span>
+</div>`,
+    css: `.vl-cat-operation-stream-lattice {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 22%, #1f5e8a);
+  border-radius: 14px;
+  background: linear-gradient(164deg, #071a30, #0b2d45 64%, #040a13);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-operation-stream-lattice .stream {
+  position: absolute;
+  left: 26px;
+  right: 26px;
+  top: 50%;
+  height: 7px;
+  margin-top: -3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--loader-accent) 28%, #dce5ef);
+  animation: vl-cat-operation-stream-lattice-bar calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+.vl-cat-operation-stream-lattice .p {
+  position: absolute;
+  top: 50%;
+  left: var(--x);
+  width: 8px;
+  height: 8px;
+  margin: -4px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  animation: vl-cat-operation-stream-lattice-node calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+  animation-delay: calc(var(--d) * -0.2s);
+}
+@keyframes vl-cat-operation-stream-lattice-bar { 0%, 100% { opacity: .24; } 50% { opacity: 1; } }
+@keyframes vl-cat-operation-stream-lattice-node { 0%, 100% { transform: scale(.5); opacity: .2; } 50% { transform: scale(1.25); opacity: 1; } }`
+  },
+  {
+    id: 'matrix-cascade-omega-loop',
+    name: 'Cascade Omega Loop Matrix',
+    category: 'Matrix',
+    tech: 'CSS',
+    description: 'A looping omega arc drives a cascade of radial matrix nodes.',
+    markup: `<div class="vl-cat-matrix-cascade-omega-loop" role="img" aria-label="Cascade omega loop matrix">
+  <span class="core"></span>
+  <span class="ring" style="--i:0"></span>
+  <span class="ring" style="--i:1"></span>
+  <span class="ring" style="--i:2"></span>
+  <span class="ring" style="--i:3"></span>
+</div>`,
+    css: `.vl-cat-matrix-cascade-omega-loop {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1f6288);
+  border-radius: 14px;
+  background: radial-gradient(circle at 50% 52%, color-mix(in srgb, var(--loader-accent) 16%, transparent), transparent 44%), linear-gradient(172deg, #061c33, #0b2942 63%, #040a14);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-matrix-cascade-omega-loop .core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 11px;
+  height: 11px;
+  margin: -5px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 90%, white 10%);
+  animation: vl-cat-matrix-cascade-omega-loop-core calc(var(--loader-speed) * 1.2) linear infinite;
+}
+.vl-cat-matrix-cascade-omega-loop .ring {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: 50%;
+  top: 50%;
+  margin: -6px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 70%, transparent);
+  transform: rotate(calc(var(--i) * 90deg)) translateY(-22px);
+  animation: vl-cat-matrix-cascade-omega-loop-node calc(var(--loader-speed) * 1.15) ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.2s);
+}
+.vl-cat-matrix-cascade-omega-loop .ring:nth-child(3) { border-style: dashed; transform: rotate(40deg) translateY(-31px); }
+.vl-cat-matrix-cascade-omega-loop .ring:nth-child(4) { transform: rotate(80deg) translateY(-22px); animation-duration: calc(var(--loader-speed) * 0.85); }
+.vl-cat-matrix-cascade-omega-loop .ring:nth-child(5) { transform: rotate(120deg) translateY(-34px); animation-direction: reverse; }
+@keyframes vl-cat-matrix-cascade-omega-loop-core { 0%, 100% { transform: scale(.65); opacity: .35; } 50% { transform: scale(1.1); opacity: 1; } }
+@keyframes vl-cat-matrix-cascade-omega-loop-node { 0%, 100% { transform: rotate(calc(var(--i) * 90deg)) translateY(-22px) scale(.5); opacity: .2; } 50% { transform: rotate(calc(var(--i) * 90deg + 180deg)) translateY(-16px) scale(1); opacity: 1; } }`
+  },
+  {
+    id: 'common-ui-shell-drift',
+    name: 'Common Shell Drift',
+    category: 'Common UI',
+    tech: 'CSS',
+    description: 'A compact shell drifts with node pulses for generic UI loading states.',
+    markup: `<div class="vl-cat-common-ui-shell-drift" role="img" aria-label="Common shell drift">
+  <span class="board"></span>
+  <span class="spark" style="--x:28px;--y:26px"></span>
+  <span class="spark" style="--x:72px;--y:45px"></span>
+  <span class="spark" style="--x:116px;--y:34px"></span>
+  <span class="spark" style="--x:160px;--y:58px"></span>
+</div>`,
+    css: `.vl-cat-common-ui-shell-drift {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 22%, #dce5ef);
+  border-radius: 14px;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-common-ui-shell-drift .board {
+  position: absolute;
+  inset: 12px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 28%, #d9e3ee);
+  border-radius: 10px;
+}
+.vl-cat-common-ui-shell-drift .spark {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 8px;
+  height: 8px;
+  margin: -4px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  animation: vl-cat-common-ui-shell-drift-spark calc(var(--loader-speed) * 1.25) ease-in-out infinite;
+}
+.vl-cat-common-ui-shell-drift .spark:nth-child(3) { animation-delay: -.18s; }
+.vl-cat-common-ui-shell-drift .spark:nth-child(4) { animation-delay: -.36s; }
+.vl-cat-common-ui-shell-drift .spark:nth-child(5) { animation-delay: -.54s; }
+.vl-cat-common-ui-shell-drift .spark:nth-child(6) { animation-delay: -.72s; }
+@keyframes vl-cat-common-ui-shell-drift-spark { 0%, 100% { opacity: .2; transform: scale(.55); } 50% { opacity: 1; transform: scale(1.25); } }`
+  },
+  {
+    id: 'application-fiber-stream',
+    name: 'Fiber Stream Application',
+    category: 'Application',
+    tech: 'CSS',
+    description: 'An application shell with two fiber streams and a central sync pulse.',
+    markup: `<div class="vl-cat-application-fiber-stream" role="img" aria-label="Fiber stream application">
+  <span class="frame"></span>
+  <span class="fiber a"></span>
+  <span class="fiber b"></span>
+  <span class="node"></span>
+</div>`,
+    css: `.vl-cat-application-fiber-stream {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 21%, #1e5f88);
+  border-radius: 14px;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-application-fiber-stream .frame {
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  top: 30px;
+  height: 30px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #dbe6f2);
+  border-radius: 9px;
+}
+.vl-cat-application-fiber-stream .fiber {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: 50%;
+  border-radius: 50%;
+  margin-top: -4px;
+  left: 50%;
+  animation: vl-cat-application-fiber-stream-fiber calc(var(--loader-speed) * 1.5) linear infinite;
+}
+.vl-cat-application-fiber-stream .a { animation-delay: -.3s; }
+.vl-cat-application-fiber-stream .b { animation-delay: -.6s; }
+.vl-cat-application-fiber-stream .node {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin: -5px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 90%, white 10%);
+  animation: vl-cat-application-fiber-stream-node calc(var(--loader-speed) * 1.4) ease-in-out infinite;
+}
+@keyframes vl-cat-application-fiber-stream-fiber { 0% { transform: rotate(0deg) translateX(28px); } 50% { transform: rotate(180deg) translateX(18px); } 100% { transform: rotate(360deg) translateX(28px); } }
+@keyframes vl-cat-application-fiber-stream-node { 0%, 100% { transform: scale(.55); opacity: .3; } 50% { transform: scale(1.2); opacity: 1; } }`
+  },
+  {
+    id: 'holographic-prism-halo',
+    name: 'Prism Halo Holographic',
+    category: 'Holographic',
+    tech: 'CSS',
+    description: 'A prism halo rotates with layered glow facets in a compact holographic field.',
+    markup: `<div class="vl-cat-holographic-prism-halo" role="img" aria-label="Prism halo holographic">
+  <span class="facet a"></span>
+  <span class="facet b"></span>
+  <span class="facet c"></span>
+  <span class="core"></span>
+</div>`,
+    css: `.vl-cat-holographic-prism-halo {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1f5e87);
+  border-radius: 14px;
+  background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--loader-accent) 16%, transparent), transparent 45%), linear-gradient(166deg, #081d37, #0f324c 60%, #050d14);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-holographic-prism-halo .facet {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 70px;
+  height: 10px;
+  margin: -5px 0 0 -35px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--loader-accent) 34%, transparent);
+  transform-origin: center;
+  animation: vl-cat-holographic-prism-halo-facet calc(var(--loader-speed) * 1.5) linear infinite;
+}
+.vl-cat-holographic-prism-halo .b { animation-delay: -.3s; width: 58px; margin-left: -29px; }
+.vl-cat-holographic-prism-halo .c { animation-delay: -.6s; width: 46px; margin-left: -23px; }
+.vl-cat-holographic-prism-halo .core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 11px;
+  height: 11px;
+  margin: -5px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  box-shadow: 0 0 16px var(--loader-accent);
+  animation: vl-cat-holographic-prism-halo-core calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+@keyframes vl-cat-holographic-prism-halo-facet { 0% { transform: translate(-50%, -50%) rotate(0deg) scale(.6); } 50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.05); } 100% { transform: translate(-50%, -50%) rotate(360deg) scale(.6); } }
+@keyframes vl-cat-holographic-prism-halo-core { 0%, 100% { transform: scale(.6); opacity: .35; } 50% { transform: scale(1.15); opacity: 1; } }`
   }
 ];

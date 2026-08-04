@@ -293,5 +293,64 @@ export const matrixPack9LoadersA = [
   0%, 100% { transform: scale(.56); opacity: .24; }
   50% { transform: scale(1.08); opacity: 1; }
 }`
+  },
+  {
+    id: 'matrix-aurora-helix-grid',
+    name: 'Aurora Helix Grid',
+    category: 'Matrix',
+    tech: 'CSS',
+    description: 'Two opposing helix streams braid through a dense grid and resolve into a synchronized aurora pulse.',
+    markup: `<div class="vl-matrix9-aurora-helix" aria-hidden="true">
+      <span class="vl-matrix9-helix-column" style="--x:12px;--d:0;--a:42deg"></span>
+      <span class="vl-matrix9-helix-column" style="--x:41px;--d:.1;--a:46deg"></span>
+      <span class="vl-matrix9-helix-column" style="--x:70px;--d:.2;--a:52deg"></span>
+      <span class="vl-matrix9-helix-column" style="--x:99px;--d:.3;--a:58deg"></span>
+      <span class="vl-matrix9-helix-column" style="--x:128px;--d:.4;--a:64deg"></span>
+      <span class="vl-matrix9-helix-column" style="--x:157px;--d:.5;--a:68deg"></span>
+      <span class="vl-matrix9-aurora-helix-core"></span>
+    </div>`,
+    css: `.vl-matrix9-aurora-helix {
+  width: 190px;
+  height: 108px;
+  position: relative;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1f5a87);
+  border-radius: 14px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 56%, color-mix(in srgb, var(--loader-accent) 16%, transparent), #05111f 62%);
+}
+.vl-matrix9-helix-column {
+  position: absolute;
+  top: 50%;
+  left: var(--x);
+  width: 8px;
+  height: 68px;
+  margin-top: -34px;
+  transform-origin: 50% 50%;
+  border-radius: 5px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--loader-accent) 90%, #f3f7fb), transparent);
+  animation: vl-matrix9-aurora-helix-spin calc(var(--loader-speed) * 1.8) linear infinite;
+  animation-delay: calc(var(--d) * 1s);
+}
+.vl-matrix9-aurora-helix-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  margin: -4px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  animation: vl-matrix9-aurora-helix-core calc(var(--loader-speed) * 1.05) ease-in-out infinite;
+}
+@keyframes vl-matrix9-aurora-helix-spin {
+  0% { transform: rotate(var(--a)) translateY(-5px) scale(.48); opacity: .18; }
+  45% { opacity: .9; transform: rotate(calc(var(--a) + 180deg)) translateY(5px) scale(1); }
+  100% { transform: rotate(calc(var(--a) + 360deg)) translateY(-5px) scale(.48); opacity: .18; }
+}
+@keyframes vl-matrix9-aurora-helix-core {
+  0%, 100% { transform: scale(.52); opacity: .24; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+}`
   }
 ];

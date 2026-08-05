@@ -184,5 +184,64 @@ AppLoader.setIndeterminate = function (message = 'Working…') {
     marker.textContent = stepIndex < activeIndex ? '✓' : '';
   });
 };`
-  }
+  },
+  {
+    id: 'progress-ring-current',
+    name: 'Current Ring Progress',
+    category: 'Progress',
+    tech: 'CSS',
+    description: 'Progress rings exchange energy along a ring of dots and a moving core.',
+    markup: `<div class="vl-cat-progress-ring-current" role="img" aria-label="Current ring progress">
+  <span class="dot d1"></span>
+  <span class="dot d2"></span>
+  <span class="dot d3"></span>
+  <span class="dot d4"></span>
+  <span class="dot d5"></span>
+  <span class="core"></span>
+</div>`,
+    css: `.vl-cat-progress-ring-current {
+  width: 108px;
+  height: 108px;
+  margin: 0 auto;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 22%, #1f5582);
+  border-radius: 50%;
+  position: relative;
+  background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--loader-accent) 12%, transparent), transparent 53%), linear-gradient(172deg, #061a2c, #0b2841 62%, #040a14);
+}
+.vl-cat-progress-ring-current .dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  margin: -4px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  animation: vl-cat-progress-ring-current-dots calc(var(--loader-speed) * 1.14) linear infinite;
+}
+.vl-cat-progress-ring-current .d1 { transform: rotate(0deg) translateX(44px); animation-delay: 0s; }
+.vl-cat-progress-ring-current .d2 { transform: rotate(72deg) translateX(44px); animation-delay: -0.2s; }
+.vl-cat-progress-ring-current .d3 { transform: rotate(144deg) translateX(44px); animation-delay: -0.4s; }
+.vl-cat-progress-ring-current .d4 { transform: rotate(216deg) translateX(44px); animation-delay: -0.6s; }
+.vl-cat-progress-ring-current .d5 { transform: rotate(288deg) translateX(44px); animation-delay: -0.8s; }
+.vl-cat-progress-ring-current .core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin: -5px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 85%, #fff);
+  animation: vl-cat-progress-ring-current-core calc(var(--loader-speed) * 1.05) ease-in-out infinite;
+}
+@keyframes vl-cat-progress-ring-current-dots {
+  to { transform: rotate(360deg) translateX(44px) scale(1.1); opacity: .25; }
+}
+@keyframes vl-cat-progress-ring-current-core {
+  0%,100% { transform: scale(.6); opacity: .35; }
+  50% { transform: scale(1.1); opacity: 1; }
+}`
+  },
+
 ];

@@ -1065,5 +1065,57 @@ export const functionalLoaders = [
   root.querySelector('.vl-reconcile-exceptions').textContent = exceptions.toLocaleString();
   root.querySelector('.vl-reconcile-track span').style.width = progress + '%';
 };`
-  }
+  },
+  {
+    id: 'application-pipeline-pulse',
+    name: 'Pipeline Pulse Application',
+    category: 'Application',
+    tech: 'CSS',
+    description: 'A compact pipeline shows three service phases as they pass through.',
+    markup: `<div class="vl-cat-application-pipeline-pulse" role="img" aria-label="Pipeline pulse application">
+  <span class="seg s1"></span>
+  <span class="seg s2"></span>
+  <span class="seg s3"></span>
+  <span class="dot d1"></span>
+  <span class="dot d2"></span>
+  <span class="dot d3"></span>
+</div>`,
+    css: `.vl-cat-application-pipeline-pulse {
+  width: 188px;
+  height: 40px;
+  margin: 34px auto;
+  position: relative;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 28%, #1f5f8a);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.vl-cat-application-pipeline-pulse .seg {
+  position: absolute;
+  inset: 0;
+  opacity: .24;
+  background: color-mix(in srgb, var(--loader-accent) 35%, transparent);
+}
+.vl-cat-application-pipeline-pulse .s1 { clip-path: polygon(0 0, 36% 0, 31% 100%, 0 100%); }
+.vl-cat-application-pipeline-pulse .s2 { clip-path: polygon(35% 0, 66% 0, 61% 100%, 30% 100%); }
+.vl-cat-application-pipeline-pulse .s3 { clip-path: polygon(65% 0, 100% 0, 100% 100%, 60% 100%); }
+.vl-cat-application-pipeline-pulse .dot {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin: -5px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  animation: vl-cat-application-pipeline-pulse-dot calc(var(--loader-speed) * 1.2) linear infinite;
+}
+.vl-cat-application-pipeline-pulse .d1 { animation-delay: -0.2s; }
+.vl-cat-application-pipeline-pulse .d2 { animation-delay: -0.4s; }
+.vl-cat-application-pipeline-pulse .d3 { animation-delay: -0.6s; }
+@keyframes vl-cat-application-pipeline-pulse-dot {
+  0% { left: 8%; opacity: .2; }
+  50% { left: 92%; opacity: 1; }
+  100% { left: 8%; opacity: .2; }
+}`
+  },
+
 ];

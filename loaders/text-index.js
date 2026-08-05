@@ -9,6 +9,7 @@ import { textPack4LoadersA } from './text-pack-4-a.js';
 import { textPack4LoadersB } from './text-pack-4-b.js';
 import { textPack5LoadersA } from './text-pack-5-a.js';
 import { textPack5LoadersB } from './text-pack-5-b.js';
+import { textPack5LoadersC } from './text-pack-5-c.js';
 
 export const textPackLoaders = [
   ...textLoaders,
@@ -21,5 +22,6 @@ export const textPackLoaders = [
   ...textPack4LoadersA,
   ...textPack4LoadersB,
   ...textPack5LoadersA,
-  ...textPack5LoadersB
+  ...textPack5LoadersB,
+  ...textPack5LoadersC,
 ];

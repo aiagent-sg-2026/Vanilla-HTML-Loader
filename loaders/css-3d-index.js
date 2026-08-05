@@ -13,6 +13,7 @@ import { css3dPack7LoadersA } from './css-3d-pack-7-a.js';
 import { css3dPack7LoadersB } from './css-3d-pack-7-b.js';
 import { css3dPack8LoadersA } from './css-3d-pack-8-a.js';
 import { css3dPack8LoadersB } from './css-3d-pack-8-b.js';
+import { css3dPack8LoadersC } from './css-3d-pack-8-c.js';
 
 export const css3dPackLoaders = [
   ...css3dLoaders,
@@ -29,5 +30,6 @@ export const css3dPackLoaders = [
   ...css3dPack7LoadersA,
   ...css3dPack7LoadersB,
   ...css3dPack8LoadersA,
-  ...css3dPack8LoadersB
+  ...css3dPack8LoadersB,
+  ...css3dPack8LoadersC,
 ];

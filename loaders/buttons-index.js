@@ -4,6 +4,7 @@ import { buttonsPack2LoadersA } from './buttons-pack-2-a.js';
 import { buttonsPack2LoadersB } from './buttons-pack-2-b.js';
 import { buttonsPack3LoadersA } from './buttons-pack-3-a.js';
 import { buttonsPack3LoadersB } from './buttons-pack-3-b.js';
+import { buttonsPack4LoadersA } from './buttons-pack-4-a.js';
 
 export const buttonPackLoaders = [
   ...buttonsPack1LoadersA,
@@ -11,5 +12,6 @@ export const buttonPackLoaders = [
   ...buttonsPack2LoadersA,
   ...buttonsPack2LoadersB,
   ...buttonsPack3LoadersA,
-  ...buttonsPack3LoadersB
+  ...buttonsPack3LoadersB,
+  ...buttonsPack4LoadersA,
 ];

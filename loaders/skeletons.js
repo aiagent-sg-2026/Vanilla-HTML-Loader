@@ -48,5 +48,47 @@ export const skeletonLoaders = [
 .vl-table-row:nth-child(3) span::after { animation-delay: .12s; }
 .vl-table-row:nth-child(4) span::after { animation-delay: .24s; }
 @keyframes vl-table-shimmer { to { transform: translateX(110%); } }`
-  }
+  },
+  {
+    id: 'skeleton-rhythm-grid',
+    name: 'Rhythm Grid Skeleton',
+    category: 'Skeletons',
+    tech: 'CSS',
+    description: 'Skeleton blocks pulse in a rhythmic wave across a grid.',
+    markup: `<div class="vl-cat-skeleton-rhythm-grid" role="img" aria-label="Rhythm grid skeleton">
+  <span class="a"></span><span class="b"></span><span class="c"></span>
+  <span class="d"></span><span class="e"></span><span class="f"></span>
+</div>`,
+    css: `.vl-cat-skeleton-rhythm-grid {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1f5a89);
+  border-radius: 14px;
+  position: relative;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  align-content: center;
+  background: linear-gradient(180deg, #f8fbff, #f0f5fa);
+}
+.vl-cat-skeleton-rhythm-grid span {
+  width: 46px;
+  height: 18px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--loader-accent) 28%, #d7e2ef);
+  animation: vl-cat-skeleton-rhythm-grid-pulse calc(var(--loader-speed) * 1.1) ease-in-out infinite;
+}
+.vl-cat-skeleton-rhythm-grid .a { animation-delay: 0s; }
+.vl-cat-skeleton-rhythm-grid .b { animation-delay: -0.14s; }
+.vl-cat-skeleton-rhythm-grid .c { animation-delay: -0.28s; }
+.vl-cat-skeleton-rhythm-grid .d { animation-delay: -0.42s; }
+.vl-cat-skeleton-rhythm-grid .e { animation-delay: -0.56s; }
+.vl-cat-skeleton-rhythm-grid .f { animation-delay: -0.7s; }
+@keyframes vl-cat-skeleton-rhythm-grid-pulse {
+  0%,100% { opacity: .32; }
+  50% { opacity: .92; }
+}`
+  },
+
 ];

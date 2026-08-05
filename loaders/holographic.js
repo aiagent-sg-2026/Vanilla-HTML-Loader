@@ -156,7 +156,63 @@ const baseLoaders = [
 @media (prefers-reduced-motion: reduce) {
   .vl-neural-plane, .vl-neural-signal path, .vl-neural-nodes circle { animation-play-state: paused; }
 }`
+  },
+  {
+    id: 'holographic-orbit-ribbon',
+    name: 'Orbit Ribbon Holographic',
+    category: 'Holographic',
+    tech: 'CSS',
+    description: 'Ribbons orbit in layered planes with subtle alpha flicker.',
+    markup: `<div class="vl-cat-holographic-orbit-ribbon" role="img" aria-label="Orbit ribbon holographic">
+  <span class="r1"></span>
+  <span class="r2"></span>
+  <span class="r3"></span>
+  <span class="core"></span>
+</div>`,
+    css: `.vl-cat-holographic-orbit-ribbon {
+  width: 108px;
+  height: 108px;
+  margin: 0 auto;
+  border-radius: 50%;
+  position: relative;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 22%, #1f5f8d);
+  background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--loader-accent) 18%, transparent), transparent 48%), linear-gradient(170deg, #071d31, #0f3045 68%, #040a13);
+  overflow: hidden;
+}
+.vl-cat-holographic-orbit-ribbon span {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 8px;
+  bottom: 8px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 50%, transparent);
+  animation: vl-cat-holographic-orbit-ribbon-spin calc(var(--loader-speed) * 1.5) linear infinite;
+}
+.vl-cat-holographic-orbit-ribbon .r1 { animation-delay: 0s; opacity: .58; }
+.vl-cat-holographic-orbit-ribbon .r2 { inset: 20px; animation-delay: -.5s; border-style: dashed; }
+.vl-cat-holographic-orbit-ribbon .r3 { inset: 30px; animation-delay: -1s; }
+.vl-cat-holographic-orbit-ribbon .core {
+  left: 47px;
+  right: 47px;
+  top: 47px;
+  bottom: 47px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 84%, white 16%);
+  border: 0;
+  animation: vl-cat-holographic-orbit-ribbon-core calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+@keyframes vl-cat-holographic-orbit-ribbon-spin {
+  0% { transform: rotate(0deg); opacity: .35; }
+  50% { transform: rotate(180deg); opacity: .85; }
+  100% { transform: rotate(360deg); opacity: .35; }
+}
+@keyframes vl-cat-holographic-orbit-ribbon-core {
+  0%,100% { transform: scale(.62); opacity: .3; }
+  50% { transform: scale(1.05); opacity: 1; }
+}`
   }
+
 ];
 
 export const holographicLoaders = [...baseLoaders, ...holographicPack2Loaders];

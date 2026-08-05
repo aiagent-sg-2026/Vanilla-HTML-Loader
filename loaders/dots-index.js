@@ -5,6 +5,7 @@ import { dotsPack3LoadersA } from './dots-pack-3-a.js';
 import { dotsPack3LoadersB } from './dots-pack-3-b.js';
 import { dotsPack4LoadersA } from './dots-pack-4-a.js';
 import { dotsPack4LoadersB } from './dots-pack-4-b.js';
+import { dotsPack4LoadersC } from './dots-pack-4-c.js';
 
 export const dotPackLoaders = [
   ...dotLoaders,
@@ -13,5 +14,6 @@ export const dotPackLoaders = [
   ...dotsPack3LoadersA,
   ...dotsPack3LoadersB,
   ...dotsPack4LoadersA,
-  ...dotsPack4LoadersB
+  ...dotsPack4LoadersB,
+  ...dotsPack4LoadersC,
 ];

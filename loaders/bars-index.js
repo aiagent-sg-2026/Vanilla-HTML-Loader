@@ -5,6 +5,7 @@ import { barsPack3LoadersA } from './bars-pack-3-a.js';
 import { barsPack3LoadersB } from './bars-pack-3-b.js';
 import { barsPack4LoadersA } from './bars-pack-4-a.js';
 import { barsPack4LoadersB } from './bars-pack-4-b.js';
+import { barsPack5LoadersA } from './bars-pack-5-a.js';
 
 export const barPackLoaders = [
   ...barLoaders,
@@ -13,5 +14,6 @@ export const barPackLoaders = [
   ...barsPack3LoadersA,
   ...barsPack3LoadersB,
   ...barsPack4LoadersA,
-  ...barsPack4LoadersB
+  ...barsPack4LoadersB,
+  ...barsPack5LoadersA,
 ];

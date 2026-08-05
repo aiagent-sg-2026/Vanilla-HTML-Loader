@@ -239,5 +239,54 @@ export const commonControlLoaders = [
   const text = loaderElement.querySelector('.vl-select-loader-text');
   if (text) text.textContent = message || 'Loading options…';
 };`
-  }
+  },
+  {
+    id: 'common-ui-chip-lattice',
+    name: 'Chip Lattice Common UI',
+    category: 'Common UI',
+    tech: 'CSS',
+    description: 'A chip row cycles highlights across a lattice-like arrangement.',
+    markup: `<div class="vl-cat-common-ui-chip-lattice" role="img" aria-label="Chip lattice common UI">
+  <span class="chip"></span>
+  <span class="chip"></span>
+  <span class="chip"></span>
+  <span class="chip"></span>
+</div>`,
+    css: `.vl-cat-common-ui-chip-lattice {
+  width: 190px;
+  height: 40px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 28%, #1f6188);
+  border-radius: 999px;
+  margin: 34px auto;
+  padding: 0 10px;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+.vl-cat-common-ui-chip-lattice .chip {
+  flex: 1;
+  height: 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--loader-accent) 20%, #dbe8f2);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-common-ui-chip-lattice .chip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, var(--loader-accent), transparent);
+  animation: vl-cat-common-ui-chip-lattice-wave calc(var(--loader-speed) * 1.15) ease-in-out infinite;
+}
+.vl-cat-common-ui-chip-lattice .chip:nth-child(2)::after { animation-delay: -.2s; }
+.vl-cat-common-ui-chip-lattice .chip:nth-child(3)::after { animation-delay: -.4s; }
+.vl-cat-common-ui-chip-lattice .chip:nth-child(4)::after { animation-delay: -.6s; }
+@keyframes vl-cat-common-ui-chip-lattice-wave {
+  0% { transform: translateX(-105%); opacity: 0; }
+  30% { opacity: .35; }
+  50% { transform: translateX(105%); opacity: 1; }
+  51%, 100% { opacity: .1; }
+}`
+  },
+
 ];

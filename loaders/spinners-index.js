@@ -9,6 +9,7 @@ import { spinnersPack5LoadersA } from './spinners-pack-5-a.js';
 import { spinnersPack5LoadersB } from './spinners-pack-5-b.js';
 import { spinnersPack6LoadersA } from './spinners-pack-6-a.js';
 import { spinnersPack6LoadersB } from './spinners-pack-6-b.js';
+import { spinnersPack6LoadersC } from './spinners-pack-6-c.js';
 
 export const spinnerPackLoaders = [
   ...spinnerLoaders,
@@ -21,5 +22,6 @@ export const spinnerPackLoaders = [
   ...spinnersPack5LoadersA,
   ...spinnersPack5LoadersB,
   ...spinnersPack6LoadersA,
-  ...spinnersPack6LoadersB
+  ...spinnersPack6LoadersB,
+  ...spinnersPack6LoadersC,
 ];

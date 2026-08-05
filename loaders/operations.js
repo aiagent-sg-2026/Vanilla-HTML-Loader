@@ -2580,5 +2580,57 @@ AppLoader.setLatency = function (value) {
   const latencyEl = root.querySelector('.vl-system-latency');
   latencyEl && (latencyEl.textContent = 'p95: ' + latency + 'ms');
 };`
-  }
+  },
+  {
+    id: 'operation-shield-loop',
+    name: 'Shield Loop Operations',
+    category: 'Operations',
+    tech: 'CSS',
+    description: 'Operational pulses pass through shield checkpoints and return.',
+    markup: `<div class="vl-cat-operation-shield-loop" role="img" aria-label="Shield loop operations">
+  <span class="shield"></span>
+  <span class="point p1"></span>
+  <span class="point p2"></span>
+  <span class="point p3"></span>
+</div>`,
+    css: `.vl-cat-operation-shield-loop {
+  width: 108px;
+  height: 108px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 26%, #1f5b8b);
+  position: relative;
+  background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--loader-accent) 12%, transparent), transparent 53%), linear-gradient(160deg, #061b2f, #0b2640 66%, #040a13);
+}
+.vl-cat-operation-shield-loop .shield {
+  position: absolute;
+  inset: 24px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 50%, transparent);
+  border-style: dashed;
+  animation: vl-cat-operation-shield-loop-spin calc(var(--loader-speed) * 1.1) linear infinite;
+}
+.vl-cat-operation-shield-loop .point {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  margin: -4px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  animation: vl-cat-operation-shield-loop-beat calc(var(--loader-speed) * 1.1) ease-in-out infinite;
+}
+ .vl-cat-operation-shield-loop .p1 { --r: 45; animation-delay: 0s; }
+ .vl-cat-operation-shield-loop .p2 { --r: 165; animation-delay: -.35s; }
+ .vl-cat-operation-shield-loop .p3 { --r: 285; animation-delay: -.7s; }
+@keyframes vl-cat-operation-shield-loop-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes vl-cat-operation-shield-loop-beat {
+  0%,100% { opacity: .24; transform: rotate(calc(var(--r) * 1deg)) translateX(42px) scale(.52); }
+  50% { opacity: 1; transform: rotate(calc(var(--r) * 1deg)) translateX(42px) scale(1.13); }
+}`
+  },
+
 ];

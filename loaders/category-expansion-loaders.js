@@ -7870,5 +7870,418 @@ export const categoryExpansionLoaders = [
   0%, 100% { opacity: .42; transform: scaleY(.7); }
   50% { opacity: 1; transform: scaleY(1.05); }
 }`
+  },
+  {
+    id: 'spinner-aurora-stretch',
+    name: 'Aurora Stretch Spinner',
+    category: 'Spinners',
+    tech: 'CSS',
+    description: 'Dual arcs stretch and snap in mirrored arcs, simulating an aurora loop.',
+    markup: `<div class="vl-cat-spinner-aurora-stretch" role="img" aria-label="Aurora stretch spinner">
+  <span class="arc arc-a"></span>
+  <span class="arc arc-b"></span>
+  <span class="dot d"></span>
+</div>`,
+    css: `.vl-cat-spinner-aurora-stretch {
+  width: 92px;
+  height: 92px;
+  position: relative;
+}
+.vl-cat-spinner-aurora-stretch .arc,
+.vl-cat-spinner-aurora-stretch .dot {
+  position: absolute;
+}
+.vl-cat-spinner-aurora-stretch .arc {
+  inset: 12px;
+  border-radius: 999px;
+  border: 6px solid;
+  border-color: transparent transparent color-mix(in srgb, var(--loader-accent) 70%, #dce9f7);
+  border-top-color: var(--loader-accent);
+  border-right-color: color-mix(in srgb, var(--loader-accent) 35%, #ecf4ff);
+  animation: vl-cat-spinner-aurora-stretch-arc calc(var(--loader-speed) * 1.2) linear infinite;
+}
+.vl-cat-spinner-aurora-stretch .arc-b {
+  inset: 24px;
+  opacity: .72;
+  border-left-color: color-mix(in srgb, var(--loader-accent) 68%, #f3f8ff);
+  border-top-color: transparent;
+  animation-duration: calc(var(--loader-speed) * .85);
+  animation-direction: reverse;
+}
+.vl-cat-spinner-aurora-stretch .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  top: 4px;
+  left: 42px;
+  animation: vl-cat-spinner-aurora-stretch-dot calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+@keyframes vl-cat-spinner-aurora-stretch-arc {
+  to { transform: rotate(360deg); }
+}
+@keyframes vl-cat-spinner-aurora-stretch-dot {
+  0% { opacity: .3; transform: translateY(84px) scale(.5); }
+  50% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: .3; transform: translateY(-5px) scale(.5); }
+}`
+  },
+  {
+    id: 'dots-crystal-grid',
+    name: 'Crystal Grid Dots',
+    category: 'Dots',
+    tech: 'CSS',
+    description: 'Hex-like dot pairs flash in a compact grid for a crystal shimmer effect.',
+    markup: `<div class="vl-cat-dots-crystal-grid" role="img" aria-label="Crystal grid dots loader">
+  <span class="dot d1"></span>
+  <span class="dot d2"></span>
+  <span class="dot d3"></span>
+  <span class="dot d4"></span>
+  <span class="dot d5"></span>
+  <span class="dot d6"></span>
+</div>`,
+    css: `.vl-cat-dots-crystal-grid {
+  width: 96px;
+  height: 56px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.vl-cat-dots-crystal-grid .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  justify-self: center;
+  align-self: center;
+  background: color-mix(in srgb, var(--loader-accent) 84%, #dfe8f5);
+  animation: vl-cat-dots-crystal-grid-flash calc(var(--loader-speed) * .9) ease-in-out infinite;
+}
+.vl-cat-dots-crystal-grid .d2 { animation-delay: -.08s; }
+.vl-cat-dots-crystal-grid .d3 { animation-delay: -.16s; }
+.vl-cat-dots-crystal-grid .d4 { animation-delay: -.24s; }
+.vl-cat-dots-crystal-grid .d5 { animation-delay: -.32s; }
+.vl-cat-dots-crystal-grid .d6 { animation-delay: -.4s; }
+@keyframes vl-cat-dots-crystal-grid-flash {
+  0%, 100% { opacity: .35; transform: scale(.55); }
+  50% { opacity: 1; transform: scale(1.1); }
+}`
+  },
+  {
+    id: 'bars-radiant-crest',
+    name: 'Radiant Crest Bars',
+    category: 'Bars',
+    tech: 'CSS',
+    description: 'Bar crests rise and invert rhythmically for a repeating wave pattern.',
+    markup: `<div class="vl-cat-bars-radiant-crest" role="img" aria-label="Radiant crest bars loader">
+  <span class="bar b1"></span>
+  <span class="bar b2"></span>
+  <span class="bar b3"></span>
+  <span class="bar b4"></span>
+  <span class="bar b5"></span>
+  <span class="bar b6"></span>
+</div>`,
+    css: `.vl-cat-bars-radiant-crest {
+  width: 156px;
+  height: 48px;
+  display: flex;
+  align-items: end;
+  gap: 7px;
+}
+.vl-cat-bars-radiant-crest .bar {
+  flex: 1;
+  border-radius: 12px 12px 0 0;
+  background: color-mix(in srgb, var(--loader-accent) 82%, #deebfa);
+  animation: vl-cat-bars-radiant-crest-swell calc(var(--loader-speed) * .86) cubic-bezier(.42,0,.58,1) infinite;
+}
+.vl-cat-bars-radiant-crest .b1 { height: 12px; animation-delay: 0s; }
+.vl-cat-bars-radiant-crest .b2 { height: 20px; animation-delay: -.12s; }
+.vl-cat-bars-radiant-crest .b3 { height: 30px; animation-delay: -.24s; }
+.vl-cat-bars-radiant-crest .b4 { height: 40px; animation-delay: -.36s; }
+.vl-cat-bars-radiant-crest .b5 { height: 30px; animation-delay: -.24s; }
+.vl-cat-bars-radiant-crest .b6 { height: 20px; animation-delay: -.12s; }
+@keyframes vl-cat-bars-radiant-crest-swell {
+  0%,100% { transform: scaleY(.62); opacity: .42; }
+  50% { transform: scaleY(1.04); opacity: 1; }
+}`
+  },
+  {
+    id: 'shapes-kite-ridges',
+    name: 'Ridges Shape',
+    category: 'Shapes',
+    tech: 'CSS',
+    description: 'Ridges travel across a rounded shell for soft geometric motion.',
+    markup: `<div class="vl-cat-shapes-kite-ridges" role="img" aria-label="Ridges shape loader">
+  <span class="ridge r1"></span>
+  <span class="ridge r2"></span>
+  <span class="ridge r3"></span>
+  <span class="ridge r4"></span>
+</div>`,
+    css: `.vl-cat-shapes-kite-ridges {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #d5e3f2);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-shapes-kite-ridges .ridge {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  height: 18px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--loader-accent) 22%, #edf3fb);
+  animation: vl-cat-shapes-kite-ridges-slide calc(var(--loader-speed) * .95) linear infinite;
+}
+.vl-cat-shapes-kite-ridges .r1 { top: 22px; animation-delay: 0s; }
+.vl-cat-shapes-kite-ridges .r2 { top: 40px; animation-delay: -.24s; opacity: .84; }
+.vl-cat-shapes-kite-ridges .r3 { top: 58px; animation-delay: -.48s; opacity: .7; }
+.vl-cat-shapes-kite-ridges .r4 { top: 76px; animation-delay: -.72s; opacity: .56; }
+@keyframes vl-cat-shapes-kite-ridges-slide {
+  0% { transform: translateX(-70px); }
+  50% { transform: translateX(70px); }
+  100% { transform: translateX(-70px); }
+}`
+  },
+  {
+    id: 'buttons-wave-pill',
+    name: 'Wave Pill Button',
+    category: 'Buttons',
+    tech: 'CSS',
+    description: 'A pill button container is driven by a soft sweeping wave band.',
+    markup: `<div class="vl-cat-buttons-wave-pill" role="img" aria-label="Wave pill button loader">
+  <span class="wave"></span>
+</div>`,
+    css: `.vl-cat-buttons-wave-pill {
+  width: 132px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 30%, #d5e1f0);
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-buttons-wave-pill .wave {
+  position: absolute;
+  left: -84px;
+  top: 0;
+  width: 84px;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--loader-accent) 30%, #f1f7ff), transparent);
+  animation: vl-cat-buttons-wave-pill-surge calc(var(--loader-speed) * 1.15) ease-in-out infinite;
+}
+@keyframes vl-cat-buttons-wave-pill-surge {
+  0% { transform: translateX(0); opacity: .35; }
+  50% { transform: translateX(216px); opacity: 1; }
+  100% { transform: translateX(0); opacity: .35; }
+}`
+  },
+  {
+    id: 'skeleton-wave-rib',
+    name: 'Wave Rib Skeleton',
+    category: 'Skeletons',
+    tech: 'CSS',
+    description: 'Ribbed skeleton bars ripple from one edge with alternating offsets.',
+    markup: `<div class="vl-cat-skeleton-wave-rib" role="img" aria-label="Wave rib skeleton loader">
+  <span class="rib r1"></span>
+  <span class="rib r2"></span>
+  <span class="rib r3"></span>
+  <span class="rib r4"></span>
+</div>`,
+    css: `.vl-cat-skeleton-wave-rib {
+  width: 138px;
+  height: 58px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+.vl-cat-skeleton-wave-rib .rib {
+  width: 100%;
+  height: 10px;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--loader-accent) 18%, #e7eef8);
+  animation: vl-cat-skeleton-wave-rib-breath calc(var(--loader-speed) * 1) ease-in-out infinite;
+}
+.vl-cat-skeleton-wave-rib .r1 { animation-delay: 0s; width: 78%; }
+.vl-cat-skeleton-wave-rib .r2 { animation-delay: -.15s; width: 100%; }
+.vl-cat-skeleton-wave-rib .r3 { animation-delay: -.3s; width: 62%; }
+.vl-cat-skeleton-wave-rib .r4 { animation-delay: -.45s; width: 90%; }
+@keyframes vl-cat-skeleton-wave-rib-breath {
+  0%,100% { opacity: .48; transform: translateX(-3px); }
+  50% { opacity: 1; transform: translateX(6px); }
+}`
+  },
+  {
+    id: 'text-runner-stream',
+    name: 'Text Runner Stream',
+    category: 'Text',
+    tech: 'CSS',
+    description: 'Sequential text-like bars stream in a compact runner rhythm.',
+    markup: `<div class="vl-cat-text-runner-stream" role="img" aria-label="Text runner stream loader">
+  <span class="bar b1"></span>
+  <span class="bar b2"></span>
+  <span class="bar b3"></span>
+  <span class="bar b4"></span>
+</div>`,
+    css: `.vl-cat-text-runner-stream {
+  width: 124px;
+  height: 42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+.vl-cat-text-runner-stream .bar {
+  height: 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--loader-accent) 28%, #ebf3fb);
+  animation: vl-cat-text-runner-stream-pulse calc(var(--loader-speed) * .95) ease-in-out infinite;
+}
+.vl-cat-text-runner-stream .b1 { width: 100%; animation-delay: 0s; }
+.vl-cat-text-runner-stream .b2 { width: 84%; animation-delay: -.2s; }
+.vl-cat-text-runner-stream .b3 { width: 68%; animation-delay: -.4s; }
+.vl-cat-text-runner-stream .b4 { width: 48%; animation-delay: -.6s; }
+@keyframes vl-cat-text-runner-stream-pulse {
+  0%,100% { opacity: .4; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-3px); }
+}`
+  },
+  {
+    id: 'progress-spoke-ring',
+    name: 'Spoke Ring Progress',
+    category: 'Progress',
+    tech: 'CSS',
+    description: 'A spoke ring rotates while spokes pulse to indicate progress confidence.',
+    markup: `<div class="vl-cat-progress-spoke-ring" role="img" aria-label="Spoke ring progress loader">
+  <span class="ring"></span>
+  <span class="spoke s1"></span>
+  <span class="spoke s2"></span>
+  <span class="spoke s3"></span>
+  <span class="spoke s4"></span>
+</div>`,
+    css: `.vl-cat-progress-spoke-ring {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  position: relative;
+}
+.vl-cat-progress-spoke-ring .ring {
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 24%, #dae7f7);
+  border-top-color: var(--loader-accent);
+  animation: vl-cat-progress-spoke-ring-turn calc(var(--loader-speed) * 1.05) linear infinite;
+}
+.vl-cat-progress-spoke-ring .spoke {
+  position: absolute;
+  width: 8px;
+  height: 20px;
+  left: 39px;
+  top: -2px;
+  border-radius: 4px;
+  background: var(--loader-accent);
+  transform-origin: 4px 44px;
+  --spoke-angle: 0deg;
+  animation: vl-cat-progress-spoke-ring-pulse calc(var(--loader-speed) * .9) ease-in-out infinite;
+}
+.vl-cat-progress-spoke-ring .s2 { --spoke-angle: 90deg; animation-delay: -.2s; }
+.vl-cat-progress-spoke-ring .s3 { --spoke-angle: 180deg; animation-delay: -.4s; }
+.vl-cat-progress-spoke-ring .s4 { --spoke-angle: 270deg; animation-delay: -.6s; }
+@keyframes vl-cat-progress-spoke-ring-turn {
+  to { transform: rotate(360deg); }
+}
+@keyframes vl-cat-progress-spoke-ring-pulse {
+  0%,100% { transform: rotate(var(--spoke-angle, 0deg)) scaleY(.6); opacity: .5; }
+  50% { transform: rotate(var(--spoke-angle, 0deg)) scaleY(1.08); opacity: 1; }
+}`
+  },
+  {
+    id: 'maps-radar-sweep',
+    name: 'Radar Sweep Map',
+    category: 'Maps',
+    tech: 'CSS',
+    description: 'A radar wedge sweeps around a map board with moving markers.',
+    markup: `<div class="vl-cat-maps-radar-sweep" role="img" aria-label="Radar sweep map loader">
+  <span class="field"></span>
+  <span class="pin p1"></span>
+  <span class="pin p2"></span>
+  <span class="pin p3"></span>
+</div>`,
+    css: `.vl-cat-maps-radar-sweep {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 22%, #dce8f5);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-maps-radar-sweep .field {
+  position: absolute;
+  inset: 10px;
+  border-radius: 50%;
+  border: 1px dashed color-mix(in srgb, var(--loader-accent) 34%, #dce8f5);
+  transform: rotate(45deg);
+}
+.vl-cat-maps-radar-sweep .field::before {
+  content: '';
+  position: absolute;
+  inset: -70px -70px;
+  background: conic-gradient(from 0deg, color-mix(in srgb, var(--loader-accent) 20%, transparent), transparent);
+  animation: vl-cat-maps-radar-sweep-spin calc(var(--loader-speed) * 1.15) linear infinite;
+  opacity: .35;
+}
+.vl-cat-maps-radar-sweep .pin {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+}
+.vl-cat-maps-radar-sweep .p1 { left: 48px; top: 32px; animation: vl-cat-maps-radar-sweep-blink calc(var(--loader-speed) * 1.2) .2s ease-in-out infinite; }
+.vl-cat-maps-radar-sweep .p2 { left: 74px; top: 56px; animation: vl-cat-maps-radar-sweep-blink calc(var(--loader-speed) * 1.2) .6s ease-in-out infinite; }
+.vl-cat-maps-radar-sweep .p3 { left: 58px; top: 74px; animation: vl-cat-maps-radar-sweep-blink calc(var(--loader-speed) * 1.2) .9s ease-in-out infinite; }
+@keyframes vl-cat-maps-radar-sweep-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes vl-cat-maps-radar-sweep-blink {
+  0%,100% { opacity: .4; transform: scale(.65); }
+  50% { opacity: 1; transform: scale(1.2); }
+}`
+  },
+  {
+    id: 'common-ui-trace-ribbon',
+    name: 'Trace Ribbon Common UI',
+    category: 'Common UI',
+    tech: 'CSS',
+    description: 'A floating ribbon traces through segmented UI chips.',
+    markup: `<div class="vl-cat-common-ui-trace-ribbon" role="img" aria-label="Trace ribbon common UI loader">
+  <span class="line l1"></span>
+  <span class="line l2"></span>
+  <span class="line l3"></span>
+</div>`,
+    css: `.vl-cat-common-ui-trace-ribbon {
+  width: 170px;
+  height: 32px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.vl-cat-common-ui-trace-ribbon .line {
+  height: 14px;
+  border-radius: 999px;
+  flex: 1;
+  background: color-mix(in srgb, var(--loader-accent) 22%, #dce7f4);
+  animation: vl-cat-common-ui-trace-ribbon-shift calc(var(--loader-speed) * .92) ease-in-out infinite;
+}
+.vl-cat-common-ui-trace-ribbon .l1 { animation-delay: 0s; }
+.vl-cat-common-ui-trace-ribbon .l2 { animation-delay: -.22s; }
+.vl-cat-common-ui-trace-ribbon .l3 { animation-delay: -.44s; }
+@keyframes vl-cat-common-ui-trace-ribbon-shift {
+  0%,100% { opacity: .42; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-4px); }
+}`
   }
 ];

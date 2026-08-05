@@ -54,10 +54,11 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 | C24 | Added 10 more category-expansion loaders; root docs snapshot updated to **1082 loaders in 17 categories**. |
 | C25 | Added 10 more category-expansion loaders; root docs snapshot updated to **1092 loaders in 17 categories**. |
 | C26 | Added 10 more category-expansion loaders; root docs snapshot updated to **1102 loaders in 17 categories**. |
+| C27 | Added 10 more category-expansion loaders; root docs snapshot updated to **1112 loaders in 17 categories**. |
 
 ### Live
 
-The site is deployed and serving at <https://yapweijun1996.github.io/Vanilla-HTML-Loader/>. Current codebase verification is 2026-08-04: **1102 loaders**, 17 category filters, deep links and category scoping remain supported.
+The site is deployed and serving at <https://yapweijun1996.github.io/Vanilla-HTML-Loader/>. Current codebase verification is 2026-08-04: **1112 loaders**, 17 category filters, deep links and category scoping remain supported.
 
 ## Now
 

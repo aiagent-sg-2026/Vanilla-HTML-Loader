@@ -120,7 +120,7 @@ export const matrixPack17LoadersB = [
     id: 'matrix-binary-wave-torsion',
     name: 'Binary Wave Torsion',
     category: 'Matrix',
-    tech: 'CSS',
+    tech: 'CSS 3D',
     description: 'Binary blocks rotate around a torsion axis and ripple in a delayed matrix wave.',
     markup: `<div class="vl-matrix17-binary-torsion" role="img" aria-label="Binary wave torsion">
       <span class="vl-matrix17-bit" style="--x:16px;--d:0"></span>
@@ -162,7 +162,7 @@ export const matrixPack17LoadersB = [
     id: 'matrix-matrix-orbital-cradle',
     name: 'Matrix Orbital Cradle',
     category: 'Matrix',
-    tech: 'CSS',
+    tech: 'CSS 3D',
     description: 'Three orbital bands cradle around a low-frequency nucleus and swap depth order.',
     markup: `<div class="vl-matrix17-orbital-cradle" role="img" aria-label="Matrix orbital cradle">
       <span class="vl-matrix17-cradle-band" style="--s:42px;--d:0;--z:0px"></span>

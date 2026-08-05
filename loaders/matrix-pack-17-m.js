@@ -1131,5 +1131,562 @@ export const matrixPack17LoadersM = [
   0%,100% { transform: scale(.75); }
   50% { transform: scale(1.2); }
 }`
+  },
+
+  {
+    id: 'matrix-spectrum-ripple',
+    name: 'Spectrum Ripple',
+    category: 'Matrix',
+    tech: 'CSS',
+    description: 'Three spectrum waves sweep the frame and collapse back to center.',
+    markup: `<div class="vl-cat-matrix-spectrum-ripple" role="img" aria-label="Spectrum ripple">
+      <span class="wave w1"></span>
+      <span class="wave w2"></span>
+      <span class="wave w3"></span>
+      <span class="node"></span>
+    </div>`,
+    css: `.vl-cat-matrix-spectrum-ripple {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1f5f89);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-matrix-spectrum-ripple .wave {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0px;
+  height: 0px;
+  margin: 0;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 78%, #fff 10%);
+  transform: translate(-50%, -50%);
+  animation: vl-cat-matrix-spectrum-ripple-ring calc(var(--loader-speed) * 1.4) ease-in-out infinite;
+}
+.vl-cat-matrix-spectrum-ripple .w1 { animation-delay: 0s; }
+.vl-cat-matrix-spectrum-ripple .w2 { animation-delay: -0.45s; }
+.vl-cat-matrix-spectrum-ripple .w3 { animation-delay: -0.9s; }
+.vl-cat-matrix-spectrum-ripple .node {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin: -4px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 90%, #fff 12%);
+  animation: vl-cat-matrix-spectrum-ripple-core calc(var(--loader-speed) * 1.4) ease-in-out infinite;
+}
+@keyframes vl-cat-matrix-spectrum-ripple-ring {
+  0% { width: 6px; height: 6px; opacity: .5; }
+  70%,100% { width: 188px; height: 100px; opacity: 0; }
+}
+@keyframes vl-cat-matrix-spectrum-ripple-core {
+  0%,100% { transform: scale(.7); }
+  50% { transform: scale(1.25); }
+}`
+  },
+
+  {
+    id: 'matrix-helix-mesh',
+    name: 'Helix Mesh',
+    category: 'Matrix',
+    tech: 'CSS',
+    description: 'Interwoven helix strokes pivot in opposite directions across a mesh grid.',
+    markup: `<div class="vl-cat-matrix-helix-mesh" role="img" aria-label="Helix mesh">
+      <span style="--d:.0"></span>
+      <span style="--d:.12"></span>
+      <span style="--d:.24"></span>
+      <span style="--d:.36"></span>
+      <span style="--d:.48"></span>
+      <span style="--d:.6"></span>
+      <span class="center"></span>
+    </div>`,
+    css: `.vl-cat-matrix-helix-mesh {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1f5f89);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(170deg, #041827, #0a2a47);
+}
+.vl-cat-matrix-helix-mesh span {
+  position: absolute;
+  left: 10px;
+  width: 168px;
+  height: 3px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--loader-accent) 82%, #fff 10%);
+  transform-origin: center;
+  animation: vl-cat-matrix-helix-mesh-band calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+  animation-delay: calc(var(--d) * -1.2s);
+}
+.vl-cat-matrix-helix-mesh span:nth-child(1) { top: 16px; }
+.vl-cat-matrix-helix-mesh span:nth-child(2) { top: 26px; }
+.vl-cat-matrix-helix-mesh span:nth-child(3) { top: 44px; }
+.vl-cat-matrix-helix-mesh span:nth-child(4) { top: 62px; }
+.vl-cat-matrix-helix-mesh span:nth-child(5) { top: 80px; }
+.vl-cat-matrix-helix-mesh span:nth-child(6) { top: 92px; }
+.vl-cat-matrix-helix-mesh .center {
+  position: absolute;
+  left: 50%;
+  top: 54px;
+  width: 9px;
+  height: 9px;
+  margin: -4px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 94%, #fff 6%);
+  animation: vl-cat-matrix-helix-mesh-core calc(var(--loader-speed) * 1.35) linear infinite;
+}
+@keyframes vl-cat-matrix-helix-mesh-band {
+  0%,100% { opacity: .12; transform: scaleX(.38) rotate(0deg); }
+  50% { opacity: .98; transform: scaleX(1) rotate(4deg); }
+}
+@keyframes vl-cat-matrix-helix-mesh-core {
+  0%,100% { transform: scale(.75); }
+  50% { transform: scale(1.2); }
+}`
+  },
+
+  {
+    id: 'matrix-crystal-grafter',
+    name: 'Crystal Grafter',
+    category: 'Matrix',
+    tech: 'CSS',
+    description: 'Diamond-like facets stitch together and dissolve between sync phases.',
+    markup: `<div class="vl-cat-matrix-crystal-grafter" role="img" aria-label="Crystal grafter">
+      <span class="f f1"></span>
+      <span class="f f2"></span>
+      <span class="f f3"></span>
+      <span class="f f4"></span>
+      <span class="core"></span>
+    </div>`,
+    css: `.vl-cat-matrix-crystal-grafter {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1f5f89);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-matrix-crystal-grafter .f {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin: -6px;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  background: color-mix(in srgb, var(--loader-accent) 80%, #fff 16%);
+  opacity: .14;
+  animation: vl-cat-matrix-crystal-grafter-facet calc(var(--loader-speed) * 1.5) ease-in-out infinite;
+}
+.vl-cat-matrix-crystal-grafter .f1 { --tx: -20px; --ty: -24px; animation-delay: 0s; }
+.vl-cat-matrix-crystal-grafter .f2 { --tx: 20px; --ty: -24px; animation-delay: -0.35s; }
+.vl-cat-matrix-crystal-grafter .f3 { --tx: -20px; --ty: 24px; animation-delay: -0.7s; }
+.vl-cat-matrix-crystal-grafter .f4 { --tx: 20px; --ty: 24px; animation-delay: -1.05s; }
+.vl-cat-matrix-crystal-grafter .core {
+  position: absolute;
+  left: 50%;
+  top: 54px;
+  width: 8px;
+  height: 8px;
+  margin: -4px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 90%, #fff 12%);
+  animation: vl-cat-matrix-crystal-grafter-core calc(var(--loader-speed) * 1.3) ease-in-out infinite;
+}
+@keyframes vl-cat-matrix-crystal-grafter-facet {
+  0%,100% { opacity: .16; transform: translate(var(--tx, 0), var(--ty, 0)) rotate(45deg) scale(.6); }
+  50% { opacity: .95; transform: translate(var(--tx, 0), var(--ty, 0)) rotate(45deg) scale(1.1); }
+}
+@keyframes vl-cat-matrix-crystal-grafter-core {
+  0%,100% { transform: scale(.7); }
+  50% { transform: scale(1.2); }
+}`
+  },
+
+  {
+    id: 'matrix-polar-needle',
+    name: 'Polar Needle',
+    category: 'Matrix',
+    tech: 'CSS',
+    description: 'A pair of polar needles sweep around a tiny center while alternating brightness.',
+    markup: `<div class="vl-cat-matrix-polar-needle" role="img" aria-label="Polar needle">
+      <span class="needle n1"></span>
+      <span class="needle n2"></span>
+      <span class="core"></span>
+    </div>`,
+    css: `.vl-cat-matrix-polar-needle {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1f5f89);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-matrix-polar-needle .needle {
+  position: absolute;
+  left: 50%;
+  top: 54px;
+  width: 2px;
+  height: 42px;
+  margin-left: -1px;
+  border-radius: 1px;
+  transform-origin: 50% 100%;
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--loader-accent) 88%, #fff 10%), transparent);
+  animation: vl-cat-matrix-polar-needle-spin calc(var(--loader-speed) * 1.5) linear infinite;
+}
+.vl-cat-matrix-polar-needle .n1 { animation-delay: 0s; }
+.vl-cat-matrix-polar-needle .n2 { animation-delay: -0.75s; }
+.vl-cat-matrix-polar-needle .core {
+  position: absolute;
+  left: 50%;
+  top: 54px;
+  width: 9px;
+  height: 9px;
+  margin: -4px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 92%, #fff 8%);
+  animation: vl-cat-matrix-polar-needle-core calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+@keyframes vl-cat-matrix-polar-needle-spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scaleY(.72); opacity: .3; }
+  50% { transform: translate(-50%, -50%) rotate(180deg) scaleY(1); opacity: .95; }
+  100% { transform: translate(-50%, -50%) rotate(360deg) scaleY(.72); opacity: .3; }
+}
+@keyframes vl-cat-matrix-polar-needle-core {
+  0%,100% { transform: translate(-50%, -50%) scale(.75); }
+  50% { transform: translate(-50%, -50%) scale(1.2); }
+}`
+  },
+
+  {
+    id: 'matrix-axon-grid',
+    name: 'Axon Grid',
+    category: 'Matrix',
+    tech: 'CSS',
+    description: 'A narrow neural-grid pulses in short bursts from multiple anchor nodes.',
+    markup: `<div class="vl-cat-matrix-axon-grid" role="img" aria-label="Axon grid">
+      <span style="--x:22px; --y:20px; --d:0"></span>
+      <span style="--x:65px; --y:20px; --d:.1"></span>
+      <span style="--x:108px; --y:20px; --d:.2"></span>
+      <span style="--x:151px; --y:20px; --d:.3"></span>
+      <span style="--x:22px; --y:70px; --d:.4"></span>
+      <span style="--x:65px; --y:70px; --d:.5"></span>
+      <span style="--x:108px; --y:70px; --d:.6"></span>
+      <span style="--x:151px; --y:70px; --d:.7"></span>
+    </div>`,
+    css: `.vl-cat-matrix-axon-grid {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1f5f89);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(150deg, #061829, #04111e);
+}
+.vl-cat-matrix-axon-grid span {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 8px;
+  height: 8px;
+  margin: -4px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 88%, #fff 12%);
+  animation: vl-cat-matrix-axon-grid-node calc(var(--loader-speed) * 1.1) ease-in-out infinite;
+  animation-delay: calc(var(--d) * -1s);
+}
+@keyframes vl-cat-matrix-axon-grid-node {
+  0%,100% { transform: scale(.6); opacity: .2; }
+  50% { transform: scale(1.22); opacity: .95; }
+}`
+  },
+
+  {
+    id: 'matrix-lumen-spiral',
+    name: 'Lumen Spiral',
+    category: 'Matrix',
+    tech: 'CSS',
+    description: 'A luminous spiral arcs between two radii with a trailing glow.',
+    markup: `<div class="vl-cat-matrix-lumen-spiral" role="img" aria-label="Lumen spiral">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span class="center"></span>
+    </div>`,
+    css: `.vl-cat-matrix-lumen-spiral {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1f5f89);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-matrix-lumen-spiral span {
+  position: absolute;
+  left: 50%;
+  top: 54px;
+  width: 7px;
+  height: 7px;
+  margin: -3px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 90%, #fff 10%);
+  animation: vl-cat-matrix-lumen-spiral-dot calc(var(--loader-speed) * 1.35) ease-in-out infinite;
+}
+.vl-cat-matrix-lumen-spiral span:nth-child(1) { transform: rotate(0deg) translateX(24px); animation-delay: 0s; }
+.vl-cat-matrix-lumen-spiral span:nth-child(2) { transform: rotate(72deg) translateX(24px); animation-delay: -0.27s; }
+.vl-cat-matrix-lumen-spiral span:nth-child(3) { transform: rotate(144deg) translateX(24px); animation-delay: -0.54s; }
+.vl-cat-matrix-lumen-spiral span:nth-child(4) { transform: rotate(216deg) translateX(24px); animation-delay: -0.81s; }
+.vl-cat-matrix-lumen-spiral .center {
+  position: absolute;
+  left: 50%;
+  top: 54px;
+  width: 10px;
+  height: 10px;
+  margin: -5px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 90%, #fff 10%);
+  animation: vl-cat-matrix-lumen-spiral-core calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+@keyframes vl-cat-matrix-lumen-spiral-dot {
+  0%,100% { opacity: .1; transform-origin: 0 54px; transform: rotate(0deg) translateX(24px) scale(.7); }
+  100% { transform-origin: 0 54px; }
+}
+@keyframes vl-cat-matrix-lumen-spiral-core {
+  0%,100% { transform: scale(.8); }
+  50% { transform: scale(1.24); }
+}`
+  },
+
+  {
+    id: 'matrix-glyph-current',
+    name: 'Glyph Current',
+    category: 'Matrix',
+    tech: 'CSS',
+    description: 'Glyph-like bars pulse in sequence while a current stream sweeps across.',
+    markup: `<div class="vl-cat-matrix-glyph-current" role="img" aria-label="Glyph current">
+      <span class="bar b1"></span>
+      <span class="bar b2"></span>
+      <span class="bar b3"></span>
+      <span class="bar b4"></span>
+      <span class="stream"></span>
+    </div>`,
+    css: `.vl-cat-matrix-glyph-current {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1f5f89);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-matrix-glyph-current .bar {
+  position: absolute;
+  left: 22px;
+  width: 146px;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--loader-accent) 84%, #fff 14%), transparent);
+  animation: vl-cat-matrix-glyph-current-bar calc(var(--loader-speed) * 1.25) ease-in-out infinite;
+}
+.vl-cat-matrix-glyph-current .b1 { top: 20px; animation-delay: 0s; }
+.vl-cat-matrix-glyph-current .b2 { top: 38px; animation-delay: -.24s; }
+.vl-cat-matrix-glyph-current .b3 { top: 56px; animation-delay: -.48s; }
+.vl-cat-matrix-glyph-current .b4 { top: 74px; animation-delay: -.72s; }
+.vl-cat-matrix-glyph-current .stream {
+  position: absolute;
+  left: 12px;
+  top: 86px;
+  width: 166px;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--loader-accent) 94%, #fff 6%), transparent);
+  animation: vl-cat-matrix-glyph-current-stream calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+@keyframes vl-cat-matrix-glyph-current-bar {
+  0%,100% { opacity: .15; transform: scaleX(.48); }
+  50% { opacity: .95; transform: scaleX(1); }
+}
+@keyframes vl-cat-matrix-glyph-current-stream {
+  0% { transform: translateX(-100%); opacity: 0; }
+  50% { opacity: .95; transform: translateX(0); }
+  100% { transform: translateX(100%); opacity: 0; }
+}`
+  },
+
+  {
+    id: 'matrix-cascade-gate',
+    name: 'Cascade Gate',
+    category: 'Matrix',
+    tech: 'CSS',
+    description: 'Cascade gates open and close from top to bottom with shrinking bounds.',
+    markup: `<div class="vl-cat-matrix-cascade-gate" role="img" aria-label="Cascade gate">
+      <span style="--d:0"></span>
+      <span style="--d:.13"></span>
+      <span style="--d:.26"></span>
+      <span style="--d:.39"></span>
+      <span class="core"></span>
+    </div>`,
+    css: `.vl-cat-matrix-cascade-gate {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1f5f89);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(155deg, #061a2f, #0a2b4a);
+}
+.vl-cat-matrix-cascade-gate span {
+  position: absolute;
+  left: 6px;
+  width: 176px;
+  height: 10px;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--loader-accent) 82%, #fff 12%);
+  animation: vl-cat-matrix-cascade-gate-bar calc(var(--loader-speed) * 1.4) ease-in-out infinite;
+  animation-delay: calc(var(--d) * -1.2s);
+}
+.vl-cat-matrix-cascade-gate span:nth-child(1) { top: 12px; }
+.vl-cat-matrix-cascade-gate span:nth-child(2) { top: 34px; }
+.vl-cat-matrix-cascade-gate span:nth-child(3) { top: 56px; }
+.vl-cat-matrix-cascade-gate span:nth-child(4) { top: 78px; }
+.vl-cat-matrix-cascade-gate .core {
+  position: absolute;
+  left: 50%;
+  top: 54px;
+  width: 8px;
+  height: 8px;
+  margin: -4px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 90%, #fff 8%);
+  animation: vl-cat-matrix-cascade-gate-core calc(var(--loader-speed) * 1.2) linear infinite;
+}
+@keyframes vl-cat-matrix-cascade-gate-bar {
+  0%,100% { transform: scaleX(.46); opacity: .2; }
+  50% { transform: scaleX(1); opacity: .95; }
+}
+@keyframes vl-cat-matrix-cascade-gate-core {
+  0%,100% { transform: scale(.75); }
+  50% { transform: scale(1.2); }
+}`
+  },
+
+  {
+    id: 'matrix-orbital-tether',
+    name: 'Orbital Tether',
+    category: 'Matrix',
+    tech: 'CSS',
+    description: 'Orbiting tethers stretch from corners and retract into a central anchor.',
+    markup: `<div class="vl-cat-matrix-orbital-tether" role="img" aria-label="Orbital tether">
+      <span class="t1"></span>
+      <span class="t2"></span>
+      <span class="t3"></span>
+      <span class="anchor"></span>
+    </div>`,
+    css: `.vl-cat-matrix-orbital-tether {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1f5f89);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-matrix-orbital-tether .t1,
+.vl-cat-matrix-orbital-tether .t2,
+.vl-cat-matrix-orbital-tether .t3 {
+  position: absolute;
+  top: 10px;
+  width: 2px;
+  height: 88px;
+  transform-origin: 50% 100%;
+  border-radius: 1px;
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--loader-accent) 86%, #fff 12%));
+  animation: vl-cat-matrix-orbital-tether-line calc(var(--loader-speed) * 1.4) ease-in-out infinite;
+}
+.vl-cat-matrix-orbital-tether .t1 { left: 18px; animation-delay: 0s; --r: -18deg; }
+.vl-cat-matrix-orbital-tether .t2 { left: 94px; animation-delay: -.5s; --r: 0deg; }
+.vl-cat-matrix-orbital-tether .t3 { left: 166px; animation-delay: -1s; --r: 18deg; }
+.vl-cat-matrix-orbital-tether .anchor {
+  position: absolute;
+  left: 50%;
+  top: 54px;
+  width: 9px;
+  height: 9px;
+  margin: -4px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 90%, #fff 8%);
+  animation: vl-cat-matrix-orbital-tether-anchor calc(var(--loader-speed) * 1.3) ease-in-out infinite;
+}
+@keyframes vl-cat-matrix-orbital-tether-line {
+  0%,100% { transform: rotate(var(--r, 0deg)) scaleY(.42); opacity: .22; }
+  50% { transform: rotate(var(--r, 0deg)) scaleY(1); opacity: .98; }
+}
+@keyframes vl-cat-matrix-orbital-tether-anchor {
+  0%,100% { transform: scale(.75); }
+  50% { transform: scale(1.2); }
+}`
+  },
+
+  {
+    id: 'matrix-fractal-shim',
+    name: 'Fractal Shim',
+    category: 'Matrix',
+    tech: 'CSS',
+    description: 'A recursive shim grid flickers through layered triangular fragments.',
+    markup: `<div class="vl-cat-matrix-fractal-shim" role="img" aria-label="Fractal shim">
+      <span class="a"></span>
+      <span class="a b"></span>
+      <span class="a c"></span>
+      <span class="a d"></span>
+      <span class="core"></span>
+    </div>`,
+    css: `.vl-cat-matrix-fractal-shim {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1f5f89);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-matrix-fractal-shim .a {
+  position: absolute;
+  left: 50%;
+  top: 54px;
+  width: 26px;
+  height: 26px;
+  margin: -13px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--loader-accent) 86%, #fff 12%);
+  transform: rotate(45deg);
+  animation: vl-cat-matrix-fractal-shim-tile calc(var(--loader-speed) * 1.35) ease-in-out infinite;
+}
+.vl-cat-matrix-fractal-shim .b { width: 18px; height: 18px; margin: -9px; animation-delay: -.22s; }
+.vl-cat-matrix-fractal-shim .c { width: 12px; height: 12px; margin: -6px; animation-delay: -.44s; }
+.vl-cat-matrix-fractal-shim .d { width: 6px; height: 6px; margin: -3px; animation-delay: -.66s; }
+.vl-cat-matrix-fractal-shim .core {
+  position: absolute;
+  left: 50%;
+  top: 54px;
+  width: 8px;
+  height: 8px;
+  margin: -4px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 90%, #fff 12%);
+  animation: vl-cat-matrix-fractal-shim-core calc(var(--loader-speed) * 1.1) linear infinite;
+}
+@keyframes vl-cat-matrix-fractal-shim-tile {
+  0%,100% { transform: translate(-50%, -50%) rotate(45deg) scale(.45); opacity: .2; }
+  50% { transform: translate(-50%, -50%) rotate(225deg) scale(1.08); opacity: .95; }
+}
+@keyframes vl-cat-matrix-fractal-shim-core {
+  0%,100% { transform: scale(.8); }
+  50% { transform: scale(1.22); }
+}`
   }
 ];

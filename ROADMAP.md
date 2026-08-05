@@ -1,6 +1,6 @@
 # ROADMAP.md — Loader Studio
 
-Last verified against code: 2026-08-04. Epics in [EPIC.md](EPIC.md), tasks in [TASK.md](TASK.md).
+Last verified against code: 2026-08-05. Epics in [EPIC.md](EPIC.md), tasks in [TASK.md](TASK.md).
 
 ## Delivered
 
@@ -45,7 +45,7 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 | C20 | New **Maps** category with 10 location loaders (17 categories, collection 605 → **615**) |
 | C21 | **Vite build tooling** — `npm run dev` / `npm run build`; supersedes D-01; 146 requests → 3, 277 KB → ~178 KB gzipped (D-21, D-22) |
 
-### 2026-08-04 — continued expansion pass
+### 2026-08-05 — continued expansion pass
 
 | Commit | Delivery |
 | --- | --- |
@@ -55,10 +55,12 @@ Product positioning settled: Loader Studio is a **reference gallery**, not an in
 | C25 | Added 10 more category-expansion loaders; root docs snapshot updated to **1092 loaders in 17 categories**. |
 | C26 | Added 10 more category-expansion loaders; root docs snapshot updated to **1102 loaders in 17 categories**. |
 | C27 | Added 10 more category-expansion loaders; root docs snapshot updated to **1112 loaders in 17 categories**. |
+| C28 | Added 17 category-expansion loaders (one per category); root docs snapshot updated to **1129 loaders in 17 categories**. |
+| C29 | Added 17 more category-expansion loaders (one per category); root docs snapshot updated to **1146 loaders in 17 categories**. |
 
 ### Live
 
-The site is deployed and serving at <https://yapweijun1996.github.io/Vanilla-HTML-Loader/>. Current codebase verification is 2026-08-04: **1112 loaders**, 17 category filters, deep links and category scoping remain supported.
+The site is deployed and serving at <https://yapweijun1996.github.io/Vanilla-HTML-Loader/>. Current codebase verification is 2026-08-05: **1146 loaders**, 17 category filters, deep links and category scoping remain supported.
 
 ## Now
 

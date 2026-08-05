@@ -2623,13 +2623,62 @@ AppLoader.setLatency = function (value) {
 }
  .vl-cat-operation-shield-loop .p1 { --r: 45; animation-delay: 0s; }
  .vl-cat-operation-shield-loop .p2 { --r: 165; animation-delay: -.35s; }
- .vl-cat-operation-shield-loop .p3 { --r: 285; animation-delay: -.7s; }
+  .vl-cat-operation-shield-loop .p3 { --r: 285; animation-delay: -.7s; }
 @keyframes vl-cat-operation-shield-loop-spin {
   to { transform: rotate(360deg); }
 }
 @keyframes vl-cat-operation-shield-loop-beat {
   0%,100% { opacity: .24; transform: rotate(calc(var(--r) * 1deg)) translateX(42px) scale(.52); }
   50% { opacity: 1; transform: rotate(calc(var(--r) * 1deg)) translateX(42px) scale(1.13); }
+}`
+  },
+  {
+    id: 'operation-control-ring',
+    name: 'Control Ring Operations',
+    category: 'Operations',
+    tech: 'CSS',
+    description: 'Operational nodes blink around a control ring with phase-shifted check marks.',
+    markup: `<div class="vl-cat-operation-control-ring" role="img" aria-label="Control ring operations">
+  <span class="ring"></span>
+  <span class="node" style="--i:0"></span>
+  <span class="node" style="--i:1"></span>
+  <span class="node" style="--i:2"></span>
+</div>`,
+    css: `.vl-cat-operation-control-ring {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #d8e5f4);
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-operation-control-ring .ring {
+  position: absolute;
+  inset: 12px;
+  border: 2px solid color-mix(in srgb, var(--loader-accent) 32%, transparent);
+  border-radius: 50%;
+  animation: vl-cat-operation-control-ring-spin calc(var(--loader-speed) * 1.12) linear infinite;
+}
+.vl-cat-operation-control-ring .node {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  margin: -4px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  transform: rotate(calc(var(--i) * 120deg)) translateX(45px);
+  animation: vl-cat-operation-control-ring-node calc(var(--loader-speed) * 1.15) ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.2s);
+}
+@keyframes vl-cat-operation-control-ring-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes vl-cat-operation-control-ring-node {
+  0%,100% { opacity: .2; transform: rotate(calc(var(--i) * 120deg)) translateX(45px) scale(.56); }
+  50% { opacity: 1; transform: rotate(calc(var(--i) * 120deg)) translateX(45px) scale(1.15); }
 }`
   },
 

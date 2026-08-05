@@ -1117,5 +1117,55 @@ export const functionalLoaders = [
   100% { left: 8%; opacity: .2; }
 }`
   },
+  {
+    id: 'application-queue-pulse',
+    name: 'Queue Pulse Application',
+    category: 'Application',
+    tech: 'CSS',
+    description: 'Three queue states cycle through active, hold, and resume markers.',
+    markup: `<div class="vl-cat-application-queue-pulse" role="img" aria-label="Queue pulse application">
+  <span class="lane"></span>
+  <span class="state s1"></span>
+  <span class="state s2"></span>
+  <span class="state s3"></span>
+</div>`,
+    css: `.vl-cat-application-queue-pulse {
+  width: 170px;
+  height: 36px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #d8e5f3);
+  border-radius: 10px;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  align-items: center;
+  padding: 0 10px;
+}
+.vl-cat-application-queue-pulse .lane {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--loader-accent) 16%, #d5e1ef);
+  border-bottom: 1px solid color-mix(in srgb, var(--loader-accent) 16%, #d5e1ef);
+}
+.vl-cat-application-queue-pulse .state {
+  position: relative;
+  z-index: 1;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  justify-self: start;
+  margin-left: calc(var(--x) * 1px);
+  animation: vl-cat-application-queue-pulse-dot calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+.vl-cat-application-queue-pulse .s1 { --x: 22; animation-delay: 0s; }
+.vl-cat-application-queue-pulse .s2 { --x: 72; animation-delay: -.2s; }
+.vl-cat-application-queue-pulse .s3 { --x: 122; animation-delay: -.4s; }
+@keyframes vl-cat-application-queue-pulse-dot {
+  0%,100% { transform: translateY(-4px) scale(.6); opacity: .25; }
+  50% { transform: translateY(3px) scale(1.2); opacity: 1; }
+}`
+  },
 
 ];

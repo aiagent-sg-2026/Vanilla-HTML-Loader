@@ -90,5 +90,52 @@ export const skeletonLoaders = [
   50% { opacity: .92; }
 }`
   },
+  {
+    id: 'skeleton-panel-grid',
+    name: 'Panel Grid Skeleton',
+    category: 'Skeletons',
+    tech: 'Vanilla CSS',
+    description: 'Skeleton card rows and fields flicker in a compact panel cadence.',
+    markup: `<div class="vl-cat-skeleton-panel-grid" role="img" aria-label="Panel grid skeleton">
+  <span class="line l1"></span>
+  <span class="line l2"></span>
+  <span class="line l3"></span>
+  <span class="line l4"></span>
+</div>`,
+    css: `.vl-cat-skeleton-panel-grid {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 22%, #dce6ef);
+  border-radius: 14px;
+  padding: 12px;
+  display: grid;
+  gap: 8px;
+  align-content: center;
+  background: #fff;
+}
+.vl-cat-skeleton-panel-grid .line {
+  position: relative;
+  border-radius: 999px;
+  height: 10px;
+  background: #e8edf5;
+  overflow: hidden;
+}
+.vl-cat-skeleton-panel-grid .l1 { width: 86%; }
+.vl-cat-skeleton-panel-grid .l2 { width: 100%; }
+.vl-cat-skeleton-panel-grid .l3 { width: 74%; }
+.vl-cat-skeleton-panel-grid .l4 { width: 100%; }
+.vl-cat-skeleton-panel-grid .line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-110%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.9), transparent);
+  animation: vl-cat-skeleton-panel-grid-shine calc(var(--loader-speed) * 1.3) ease-in-out infinite;
+}
+@keyframes vl-cat-skeleton-panel-grid-shine {
+  0% { transform: translateX(-110%); }
+  50%,100% { transform: translateX(110%); }
+}`
+  },
 
 ];

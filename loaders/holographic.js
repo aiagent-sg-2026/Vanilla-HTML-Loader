@@ -211,6 +211,59 @@ const baseLoaders = [
   0%,100% { transform: scale(.62); opacity: .3; }
   50% { transform: scale(1.05); opacity: 1; }
 }`
+  },
+  {
+    id: 'holographic-facet-wave',
+    name: 'Facet Wave Holographic',
+    category: 'Holographic',
+    tech: 'CSS',
+    description: 'Layered facets and a soft core pulse create a transparent wave effect.',
+    markup: `<div class="vl-cat-holographic-facet-wave" role="img" aria-label="Facet wave holographic">
+  <span class="facet a"></span>
+  <span class="facet b"></span>
+  <span class="facet c"></span>
+  <span class="core"></span>
+</div>`,
+    css: `.vl-cat-holographic-facet-wave {
+  width: 108px;
+  height: 108px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 24%, #1e6087);
+  background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--loader-accent) 20%, transparent), transparent 46%), linear-gradient(165deg, #08203c, #113057 62%, #050f14);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-holographic-facet-wave .facet {
+  position: absolute;
+  inset: 16px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 55%, transparent);
+  border-radius: 50%;
+  animation: vl-cat-holographic-facet-wave-veil calc(var(--loader-speed) * 1.8) linear infinite;
+}
+.vl-cat-holographic-facet-wave .a { transform: scale(.55); animation-delay: 0s; }
+.vl-cat-holographic-facet-wave .b { inset: 26px; border-style: dashed; animation-delay: -.5s; }
+.vl-cat-holographic-facet-wave .c { inset: 36px; animation-delay: -1s; }
+.vl-cat-holographic-facet-wave .core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin: -5px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  animation: vl-cat-holographic-facet-wave-core calc(var(--loader-speed) * 1.1) ease-in-out infinite;
+}
+@keyframes vl-cat-holographic-facet-wave-veil {
+  0% { transform: scale(.55) rotate(0deg); opacity: .24; }
+  50% { transform: scale(1) rotate(180deg); opacity: 1; }
+  100% { transform: scale(.55) rotate(360deg); opacity: .24; }
+}
+@keyframes vl-cat-holographic-facet-wave-core {
+  0%,100% { transform: scale(.6); opacity: .4; }
+  50% { transform: scale(1.2); opacity: 1; }
+}`
   }
 
 ];

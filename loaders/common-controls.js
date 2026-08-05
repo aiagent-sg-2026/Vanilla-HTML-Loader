@@ -280,12 +280,54 @@ export const commonControlLoaders = [
 }
 .vl-cat-common-ui-chip-lattice .chip:nth-child(2)::after { animation-delay: -.2s; }
 .vl-cat-common-ui-chip-lattice .chip:nth-child(3)::after { animation-delay: -.4s; }
-.vl-cat-common-ui-chip-lattice .chip:nth-child(4)::after { animation-delay: -.6s; }
+  .vl-cat-common-ui-chip-lattice .chip:nth-child(4)::after { animation-delay: -.6s; }
 @keyframes vl-cat-common-ui-chip-lattice-wave {
   0% { transform: translateX(-105%); opacity: 0; }
   30% { opacity: .35; }
   50% { transform: translateX(105%); opacity: 1; }
   51%, 100% { opacity: .1; }
+}`
+  },
+  {
+    id: 'common-ui-switch-lattice',
+    name: 'Switch Lattice Common UI',
+    category: 'Common UI',
+    tech: 'CSS',
+    description: 'A compact sequence of switch-like pills cycles a shared lattice path.',
+    markup: `<div class="vl-cat-common-ui-switch-lattice" role="img" aria-label="Switch lattice common UI">
+  <span class="switch s1"></span>
+  <span class="switch s2"></span>
+  <span class="switch s3"></span>
+</div>`,
+    css: `.vl-cat-common-ui-switch-lattice {
+  width: 170px;
+  height: 40px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.vl-cat-common-ui-switch-lattice .switch {
+  flex: 1;
+  height: 14px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 28%, #d8e5f5);
+  background: color-mix(in srgb, var(--loader-accent) 18%, #dbe7f3);
+  position: relative;
+  overflow: hidden;
+}
+.vl-cat-common-ui-switch-lattice .switch::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, var(--loader-accent), transparent);
+  animation: vl-cat-common-ui-switch-lattice-shift calc(var(--loader-speed) * 1.05) ease-in-out infinite;
+}
+.vl-cat-common-ui-switch-lattice .s2::after { animation-delay: -.35s; }
+.vl-cat-common-ui-switch-lattice .s3::after { animation-delay: -.7s; }
+@keyframes vl-cat-common-ui-switch-lattice-shift {
+  0%,100% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
 }`
   },
 

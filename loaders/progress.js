@@ -243,5 +243,63 @@ AppLoader.setIndeterminate = function (message = 'Working…') {
   50% { transform: scale(1.1); opacity: 1; }
 }`
   },
+  {
+    id: 'progress-wave-scaffold',
+    name: 'Wave Scaffold Progress',
+    category: 'Progress',
+    tech: 'CSS',
+    description: 'Progress lanes are scaffolded by a looping wave with timed node pulses.',
+    markup: `<div class="vl-cat-progress-wave-scaffold" role="img" aria-label="Wave scaffold progress">
+  <span class="bar b1"></span>
+  <span class="bar b2"></span>
+  <span class="bar b3"></span>
+  <span class="dot"></span>
+</div>`,
+    css: `.vl-cat-progress-wave-scaffold {
+  width: 190px;
+  height: 108px;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 22%, #1e6088);
+  border-radius: 14px;
+  padding: 14px 15px;
+  display: grid;
+  gap: 8px;
+  align-content: center;
+  background: linear-gradient(180deg, #071d33, #0b2d47 63%, #040a14);
+}
+.vl-cat-progress-wave-scaffold .bar {
+  height: 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--loader-accent) 18%, #e9edf5);
+  overflow: hidden;
+}
+.vl-cat-progress-wave-scaffold .bar::after {
+  content: '';
+  display: block;
+  width: 40%;
+  height: 100%;
+  background: var(--loader-accent);
+  animation: vl-cat-progress-wave-scaffold-run calc(var(--loader-speed) * 1.15) cubic-bezier(.36,.8,.2,1) infinite;
+}
+.vl-cat-progress-wave-scaffold .b1::after { animation-delay: 0s; }
+.vl-cat-progress-wave-scaffold .b2::after { animation-delay: -.2s; }
+.vl-cat-progress-wave-scaffold .b3::after { animation-delay: -.4s; }
+.vl-cat-progress-wave-scaffold .dot {
+  justify-self: center;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--loader-accent);
+  animation: vl-cat-progress-wave-scaffold-dot calc(var(--loader-speed) * 1.2) ease-in-out infinite;
+}
+@keyframes vl-cat-progress-wave-scaffold-run {
+  0% { transform: translateX(-75px); }
+  50% { transform: translateX(110px); }
+  100% { transform: translateX(110px); }
+}
+@keyframes vl-cat-progress-wave-scaffold-dot {
+  0%,100% { transform: scale(.5); opacity: .3; }
+  50% { transform: scale(1.25); opacity: 1; }
+}`
+  },
 
 ];

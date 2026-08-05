@@ -458,11 +458,11 @@ export const matrixPack17LoadersH = [
   },
   {
     id: 'matrix-halo-bloom-lattice',
-    name: 'Drift Bloom Lattice',
+    name: 'Halo Drift Bloom Lattice',
     category: 'Matrix',
     tech: 'CSS',
     description: 'Blooming nodes drift in opposite directions across a thin lattice plane.',
-    markup: `<div class="vl-matrix17h-drift-bloom" role="img" aria-label="Drift bloom lattice">
+    markup: `<div class="vl-matrix17h-drift-bloom" role="img" aria-label="Halo drift bloom lattice">
       <span class="vl-matrix17h-bloom-node" style="--x:14px;--y:72px;--d:0"></span>
       <span class="vl-matrix17h-bloom-node" style="--x:42px;--y:34px;--d:.11"></span>
       <span class="vl-matrix17h-bloom-node" style="--x:70px;--y:84px;--d:.22"></span>

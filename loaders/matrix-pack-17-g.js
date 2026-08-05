@@ -423,11 +423,11 @@ export const matrixPack17LoadersG = [
   },
   {
     id: 'matrix-drift-bloom-lattice',
-    name: 'Drift Bloom Lattice',
+    name: 'Radiant Drift Bloom Lattice',
     category: 'Matrix',
     tech: 'CSS',
     description: 'Lattice blooms drift outward and pull back, forming a smooth rhythmic motion loop.',
-    markup: `<div class="vl-matrix17g-bloom-lattice" role="img" aria-label="Drift bloom lattice">
+    markup: `<div class="vl-matrix17g-bloom-lattice" role="img" aria-label="Radiant drift bloom lattice">
       <span class="vl-matrix17g-bloom" style="--x:20px;--y:18px;--d:0"></span>
       <span class="vl-matrix17g-bloom" style="--x:51px;--y:52px;--d:.1"></span>
       <span class="vl-matrix17g-bloom" style="--x:82px;--y:24px;--d:.2"></span>

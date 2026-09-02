@@ -362,7 +362,7 @@ export const holographicPack2Loaders = [
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y));
+  transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y)));
   background: color-mix(in srgb, var(--loader-accent) 64%, #eff8ff);
   box-shadow: 0 0 8px color-mix(in srgb, var(--loader-accent) 48%, transparent);
   animation: vl-holo-orbital-node calc(var(--loader-speed) * 2.2) ease-in-out infinite;

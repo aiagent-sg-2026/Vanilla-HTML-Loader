@@ -406,5 +406,152 @@ export const holographicPack2Loaders = [
   0%,100% { transform: scale(.78); opacity: .48; }
   45%, 70% { transform: scale(1.08); opacity: 1; }
 }`
+  },
+  {
+    id: 'holographic-aurora-rift',
+    name: 'Holographic Aurora Rift',
+    category: 'Holographic',
+    tech: 'HTML + CSS',
+    description: 'Counter-rotating aurora rings frame a luminous rift while a scanning beam sweeps through the holographic field.',
+    markup: `<div class="vl-holo-aurora-rift" role="img" aria-label="Holographic aurora rift synchronising">
+  <span class="vl-holo-aurora-grid" aria-hidden="true"></span>
+  <span class="vl-holo-aurora-ring vl-holo-aurora-ring-a" aria-hidden="true"></span>
+  <span class="vl-holo-aurora-ring vl-holo-aurora-ring-b" aria-hidden="true"></span>
+  <span class="vl-holo-aurora-ring vl-holo-aurora-ring-c" aria-hidden="true"></span>
+  <span class="vl-holo-aurora-rift-core" aria-hidden="true"></span>
+  <span class="vl-holo-aurora-scan" aria-hidden="true"></span>
+  <span class="vl-holo-aurora-star vl-holo-aurora-star-a" aria-hidden="true"></span>
+  <span class="vl-holo-aurora-star vl-holo-aurora-star-b" aria-hidden="true"></span>
+  <span class="vl-holo-aurora-star vl-holo-aurora-star-c" aria-hidden="true"></span>
+  <span class="vl-holo-aurora-label">RIFT SYNC</span>
+</div>`,
+    css: `.vl-holo-aurora-rift {
+  position: relative;
+  width: 190px;
+  height: 108px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 34%, #14263f);
+  border-radius: 14px;
+  background:
+    radial-gradient(ellipse at 50% 52%, color-mix(in srgb, var(--loader-accent) 24%, transparent), transparent 34%),
+    linear-gradient(160deg, #06101d, #0a1830 62%, #030711);
+  box-shadow: inset 0 0 34px rgba(0, 0, 0, .6), 0 10px 24px rgba(2, 8, 23, .22);
+  perspective: 420px;
+}
+.vl-holo-aurora-grid {
+  position: absolute;
+  inset: 0;
+  opacity: .24;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--loader-accent) 16%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--loader-accent) 12%, transparent) 1px, transparent 1px);
+  background-size: 100% 9px, 18px 100%;
+  mask-image: linear-gradient(to bottom, transparent, black 22%, black 78%, transparent);
+}
+.vl-holo-aurora-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1px solid color-mix(in srgb, var(--loader-accent) 76%, white 24%);
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--loader-accent) 28%, transparent);
+}
+.vl-holo-aurora-ring-a {
+  width: 118px;
+  height: 38px;
+  margin: -19px 0 0 -59px;
+  animation: vl-holo-aurora-spin-a calc(var(--loader-speed) * 2.4) linear infinite;
+}
+.vl-holo-aurora-ring-b {
+  width: 88px;
+  height: 56px;
+  margin: -28px 0 0 -44px;
+  border-style: dashed;
+  opacity: .72;
+  animation: vl-holo-aurora-spin-b calc(var(--loader-speed) * 2) linear infinite reverse;
+}
+.vl-holo-aurora-ring-c {
+  width: 58px;
+  height: 78px;
+  margin: -39px 0 0 -29px;
+  opacity: .5;
+  animation: vl-holo-aurora-tilt calc(var(--loader-speed) * 1.55) ease-in-out infinite;
+}
+.vl-holo-aurora-rift-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 9px;
+  height: 58px;
+  margin: -29px 0 0 -4.5px;
+  border-radius: 999px;
+  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--loader-accent) 82%, white 18%) 22%, white 50%, color-mix(in srgb, var(--loader-accent) 82%, white 18%) 78%, transparent);
+  box-shadow: 0 0 8px var(--loader-accent), 0 0 22px color-mix(in srgb, var(--loader-accent) 64%, transparent);
+  animation: vl-holo-aurora-core calc(var(--loader-speed) * 1.1) ease-in-out infinite;
+}
+.vl-holo-aurora-scan {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  top: 20px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--loader-accent) 84%, white 16%), transparent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--loader-accent) 64%, transparent);
+  animation: vl-holo-aurora-scan calc(var(--loader-speed) * 1.35) ease-in-out infinite;
+}
+.vl-holo-aurora-star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loader-accent) 72%, white 28%);
+  box-shadow: 0 0 8px var(--loader-accent);
+  animation: vl-holo-aurora-star calc(var(--loader-speed) * 1.25) ease-in-out infinite;
+}
+.vl-holo-aurora-star-a { left: 35px; top: 34px; }
+.vl-holo-aurora-star-b { right: 38px; top: 29px; animation-delay: calc(var(--loader-speed) * -.38); }
+.vl-holo-aurora-star-c { right: 52px; bottom: 27px; animation-delay: calc(var(--loader-speed) * -.76); }
+.vl-holo-aurora-label {
+  position: absolute;
+  right: 10px;
+  bottom: 7px;
+  color: color-mix(in srgb, var(--loader-accent) 80%, white 20%);
+  font: 800 7px/1 system-ui, sans-serif;
+  letter-spacing: .16em;
+}
+@keyframes vl-holo-aurora-spin-a {
+  from { transform: rotateX(64deg) rotateZ(0deg); }
+  to { transform: rotateX(64deg) rotateZ(360deg); }
+}
+@keyframes vl-holo-aurora-spin-b {
+  from { transform: rotateY(58deg) rotateZ(0deg); }
+  to { transform: rotateY(58deg) rotateZ(360deg); }
+}
+@keyframes vl-holo-aurora-tilt {
+  0%, 100% { transform: rotateY(22deg) rotateZ(-16deg) scale(.92); opacity: .36; }
+  50% { transform: rotateY(66deg) rotateZ(18deg) scale(1.08); opacity: .82; }
+}
+@keyframes vl-holo-aurora-core {
+  0%, 100% { transform: scaleX(.5) scaleY(.84); opacity: .45; }
+  50% { transform: scaleX(1.35) scaleY(1.06); opacity: 1; }
+}
+@keyframes vl-holo-aurora-scan {
+  0% { transform: translateY(-10px) scaleX(.5); opacity: 0; }
+  18% { opacity: 1; }
+  50% { transform: translateY(34px) scaleX(1); opacity: .94; }
+  82% { opacity: .8; }
+  100% { transform: translateY(68px) scaleX(.5); opacity: 0; }
+}
+@keyframes vl-holo-aurora-star {
+  0%, 100% { transform: scale(.55); opacity: .22; }
+  50% { transform: scale(1.5); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vl-holo-aurora-ring,
+  .vl-holo-aurora-rift-core,
+  .vl-holo-aurora-scan,
+  .vl-holo-aurora-star { animation-play-state: paused; }
+}`
   }
 ];
